@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*메인타입 - 06 import*/
+@import url("/resources/common/css/layout/main_type06.css");
+
+/*퀵메뉴+공지타입 - 02 import*/
+@import url("/resources/common/css/layout/quick_type02.css");
+
+/*일정+행사타입 - 01 import*/
+@import url("/resources/common/css/layout/culture_type01.css");
+
+/*도서타입 - 04 import*/
+@import url("/resources/common/css/layout/book_type04.css");
+
+/*큐레이션타입 - 03 import*/
+@import url("/resources/common/css/layout/curation_type03.css");
+
+#main4 .main4-top{height:48%;}
+#main4 .main4-bottom{height:53%;}
+#main4 .main4-top div.title,
+#main4 .main4-bottom div.title{padding-top:2%;}
+#main4 .main4-top div.title a.more,
+#main4 .main4-bottom div.title a.more{top:25px;}
+
+@media all and (max-width:1024px){
+	#header h1{width:150px;}
+	#main4 .main4-top{border-top:1px solid #ddd;}
+	#main4 .main4-top div.title a.more,
+	#main4 .main4-bottom div.title a.more{top:10px;font-size:10px;}
+}
+
+@media all and (max-width:768px){
+	#main4 .main4-top .cultureList{margin:0 50px;}
+	#main4 .main4-top .cultureList .bx-prev{left:-35px;}
+	#main4 .main4-top .cultureList .bx-next{right:-35px;}
+}
+
+@media all and (max-width:440px){
+	#main4 .main4-top .cultureList{margin:0;}
+	#main4 .main4-top .cultureList .bx-prev{left:0;}
+	#main4 .main4-top .cultureList .bx-next{right:0;}
+}
