@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/j2ee/dtds/web-jsptaglibrary_1_1.dtd">
+<taglib>
+	<tlibversion>1.0</tlibversion>
+	<jspversion>1.1</jspversion>
+	<shortname>secuKeyPad</shortname>
+	<uri>/tlds/SecuKeyPad.tld</uri>
+	<info>SecuKeypad Tag Library</info>
+	<tag>
+		<name>SecuKeyPadScript</name>
+		<tagclass>com.yhdb.solution.secukeypad.interweb.tag.SecuKeyPadScript</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>SecuKeypad Script Tag Library</info>
+		<attribute>
+			<name>tagParam</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>SecuKeypadHidden</name>
+		<tagclass>com.yhdb.solution.secukeypad.interweb.tag.SecuKeypadHidden</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>SecuKeypad Hidden Tag Library</info>
+		<attribute>
+			<name>tagParam</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>SecuKeypadMap</name>
+		<tagclass>com.yhdb.solution.secukeypad.interweb.tag.SecuKeypadMap</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<info>SecuKeypad Map Tag Library</info>
+		<attribute>
+			<name>tagParam</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

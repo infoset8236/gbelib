@@ -1,0 +1,207 @@
+@charset "utf-8";
+@font-face { font-family: 'S-CoreDream-3Light'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff'); font-weight: normal; font-style: normal; }
+@font-face { font-family: 'S-CoreDream-8Heavy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff'); font-weight: normal; font-style: normal; }
+/* noto-sans-kr-regular - korean_latin */
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/noto-sans-kr-v11-regular.eot'); /* IE9 Compat Modes */
+    src: local('Noto Sans KR Regular'), local('NotoSansKR-Regular'),
+         url('../fonts/noto-sans-kr-v11-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/noto-sans-kr-v11-regular.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-regular.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/noto-sans-kr-v11-regular.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+  }
+  /* noto-sans-kr-500 - korean_latin */
+  @font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 500;
+    src: url('../fonts/noto-sans-kr-v11-500.eot'); /* IE9 Compat Modes */
+    src: local('Noto Sans KR Medium'), local('NotoSansKR-Medium'),
+         url('../fonts/noto-sans-kr-v11-500.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/noto-sans-kr-v11-500.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-500.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-500.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/noto-sans-kr-v11-500.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+  }
+  /* noto-sans-kr-700 - korean_latin */
+  @font-face {
+    font-family: 'Noto Sans KR';
+    font-style: normal;
+    font-weight: 700;
+    src: url('../fonts/noto-sans-kr-v11-700.eot'); /* IE9 Compat Modes */
+    src: local('Noto Sans KR Bold'), local('NotoSansKR-Bold'),
+         url('../fonts/noto-sans-kr-v11-700.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('../fonts/noto-sans-kr-v11-700.woff2') format('woff2'), /* Super Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-700.woff') format('woff'), /* Modern Browsers */
+         url('../fonts/noto-sans-kr-v11-700.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('../fonts/noto-sans-kr-v11-700.svg#NotoSansKR') format('svg'); /* Legacy iOS */
+  }
+
+/*reset.css*/
+/* http://meyerweb.com/eric/tools/css/reset/
+  v2.0 | 20110126
+  License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, main {display: block;}
+body {line-height: 1;}
+ol, ul {list-style: none;}
+blockquote, q {quotes: none;}
+blockquote:before, blockquote:after,
+q:before, q:after {content: '';content: none;}
+table {border-collapse: collapse;border-spacing: 0;}
+
+/*font*/
+body, input, textarea, select {font-family: 'Noto Sans KR', '맑은고딕', 'Malgun Gothic', sans-serif;}
+/*common*/
+* {box-sizing: border-box;-webkit-text-size-adjust: none;}
+html, body {height: 100%;}
+/* body {font-size: 15px;} */
+table {border-collapse: collapse;border-spacing: 0;width: 100%;table-layout: fixed;}
+legend, caption {display: none;}
+button {border: none;cursor: pointer;background: #fff;cursor: pointer;}
+p {line-height: 1.7em;}
+a {text-decoration: none;font-weight: 400;color: #333;}
+input {padding: 5px;}
+input[type=checkbox] {border: none;}
+label {display: inline-block;cursor: pointer;}
+.clFix:after {content: '';clear: both;display: table;}
+.blind {border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px}
+.hide {display: none;}
+.show {display: block;}
+
+/* align */
+.taL {text-align: left;}
+.taC {text-align: center;}
+.taR {text-align: right;}
+
+/* margin */
+.mT-10 {margin-top: -10px !important;}
+.mT0 {margin-top: 0 !important;}
+.mT10 {margin-top: 10px !important;}
+.mT20 {margin-top: 20px !important;}
+
+body {transition: 0.3s;background: #eef0f3;}
+/* layout */
+#wrap {height: 100%;min-width: 1200px;}
+/* #wrap, #lnbWrap, #contWrap {min-width: 1200px;} */
+#lnbWrap >h1 {padding: 20px 0;font-weight: 700;font-size: 20px;text-align: center;background: #38427e;color: #fff;}
+#lnbWrap ul {border-bottom: 1px solid #ddd;position: relative;}
+#lnbWrap li {float: left;width: 33.33%;text-align: center;background: #fff;}
+#lnbWrap li >a {font-family:'S-CoreDream-3Light';font-size: 18px;padding: 20px 0 17px;display: block;position: relative;}
+#lnbWrap li.on >a {font-family:'S-CoreDream-8Heavy';}
+#lnbWrap li.on >a:after {content: '';width: 74px;height: 3px;background: #3188cb;display: inline-block;position: absolute;bottom: 0;left: 50%;margin-left: -37px;}
+
+#contWrap {padding: 30px;}
+#contWrap .choose_theme {margin-bottom: 50px;padding: 0 0 20px 0;border-bottom: 1px solid #ddd;}
+#contWrap .choose_theme p, #contWrap .choose_theme label {display: inline-block;}
+#contWrap .choose_theme p {font-weight: 700;font-size: 17px;margin-right: 20px;}
+#contWrap form {width: 743px;display: block;padding: 40px;margin: 0 auto;background: #fff;border: 1px solid #bbb;border-radius: 10px;position: relative;}
+#contWrap h2 {font-family: 'S-CoreDream-3Light';text-align: center;font-size: 28px;margin-bottom: 20px;padding: 0 0 30px;border-bottom: 1px solid #ddd;}
+#contWrap h2 strong {font-family: 'S-CoreDream-8Heavy';}
+#contWrap form p {margin: 20px 0;width: 100%;}
+#contWrap form p >label {width: 100%;display:block;text-align: left;padding-right: 20px;margin-bottom: 10px;font-family: 'S-CoreDream-3Light';font-size: 18px;}
+#contWrap form input {width: 100%;background: #eef0f3;border: 1px solid #ddd;border-radius: 4px;padding: 14px 10px;font-size: 16px;}
+#contWrap form input:focus {background:#e9f6fc;}
+#contWrap form .login {width: 100%;padding: 17px 0;background: #385ab1;color: #fff;border-radius: 4px;font-size: 18px;font-family: 'S-CoreDream-8Heavy';}
+#contWrap form .login:hover, #contWrap form .login:focus {background: #26479f;}
+#contWrap form .state {text-align: right;margin-bottom: 0;}
+#contWrap .state label {width: auto !important;font-weight: normal;font-family: 'S-CoreDream-3Light';}
+#contWrap .login_wrap fieldset {padding-bottom: 10px;}
+#contWrap .login_wrap.multi_num form .state {margin-bottom: 29px;padding-bottom: 20px;border-bottom: 1px dashed #ddd;}
+#contWrap .login_wrap.multi_num form .state:last-of-type {border-bottom: none;padding-bottom: 0;margin-bottom: 0;}
+
+/* sub */
+#contWrap h2.tit {font-family: 'S-CoreDream-3Light';text-align: left;font-size: 24px;margin-bottom: 20px;padding-bottom: 20px;border-bottom: 1px solid #ddd;}
+#contWrap .result_wrap {border: 1px solid #bbb;background: #fff;border-radius: 10px;padding: 30px;}
+#contWrap .result_wrap h3 {font-family: 'S-CoreDream-8Heavy';text-align: left;}
+#contWrap .result_wrap p {background: #fafafa;color: #999;border: 1px dashed #e4e4e4;padding: 20px;margin: 10px 0 30px;border-radius: 4px;word-break: break-all;}
+#contWrap .result_wrap p:last-child {margin-bottom: 0;}
+#contWrap .btn_wrap button {background:#385ab1;color: #fff;padding: 17px 30px;border-radius: 4px;font-size: 16px;}
+
+/* radio */
+.radio_wrap {display: block;position: relative;margin-bottom: 12px;cursor: pointer;font-size: 17px;border-radius: 4px;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.radio_wrap {width: 174px;padding:15px 15px 15px 46px;}
+.radio_wrap.grey {background: #efefef;border: 1px solid #bbb;margin-right: 28px;}
+.radio_wrap.darkblue {background: #253560;border: 1px solid #1b2a54;color: #fff;}
+.radio_wrap input {position: absolute;opacity: 0;cursor: pointer;}
+.radio_wrap .chk_mark {position: absolute;top: 50%;left: 20px;height: 18px;width: 18px;background: #fff;border: 1px solid #bbb;border-radius: 50%;-webkit-transform:translateY(-50%);-ms-transform: translateY(-50%);transform: translateY(-50%);}
+/* .radio_wrap:hover input ~ .chk_mark {background-color: #ccc;} */
+.radio_wrap .chk_mark:after {content: '';position: absolute;display: none;}
+.radio_wrap input:checked ~ .chk_mark:after, .radio_wrap input:checked ~ .chk_mark:after {display: block;}
+.radio_wrap .chk_mark:after {top: 5px;left: 5px;width: 6px;height: 6px;border-radius: 50%;background: #666;}
+
+.chk_wrap {display: block;position: relative;padding: 0 10px 0 27px !important;margin-bottom: 12px;cursor: pointer;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;}
+.chk_wrap input {position: absolute;left:0;opacity: 0;cursor: pointer;height: 0;width: 0;}
+.chk_wrap .chk_mark {position: absolute;top: 4px;left: 0;height: 20px;width: 20px;background: #fff;border: 1px solid #ddd;border-radius: 4px;}
+.chk_wrap input:checked ~ .chk_mark, .chk_wrap input:checked ~ .chk_mark {border-color: #bbb;}
+.chk_wrap .chk_mark:after {content: '';position: absolute;display: none;}
+.chk_wrap input:checked ~ .chk_mark:after, .chk_wrap input:checked ~ .chk_mark:after {display: block;}
+.chk_wrap .chk_mark:after {left: 5px;top: 1px;width: 5px;height: 10px;border: solid #666;border-width: 0 3px 3px 0;-webkit-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);}
+
+/* 반응형 */
+@media only screen
+and (min-device-width : 768px)
+and (max-device-width : 1024px)
+/* and (orientation : portrait) */ {
+  #wrap {min-width: 100%;overflow-x: hidden;}
+  #contWrap form {width: 100%;}
+}
+@media screen and (max-width:1023px) {
+  #wrap {min-width: 100%;overflow-x: hidden;}
+  #contWrap form {width: 100%;}
+}
+@media screen and (max-width:768px) {
+  #contWrap h2 {font-size: 24px;}
+  #contWrap .choose_theme {margin-bottom: 30px;}
+}
+@media screen and (max-width:640px) {
+  #lnbWrap li >a {font-size: 16px;}
+  #contWrap {padding: 10px;}
+  #contWrap form h2 {margin-bottom: 0;font-size: 22px;padding-bottom: 15px;}
+  #contWrap .choose_theme {padding-bottom: 6px;margin-bottom: 20px;}
+  #contWrap .choose_theme p {display: block;margin-bottom: 5px;}
+  #contWrap .choose_theme label {width: 49%;float: left;}
+  #contWrap form {padding: 30px 20px;}
+  #contWrap form p >label, #contWrap form .login {font-size: 15px;}
+  #contWrap form .login {font-family: 'S-CoreDream-3Light';}
+  #contWrap .radio_wrap.grey {margin-right: 2%;}
+  #contWrap h2.tit {padding: 20px 0;font-size: 18px;}
+  #contWrap .result_wrap {padding: 20px 17px}
+  #contWrap .result_wrap p {padding: 10px;}
+}
+@media screen and (max-width:568px) {
+  #contWrap .choose_theme label {display: block;width: 100%;}
+  #contWrap form h2 {margin:30px 3% 0 3%;}
+  #contWrap form {padding: 0;}
+  #contWrap form p {padding:0 3%;}
+  #contWrap form .login {margin: 0 3%;width: 96%;}
+}
+@media screen and (max-width:320px) {
+  #lnbWrap li {width:30%}
+  #lnbWrap li:last-of-type {width: 40%;}
+  #lnbWrap li >a {font-size: 15px;}
+  #contWrap form h2 {font-size: 18px;margin-top: 20px;}
+  #contWrap form p {margin: 10px 0;}
+  #contWrap form p >label {margin-bottom: 0;}
+  #contWrap .choose_theme {padding-bottom: 6px;margin-bottom: 20px;}
+  .radio_wrap {margin-bottom: 6px;}
+}

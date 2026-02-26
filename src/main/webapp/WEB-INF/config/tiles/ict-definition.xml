@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN" "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="*/ict/*/*" templateExpression="/WEB-INF/views/app/ict/{2}/{3}.jsp"/>
+	<definition name="*/ict/*/*/*" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}.jsp"/>
+	<definition name="*/ict/*/*/*/*" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}.jsp"/>
+	<definition name="*/ict/*/*/*/*/*" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}/{6}.jsp"/>
+	<definition name="*/ict/*/*/*/*/*/*" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}/{6}/{7}.jsp"/>
+
+	<definition name="*/ict/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}.jsp"/>
+	<definition name="*/ict/*/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}.jsp"/>
+	<definition name="*/ict/*/*/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}.jsp"/>
+	<definition name="*/ict/*/*/*/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}/{6}.jsp"/>
+	<definition name="*/ict/*/*/*/*/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}/{6}/{7}.jsp"/>
+	<definition name="*/ict/*/*/*/*/*/*/*_ajax" templateExpression="/WEB-INF/views/app/ict/{2}/{3}/{4}/{5}/{6}/{7}/{8}.jsp"/>
+
+</tiles-definitions>

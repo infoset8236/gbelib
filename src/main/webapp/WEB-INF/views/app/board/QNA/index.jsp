@@ -1,0 +1,198 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${boardManage.add_html_use_yn eq 'Y' and fn:length(boardManage.top_html) > 0}">
+${boardManage.top_html}
+</c:if>
+<jsp:include page="/WEB-INF/views/app/board/common/index/script.jsp" flush="false" />
+<form:form modelAttribute="board" action="index.do" method="get" onsubmit="return false;">
+<jsp:include page="/WEB-INF/views/app/board/common/form_param.jsp" flush="false" />
+<style>
+	.state_wid{width:9%;}
+
+	@media all and (max-width:425px){
+		.state_wid{width:25%;}
+	}
+</style>
+<c:if test="${boardManage.manage_idx eq '742'}">
+	<style>
+		.category span.ca.bg-0000 {background-color:#7a6e61;color:#fff;}
+		.category span.ca.bg-0001 {background-color:#2f55d4;color:#fff;}
+		.category span.ca.bg-0002 {background-color:#089916;color:#fff;}
+		.category span.ca.bg-0003 {background-color:#a536d9;color:#fff;}
+		.category span.ca.bg-0004 {background-color:#ff2222;color:#fff;}
+		.category span.ca.bg-0005 {background-color:#edce00;color:#fff;}
+		.category span.ca.bg-0006 {background-color:#ff70ba;color:#fff;}
+	</style>
+</c:if>
+<style>
+	table.bbs tr.notice{background:#f5f6f7}
+	@media (max-width: 430px) and (min-width: 0px) {
+		table.bbs thead {display: none;}
+		table.bbs col.col2 {
+				width : 1%
+		}
+		td.title{width: 100%;float:left;border-bottom: none;margin-bottom: -5px; padding: 5px 10px 0 10px !important;}
+		td.status {float: left; display: table-cell !important;border: none; font-size: 12px !important;padding: 5px 10px !important;}
+		td.username{float:left;display: table-cell !important;border: none;font-size: 12px !important;}
+		td.adddate{float:left;display: table-cell !important;border: none;font-size: 12px !important;}
+		table.bbs tbody tr:hover {background:#f8f8f8}
+		td.txtBar{display: inline-block;width: 1px;height: 10px;font-size: 0px;line-height: 0;text-indent: -9999px;vertical-align: top;margin: 3px 5px;background: rgb(217, 217, 217);}
+	}
+</style>
+<div class="wrapper-bbs">
+	<jsp:include page="/WEB-INF/views/app/board/common/index/infodesk.jsp" flush="false" />
+	<div class="table-wrap">
+		<table class="bbs center" summary="질문답변 게시판입니다.">
+			<caption>QNA 게시판</caption>
+			<colgroup>
+<%-- 				<c:if test="${board.delete_yn eq 'Y'}"> --%>
+				<c:if test="${member.admin or authMBA or authMBS or portalAuth eq '2'}">
+				<col width="5%">
+				</c:if>
+				<col/>
+				<c:if test="${boardManage.manage_idx eq '742'}">
+					<col class="important mmm2"/>
+				</c:if>
+				<col class="important"/>
+				<col class="important"/>
+				<col class="important mmm2"/>
+				<col class="mmm1"/>
+				<col class="mmm1"/>
+				<col class="mmm1"/>
+			</colgroup>
+			<thead>
+				<tr>
+			<%--<c:if test="${board.delete_yn eq 'Y'}"> --%>
+					<c:if test="${member.admin or authMBA or authMBS or portalAuth eq '2'}">
+					<th><input type="checkbox" id="checkAll"> </th>
+					</c:if>
+					<th style="width:7%">번호</th>
+				<c:if test="${boardManage.manage_idx eq '742'}">
+					<th class="category">도서관</th>
+				</c:if>
+					<th class="important" >제목</th>
+					<th class="important state_wid">처리상태</th>
+					<th class="important mmm2" style="width:11%">작성자</th>
+					<th class="mmm1" style="width:8%">작성일</th>
+					<th class="mmm1" style="width:10%">조회수</th>
+					<th class="mmm1" style="width:7%">파일</th>
+				</tr>
+			</thead>
+			<tbody id="board_tbody">
+			<c:forEach var="i" varStatus="status" items="${boardNoticeList}">
+				<tr class="notice">
+<%-- 					<c:if test="${board.delete_yn eq 'Y'}"> --%>
+					<c:if test="${member.admin or authMBA or authMBS or portalAuth eq '2'}">
+					<td></td>
+					</c:if>
+					<c:if test="${boardManage.manage_idx eq '742'}">
+						<td></td>
+					</c:if>
+					<td class="num notice"><span>공지</span></td>
+					<td class="title left important" style="padding-left:${(i.group_depth > 0 ? (i.group_depth-1)*15 : 0)+10}px;">
+						<c:set var="boardIdx" value="${i.parent_idx > 0 ? i.parent_idx : i.board_idx}"></c:set>
+						<a href="view.do?menu_idx=${board.menu_idx}&manage_idx=${i.manage_idx}&board_idx=${boardIdx}&viewPage=${board.viewPage}" keyValue="${i.board_idx}">
+						<c:if test="${i.group_depth > 0}">
+							<i class="fa fa-reply"></i>
+						</c:if>
+							<span>${i.title}</span>${i.secret_yn eq 'Y'?'<i class="fa fa-lock"></i>':''}
+							<c:if test="${i.date_gap <= boardManage.new_date_count}"><em class="new">새글</em></c:if>
+							<c:if test="${i.comment_count > 0}">
+							<span class="comment"><em>댓글</em> <i>${i.comment_count}</i></span>
+							</c:if>
+						</a>
+					</td>
+					<td class="title important"></td>
+					<td class="username mmm2">${i.user_name}</td>
+					<td class="adddate num mmm1"><fmt:formatDate value="${i.add_date}" pattern="yyyy.MM.dd" /></td>
+					<td class="viewCount num mmm1">${i.view_count}</td>
+					<td class="file mmm1">
+					<c:if test="${i.file_count > 0}">
+						<i class="fa fa-floppy-o"></i>
+					</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+			<c:forEach var="i" varStatus="status" items="${boardList}">
+				<tr${i.group_depth > 0?' class="reply"':''}>
+<%-- 					<c:if test="${board.delete_yn eq 'Y'}"> --%>
+					<c:if test="${member.admin or authMBA or authMBS or portalAuth eq '2'}">
+					<td><form:checkbox path="boardIdxArray" value="${i.board_idx}"/></td>
+					</c:if>
+					<td class="num">${paging.listRowNum - status.index}</td>
+					<c:if test="${boardManage.manage_idx eq '742'}">
+						<td class="category important td2">
+							<span class="ca bg-${i.category1}">${not empty i.category1_name ? i.category1_name : '통합'}</span>
+						</td>
+					</c:if>
+					<td class="title left important" style="padding-left:${(i.group_depth > 0 ? (i.group_depth-1)*15 : 0)+10}px;">
+						<c:set var="boardIdx" value="${i.parent_idx > 0 ? i.parent_idx : i.board_idx}"></c:set>
+						<a href="view.do?menu_idx=${board.menu_idx}&manage_idx=${i.manage_idx}&board_idx=${boardIdx}&viewPage=${board.viewPage}" keyValue="${i.board_idx}">
+							<span>${i.title}</span>${i.secret_yn eq 'Y'?'<i class="fa fa-lock"></i>':''}
+							<c:if test="${i.request_state_str eq '완료'}">
+								<i class="fa fa-reply"></i>
+							</c:if>
+							<c:if test="${i.date_gap <= boardManage.new_date_count}"><em class="new">새글</em></c:if>
+							<c:if test="${i.comment_count > 0}">
+							<span class="comment"><em>댓글</em> <i>${i.comment_count}</i></span>
+							</c:if>
+						</a>
+					</td>
+					<td class="status important">
+						<c:choose>
+							<c:when test="${(i.notice_yn eq 'Y' ? '' : i.request_state_str) eq '접수'}">
+								<span style="color:blue">${i.notice_yn eq 'Y' ? '' : i.request_state_str}</span>
+							</c:when>
+							<c:when test="${(i.notice_yn eq 'Y' ? '' : i.request_state_str) eq '완료'}">
+								<span style="color:green">${i.notice_yn eq 'Y' ? '' : i.request_state_str}</span>
+							</c:when>
+							<c:otherwise>
+								<span style="color:gray">${i.notice_yn eq 'Y' ? '' : i.request_state_str}</span>
+							</c:otherwise>
+						</c:choose> 
+					</td>
+					<c:choose>
+					<c:when test="${authMBA or (not empty loginSupport and loginSupport.admin)}">
+					<c:set var="user_name" value="${i.user_name}"/>
+					</c:when>
+					<c:when test="${boardManage.anonymize_yn eq 'Y'}">
+					<c:set var="user_name" value="${fn:substring(i.user_name, -1, 1)}**"/>
+					</c:when>
+					<c:otherwise>
+					<c:set var="user_name" value="${i.user_name}"/>
+					</c:otherwise>
+					</c:choose>
+					<td class="username important mmm2">${i.secret_yn ne 'Y'? user_name : (authMBA or (not empty loginSupport and loginSupport.admin) ? i.user_name : '비공개')}</td>
+					<td class="adddate num mmm1"><fmt:formatDate value="${i.add_date}" pattern="yyyy.MM.dd" /></td>
+					<td class="viewCount num mmm1">${i.view_count}</td>
+					<td class="file mmm1">
+					<c:if test="${i.file_count > 0}">
+						<i class="fa fa-floppy-o"></i>
+					</c:if>
+					</td>
+				</tr>
+			</c:forEach>
+			</tbody>
+		</table>
+		<c:if test="${fn:length(boardList) < 1}">
+		<table class="bbs center" summary="질문답변 게시판입니다.">
+			<caption>QNA 게시판</caption>
+				<td class="dataEmpty">등록된 게시물이 없습니다.</td>
+			</tr>
+		</table>
+		</c:if>
+	</div>
+
+	<jsp:include page="/WEB-INF/views/app/board/common/index/button.jsp" flush="false" />
+
+	<jsp:include page="/WEB-INF/views/app/board/common/index/paging.jsp" flush="false">
+		<jsp:param name="formId" value="#board"/>
+	</jsp:include>
+</div>
+</form:form>
+<c:if test="${boardManage.add_html_use_yn eq 'Y' and fn:length(boardManage.bottom_html) > 0}">
+${boardManage.bottom_html}
+</c:if>
