@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*메인타입 - 02 import*/
+@import url("/resources/common/css/layout/main_type02.css");
+
+/*팝업존+공지타입 - 02 import*/
+@import url("/resources/common/css/layout/notice_type02.css");
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 03 import*/
+@import url("/resources/common/css/layout/book_type03.css");
+
+/*큐레이션타입 - 03 import*/
+@import url("/resources/common/css/layout/curation_type03.css");
+
+.blind{position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;font-size:0;line-height:0;text-indent:-999px}
+
+#header h1{padding-top:25px;}
+
+#main0{background:url('/resources/homepage/sjl/img/main-bg.jpg') no-repeat center bottom;}
+#main0 .main0-bottom .qmenu .bx-controls{display:none;}
+
+.cal-tbl td div{font-size:15px;padding:1.8px 0;font-family:'S-Core Dream 5';color:#000;width:40px;height:40px;display:inline-block;line-height:45px;}
+.cal-tbl td div span{font-size:15px;color:#fff;padding-top:6px;font-family:'S-Core Dream 5';width:40px;height:40px;display:inline-block;line-height:30px;}
+.cal-tbl td .hu{background:url('/resources/common/img/culture_type04/cal-close-bg.png') no-repeat center top;}
+.cal-tbl td .ev{background:url('/resources/common/img/culture_type04/cal-event-bg.png') no-repeat center top;}
+
+@media all and (max-width:1500px){
+	#main0 .main0-bottom .qmenu .bx-controls{display:block;}
+}
+
+@media all and (max-width:1024px){
+	#header h1{padding-top:8px;}
+}
+
+@media all and (max-width:450px){
+	.cal-tbl td div,
+	.cal-tbl td div span{font-size:13px;}
+	.cal-tbl th, .cal-tbl td{padding:1px 5px;}
+}

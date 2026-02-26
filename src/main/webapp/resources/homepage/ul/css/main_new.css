@@ -1,0 +1,49 @@
+@charset "utf-8";
+/*메인타입 - 01 import*/
+@import url("/resources/common/css/layout/main_type01.css");
+
+/*팝업존+공지타입 - 04 import*/
+@import url("/resources/common/css/layout/notice_type04.css");
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type01.css");
+
+#main0{background:url('/resources/homepage/ul/img/main0-bg.png')no-repeat center bottom;}
+#main0 .main0-inner-left .slogan{height:230px;}
+#main0 .main0-inner-left .slogan p{display:none;}
+#main0 .main0-inner-right{display:none;}
+#main0 .qmenu{padding-top:8%;}
+#main0 .qmenu li div{color:#fff;margin-top:20px;}
+#main0 .source-box{position:absolute;bottom:10px;right:10px;}
+#main0 .source-box p{color:rgba(255,255,255,0.7);font-size:14px;}
+
+/*#main1 .main1_wrap .main1-inner-left{background:linear-gradient(75deg, #008f97, #006571);}*/
+
+#main2 .event-box .list ul li div p b{color:#146cae;}
+#main2 .event-box .list ul li:first-child:hover div{background:#146cae url('/resources/common/img/culture_type02/event-icon01-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:nth-child(2):hover div{background:#146cae url('/resources/common/img/culture_type02/event-icon02-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:last-child:hover div{background:#146cae url('/resources/common/img/culture_type02/event-icon03-hover.png')no-repeat center 80px;}
+
+@media all and (max-width:1200px){
+	#main2 .event-box .list ul li:first-child:hover div{background:#146cae url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:nth-child(2):hover div{background:#146cae url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:last-child:hover div{background:#146cae url('/resources/common/img/transparent.png')no-repeat !important;}
+}
+
+@media all and (max-width:1024px){
+	#main0 .main0-inner-left .slogan{height:auto;}
+}
+
+@media all and (max-width:870px){
+	#main0 .qmenu{padding-top:2%;}
+	#main0 .qmenu li div{font-size:15px;}
+	#main0 .source-box p{font-size:12px;}
+}
+
+@media all and (max-width:500px){
+	#main0 .qmenu li div{font-size:14px;}
+	#main0 .source-box p{font-size:11px;}
+}

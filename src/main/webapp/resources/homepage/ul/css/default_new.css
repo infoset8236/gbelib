@@ -1,0 +1,41 @@
+@charset "utf-8"; 
+@import "/resources/common/css/common_inc.css";
+
+/* 스타일 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,address
+{font-family:'Noto Sans';}
+
+#wrap {position:relative;z-index:7;}
+#container {clear:both;}
+.end {clear:both;}
+.outer{display:table;width:100%;height:100%;}
+.inner{display:table-cell;vertical-align:middle;text-align:center;}
+
+#calendar2 .planView{position:absolute;width:80%;left:50%;top:30%;background:#fff;margin-left:-40%;box-shadow:0px 1px 7px 0px rgba(0,0,0,0.5)}
+#calendar2 .planView .inbox{position:relative;border:1px solid #ccc;padding:10px}
+#calendar2 .planView .inbox dt{font-weight:bold;font-size:11px;font-family:verdana}
+#calendar2 .planView .inbox dd{padding:3px 0}
+#calendar2 .planView .inbox a.close{position:absolute;right:5px;top:0;font-size:120%}
+
+.Gnb .gnb-menu > li.menu1 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu2 > .SubMenu{left:100px;}
+.Gnb .gnb-menu > li.menu3 > .SubMenu{left:-350px;}
+.Gnb .gnb-menu > li.menu4 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu5 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu6 > .SubMenu{left:0;}
+
+@media all and (max-width:1024px){
+
+}
+
+@media all and (max-width:768px){
+
+}
+
+@media all and (max-width:550px){
+
+}
+
+@media all and (max-width:425px){
+
+}

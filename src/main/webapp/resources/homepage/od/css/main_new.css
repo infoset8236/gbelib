@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*메인타입 - 04 import*/
+@import url("/resources/common/css/layout/main_type04.css");
+
+/*팝업존+공지타입 - 02 import*/
+@import url("/resources/common/css/layout/notice_type02.css");
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type01.css");
+
+/*큐레이션타입 - 01 import*/
+@import url("/resources/common/css/layout/curation_type01.css");
+
+#header h1{padding-top:25px;}
+
+#main0 .main-txt-area{top:25%;}
+#main0 .main-visual .search-area{top:48%;}
+#main0 .main-visual .quickmenu-box{top:62%;}
+
+#main1 .main1_wrap .main1-left-box .list ul li div{background:#00827c;border:1px solid #00827c;}
+#main1 .main1_wrap .main1-right-box .popupzonenew{margin-top:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew .bx-controls{bottom:55px;}
+
+#main6{background:url('/resources/homepage/od/img/main/main-bg.jpg') no-repeat center top;}
+#main6 .bx-controls-direction a.bx-prev{background:url('/resources/homepage/od/img/main/curation-prev-btn.png') no-repeat center;}
+#main6 .bx-controls-direction a.bx-next{background:url('/resources/homepage/od/img/main/curation-next-btn.png') no-repeat center;}
+
+@media all and (max-width:1024px){
+	#header h1{padding-top:10px;}
+
+	#main0 .main-txt-area{top:18%;}
+	#main0 .main-visual .search-area{top:32%;}
+	#main0 .main-visual .quickmenu-box{top:50%;}
+}
+
+@media all and (max-width:550px){
+	#main0 .main-txt-area{top:20%;}
+}

@@ -1,0 +1,59 @@
+@charset "utf-8";
+/*메인타입 - 06 import*/
+@import url("/resources/common/css/layout/main_type06.css");
+
+/*퀵+공지타입 - 02 import*/
+@import url("/resources/common/css/layout/quick_type02.css");
+
+/*일정+행사타입 - 04 import*/
+@import url("/resources/common/css/layout/culture_type04.css");
+
+/*도서타입 - 04 import*/
+@import url("/resources/common/css/layout/book_type04.css");
+
+/*큐레이션타입 - 04 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+#header h1{padding-top:25px;}
+
+#main0 .main0-top{background:url('/resources/homepage/yc/img/main/main-bg3.jpg') no-repeat center bottom;background-size:cover;}
+/*#main0 .main0-inner-left .main-txt p.txt01 span{padding:10px 20px;font-size:14px;margin-right:10px;letter-spacing:-0.5px;font-weight:600;}*/
+
+#main0 .main0-inner-left .popZone ul li a img, #main0 .main0-inner-left .popZone ul li img {width:750px;height:420px;box-shadow:3px 3px 10px rgba(0,0,0,0.1);position:relative;z-index:9998;}
+#main0 .main0-inner-left .popZone .bx-controls {position:relative;text-align:center;width:100%;top:20px;right:0;z-index:10000;}
+#main0 .main0-inner-left .popZone .bx-pager {display:block;margin:0 auto;height:12px;padding:0 0 0 0;text-align:center;z-index:10000;}
+#main0 .main0-inner-left .popZone .bx-pager .bx-pager-item {display:inline-block;zoom:1;*display:inline;font-size:0;line-height:0;margin-left:3px;}
+#main0 .main0-inner-left .popZone .bx-pager a {width:1px;height:1px;display:inline-block;font-size:0;overflow:hidden;padding:7px 0 0 7px;background:#999999;border:2px solid transparent;border-radius:20px;}
+#main0 .main0-inner-left .popZone .bx-pager a.active{background:#FFF;border:2px solid #000;}
+#main0 .main0-inner-left .popZone .bx-prev, 
+#main0 .main0-inner-left .popZone .bx-next, 
+#main0 .main0-inner-left .popZone .bx-start,
+#main0 .main0-inner-left .popZone .bx-stop {position:absolute;width:50px;height:50px;font-size:0;background-image:url("/resources/homepage/ycgh/img/popupzone-arrow-v2.png");background-repeat: no-repeat; background-position:0 0;background-size:initial;}
+#main0 .main0-inner-left .popZone .bx-prev { right:170px; }
+#main0 .main0-inner-left .popZone .bx-next { right:0; background-position:-50px 0; }
+#main0 .main0-inner-left .popZone .bx-start { right:50px; background-position:-150px 0; }
+#main0 .main0-inner-left .popZone .bx-stop { right:50px; background-position:-100px 0;}
+
+#main2 .main2-wrap .calendar-wrap{padding-bottom:0;}
+#main2 .event-box ul li div img{width:200px;height:180px;padding:10px 0;}
+#main2 .main2-wrap .event-box .culList .bx-controls a.bx-prev{top:-240px;}
+#main2 .main2-wrap .event-box .culList .bx-controls a.bx-next{top:-240px;}
+
+#main6{background:#f8f8f8 url('/resources/homepage/yc/img/main/curation4-bg.jpg') no-repeat center bottom;}
+
+@media all and (max-width:1024px){
+	#header h1{padding-top:10px;}
+}
+
+@media all and (max-width:768px){
+	#main0 .main0-inner-left .popZone ul li{text-align:center;}
+	#main0 .main0-inner-left .popZone ul li a img, #main0 .main0-inner-left .popZone ul li img{width:500px;height:280px;}
+}
+
+@media all and (max-width:600px){
+	#main0 .main0-inner-left .popZone ul li a img, #main0 .main0-inner-left .popZone ul li img{width:400px;height:224px;}
+}
+
+@media all and (max-width:500px){
+	#main0 .main0-inner-left .popZone ul li a img, #main0 .main0-inner-left .popZone ul li img{width:330px;height:185px;}
+}
