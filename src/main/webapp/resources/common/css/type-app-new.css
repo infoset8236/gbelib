@@ -1,0 +1,132 @@
+@charset "utf-8";
+
+#wrap {height:100%;}
+
+#header {height:90px;}
+#container {width:100%;margin:0 auto;box-sizing:border-box;}
+#footer {position:fixed;bottom:0;margin-top:auto;width:100%;background:#2d2e33;color:#fff;padding:0;z-index:2;}
+
+#header, #footer dd, #header input{font-size:14px}
+.Gnb{z-index:4}
+
+#container.subpage > .section{}
+
+/* Gnb */
+.Gnb{position:absolute;top:165px;overflow:visible;height:51px;text-align:center;width:100%;background:#c80b29/* url('/resources/homepage/geic/img/gnbBg.gif') repeat-x 0 0 */}
+.Gnb.active,
+.Gnb.on{border-bottom:1px solid #225aa4}
+
+.Gnb > div{font-size:0;line-height:0} 
+.Gnb{width:100%;left:0}
+.Gnb .gnb-menu{position:relative;padding:0;margin:0;}
+.Gnb .gnb-menu > li {}
+.Gnb .gnb-menu > li:hover{background-color:#b10621}
+.Gnb .gnb-menu > li:hover > a{background-color:#b10621;color:#fff}
+.Gnb .gnb-menu > li a.fontactive{background-color:#fff;color:#ef4d38}
+.Gnb .SubMenu {text-align:left;background-color:#c80b29}
+.Gnb .gnb-menu > li > a{text-decoration: none;padding:15px;font-size:19px;color:#eee;font-weight:bold;height:21px;display:block; text-align:center}
+.Gnb .gnb-menu > li > .SubMenu{margin-left:-1px;display:none;border:0;width:130%;height:auto;padding:0;}
+.Gnb .gnb-menu > li:first-child > .SubMenu{border-left:1px solid #ccc}
+
+.Gnb .gnb-menu > li > div.SubMenu{display:block;position:fixed;margin-top:-98000px}
+.Gnb .gnb-menu > li > div.SubMenu.active{position:absolute;margin-top:0}
+
+.Gnb .gnb-menu > li > .SubMenu.active{display:block}
+.Gnb .gnb-menu > li > .SubMenu > ul > li, .Gnb .gnb-menu > li > .SubMenu > li{word-break:keep-all}
+.Gnb .gnb-menu>li>.SubMenu{/*box-shadow:0 2px 10px rgba(0,0,0,0.2)*/}
+.Gnb .gnb-menu>li.snbGroup2>div.SubMenu{width:450px;padding:10px 5px}
+.Gnb .gnb-menu>li.snbGroup2>div.SubMenu>ul{float:left;width:50%}
+.Gnb .gnb-menu>li>.SubMenu>ul>li,
+.Gnb .gnb-menu>li>.SubMenu>li{position:relative;white-space:nowrap}
+.Gnb .gnb-menu>li>.SubMenu>li.title{display:none}
+.Gnb .gnb-menu>li>.SubMenu>ul>li,
+.Gnb .gnb-menu>li>.SubMenu>li,
+.Gnb .gnb-menu>li>.SubMenu>ul>li>a,
+.Gnb .gnb-menu>li>.SubMenu>li>a{color:#fff}
+.Gnb .gnb-menu>li.aa>.SubMenu>ul>li>a,
+.Gnb .gnb-menu>li.aa>.SubMenu>li>a{color:#fff;font-weight:200}
+.Gnb .gnb-menu>li>.SubMenu>ul>li>a,
+.Gnb .gnb-menu>li>.SubMenu>li>a{font-size:14px;font-weight:222;display:block;line-height:130%;padding:15px 20px 15px 17px;margin:0;border-bottom:1px solid #e02442}
+.Gnb .gnb-menu>li>.SubMenu>ul>li>a:hover,
+.Gnb .gnb-menu>li>.SubMenu>ul>li>a:focus,
+.Gnb .gnb-menu>li>.SubMenu>li>a:hover,
+.Gnb .gnb-menu>li>.SubMenu>li>a:focus{background:#b10621;text-decoration:none}
+.Gnb .gnb-menu>li.on>a{color:#fff}
+.Gnb .gnb-menu>li.active>.SubMenu>li.title{color:#3a6cae}
+.Gnb .gnb-menu>li.active.Last{background:none}
+.Gnb .gnb-menu>li>.SubMenu>ul>li>ul,
+/* .Gnb .gnb-menu>li>.SubMenu>li>ul{display:block;padding:8px 35px} */
+.Gnb .gnb-menu>li>.SubMenu>li>ul{display:none;}
+.Gnb .gnb-menu>li>.SubMenu>ul>li>ul>li,
+.Gnb .gnb-menu>li>.SubMenu>li>ul>li{padding-left:15px;background:url('/resources/homepage/geic/img/gnb_arr.gif') no-repeat 0 center}
+
+.Gnb .mask{width:100%;background:#fff;margin-top:2px}
+.Gnb .gnb-menu>li>.SubMenu{letter-spacing:-1px}
+
+.Gnb .gnb-menu{text-align:left}
+.Gnb .gnb-menu>li{text-align:left}
+
+.lnb > ul > li{border-bottom-width:0}
+
+
+#footer .section{position:relative;font-size:0;line-height:0;text-align:center}
+#footer .copyright-section {font-size:11px;font-weight:200;padding:10px 0;color:#4c6683;}
+
+.subpage > .section{overflow:visible!important}
+
+.login-box div{font-size:14px}
+.login-box,
+.login-body .login button{font-weight:bold}
+.login-body .tab .call li{font-size:15px}
+.login-body .login button span{font-size:20px}
+
+@media all and (max-width:1920px){
+	#header {padding:0;margin-bottom:0;height:90px;text-align:center;}
+	#header h1 {width:230px;margin:0 auto;padding-top:25px;}
+
+	.m-menu  {position:absolute;width:32px;right:18px;top:0;font-size:0;display:block;cursor:pointer;}
+	.m-menu2 {position:absolute;width:32px;left:18px;top:0;font-size:0;display:block;cursor:pointer;}
+	.m-menu a, .m-menu2 a{display:inline-block;margin:31px 0 0 0;text-align:center;vertical-align:middle}
+
+	.Gnb{display:none}
+}
+
+@media all and (max-width:1050px){
+
+}
+
+@media all and (max-width:1024px){
+
+}
+
+@media all and (max-width:1000px){
+	.doc-head{border:0}
+	.doc-head ul{display:none}
+	.doc-title h3{height:auto;padding-top:10px}
+
+	.subpage .lnb, .subpage .content{margin-top:0}
+}
+
+@media all and (max-width:900px){
+
+}
+
+@media all and (max-width:768px){
+
+}
+
+@media all and (max-width:700px){
+
+}
+
+@media all and (max-width:650px){
+
+}
+
+@media all and (max-width:520px){
+
+}
+
+@media all and (max-width:500px){
+
+}

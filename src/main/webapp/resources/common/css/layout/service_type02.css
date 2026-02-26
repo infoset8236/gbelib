@@ -1,0 +1,42 @@
+#main3 {position:relative;width:100%;height:100%;background:#f7f6fb;}
+#main3 .qservice {position:relative;padding-top:120px;text-align:center;}
+#main3 .qservice ul li{display:inline-block;width:435px;border-radius:10px;}
+#main3 .qservice ul li.q1{background:url('/resources/common/img/service_type02/q1.png')no-repeat center 90px #fff;}
+#main3 .qservice ul li.q2{background:url('/resources/common/img/service_type02/q2.png')no-repeat center 90px #fff;margin:0 69px;}
+#main3 .qservice ul li.q3{background:url('/resources/common/img/service_type02/q3.png')no-repeat center 90px #fff;}
+#main3 .qservice ul li div{text-align:center;}
+#main3 .qservice ul li div h3{font-family:"Noto Sans";font-size:25px;font-weight:500;display:block;color:#333;padding:200px 0 0;}
+#main3 .qservice ul li div p{font-family:"Noto Sans";font-size:15px;font-weight:400;display:block;color:#767676;padding:10px 0 30px;}
+#main3 .qservice ul li div ul{position:relative;margin-bottom:75px;}
+#main3 .qservice ul li div ul li{margin:0 auto;width:70%;background:#e0f6ef;border-radius:10px;height:50px;line-height:50px;margin:5px 0;}
+#main3 .qservice ul li div ul li a{font-family:"Noto Sans";font-size:16px;font-weight:500;display:block;color:#026f59;letter-spacing:-0.25px;}
+#main3 .qservice ul li div ul li:hover{background:#b6ebda;transition:1s;}
+
+@media all and (max-width:1450px){
+	#main3 .qservice ul li{width:30%;}
+	#main3 .qservice ul li.q2{margin:0 2%;}
+}
+
+@media all and (max-width:1024px){
+	#main3 .qservice {padding:30px 0;}
+	#main3 .qservice ul li.q1{background:url('/resources/common/img/service_type02/q1.png')no-repeat center 40px #fff;background-size:50px;}
+	#main3 .qservice ul li.q2{background:url('/resources/common/img/service_type02/q2.png')no-repeat center 40px #fff;background-size:50px;}
+	#main3 .qservice ul li.q3{background:url('/resources/common/img/service_type02/q3.png')no-repeat center 40px #fff;background-size:50px;}
+	#main3 .qservice ul li div h3{font-size:18px;padding:105px 0 0;}
+	#main3 .qservice ul li div p{display:none;}
+	#main3 .qservice ul li div ul{margin-top:15px;margin-bottom:30px;}
+	#main3 .qservice ul li div ul li{width:80%;background:#e0f6ef;height:40px;line-height:40px;margin:3px 0;}
+	#main3 .qservice ul li div ul li a{font-size:14px;}
+}
+
+@media all and (max-width:550px){
+	#main3 .qservice {padding:30px 0;}
+	#main3 .qservice ul li.q1{background:url('/resources/common/img/service_type02/q1.png')no-repeat center 30px #fff;background-size:40px;}
+	#main3 .qservice ul li.q2{background:url('/resources/common/img/service_type02/q2.png')no-repeat center 30px #fff;background-size:40px;}
+	#main3 .qservice ul li.q3{background:url('/resources/common/img/service_type02/q3.png')no-repeat center 30px #fff;background-size:40px;}
+	#main3 .qservice ul li div h3{font-size:15px;padding:80px 0 0;letter-spacing:-0.5px;}
+	#main3 .qservice ul li div ul{margin-top:15px;margin-bottom:0;}
+	#main3 .qservice ul li div ul li{width:100%;background:#e0f6ef;border-radius:0;margin:0;border-bottom:1px solid #d9d9d9;}
+	#main3 .qservice ul li div ul li:last-child{border-bottom:none;}
+	#main3 .qservice ul li div ul li a{font-size:13px;}
+}

@@ -1,0 +1,99 @@
+#main6 {position:relative;background:url('/resources/common/img/curation_type02/curation2-bg.jpg') no-repeat center center;background-size:cover;}
+#main6 .main6-wrap{position:relative;width:1450px;margin:0 auto;margin-top:140px;}
+#main6 .main6-wrap .title{position:relative;width:100%;}
+#main6 .main6-wrap .title h3{position:absolute;text-align:center;font-weight:bold;font-size:35px;color:#fff;left:44%;}
+#main6 .main6-wrap .title .arr-btn{position:absolute;left:0;top:0;}
+#main6 .main6-wrap .title .arr-btn li{display:inline-block;}
+#main6 .main6-wrap .title .arr-btn li:last-child{margin-left:-5px;}
+#main6 .main6-wrap .title .more-btn{position:absolute;right:0;top:0;}
+#main6 .main6-wrap .list{position:relative;margin-top:30px;}
+#main6 .main6-wrap .list ul li {width:700px;display:inline-block;}
+#main6 .main6-wrap .list ul li a {display:block;}
+#main6 .main6-wrap .list ul li:first-child{margin-bottom:45px;}
+#main6 .main6-wrap .list ul li:nth-child(2){margin-left:45px;margin-bottom:45px;}
+#main6 .main6-wrap .list ul li:last-child{margin-left:45px;}
+#main6 .main6-wrap .list ul li .img-box{float:left;}
+#main6 .main6-wrap .list ul li .img-box img {width:300px;height:290px;}
+#main6 .main6-wrap .list ul li .txt-box{float:left;background:#fff;width:400px;height:290px;}
+#main6 .main6-wrap .list ul li .txt-box h3{padding:35px 30px 0;font-size:22px;color:#222;line-height:1.3;font-weight:600;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+#main6 .main6-wrap .list ul li .txt-box p{padding:20px 30px 0;font-size:16px;color:#555;line-height:1.4;font-weight:300;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
+#main6 .main6-wrap .list ul li .txt-box span{display:block;padding:30px 30px 0;font-size:16px;color:#0091d4;font-weight:300;}
+#main6 .bx-controls-direction{z-index:999;}
+#main6 .bx-controls-direction a.bx-prev {display:inline-block;font-size:0;width:50px;height:50px;background:url('/resources/common/img/curation_type02/curation-prev-btn.png') no-repeat center center;margin-top:-10px;}
+#main6 .bx-controls-direction a.bx-next {display:inline-block;font-size:0;width:50px;height:50px;background:url('/resources/common/img/curation_type02/curation-next-btn.png') no-repeat center center;}
+#main6 .bx-controls-direction a:last-child{top:7px;}
+
+@media all and (max-width:1880px){
+	#main6 .main6-wrap .list ul li:first-child{margin-bottom:20px;}
+	#main6 .main6-wrap .list ul li:nth-child(2){margin-bottom:20px;}	
+}
+
+@media all and (max-width:1450px){
+	#main6 .main6-wrap{width:95%;}
+	#main6 .main6-wrap .title .more-btn{right:20px;}
+	#main6 .main6-wrap .list ul li{width:49%;}
+	#main6 .main6-wrap .list ul li:first-child{margin-bottom:20px;}
+	#main6 .main6-wrap .list ul li:nth-child(2){margin-left:1%;margin-bottom:20px;}
+	#main6 .main6-wrap .list ul li:last-child{margin-left:1%;}
+	#main6 .main6-wrap .list ul li .txt-box{width:50%;}
+}
+
+@media all and (max-width:1290px){
+	#main6 .main6-wrap .list ul li{width:49%;}
+	#main6 .main6-wrap .list ul li:first-child{margin-bottom:20px;}
+	#main6 .main6-wrap .list ul li:nth-child(2){margin-left:1%;margin-bottom:20px;}
+	#main6 .main6-wrap .list ul li:last-child{margin-left:1%;}
+	#main6 .main6-wrap .list ul li .img-box {width:50%;height:250px;}
+	#main6 .main6-wrap .list ul li .img-box img {width:100%;height:250px;}
+	#main6 .main6-wrap .list ul li .txt-box{width:50%;height:250px;}	
+	#main6 .main6-wrap .list ul li .txt-box h3{padding:25px 30px 0;}
+	#main6 .main6-wrap .list ul li .txt-box p{padding:20px 30px 0;font-size:16px;color:#555;line-height:1.4;font-weight:300;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+	#main6 .main6-wrap .list ul li .txt-box span{display:block;padding:30px 30px 0;font-size:16px;color:#0091d4;font-weight:300;}
+}
+
+@media all and (max-width:1024px){
+	#main6 .main6-wrap{width:97%;margin-top:0;padding-top:30px;}
+	#main6 .main6-wrap .title h3{font-size:26px;left:44%;top:10px;}
+	#main6 .main6-wrap .title .more-btn{right:0;}
+	#main6 .main6-wrap .list ul li{width:100%;margin-bottom:10px;}
+	#main6 .main6-wrap .list ul li:first-child{margin-bottom:10px;}
+	#main6 .main6-wrap .list ul li:nth-child(2){margin-left:0;margin-bottom:10px;}
+	#main6 .main6-wrap .list ul li:last-child{margin-left:0;}
+}
+
+@media all and (max-width:768px){
+	#main6 .main6-wrap .title h3{left:43%;}
+	#main6 .main6-wrap .title .arr-btn,
+	#main6 .main6-wrap .title .more-btn{margin-top:5px;}
+	#main6 .main6-wrap .title .arr-btn li,
+	#main6 .main6-wrap .title .more-btn li{width:40px;}
+	#main6 .main6-wrap .title .arr-btn li:last-child{margin-left:-3px;}
+	#main6 .main6-wrap .list ul li .txt-box h3{padding:30px 30px 0;font-size:20px;}
+	#main6 .main6-wrap .list ul li .txt-box p{font-size:15px;}
+	#main6 .main6-wrap .list ul li .txt-box span{font-size:15px;}
+}
+
+@media all and (max-width:550px){
+	#main6 .main6-wrap .title h3{font-size:20px;left:41%;top:13px;}
+	#main6 .main6-wrap .title .arr-btn,
+	#main6 .main6-wrap .title .more-btn{margin-top:4px;}
+	#main6 .main6-wrap .title .arr-btn li,
+	#main6 .main6-wrap .title .more-btn li{width:35px;}
+	#main6 .main6-wrap .title .arr-btn li:last-child{margin-left:-3px;}
+	#main6 .main6-wrap .list{margin-top:15px;}
+	#main6 .main6-wrap .list ul li:first-child{margin-bottom:5px;}
+	#main6 .main6-wrap .list ul li:nth-child(3),
+	#main6 .main6-wrap .list ul li:last-child{display:none;}
+	#main6 .main6-wrap .list ul li .txt-box h3{font-size:18px;}
+	#main6 .main6-wrap .list ul li .txt-box p{font-size:14px;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+	#main6 .main6-wrap .list ul li .txt-box span{font-size:14px;}
+}
+
+@media all and (max-width:425px){
+	#main6 .main6-wrap .title h3{}
+	#main6 .main6-wrap .list ul li .img-box{height:180px;}
+	#main6 .main6-wrap .list ul li .txt-box{height:180px;}	
+	#main6 .main6-wrap .list ul li .txt-box h3{padding:20px 25px 0;}
+	#main6 .main6-wrap .list ul li .txt-box p{padding:10px 25px 0;}
+	#main6 .main6-wrap .list ul li .txt-box span{padding:10px 25px 0;}
+}
