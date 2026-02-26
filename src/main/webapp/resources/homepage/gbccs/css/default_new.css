@@ -1,0 +1,220 @@
+@charset "utf-8"; 
+@import "/resources/common/css/common_inc.css";
+
+/* 스타일 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,address
+{font-family:'Noto Sans';}
+
+#wrap {position:relative;z-index:7;}
+#container {clear:both;}
+
+.Gnb .gnb-menu{margin-right:50px;}
+
+.end {clear:both;}
+.outer{display:table;width:100%;height:100%;}
+.inner{display:table-cell;vertical-align:middle;text-align:center;}
+
+.site-box{position:relative;border-left:1px solid #ddd;height:60px;line-height:50px;}
+.site-box ul li{display:inline-block;width:19.8%;}
+
+.site_link div > div{width:86%}
+.site_link a.btn{border:none;background:#fff;color:#555;border-left:1px solid #ddd;font-weight:500;height:46px;line-height:45px;}
+
+.site_link > div > div {position:relative;display:inline-block;zoom:1;*display:inline;margin:0;vertical-align:middle;margin-right:-8px;}
+.site_link > div > div > a.fsite{display:block;padding:0 20px;border-right-width:0;text-align:left;background:transparent;color:#444;font-size:17px;font-weight:500;}
+.site_link > div > div > ul{position:absolute;bottom:50px;left:0;width:100%;text-align:left;border-top:1px solid #ccc;background:#fff;}
+.site_link > div > div > ul{overflow-y:auto;border-right:1px solid #ccc}
+.site_link > div > div > ul > li{line-height:25px;border-left:1px solid #ccc}
+.site_link > div > div > ul > li > a{color:#666;display:block;padding:3px 6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.site_link > div > div > a > span{display:inline-block;zoom:1;*display:inline;vertical-align:middle;line-height:45px;height:60px}
+.site_link > div > div > a > span.f1{display:block;width:100%;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;line-height:60px;}
+.site_link > div > div > a > span.f2{position:absolute;right:15px;top:0;width:20px;color:#444;}
+.site_link > div > div > a > span > i{border-color:#888 transparent transparent transparent;border-style:solid;border-width:5px 4px 0 4px;width:0;height:0;left:50%;position:absolute;top:50%}
+.site_link > div > div > a > span > i,
+.site_link > div > div > a:hover > span > i{margin-top:-2px}
+.site_link > div > div > a.active > span > i{border-color:transparent transparent #888 transparent;border-width:0 4px 5px 4px}
+.site_link > div > div > ul > li > a.disabled{color:#999}
+.site_link > div > div > ul > li > a:hover{background:#5897fb;color:#444;}
+
+.Gnb .gnb-menu > li{padding:0 1.5%;}
+.Gnb .gnb-menu > li.menu1 > .SubMenu{left:-100px;}
+.Gnb .gnb-menu > li.menu2 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu3 > .SubMenu{left:-700px;}
+.Gnb .gnb-menu > li.menu4 > .SubMenu{left:-600px;}
+.Gnb .gnb-menu > li.menu5 > .SubMenu{left:-600px;}
+.Gnb .gnb-menu > li.menu6 > .SubMenu{left:-250px;}
+.Gnb .gnb-menu > li.menu7 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu8 > .SubMenu{left:0;}
+
+
+@media all and (max-width:1350px){
+	.site-box ul li{width:19.7%;}
+}
+
+
+@media all and (max-width:1300px){
+	.Gnb .gnb-menu{margin-right:30px;}
+	.Gnb .gnb-menu > li{padding:0 0.8%;}
+	.Gnb .gnb-menu > li > a{font-size:17px;}
+
+	.Gnb .g-menu a.last-box-a{right:0;}
+}
+
+@media all and (max-width:1110px){
+	.site-box ul li{width:19.5%;}
+}
+
+@media all and (max-width:1080px){
+	.site-box{text-align:center;}
+}
+
+@media all and (max-width:1024px){
+
+}
+
+@media all and (max-width:768px){
+	.site-box{display:none;}
+}
+
+@media all and (max-width:550px){
+}
+
+@media all and (max-width:425px){
+
+}
+
+
+
+/*********sub contents**********/
+
+/* 추진계획 */
+.sic{margin:3%}
+.sic .txt-box{overflow:visible}
+.sic h3{background:#001c58;color:#fff;margin:-5% 2% 0}
+.sic h3 em{font-size:13px;font-weight:normal;font-style:normal}
+.sic h3 em,
+.sic h3 strong,
+.sic h3 span{display:inline-block;zoom:1;*display:inline}
+.sic h3 strong{margin-right:10px}
+.sic ul.con{padding-top:15px;padding-bottom:0}
+
+/* 조감도 */
+.content151_area{width:690px;margin:0 auto}
+.content151 .box{position:relative;margin-top:-9%;left:3%;width:60%;background:rgba(255,255,255,0.7);overflow:hidden;padding:12px;box-shadow:0 0 5px 0px rgba(0,0,0,0.5);}
+.content151 .box ul{float:left;width:50%}
+.content151 .box li{padding:2px}
+.content151 .box li.link_area{padding-top:5px}
+.content151 .box i{width:16px;height:16px;line-height:16px;color:#fff;background:#464646;border:1px solid #222;text-align:center}
+.content151 .box span{margin-left:5px}
+.content151 .box,
+.content151 .box i,
+.content151 .box span,
+.content151 .box em{display:inline-block;zoom:1;*display:inline;vertical-align:top}
+.content151 .box em{font-style:normal;font-size:90%;color:#888}
+.content151 .box a{width:120px;padding:4px 13px;text-align:center;color:#fff;font-weight:bold;margin:2px 0}
+.content151 .box a.btn.s1{background:#69a731;border-color:#467819}
+.content151 .box a.btn.s2{background:#3d907e;border-color:#257f6b}
+@media all and (max-width:1000px){
+	.content151_area{width:auto}
+}
+@media all and (max-width:950px){
+	.content151 .box{width:87%}
+}
+@media all and (max-width:500px){
+	.content151 .box ul{width:100%}
+}
+
+/* 층별안내도 */
+.roomInfo,
+.facilityInfo{background:#f9f9f9;padding:3%}
+.facilityInfo > p,
+.roomInfo > p{border:1px solid #ddd;margin:0 auto;text-align:center;font-size:0;line-height:0;background:#fff}
+.facilityInfo ul.con2,
+.roomInfo ul.con{padding-top:15px}
+.roomInfo ul.con strong{display:block;color:#333;font-size:110%}
+.roomInfo ul.con div.s1{padding:5px 0 0}
+.roomInfo ul.con div.s1,
+.roomInfo ul.con ul{display:inline-block;zoom:1;*display:inline;vertical-align:top}
+.roomInfo ul.con ul{margin-left:10px;font-weight:bold}
+
+/* 시설현황 */
+.facilityInfo > p{padding:2%}
+.facilityInfo ul.con2 li{display:inline-block;zoom:1;*display:inline;vertical-align:top;padding-right:5%;padding-bottom:5px}
+.facilityInfo ul.con2 li.block{display:block;padding-right:0}
+
+/* CI소개 */
+.ci_info .ci_box{overflow:hidden}
+.ci_info .ci_box1{background:url('../img/contents/ci_border.gif') -1px -1px;border:1px solid #ececec;text-align:center}
+.ci_info .ci_box1 p{display:inline-block;zoom:1;*display:inline;width:33%;margin:5%}
+.ci_info .ci_download{padding-top:15px;text-align:center}
+.ci_info .ci_download a{margin:0 1%}
+.ci_info .ci_download a img{margin-right:3px}
+.ci_info .ci_download a img,
+.ci_info .ci_download a span{vertical-align:middle}
+.ci_info h3{padding-left:0;background:none;font-weight:normal;letter-spacing:0}
+.ci_info h3 strong{color:#f90;font-weight:800}
+.ci_info h3 em{font-style:normal;font-size:90%;color:#999}
+.ci_info .ci_box2{overflow:hidden}
+.ci_info .ci_box2 .symbol,
+.ci_info .ci_box2 .symbol_info{float:left}
+.ci_info .ci_box2 .symbol{width:150px}
+.ci_info .ci_box2 .symbol_info{width:100%;margin-right:-150px}
+.ci_info .ci_box2 .symbol_info .box{margin-right:150px}
+.ci_info .ci_box2 .symbol_info p{padding:0 0 15px}
+.ci_info .ci_box2 .symbol_info .t1{padding-top:10px;color:#8a2c2e;font-size:130%;font-weight:bold}
+.ci_info .ci_box3 .box p{display:inline-block;zoom:1;*display:inline;padding:15px 5% 5px 5px}
+.ci_info .ci_box4 .box{margin-top:15px;border:1px solid #e5e5e5;padding:2% 4%}
+.ci_info .ci_box4 .box dl{white-space:nowrap;padding:10px 0}
+.ci_info .ci_box4 .box dl.s1{margin-right:6%}
+.ci_info .ci_box4 .box dl,
+.ci_info .ci_box4 .box dt,
+.ci_info .ci_box4 .box dd{display:inline-block;zoom:1;*display:inline;vertical-align:top}
+.ci_info .ci_box4 .box dt{font-weight:bold;color:#888;padding:10px 0}
+.ci_info .ci_box4 .box dd{border-left:1px solid #eee;margin-left:10px;padding-left:20px}
+@media all and (max-width:580px){
+	.ci_info .ci_box4 .box dl{white-space:normal}
+	.ci_info .ci_box4 .box dt{display:block}
+	.ci_info .ci_box4 .box dd{border:0;margin:0;padding:0}
+}
+.ci_info .ci_box5{float:left;width:49%}
+.ci_info .ci_box5 li{font-size:0;line-height:0;margin:4px 0;background:#f2f2f2;padding:5px;overflow:hidden}
+.ci_info .ci_box5 li div p{font-size:0;line-height:0}
+.ci_info .ci_box5 li div.s1,
+.ci_info .ci_box5 li div.s2{display:inline-block;zoom:1;*display:inline;vertical-align:top}
+.ci_info .ci_box5 li div.s1{width:23%}
+.ci_info .ci_box5 li div.s2{width:77%}
+.ci_info .ci_box5 li div.s2 p{padding-left:3%;padding-top:7px}
+.ci_info .ci_box5 li div.s2 span{vertical-align:middle;line-height:16px;font-size:12px;white-space:nowrap}
+.ci_info .ci_box5 li div.s2 span.txt-bar{background-color:#bbb}
+.ci_info .ci_box6{float:right;width:49%}
+.ci_info .ci_box6 .box{border:1px solid #ddd;margin-top:4px;font-size:0;line-height:0;text-align:center;padding:0 10px}
+@media all and (max-width:500px){
+	.ci_info .ci_box5,
+	.ci_info .ci_box6{width:100%;float:none}
+}
+
+/* 자원봉사 */
+.cont414{overflow:hidden}
+.cont414 h4{background-repeat:no-repeat;background-position:0 center;padding-bottom:10px;margin-bottom:5px}
+.cont414 h4.icon414_1{background-image:url('/resources/homepage/gbccs/img/contents/icon414_1.gif');padding-left:33px}
+.cont414 h4.icon414_2{background-image:url('/resources/homepage/gbccs/img/contents/icon414_2.gif');padding-left:56px}
+.cont414 h4.icon414_3{background-image:url('/resources/homepage/gbccs/img/contents/icon414_3.gif');padding-left:36px}
+.cont414 .fL,
+.cont414 .fR{width:48%}
+.cont414 .fL{float:left}
+.cont414 .fR{float:right}
+@media all and (max-width:580px){
+	.cont414 .fL,
+	.cont414 .fR{width:100%;float:none}
+	.cont414 .fR{padding-top:20px}
+}
+
+/* 캘린더 */
+
+#calendar table.cal-tbl td li span i, #calendar .calendar-view span i, #calendar .date-type span i{width:35px !important;margin-right:3px;}
+
+#calendar span.type-r i{background-image:url('/resources/homepage/gbccs/img/contents/icon_schedule_r.png') !important;}
+#calendar span.type-1 i{background-image:url('/resources/homepage/gbccs/img/contents/icon_schedule_1.png') !important;}
+#calendar span.type-2 i{background-image:url('/resources/homepage/gbccs/img/contents/icon_schedule_2.png') !important;}
+#calendar span.type-3 i{background-image:url('/resources/homepage/gbccs/img/contents/icon_schedule_3.png') !important;}
+#calendar span.type-4 i{background-image:url('/resources/homepage/gbccs/img/contents/icon_schedule_4.png') !important;}

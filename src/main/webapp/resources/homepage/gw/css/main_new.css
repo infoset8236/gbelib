@@ -1,0 +1,34 @@
+@charset "utf-8";
+/*메인타입 - 01 import*/
+@import url("/resources/common/css/layout/main_type03.css");
+
+/*공지+팝업존타입 - 01 import*/
+@import url("/resources/common/css/layout/notice_type01.css");
+
+/*일정+행사타입 - 01 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type03.css");
+
+/*큐레이션타입 - 03 import*/
+@import url("/resources/common/css/layout/curation_type03.css");
+
+#header h1{padding-top:25px;}
+
+#main2 .event-box .list ul li div p b{color:#018578;}
+#main2 .event-box .list ul li:first-child:hover div{background:#018578 url('/resources/common/img/culture_type02/event-icon01-hover.png')no-repeat center 80px;transition:all 0.5s;}
+#main2 .event-box .list ul li:nth-child(2):hover div{background:#018578 url('/resources/common/img/culture_type02/event-icon02-hover.png')no-repeat center 80px;transition:all 0.5s;}
+#main2 .event-box .list ul li:last-child:hover div{background:#018578 url('/resources/common/img/culture_type02/event-icon03-hover.png')no-repeat center 80px;transition:all 0.5s;}
+
+#main3{background:url('/resources/common/img/book_type03/bg-icon.png')no-repeat bottom right #e3f7de;}
+
+@media all and (max-width:1024px){
+	#header h1{padding-top:10px;width:240px;}
+}
+
+@media all and (max-width:1200px){
+	#main2 .event-box .list ul li:first-child:hover div{background:#018578 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:nth-child(2):hover div{background:#018578 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:last-child:hover div{background:#018578 url('/resources/common/img/transparent.png')no-repeat !important;}
+}

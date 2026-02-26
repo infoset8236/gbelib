@@ -1,0 +1,76 @@
+/* 도서관별 메인 큐레이션*/
+.end {clear:both}
+.curation-section {width:1260px;margin:0 auto;clear:both;position:relative;margin:0 0 30px 0;height:100%;box-sizing:border-box;}
+.row.row3 {height:auto;box-sizing:border-box;position:relative;}
+.book-list-section{padding:20px;}
+.col-sm-3 { width:28%;display:inline-block;box-sizing:border-box;vertical-align:top;text-align:center; }
+.row3 .thumbnail {height:320px;overflow:hidden;margin:0;padding:0;/* border:1px solid #dddddd; */border-radius:0;}
+.thumbnail {display: block;padding:4px;background-color: #fff;/* border:1px solid #ddd; */border-radius:0;}
+.row3 .thumbnail > img, .row3 .thumbnail a > img {height:100%;width:100%;}
+.row3 .contents {background:#fff;box-sizing:border-box;padding:18px;text-align:left;}
+.row3 .book-list-section h3.book-title {height:65px;width:100%;word-break:break-all;max-height:65px;overflow:hidden;text-overflow:ellipsis;color:#000;font-weight:bold;letter-spacing:-1.25px;font-size:20px;}
+.row3 .book-list-section p.book-desc {height:70px;width:100%;word-break:break-all;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;width:100%;overflow:hidden;}
+.dgst-main p {margin: 0 0 10px;font-size:16px;}
+.row3 .book-info {color:#1598dc;display: block;font-size: 0.9em;}
+
+.curation-box .bx-controls-direction {position:absolute;width:100%;top:45%;}
+.curation-box .bx-controls-direction a {position:absolute;width:62px;height:62px;}
+.curation-box .bx-controls-direction a.bx-prev {left:0;}
+.curation-box .bx-controls-direction a.bx-next {right:0;}
+
+@media all and (max-width:1280px)
+{
+	.curation-section {width:100%}
+	.book-list-section{padding:15px 10px;}
+	.curation-box .bx-controls-direction a.bx-prev {left:10px;}
+	.curation-box .bx-controls-direction a.bx-next {right:10px;}
+}
+
+@media all and (max-width:1024px)
+{
+	.curation-section {width:100%}
+	.book-list-section{padding:15px 5px;}
+	.row3 .thumbnail {height:250px;}
+}
+
+@media all and (max-width:768px)
+{
+	.row.row3 {padding-left:0;padding-right:0;}
+	.col-sm-3 {width:30%;}
+	.row3 .thumbnail {}
+	.row3 .book-list-section h3.book-title {font-size:16px;}
+	.row3 .book-list-section p.book-desc {}
+}
+
+@media all and (max-width:650px){
+	.row3 .thumbnail {}
+}
+
+@media all and (max-width:600px){
+	.col-sm-3 {width:69%;}
+	.row3 .thumbnail {}
+}
+
+@media all and (max-width:540px){
+	.col-sm-3 {}
+	.row3 .thumbnail {}
+
+	.curation-box .bx-controls-direction a{width:40px;height:40px;}
+	.row3 .book-list-section h3.book-title{font-size:14px;height:40px;}
+	.row3 .book-list-section p.book-desc{font-size:13px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-overflow:ellipsis;height:70px;}
+}
+
+@media all and (max-width:425px)
+{
+	.row3 .thumbnail {}
+}
+
+@media all and (max-width:375px)
+{
+	..row3 .thumbnail {}
+}
+
+@media all and (max-width:320px)
+{
+	.row3 .thumbnail {}
+}

@@ -1,0 +1,264 @@
+#Container { min-width: 1280px; background: #146da8; }
+
+#Container .visual { background: url("../img/main_bg.jpg") no-repeat center bottom; height: 745px; padding-top: 174px; background-size: cover; }
+
+#Container .visual .section { height: 100%; }
+
+#Container .visual .section .rolling-box { position: relative; width: 643px; left: 15px; top: 77px; z-index: 1; }
+
+#Container .visual .section .rolling-box .bx-wrapper .bx-controls-direction a { background: url("../img/ico_slider_arr.png") no-repeat 0 0; position: absolute; width: 76px; height: 76px; font-size: 0; top: 50%; margin-top: -38px; }
+
+#Container .visual .section .rolling-box .bx-wrapper .bx-controls-direction a.bx-prev { left: -100px; }
+
+#Container .visual .section .rolling-box .bx-wrapper .bx-controls-direction a.bx-next { right: -100px; background-position-x: -76px; }
+
+#Container .visual .section .rolling-box .bx-wrapper .bx-pager { display: none; }
+
+#Container .visual .section .srchBox { float: left; width: 562px; height: 116px; font-size: 16px; line-height: 20px; color: #fff; padding: 20px 20px; margin: 105px 0 0 63px; box-sizing: border-box; background: #253155; }
+
+#Container .visual .section .srchBox label { display: inline-block; padding-right: 16px; }
+
+#Container .visual .section .srchBox label input { display: inline-block; width: 16px; height: 16px; vertical-align: top; margin: 2px 6px 0 0; }
+
+#Container .visual .section .srchBox .srch { position: relative; margin-top: 10px; }
+
+#Container .visual .section .srchBox .srch input { width: 430px; height: 40px; line-height: 40px; font-size: 14px; color: #9b9b9b; letter-spacing: 0; padding: 0 15px; box-sizing: border-box; }
+
+#Container .visual .section .srchBox .srch .btn-link-srch {z-index:9999; position: absolute; width: 87px; height: 40px; top: 0; right: 0; font-size: 18px; line-height: 40px; text-align: center; background: #2485b9; }
+
+#Container .visual .section .link { position: absolute; top: 600px; font-size: 0; left: 110px; bottom: 0; width: 310px; }
+
+#Container .visual .section .link i { display: none; }
+
+#Container .visual .section .link li { float: left; width: 145px; font-size: 15px; color: #fff; font-weight: bold; padding: 0 0 15px 8px; position: relative; }
+
+#Container .visual .section .link li:after { content: ''; width: 3px; height: 3px; position: absolute; left: 0px; top: 6px; background-color: #fff; }
+
+#Container .visual .section .link li:first-child { width: 100%; }
+
+#Container .content { color: #fff; padding: 70px 0 0; overflow: hidden; }
+
+#Container .content .link { position: absolute; width: 741px; font-size: 0; top: -679px; right: 138px; }
+
+#Container .content .link li { float: left; width: 247px; font-size: 24px; font-weight: bold; text-align: center; background: #fff; }
+
+#Container .content .link li a { display: block; height: 60px; padding-top: 166px; position: relative; }
+
+#Container .content .link li.c1 { margin-left: 494px; background-color: #4db5b5; }
+
+#Container .content .link li.c1 .icon1{ content: ''; width: 87px; height: 95px; position: absolute; left: 50%; margin-left: -43.5px; top: 50%; margin-top: -47.5px; margin-top: -77px; }
+
+#Container .content .link li.c2 { margin-left: 247px; background-color: #2485b9; }
+
+#Container .content .link li.c2 .icon2 { content: ''; width: 63px; height: 102px; position: absolute; left: 50%; margin-left: -31.5px; top: 50%; margin-top: -51px; margin-top: -82px; }
+
+#Container .content .link li.c3 { color: #2594cf; background-color: #fff; }
+
+#Container .content .link li.c3 .icon3 { content: ''; width: 104px; height: 96px; position: absolute; left: 50%; margin-left: -52px; top: 50%; margin-top: -48px; margin-top: -75px; }
+
+#Container .content .link li.c4 { color: #2594cf; background-color: #fff; }
+
+#Container .content .link li.c4 .icon4 { content: ''; width: 96px; height: 91px; position: absolute; left: 50%; margin-left: -48px; top: 50%; margin-top: -45.5px; margin-top: -73px; }
+
+#Container .content .link li.c5 { background-color: #7d7d7d; }
+
+#Container .content .link li.c5 .icon5 { content: ''; width: 111px; height: 71px; position: absolute; left: 50%; margin-left: -55.5px; top: 50%; margin-top: -35.5px; margin-top: -50px; }
+
+#Container .content .link li.c6 { background-color: #f15a48; }
+
+#Container .content .link li.c6 .icon6 { content: ''; width: 110px; height: 80px; position: absolute; left: 50%; margin-left: -55px; top: 50%; margin-top: -40px; margin-top: -60px; }
+
+#Container .content .tit { font: 18px/20px 'Nanum Barun Gothic'; font-weight: bold; overflow: hidden; padding-bottom: 20px; }
+
+#Container .content .tit li { float: left; padding-right: 30px; letter-spacing: 0; }
+
+#Container .content .notice { float: left; width: 457px; margin: 0 49px 35px 0; position: relative; }
+
+#Container .content .notice .cont { font-size: 14px; line-height: 16px; }
+
+#Container .content .notice .cont i { display: none; }
+
+#Container .content .notice .cont li { overflow: hidden; padding-bottom: 11px; }
+
+#Container .content .notice .cont li a { display: inline-block; width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+#Container .content .notice .cont li a:hover { text-decoration: underline; }
+
+#Container .content .notice .cont li span { float: right; }
+
+#Container .content .promotion { float: left; margin: 0 49px 35px 0; position: relative; }
+
+#Container .content .promotion .cont li { float: left; margin-left: 30px; }
+
+#Container .content .promotion .cont li:first-child { margin-left: 0; }
+
+#Container .content .promotion .cont li span { display: block; font-size: 14px; line-height: 18px; padding-top: 10px; }
+
+#Container .content .promotion .cont li span strong { display: block; font-size: 16px; }
+
+#Container .content .promotion .cont li a img { width: 116px; height: 162px;}
+
+#Container .content .calender { float: left; margin: 0 0 35px; position: relative; }
+
+#Container .content .calender .tit { font: 18px/20px 'Nanum Barun Gothic'; font-weight: bold; }
+
+#Container .content .calender .tit strong { font-weight: bold; letter-spacing: 0; }
+
+#Container .content .calender .cont { position: relative; }
+
+#Container .content .calender .cont p { position: absolute; left: 30px; top: 190px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-right: 30px; box-sizing: border-box; }
+
+#Container .content .calender .cont p span { color: #23c2ee; }
+
+#Container .content .calender .cont table { font-size: 10px; font-weight: normal; text-align: center; padding-left: 100px; }
+
+#Container .content .calender .cont table th, #Container .content .calender .cont table td { width: 33px; height: 25px; }
+
+#Container .content .calender .cont table tbody td { font-size: 15px; }
+
+#Container .content .calender .cont table tbody b.hoil { color: #ee2375; }
+
+#Container .content .calender .cont table tbody b.event { color: #23c2ee; }
+
+#Container .content .calender .cont table tbody b a:hover { font-weight: bold; }
+
+#Container .content .calender #datepicker { position: relative; }
+
+#Container .content .calender #datepicker .ui-datepicker-header { position: absolute; font-size: 0; left: 25px; top: 0; }
+
+#Container .content .calender #datepicker .ui-datepicker-header .ui-datepicker-year { display: none; }
+
+#Container .content .calender #datepicker .ui-datepicker-header .ui-datepicker-month em { display: block; font-size: 10px; text-align: center; }
+
+#Container .content .calender #datepicker .ui-datepicker-header .ui-datepicker-month em.number { font-size: 48px; line-height: 50px; font-weight: bold; }
+
+#Container .content .calender #datepicker .ui-datepicker-header .ui-datepicker-prev { position: absolute; height: 20px; left: -17px; top: 50%; margin-top: -10px; font-size: 20px; cursor: pointer; }
+
+#Container .content .calender #datepicker .ui-datepicker-header .ui-datepicker-next { position: absolute; height: 20px; top: 50%; margin-top: -10px; right: -17px; font-size: 20px; cursor: pointer; }
+
+#Container .content .calender #datepicker .util { position: absolute; left: 30px; top: 86px; }
+
+#Container .content .calender #datepicker .util span { display: block; padding: 15px 0 0 22px; position: relative; }
+
+#Container .content .calender #datepicker .util span.hoil:after { content: ''; position: absolute; width: 13px; height: 13px; font-size: 0; left: 0; top: 16px; background: #ee2375; }
+
+#Container .content .calender #datepicker .util span.event:after { content: ''; position: absolute; width: 13px; height: 13px; font-size: 0; left: 0; top: 16px; background: #23c2ee; }
+
+#Container .content .calender .btn-link-more { right: 8px; }
+
+#Container .content .book-list { float: left; margin: 0 49px 0 0; position: relative; }
+
+#Container .content .book-list .cont { width: 591px; height: 307px; box-sizing: border-box; }
+
+#Container .content .book-list .cont li { display: inline-block; width: 165px; vertical-align: top; text-align: center; margin-left: 20px;}
+
+#Container .content .book-list .cont li span { display: block; font-size: 12px; line-height: 22px; color: #fff; }
+
+#Container .content .book-list .cont li span strong { display: block; font-size: 14px; padding-top: 10px; }
+
+#Container .content .book-list .cont li span.img { display: inline-block; width: 125px; height: 179px; }
+
+#Container .content .book-list .cont li span.img img { display: block; width:125px; height:184px; padding-top: 5px; }
+
+#Container .content .book-list .imgBox span.bookKind {position: absolute;background: url('/resources/common/img/mainTabcontents_bg03.png');background-size: 100%;z-index: 999999;width: 36px;height: 37px;color: #fff;font-size: 13px;padding-top: 5px;background-repeat: no-repeat;}
+
+#Container .content .promotion .imgBox span.bookKind{position: absolute;background: url('/resources/common/img/mainTabcontents_bg05.png');background-size: 100%;z-index: 999999;width: 36px;height: 37px;color: #fff;font-size: 13px;padding-top: 5px;background-repeat: no-repeat; text-align: center;}
+
+#Container .content .banner { float: left; width: 509px; padding-top: 15px; }
+
+#Container .content .banner img { display: block; width: 100%; }
+
+.banner .bx-viewport { height:  250px!important;}
+
+.banner .bx-viewport img { height:  250px;}
+
+#Container .btn-link-more { position: absolute; font-size: 0; top: 3px; right: 1px; }
+
+#Container .btn-link-more i { font-size: 18px; }
+
+.tab .tit .active { color: #00aeef; }
+
+.tab .cont { display: none; }
+
+.tab .cont[data-tab='tab1'] { display: block; }
+
+.bx-wrapper { position: relative; }
+
+.bx-wrapper .bx-pager { position: absolute; font-size: 0; right: 15px; bottom: 17px; }
+
+.bx-wrapper .bx-pager .bx-pager-item { display: inline-block; margin: 0 5px; }
+
+.bx-wrapper .bx-pager .bx-pager-item a { display: block; width: 12px; height: 12px; font-size: 0; border-radius: 12px; background: #fff; }
+
+.bx-wrapper .bx-pager .bx-pager-item a.active { background: #6d6d6d; }
+
+i.fa-external-link{font-size: 0;}
+
+.banner-roll li a img {border: 1px solid #e2e2e2;}
+
+#header #gnbWrap.notalertSubMenu { top: 95px !important; }
+#header #gnbWrap.alertSubMenu { top: 150px !important; }
+
+#header #tnbWrap.notalertSubMenu { top: 58px !important; }
+#header #tnbWrap.alertSubMenu { top: 100px !important; }
+
+@media (max-width: 1000px) { #header { position: static; }
+  #header #tnbWrap { display: none; }
+  #Container { min-width: 100%; margin-top: 0; background: none; }
+  #Container .visual { height: 645px; padding: 0; }
+  #Container .visual .section .rolling-box { left: 50%; margin-left: -321px; }
+  #Container .visual .section .rolling-box .bx-controls .bx-pager { display: block; width: 100%; right: auto; bottom: -210px; text-align: center; }
+  #Container .visual .section .srchBox { float: none; margin: 189px auto 0; }
+  #Container .visual .link { display: none; }
+  #Container .content { display: flex; flex-wrap: wrap; padding: 0; color: #000; }
+  #Container .content .tit { font-weight: normal; }
+  #Container .content .notice, #Container .content .promotion, #Container .content .calender, #Container .content .book-list { overflow: hidden; width: 50%; padding: 15px 15px; margin: 0; box-sizing: border-box; }
+  #Container .content .link { color: #fff; }
+  #Container .content .notice .cont li a { width: 75%; }
+  #Container .content .banner { width: 100%; padding-top: 20px; }
+  #Container .content .calender .tit strong { font-weight: normal; }
+  #Container .content .calender .cont table { float: right; }
+  #Container .content .calender .cont table th, #Container .content .calender .cont table td { width: 40px; }
+  #Container .content .calender .cont p { padding-right: 0; }
+  #Container .content .calender .btn-link-more { right: 15px; }
+  #Container .content .link { display: flex; flex-wrap: wrap; width: 100%; padding-bottom: 0; position: static; }
+  #Container .content .link li { margin: 0 !important; width: 33.3%; }
+  #Container .content .link li:nth-of-type(3n+1) { width: 33.4%; }
+  #Container .content .link li.c4 { border-bottom: 1px solid #d1d1d1; }
+  #Container .content .book-list .cont { width: 100%; height: auto; }
+  #Container .content .book-list .cont ul { display: flex; flex-wrap: wrap; justify-content: flex-start; }
+  #Container .content .book-list .cont li { width:33.33%; padding-bottom: 0; margin-left: 0; }
+  #Container .content .book-list .cont li span { color: #000; }
+  #Container .btn-link-more { right: 15px; top: 18px; } }
+
+@media (max-width: 765px) { #Container .content .link li { font-size: 14px; font-weight: normal; color: #fff; }
+  #Container .content .link li a { height: 30px; padding-top: 90px; }
+  #Container .content .link li a:after { background-size: cover !important; }
+  #Container .content .link li.c1 a:after { position: absolute; width: 58px; height: 63px; font-size: 0; left: 50%; margin-left: -29px; margin-top: -45px; }
+  #Container .content .link li.c2 a:after { position: absolute; width: 42px; height: 68px; font-size: 0; left: 50%; margin-left: -21px; margin-top: -50px; }
+  #Container .content .link li.c3 a:after { position: absolute; width: 69px; height: 64px; font-size: 0; left: 50%; margin-left: -34.5px; margin-top: -45px; }
+  #Container .content .link li.c4 a:after { position: absolute; width: 64px; height: 60px; font-size: 0; left: 50%; margin-left: -32px; margin-top: -45px; }
+  #Container .content .link li.c5 a:after { position: absolute; width: 74px; height: 47px; font-size: 0; left: 50%; margin-left: -37px; margin-top: -35px; }
+  #Container .content .link li.c6 a:after { position: absolute; width: 73px; height: 53px; font-size: 0; left: 50%; margin-left: -36.5px; margin-top: -35px; }
+  #Container .content .notice, #Container .content .promotion, #Container .content .calender, #Container .content .book-list { width: 100%; border-bottom: 1px solid #d1d1d1; }
+  #Container .content .notice .cont ul, #Container .content .promotion .cont ul, #Container .content .calender .cont ul, #Container .content .book-list .cont ul { justify-content: center; }
+  #Container .content .tit { font-weight: normal; }
+  #Container .content .notice { height: auto; }
+  #Container .content .promotion .cont ul { display: flex; justify-content: center; }
+  #Container .content .promotion .cont ul li { float: none; }
+  #Container .content .calender { min-height: 290px; }
+  #Container .content .calender .cont { display: flex; justify-content: center; }
+  #Container .content .calender .cont p { left: auto; }
+  #Container .content .banner { padding-top: 0; }
+  #Container .visual { height: auto; overflow: hidden; }
+  #Container .visual .section .rolling-box { position: static; margin: 0; width: 100%; box-sizing: border-box; text-align: center; }
+  #Container .visual .section .rolling-box img { width: 100%; padding: 50px; box-sizing: border-box; }
+  #Container .visual .section .rolling-box .bx-controls .bx-pager { bottom: 17px; }
+  #Container .visual .section .srchBox { width: 100%; margin: 0; }
+  #Container .visual .section .srchBox .srch { display: flex; }
+  #Container .visual .section .srchBox .srch input { width: 100%; margin-right: 10px; }
+  #Container .visual .section .srchBox .srch .btn-link-srch { position: static; }
+  #Container .bx-controls { position: relative; z-index: 51; }
+  #Container .bx-controls .bx-pager { width: 100%; right: auto; text-align: center; } }
+
+/*# sourceMappingURL=main.css.map */

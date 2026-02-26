@@ -1,0 +1,91 @@
+@charset "utf-8"; 
+@import "/resources/common/css/common_inc.css";
+
+@font-face {
+    font-family: 'MapoDPPA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoDPPA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* 스타일 */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,address
+{font-family:'MapoDPPA';}
+
+.Gnb .gnb-menu{margin-right:50px;}
+.Gnb .gnb-menu > li.menu1 > .SubMenu{left:-350px;}
+.Gnb .gnb-menu > li.menu2 > .SubMenu{left:-20px;}
+.Gnb .gnb-menu > li.menu3 > .SubMenu{left:-350px;}
+.Gnb .gnb-menu > li.menu4 > .SubMenu{left:-280px;}
+.Gnb .gnb-menu > li.menu5 > .SubMenu{left:-200px;}
+.Gnb .gnb-menu > li.menu6 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu7 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li.menu8 > .SubMenu{left:0;}
+.Gnb .gnb-menu > li > a{font-family:'MapoDPPA';}
+
+
+.tnb .util-left a, .tnb .util-right a{font-weight:normal;font-size:15px;}
+.Gnb .gnb-menu > li > a{font-weight:normal;}
+
+#wrap {position:relative;z-index:7}
+
+#container{clear:both}
+
+#header h1{top:1px;width:223px;}
+
+@media all and (max-width:1430px){
+	.g-menu{display:none;}
+	.mmode{display:block}
+	.tnb,
+	.g-menu{display:none}
+	.m-menu{float:right}
+	.m-menu a i{font-size:30px;width:45px;height:45px;line-height:85px}
+
+	#m-util{display:block;position:relative;background:rgba(242,242,242);}
+	#m-util ul li{display:inline-block;width:32%;text-align:center;border-right:1px solid #e0e0e0;}
+	#m-util.no3 ul li{width:48%;}
+	#m-util.no5 ul li{width:24%;}
+	#m-util ul li:last-child{border-right:none;}
+	#m-util ul li a{height:40px;line-height:40px;font-weight:500;}
+}
+
+@media all and (max-width:1024px){
+	.Gnb{padding:15px 0;}
+
+	#header h1{top:-5px;left:15px;}
+
+	.m-menu{margin-right:10px;}
+	.m-menu a i{line-height:45px;}
+}
+
+@media all and (max-width:600px){
+	#header h1{width:180px;top:-5px;left:15px;}
+}
+
+
+/* 인사말 */
+.greeting{background:url('../img/contents/body/greeting.jpg') no-repeat right bottom}
+.greeting_intro{background:url('../img/contents/body/greeting_intro.png') no-repeat 0 0}
+.greeting .t1{font-size:190%;letter-spacing:-1px;padding:20px 0 25px 35px;border-bottom:1px solid #cdcdcd;width:400px}
+.greeting .t1 span{font-size:50%;color:#85cbd3;letter-spacing:0.5px;display:block;line-height:120%;padding:10px 0 0}
+.greeting .box{padding:20px 260px 0px 0}
+.greeting .gtxt{padding:20px;background:url('../img/contents/body/greeting_bottom.png') no-repeat right bottom}
+.greeting .txt p{padding:0 0 10px;font-size:105%;line-height:180%}
+.greeting .sign{padding:15px 100px 0 0;font-size:120%}
+.greeting .sign span{color:#888;display:inline-block;zoom:1;*display:inline;vertical-align:middle;line-height:130%;margin:3px 0}
+.greeting .sign span.name{margin-left:5px}
+
+@media all and (max-width:900px){
+	.greeting .box{padding-right:35%}
+}
+
+@media all and (max-width:767px){
+	.greeting{background:none}
+	.greeting .t1{width:auto}
+	.greeting .box{padding-right:5%;background:none}
+}
+
+@media all and (max-width:400px){
+	.greeting .t1{padding:20px 0 25px 25px}
+	.greeting .gtxt{padding:2%}
+}
