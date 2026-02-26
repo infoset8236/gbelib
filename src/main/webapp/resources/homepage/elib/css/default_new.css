@@ -1,0 +1,22 @@
+@charset "utf-8";
+@import "/resources/common/css/common_inc.css";
+
+
+/* ��Ÿ�� */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td,address {margin:0;padding:0;line-height:150%;word-break:keep-all;font-family:'Noto Sans KR';}
+
+.tnb{background:#d9d9d9;}
+.tnb .util-left a{border-right:none;}
+.tnb .util-left ul li.geic{background:#2f4c93;}
+.tnb .util-left ul li.gbelib{background:#46a5bc;}
+.tnb .util-left ul li a{color:#fff;}
+.tnb .util-left ul li a:hover{color:rgba(255,255,255,0.9);}
+.tnb .util-right a{border-left:1px solid #c3c3c3;}
+
+.Gnb .gnb-menu > li.menu1 > .SubMenu{left:-200px;}
+.Gnb .gnb-menu > li.menu2 > .SubMenu{left:-50px;}
+.Gnb .gnb-menu > li.menu3 > .SubMenu{left:-500px;}
+.Gnb .gnb-menu > li.menu4 > .SubMenu{left:-400px;}
+.Gnb .gnb-menu > li.menu5 > .SubMenu{left:-370px;}
+.Gnb .gnb-menu > li.menu6 > .SubMenu{left:-100px;}
+.Gnb .gnb-menu > li.menu7 > .SubMenu{left:0;}

@@ -1,0 +1,133 @@
+@charset "utf-8";
+/*메인타입 - 04 import*/
+@import url("/resources/common/css/layout/main_type04.css");
+
+/*큐레이션타입 - 04 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+/*팝업존+공지타입 - 01 import*/
+@import url("/resources/common/css/layout/notice_type01.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type01.css");
+
+/*일정+행사타입 - 01 import*/
+@import url("/resources/common/css/layout/culture_type01.css");
+
+#header h1{padding-top:25px;}
+
+#main0 .main-visual .search-area{top:35%;}
+#main0 .main-visual .quickmenu-box{top:50%;}
+
+#main0 .popupzone-txt{position:absolute;width:52%;height:395px;top:35%;left:0;z-index:999;background:rgba(50,50,50,0.8);}
+#main0 .popupzone-txt .txt {width:100%;text-align:center;margin-top:100px;}
+#main0 .popupzone-txt .txt h3 {color:#fff;font-size:47px;letter-spacing:-1.0px;margin-bottom:5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:70%;display:inline-block;font-family:'S-Core Dream 5';}
+#main0 .popupzone-txt .txt p {color:#fff;font-size:27px;letter-spacing:-1.0px;margin-bottom:30px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:70%;margin:0 auto;margin-bottom:20px;font-family:'S-Core Dream 4';}
+#main0 .popupzone-txt .txt a {color:#fff;font-size:15px;padding:12px 0 15px 55px;background:url('/resources/homepage/geic/img/popupzone-view-btn.png') no-repeat;height:50px;line-height:50px;font-family:'S-Core Dream 4';}
+#main0 .popupzone-txt .bx-viewport,
+#main0 .popupzone-txt .bx-viewport ul,
+#main0 .popupzone-txt .bx-viewport ul li,
+#main0 .popupzone-txt .bx-viewport ul li .txt,
+#main0 .popupzone-txt .bx-viewport ul li .txt h3,
+#main0 .popupzone-txt .bx-viewport ul li .txt p,
+#main0 .popupzone-txt .bx-viewport ul li .txt a{z-index:9;}
+#main0 .popupzone-txt .bx-controls,
+#main0 .popupzone-txt .bx-controls .bx-controls-direction{z-index:9999;}
+#main0 .popupzone-txt .bx-controls .bx-controls-direction a.bx-prev{z-index:9999;font-size:0;position:absolute;top:46%;left:30px;display:block;width:49px;height:49px;background:url('/resources/homepage/geic/img/popupzone-prev-btn.png') no-repeat;}
+#main0 .popupzone-txt .bx-controls .bx-controls-direction a.bx-next{z-index:9999;font-size:0;position:absolute;top:46%;right:30px;display:block;width:49px;height:49px;background:url('/resources/homepage/geic/img/popupzone-next-btn.png') no-repeat;}
+#main0 .popupzone-txt .bx-controls .bx-pager{display:none;}
+
+#main1 .main1_wrap:before{background:#eee6fe;}
+#main1 .main1_wrap .main1-left-box{background:#eee6fe;}
+#main1 .main1_wrap .main1-right-box .news .box ul li a:hover{background:#7753c1;}
+#main1 .main1_wrap .main1-right-box .news .box.notice-list .bx-prev{background-image:url("/resources/homepage/cd/img/main/notice-prev-btn.png")}
+#main1 .main1_wrap .main1-right-box .news .box.notice-list .bx-next{background-image:url("/resources/homepage/cd/img/main/notice-next-btn.png")}
+
+#main4 .main4-top .cultureList ul li a div.date p{color:#eb1322;}
+#main4 .main4-bottom{background:#fceced;}
+
+#main6{background:#bbbbbd url('/resources/homepage/cd/img/main/curation4-bg.jpg') no-repeat center bottom;}
+
+@media all and (max-width:1460px){
+	#main0 .main-txt-area {top:230px;width:50%;}
+
+	#main0 .popupzone-txt{top:132px;left:0;width:100%;}
+
+	#main0 .main-visual .search-area{top:68%;}
+	
+	#main0 .main-visual .quickmenu-box{top:82%;}
+	#main0 .main-visual .quickmenu-box .main-box .qmenu li{width:16.6%;}
+}
+
+@media all and (max-width:1024px){
+	#header h1 {padding-top:10px;}
+
+	#main0 .popupzone-txt {top:100px;width:100%;height:300px;}
+
+	#main0 .main-visual{height:110%;}
+	#main0 .main-visual .search-area{top:65%;}
+
+	#main0 .main-visual .quickmenu-box{top:79%;}
+
+	#main0 .main-txt-area{top:14%;width:100%;}
+	#main0 .main-txt-area .main-txt{line-height:40px;}
+	#main0 .popupzone-txt .txt {margin-top:60px;}
+	#main0 .popupzone-txt .txt h3{font-size:38px;}
+	#main0 .popupzone-txt .txt p{font-size:20px;}
+
+	#main4 .main4-top div.title a.more,
+	#main4 .main4-bottom div.title a.more{top:10px;font-size:10px;}
+
+	#main6{margin-top:60px;}
+}
+
+@media all and (max-width:768px){
+	#main0 .main-visual .quickmenu-box .main-box .qmenu {width:100%;}
+
+	#main0 .main-txt-area .main-txt .txt01{font-size:25px;line-height:35px;}
+	#main0 .main-txt-area .main-txt .txt02{font-size:25px;}
+	
+	#main0 .popupzone-txt{height:270px;}
+	#main0 .popupzone-txt .txt h3{font-size:30px;}
+	#main0 .popupzone-txt .txt p{font-size:18px;}
+
+	#main4 .main4-top .cultureList{margin:0 50px;}
+	#main4 .main4-top .cultureList .bx-prev{left:-35px;}
+	#main4 .main4-top .cultureList .bx-next{right:-35px;}
+
+	#main6{margin-top:50px;}
+}
+
+@media all and (max-width:550px){
+	#main0 .main-txt-area .main-txt .txt01{font-size:20px;line-height:30px;}
+	#main0 .main-txt-area .main-txt .txt02{font-size:20px;}
+
+	#main0 .popupzone-txt{top:50px;}
+	#main0 .popupzone-txt .txt h3{font-size:27px;}
+	#main0 .popupzone-txt .txt p{font-size:17px;margin-bottom:10px;}
+	#main0 .popupzone-txt .txt a{font-size:14px;}
+
+	#main6{margin-top:40px;}
+}
+
+@media all and (max-width:500px){
+	#main0 {height:600px;}
+	#main0 .main-txt-area{top:12%;}
+	#main0 .main-visual .search-area{top:52%;}
+	#main0 .main-visual .quickmenu-box{top:65%;}
+
+	#main0 .main-visual .quickmenu-box .main-box .qmenu li{width:33.3%;}
+
+	#main0 .popupzone-txt .txt h3{font-size:21px;}
+	#main0 .popupzone-txt .txt p{font-size:15px;}
+	#main0 .popupzone-txt .txt a{font-size:14px;}
+}
+
+@media all and (max-width:440px){
+	#main0 .main-txt-area .main-txt .txt01,
+	#main0 .main-txt-area .main-txt .txt02{font-size:17px;}
+
+	#main4 .main4-top .cultureList{margin:0;}
+	#main4 .main4-top .cultureList .bx-prev{left:0;}
+	#main4 .main4-top .cultureList .bx-next{right:0;}
+}

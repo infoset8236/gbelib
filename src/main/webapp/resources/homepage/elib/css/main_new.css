@@ -1,0 +1,291 @@
+@charset "utf-8";
+
+#all-area{position:relative;padding-top:131px;background:#4173b9;}
+
+.search-box{position:relative;background:#335a90;border-radius:10px;width:1450px;margin:0 auto;margin-top:50px;}
+.search-box button{background:none;position:absolute;top:25px;right:35px;}
+.search-box .box1 input.text{width:90%;margin-left:30px;border:none;background:none;font-family:'S-Core Dream 4';font-size:20px;height:70px;line-height:70px;letter-spacing:-0.3px;color:#fff;}
+.search-box .box1 input.text::placeholder{color:#fff;}
+
+.more-btn-on {display:none;}
+.main-content-box {position:relative;box-sizing:border-box;padding:0;margin:0;overflow:hidden;}
+
+.ebook-box {width:1050px;margin:30px auto 0;transition:all .45s ease;overflow:hidden;}
+.ebook-box .img-box {position:relative;width:355px;height:430px;background:url('/resources/homepage/elib/img/ebook-bg.png')no-repeat;float:left;margin-right:40px;}
+.ebook-box .img-box img {position:absolute;top:10px;left:68px;width:229px;height:381px;border-radius:30px;}
+.ebook-box .txt-box {position:relative;width:630px;height:350px;float:left;background:#46a5bc;border:1px solid #fff;text-align:center;margin-top:20px;}
+.ebook-box .txt-box span{position:absolute;top:-20px;left:30px;display:block;background:#fff;color:#4173b9;font-family:'S-Core Dream 5';font-size:18px;padding:13px 30px;}
+.ebook-box .txt-box h3{font-family:'S-Core Dream 6';width:85%;margin:0 auto;font-size:35px;color:#fff;margin-top:55px;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;}
+.ebook-box .txt-box img{margin:23px 0 25px;}
+.ebook-box .txt-box p{position:relative;margin:0 auto;width:530px;font-size:20px;line-height:28px;color:#fff;font-weight:normal;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;}
+.ebook-box .txt-box ul{position:absolute;right:0;bottom:-5px;}
+.ebook-box .txt-box ul li{display:inline-block;}
+.ebook-box .txt-box ul li:first-child{margin-right:-2px;}
+.ebook-box .txt-box ul li img{margin:0;}
+.ebook-box .txt-box .detail-btn{position:absolute;bottom:0;right:0;background:rgba(0,0,0,0.5);padding:7px 15px;}
+.ebook-box .txt-box .detail-btn a{font-size:12px;color:#fff;}
+
+.widget {position:absolute;background:#5884c2;width:590px;height:350px;right:-800px;top:50px;z-index:9099;box-sizing:border-box;padding:20px;transition:all .45s ease;}
+.widget .popupzone-box {position:relative;width:550px;height:200px;padding-bottom:0;}
+.widget .popupzone-box .cont{position:absolute;right:0;bottom:0;}
+.widget .popupzone-box li a img {width:550px;height:200px;}
+.widget .popupzone-box .bx-controls {position:absolute;bottom:50px;right:0;z-index:150000000;width:100%;}
+.widget .popupzone-box .bx-prev, 
+.widget .popupzone-box .bx-next, 
+.widget .popupzone-box .bx-start,
+.widget .popupzone-box .bx-stop {position:absolute;width:50px;height:50px;font-size:0;background-image:url("/resources/homepage/ycgh/img/popupzone-arrow-v2.png");background-repeat: no-repeat; background-position:0 0;background-size:initial;}
+.widget .popupzone-box .bx-stop{display:none;}
+.widget .popupzone-box .bx-pager {position:absolute;text-align:center;right:50px;width:70px;height:50px;line-height:50px;background:#2f2f2f;color:#fff;}
+.widget .popupzone-box .bx-prev { right:120px; }
+.widget .popupzone-box .bx-next { right:0; background-position:-50px 0; }
+
+
+.widget .notice-box {position:relative;width:550px;height:110px;background:#fff;padding-top:0;}
+.widget .notice-box ul {padding:17px 19px;}
+.widget .notice-box ul li {position:relative;background:url('/resources/homepage/elib/img/notice-icon.png') no-repeat;height:34px;line-height:34px;padding-left:45px;margin-bottom:5px;}
+.widget .notice-box ul li a {overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:80%;display:block;color:#333;font-size:15px;font-weight:bold;}
+.widget .notice-box ul li a:hover{color:#333;}
+.widget .notice-box ul li span{position:absolute;right:13px;top:0;font-size:14px;color:#555;}
+.widget-btn{position:absolute;top:450px;right:50px;}
+
+.ebook-box.on {margin:30px 0 0 90px;}
+.widget.on {right:7%;}
+
+.quick-box {position:relative;width:100%;background:#fff;text-align:center;}
+.quick-box ul {font-size:0;}
+.quick-box li {position:relative;display:inline-block;text-align:center;top:0;cursor:pointer;width:320px;height:240px;z-index:9999;transition:all .3s ease;}
+.quick-box li span {font-family:'s-core_dream4_regular';font-size:20px;color:#444;display:block;width:100%;height:auto;padding-top:0;position:absolute;bottom:50px;}
+.quick-box .quick01{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;}
+.quick-box .quick02{background:url('/resources/homepage/elib/img/quick02off.png') no-repeat center top;}
+.quick-box .quick03{background:url('/resources/homepage/elib/img/quick03off.png') no-repeat center top;}
+.quick-box .quick04{background:url('/resources/homepage/elib/img/quick04off.png') no-repeat center top;}
+.quick-box .quick05{background:url('/resources/homepage/elib/img/quick05off.png') no-repeat center top;}
+
+.quick-box li:hover {width:320px;height:240px;}
+.quick-box li:hover span {color:#005297;bottom:-50px;}
+.quick-box .quick01:hover{background:url('/resources/homepage/elib/img/quick01.png') no-repeat center center;transform:translate(0,-90px);}
+.quick-box .quick02:hover{background:url('/resources/homepage/elib/img/quick02.png') no-repeat center center;transform:translate(0,-90px);}
+.quick-box .quick03:hover{background:url('/resources/homepage/elib/img/quick03.png') no-repeat center center;transform:translate(0,-90px);}
+.quick-box .quick04:hover{background:url('/resources/homepage/elib/img/quick04.png') no-repeat center center;transform:translate(0,-90px);}
+.quick-box .quick05:hover{background:url('/resources/homepage/elib/img/quick05.png') no-repeat center center;transform:translate(0,-90px);}
+
+@media all and (max-width:1880px){
+	.ebook-box {width:57%;}
+	.ebook-box .txt-box {position:relative;width:calc(100% - 420px);height:350px;float:left;background:#46a5bc;border:1px solid #fff;text-align:center;}
+	.widget {position:absolute;background:#5884c2;width:30%;}
+	.widget .popupzone-box {position:relative;width:100%;}
+	.widget .notice-box {position:relative;width:100%;}
+}
+
+@media all and (max-width:1820px){
+}
+
+@media all and (max-width:1700px){
+	.ebook-box{margin:80px 0 0 12%;}
+}
+
+@media all and (max-width:1630px){
+	.ebook-box{margin:80px 0 0 10%;}
+}
+
+@media all and (max-width:1600px){
+	.quick-box li{width:264px;}
+}
+
+@media all and (max-width:1570px){
+	.ebook-box{margin:80px 0 0 7%;}
+}
+
+@media all and (max-width:1500px){
+	.ebook-box{margin:80px 0 0 7%;}
+
+	.widget-btn{right:35px;}
+}
+
+@media all and (max-width:1450px){
+	.search-box{width:80%;}
+	.ebook-box {width:85%;}
+	.ebook-box{margin:80px 0 0 11%;}
+	.ebook-box .img-box{display:block;}
+
+	.widget{display:none;}
+	.more-btn-on {display:none;}
+	.more-btn-off {display:none;}
+}
+
+@media all and (max-width:1375px){
+	.quick-box li{width:20%;}
+	.quick-box li:hover {width:20%;height:200px;}
+	.quick-box li:hover span {color:#005297;bottom:50px;}
+	.quick-box .quick01:hover{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;transform:translate(0,0);}
+	.quick-box .quick02:hover{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;transform:translate(0,0);}
+	.quick-box .quick03:hover{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;transform:translate(0,0);}
+	.quick-box .quick04:hover{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;transform:translate(0,0);}
+	.quick-box .quick05:hover{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center top;transform:translate(0,0);}
+}
+
+@media all and (max-width:1310px){
+	.ebook-box{margin:80px 0 0 8%;}
+}
+
+@media all and (max-width:1230px){
+	.ebook-box{margin:80px 0 0 4%;}
+	.ebook-box .img-box{margin-right:30px;}
+}
+
+@media all and (max-width:1150px){
+	.ebook-box{margin:80px 0 0 23%;}
+	.ebook-box .img-box{display:none;}
+	.ebook-box {width:90%;margin:0 auto;}
+	.ebook-box .txt-box {position:relative;width:100%;float:none;box-sizing:border-box;}
+	.ebook-box.on {margin:50px auto;}
+}
+
+@media all and (max-width:1050px){
+	.ebook-box{margin:80px 0 0 23%;}
+	.ebook-box .img-box{display:none;}
+}
+
+@media all and (max-width:1024px){
+	#header h1{width:200px;top:0;}
+
+	#all-area{padding-top:90px;height:810px;}
+
+	.search-box{width:90%;}
+	.search-box .box1 input.text{font-size:17px;}
+
+	.ebook-box{margin:60px 0 0 16%;}
+	.ebook-box .txt-box span{font-size:17px;}
+	.ebook-box .txt-box h3{font-size:33px;}
+	.ebook-box .txt-box p{width:90%;font-size:18px;line-height:1.5;}
+
+	.quick-box li{height:220px;}
+	.quick-box li span{font-size:18px;}
+	.quick-box .quick01{background:url('/resources/homepage/elib/img/quick01off.png') no-repeat center 10px;background-size:100%;}
+	.quick-box .quick02{background:url('/resources/homepage/elib/img/quick02off.png') no-repeat center 10px;background-size:100%;}
+	.quick-box .quick03{background:url('/resources/homepage/elib/img/quick03off.png') no-repeat center 10px;background-size:100%;}
+	.quick-box .quick04{background:url('/resources/homepage/elib/img/quick04off.png') no-repeat center 10px;background-size:100%;}
+	.quick-box .quick05{background:url('/resources/homepage/elib/img/quick05off.png') no-repeat center 10px;background-size:100%;}
+
+	.widget-btn{display:none;}
+}
+
+@media all and (max-width:850px){
+	#all-area{height:760px;}
+
+	.ebook-box{margin:60px 0 0 13%;}
+	
+	.quick-box{height:180px;}
+	.quick-box div{height:180px;}
+	.quick-box li span{bottom:85px;font-size:17px;}
+	.quick-box li:hover span{bottom:85px;}
+	.quick-box .quick01{background:url('/resources/homepage/elib/img/q1.png')no-repeat center 37px;}
+	.quick-box .quick02{background:url('/resources/homepage/elib/img/q2.png')no-repeat center 37px;}
+	.quick-box .quick03{background:url('/resources/homepage/elib/img/q3.png')no-repeat center 37px;}
+	.quick-box .quick04{background:url('/resources/homepage/elib/img/q4.png')no-repeat center 37px;}
+	.quick-box .quick05{background:url('/resources/homepage/elib/img/q5.png')no-repeat center 37px;}
+	.quick-box .quick01:hover{background:url('/resources/homepage/elib/img/q1.png') no-repeat center 37px;}
+	.quick-box .quick02:hover{background:url('/resources/homepage/elib/img/q2.png') no-repeat center 37px;}
+	.quick-box .quick03:hover{background:url('/resources/homepage/elib/img/q3.png') no-repeat center 37px;}
+	.quick-box .quick04:hover{background:url('/resources/homepage/elib/img/q4.png') no-repeat center 37px;}
+	.quick-box .quick05:hover{background:url('/resources/homepage/elib/img/q5.png') no-repeat center 37px;}
+	.quick-box .quick01,
+	.quick-box .quick02,
+	.quick-box .quick03,
+	.quick-box .quick04,
+	.quick-box .quick05,	
+	.quick-box .quick01:hover,
+	.quick-box .quick02:hover,
+	.quick-box .quick03:hover,
+	.quick-box .quick04:hover,
+	.quick-box .quick05:hover{background-size:60px;}
+
+	.quick-box div a{line-height:265px;}
+
+	#footer .bottom-box .info{width:100%;}
+}
+
+@media all and (max-width:600px){	
+	#all-area{height:700px;}
+	
+	.search-box{margin-top:40px;}
+	.search-box .box1 input.text{font-size:15px;}
+	
+	.ebook-box.on{margin:20px auto 30px;}
+	.ebook-box .txt-box span{font-size:16px;}
+	.ebook-box .txt-box h3{font-size:30px;}
+	.ebook-box .txt-box p{width:90%;font-size:17px;line-height:1.5;}
+
+	.quick-box{height:180px;margin-top:0;}
+	.quick-box div{height:180px;}
+	.quick-box .quick01{background:url('/resources/homepage/elib/img/q1.png')no-repeat center 45px;}
+	.quick-box .quick02{background:url('/resources/homepage/elib/img/q2.png')no-repeat center 45px;}
+	.quick-box .quick03{background:url('/resources/homepage/elib/img/q3.png')no-repeat center 45px;}
+	.quick-box .quick04{background:url('/resources/homepage/elib/img/q4.png')no-repeat center 45px;}
+	.quick-box .quick05{background:url('/resources/homepage/elib/img/q5.png')no-repeat center 45px;}
+	.quick-box .quick01:hover{background:url('/resources/homepage/elib/img/q1.png') no-repeat center 45px;}
+	.quick-box .quick02:hover{background:url('/resources/homepage/elib/img/q2.png') no-repeat center 45px;}
+	.quick-box .quick03:hover{background:url('/resources/homepage/elib/img/q3.png') no-repeat center 45px;}
+	.quick-box .quick04:hover{background:url('/resources/homepage/elib/img/q4.png') no-repeat center 45px;}
+	.quick-box .quick05:hover{background:url('/resources/homepage/elib/img/q5.png') no-repeat center 45px;}
+	.quick-box .quick01,
+	.quick-box .quick02,
+	.quick-box .quick03,
+	.quick-box .quick04,
+	.quick-box .quick05,	
+	.quick-box .quick01:hover,
+	.quick-box .quick02:hover,
+	.quick-box .quick03:hover,
+	.quick-box .quick04:hover,
+	.quick-box .quick05:hover{background-size:50px;}
+
+	.quick-box li a{font-size:15px;}
+}
+
+@media all and (max-width:500px){	
+	#all-area{height:600px;}
+
+	.search-box .box1 input.text{font-size:14px;width:95%;}
+	
+	.ebook-box{margin-top:40px;}
+	.ebook-box .txt-box{height:300px;}
+	.ebook-box .txt-box span{left:20px;padding:13px 20px;font-size:14px;}
+	.ebook-box .txt-box h3{font-size:23px;}
+	.ebook-box .txt-box p{width:80%;font-size:16px;line-height:1.5;}
+	.ebook-box .txt-box img{margin:15px 0 17px;}
+
+	.quick-box{height:150px;}
+	.quick-box div{height:150px;}
+	.quick-box .quick01{background:url('/resources/homepage/elib/img/q1.png')no-repeat center 30px;}
+	.quick-box .quick02{background:url('/resources/homepage/elib/img/q2.png')no-repeat center 30px;}
+	.quick-box .quick03{background:url('/resources/homepage/elib/img/q3.png')no-repeat center 30px;}
+	.quick-box .quick04{background:url('/resources/homepage/elib/img/q4.png')no-repeat center 30px;}
+	.quick-box .quick05{background:url('/resources/homepage/elib/img/q5.png')no-repeat center 30px;}
+	.quick-box .quick01:hover{background:url('/resources/homepage/elib/img/q1.png') no-repeat center 30px;}
+	.quick-box .quick02:hover{background:url('/resources/homepage/elib/img/q2.png') no-repeat center 30px;}
+	.quick-box .quick03:hover{background:url('/resources/homepage/elib/img/q3.png') no-repeat center 30px;}
+	.quick-box .quick04:hover{background:url('/resources/homepage/elib/img/q4.png') no-repeat center 30px;}
+	.quick-box .quick05:hover{background:url('/resources/homepage/elib/img/q5.png') no-repeat center 30px;}
+	.quick-box .quick01,
+	.quick-box .quick02,
+	.quick-box .quick03,
+	.quick-box .quick04,
+	.quick-box .quick05,	
+	.quick-box .quick01:hover,
+	.quick-box .quick02:hover,
+	.quick-box .quick03:hover,
+	.quick-box .quick04:hover,
+	.quick-box .quick05:hover{background-size:40px;}
+	.quick-box li{height:190px;}
+	.quick-box li span{font-size:14px;}
+}
+
+@media all and (max-width:425px){	
+	#all-area{height:550px;}
+	
+	.ebook-box .txt-box{height:250px;}
+	.ebook-box .txt-box p{font-size:14px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;word-wrap:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;}
+	.ebook-box .txt-box ul{position:relative;margin:0 auto;bottom:-24px;}
+
+	.quick-box li span{font-size:13px;letter-spacing:-1px;}
+}

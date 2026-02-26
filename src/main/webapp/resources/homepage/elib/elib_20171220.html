@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>경북도서관</title>
+<style>
+body{font:11px "돋움",arial,helvetica; color:#000; line-height:140%; text-align:right;}
+</style>
+
+<SCRIPT LANGUAGE="JavaScript">
+function setCookie(name, value, expiredays) {
+        var todayDate = new Date();          
+        todayDate = new Date(parseInt(todayDate.getTime() / 86400000) * 86400000 + 54000000);  
+        if(todayDate > new Date()){  
+            expiredays = expiredays - 1;  
+        }  
+        todayDate.setDate(todayDate.getDate() + expiredays);   
+        document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
+}	
+
+function closewin(popup_name) { 
+	setCookie(popup_name, 'checked' , 1); // 1=하룻동안 공지창 열지 않음
+	self.close(); 
+}
+
+function MM_openBrWindow(theURL,winName,features) { //v2.0
+
+  window.open(theURL,winName,features);
+
+}
+</SCRIPT>
+</head>
+
+<body topmargin="0" leftmargin="0">
+<img src="/data/popup/h30/1513776125246" border="0" usemap="#Map2" />
+<a href="javascript:closewin('1513776125246');"> 오늘 하루 이창을 띄우지 않음</a>
+</body>
+</html>
