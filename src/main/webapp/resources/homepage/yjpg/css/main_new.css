@@ -1,0 +1,74 @@
+@charset "utf-8";
+/*메인타입 - 02 import*/
+@import url("/resources/common/css/layout/main_type02.css");
+
+/*팝업존+공지타입 - 02 import*/
+@import url("/resources/common/css/layout/notice_type02.css");
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 04 import*/
+@import url("/resources/common/css/layout/book_type04.css");
+
+/*큐레이션타입 - 04 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+
+#main0 .main0-bottom .qmenu li{width:270px;margin:0 9px;}
+#main0 .main0-bottom .qmenu .bx-prev,
+#main0 .main0-bottom .qmenu .bx-next{display:none;}
+
+#main1 .main1_wrap .main1-right-box .popupzonenew{margin-top:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew .bx-controls{bottom:55px;}
+
+#main3 .main3-wrap .title ul li.on{background:#d53d30;}
+#main3 .main3-wrap .title .more-btn a{background:url('/resources/homepage/yjpg/img/main/view-btn.png')no-repeat right;}
+
+@media all and (max-width:1460px){
+	#main0 .main0-bottom .qmenu li{width:19%;margin:0 0.3%;}}
+}
+
+@media all and (max-width:1310px){
+	#main0 .main0-bottom .qmenu li div.image{margin-top:0;}
+	#main0 .main0-bottom .qmenu li div.qtxt1{font-size:19px;}
+}
+
+@media all and (max-width:1260px){
+	#main0 .main0-bottom .qmenu .bx-prev,
+	#main0 .main0-bottom .qmenu .bx-next{display:block;}
+}
+
+@media all and (max-width:1024px){
+	#header h1{width:180px;padding-top:6px;}
+	
+	#main0 .main0-bottom .qmenu{padding-top:50px;}
+	#main0 .main0-bottom .qmenu li{height:250px;}	
+	#main0 .main0-bottom .qmenu li div.qtxt1{font-size:17px;}
+	#main0 .main0-bottom .qmenu li div.qtxt2{display:none !important;}
+	#main0 .main0-bottom .qmenu .bx-prev, #main0 .main0-bottom .qmenu .bx-next {display:block;}
+
+	#main3 .main3-wrap .title .more-btn{top:7px;}
+	#main3 .main3-wrap .title .more-btn a{width:40px;height:40px;background-size:40px;}
+}
+
+@media all and (max-width:768px){
+	#main0 .main0-bottom .qmenu li div.qtxt1{width:70%;margin:0 auto;}
+}
+
+@media all and (max-width:600px){
+	#main0 .main0-bottom .qmenu li div.qtxt1{font-size:15px;}
+}
+
+@media all and (max-width:550px){
+	#main0 .main0-bottom .qmenu{padding-top:10px;}
+	#main0 .main0-bottom .qmenu li{display:block;width:88%;height:60px;margin:0 auto;margin-bottom:5px;}
+	#main0 .main0-bottom .qmenu li a{background:#c91461}
+	#main0 .main0-bottom .qmenu li div.image{display:none;}
+	#main0 .main0-bottom .qmenu li div.qtxt1{font-size:14px;padding-top:0;color:#fff;}
+	#main0 .main0-bottom .qmenu li div.qtxt3{display:none !important;}
+	#main0 .main0-bottom .qmenu li:last-child{margin:0 auto;}
+
+	#main0 .main0-bottom .qmenu li a:hover,
+	#main0 .main0-bottom .qmenu li a:focus {margin-top:0;}
+}
