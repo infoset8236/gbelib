@@ -1,0 +1,105 @@
+@charset "utf-8";
+/*메인타입 - 02 import*/
+@import url("/resources/common/css/layout/main_type02.css");
+
+/*팝업존+공지타입 - 03 import*/
+@import url("/resources/common/css/layout/notice_type03.css");
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type01.css");
+
+/*큐레이션타입 - 04 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+.blind{position:absolute;top:0;left:0;width:0;height:0;overflow:hidden;font-size:0;line-height:0;text-indent:-999px}
+
+#main0 .main0-top .search-box .main-box button{background:#1d6bb3 url('/resources/homepage/yi/img/main/srch-icon.png') no-repeat center center;}
+
+#main0 .main0-bottom .qmenu li a:hover,
+#main0 .main0-bottom .qmenu li a:focus {background:#1d6bb3;}
+
+#main2 .event-box .list ul li div p b{color:#1d6bb3;}
+#main2 .event-box .list ul li:first-child:hover div{background:#1d6bb3 url('/resources/common/img/culture_type02/event-icon01-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:nth-child(2):hover div{background:#1d6bb3 url('/resources/common/img/culture_type02/event-icon02-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:last-child:hover div{background:#1d6bb3 url('/resources/common/img/culture_type02/event-icon03-hover.png')no-repeat center 80px;}
+
+#main5 .main5-visual .main5-top:before{background:#154a7c url('/resources/homepage/yi/img/main/book01-bg.jpg') no-repeat 100% bottom;}
+#main5 .main5-visual .main5-bottom{background:url('/resources/homepage/yi/img/main/book02-bg.jpg') no-repeat 100% center;}
+
+#main0 .main0-bottom .qmenu .bx-prev,
+#main0 .main0-bottom .qmenu .bx-next{display:none;}
+
+#main1 .main1_wrap .main1-right-box .popupzonenew2 {position:relative;margin-top:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li {}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li a {}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li a img,
+#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li img {width:1075px;height:605px;}
+
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-wrapper {position:relative;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-controls .bx-controls-direction{position:absolute;top:-25px;right:5px;width:70px;padding:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-controls .bx-controls-auto{position:absolute;top:-25px;right:5px;width:70px;padding:0;}
+
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-start,
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-stop,
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-prev,
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-next {position:absolute;width:26px;height:26px;font-size:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-prev  {background-image:url("/resources/common/img/notice_type03/popupzone-prev-btn.png");background-repeat: no-repeat;background-size:cover;bottom:0;right:78px;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-next  { background-image:url("/resources/common/img/notice_type03/popupzone-next-btn.png");background-repeat: no-repeat;background-size:cover;bottom:0;right:0;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-stop {background-image:url("/resources/common/img/notice_type03/popupzone-stop-btn.png");background-repeat: no-repeat;background-size:cover;bottom:0;right:40px;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-start {background-image:url("/resources/common/img/notice_type03/popupzone-play-btn.png");background-repeat: no-repeat;background-size:cover;bottom:0;right:40px;}
+
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-pager{position:relative;display:block;margin:0 auto;height:12px;padding:0 0 0 0;text-align:center;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-pager .bx-pager-item {display:inline-block;zoom:1;*display:inline;font-size:0;line-height:0;margin-left:3px;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-pager a {display:inline-block;font-size:0;overflow:hidden;padding:7px 0 0 7px;background:#999999;border:2px solid transparent;border-radius:20px;}
+#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-pager a.active{background:#FFF;border:2px solid #000;}
+
+#main1 .main1_wrap .main1-left-box .title a,
+#main2 .calendar-box .title a,
+#main2 .event-box .title a{font-weight:500;font-size:110%;top:15px;}
+
+@media all and (max-width:1770px){
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li a img,
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 ul li img {width:100%;height:auto;}
+}
+
+@media all and (max-width:1680px){
+	#main5 .main5-visual .main5-bottom{background:url('/resources/homepage/yi/img/main/book02-bg.jpg') no-repeat 150% center;}
+}
+
+@media all and (max-width:1600px){
+	#main5 .main5-top-left{background:url('/resources/homepage/yi/img/main/book01-bg.jpg') no-repeat right center;background-size:cover;}
+	#main5 .main5-bottom-right{background:url('/resources/homepage/yi/img/main/book02-bg.jpg') no-repeat right center;background-size:cover;}
+}
+
+@media all and (max-width:1200px){
+	#main2 .event-box .list ul li:first-child:hover div{background:#1d6bb3 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:nth-child(2):hover div{background:#1d6bb3 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:last-child:hover div{background:#1d6bb3 url('/resources/common/img/transparent.png')no-repeat !important;}
+}
+
+@media all and (max-width:1024px){
+	#header h1{width:180px;padding-left:10px;}
+
+	#main5 .main5-visual .main5-bottom{background:none;}
+		
+	#main2 .calendar-box .title a, #main2 .event-box .title a{width:auto;height:auto;}
+}
+
+@media all and (max-width:768px){
+	#main0 .main0-bottom .qmenu .bx-prev,
+	#main0 .main0-bottom .qmenu .bx-next{display:block;}
+}
+
+@media all and (max-width:500px){
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-start,
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-stop,
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-prev,
+	#main1 .main1_wrap .main1-right-box .popupzonenew2 .bx-next{width:20px;height:20px;}
+
+	#main1 .main1_wrap .main1-left-box .title a{width:auto;height:auto;top:10px;}
+	#main2 .calendar-box .title a,
+	#main2 .event-box .title a{width:auto;height:auto;top:5px;}
+}

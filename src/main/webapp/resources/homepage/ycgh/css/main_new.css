@@ -1,0 +1,71 @@
+@charset "utf-8";
+/*메인타입 - 01 import*/
+@import url("/resources/common/css/layout/main_type05.css");
+
+/*공지사항타입 - 01 import*/
+@import url("/resources/common/css/layout/notice_type02.css");
+
+/*도서타입 - 01 import*/
+@import url("/resources/common/css/layout/book_type02.css");
+
+/*큐레이션타입 - 04 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+#main6{background:#f8f8f8 url('/resources/homepage/yc/img/main/curation4-bg.jpg') no-repeat center bottom;}
+
+#main1 .main1_wrap .main1-right-box .title{position:relative;text-align:center;padding-bottom:20px;}
+#main1 .main1_wrap .main1-right-box .title h3{font-family:'S-Core Dream 6';color:#111;font-size:35px;letter-spacing:-1px;}
+#main1 .main1_wrap .main1-right-box .title a{position:absolute;top:15px;right:0;}
+
+.calendar{position:relative;border:1px solid #ddd;}
+.calendar-wrap{position:relative;background:#fff;box-sizing:border-box;margin-bottom:20px;}
+.cal-func2{position:relative;width:140px;margin:0 auto;padding-top:30px;text-align:center;}
+.cal-func2 p{font-size:23px;color:#333;font-family:'GmarketSansMedium';}
+.cal-func2 b{font-size:24px;}
+.cal-func2 .btn{position:absolute;background:none;padding:0;margin:0;border:none;}
+.cal-func2 .btn.prev{top:30px;left:-30px;}
+.cal-func2 .btn.next{top:30px;right:-30px;}
+.calendar-info{position:absolute;top:15px;right:20px;}
+.calendar-info span{font-size:14px;font-weight:500;}
+.calendar-info span.hu{color:#ff3333;}
+.calendar-info span.ev{color:#3368ff;}
+.cal-tbl{position:relative;margin:0 auto;width:90%;margin-top:20px;border-top:none;border-bottom:none;}
+.cal-tbl th, .cal-tbl td{font-size:15px;color:#333;border:none;text-align:center;font-weight:500;padding:0;}
+.cal-tbl td div{font-size:15px;padding:10px 0;font-weight:500;}
+.cal-tbl td div span{font-size:15px;color:#333;padding-top:6px;font-weight:500;}
+.cal-tbl td .hu{color:#ff3333;}
+.cal-tbl td .ev{color:#3368ff;}
+
+.planView {position:relative;height:235px;overflow-y:scroll;border-top:1px solid #ddd;}
+.planView .inbox {position:relative;box-sizing:border-box;padding:25px 30px;}
+.planView .inbox ul {font-size:0;}
+.planView .inbox li.planList {position:relative;display:inline-block;vertical-align:top;width:100%;padding-bottom:8px;}
+.planView .inbox li:nth-child(2n) {margin-right:0;}
+.planView .inbox li.planList div.schedule-title {width:90px;font-family:"GmarketSansMedium";display:inline-block;position:absolute;left:0;padding:10px 0 8px;font-size:15px;text-align:center;}
+.planView .inbox li.planList div.schedule-title.cul {border:1px solid #3368ff;color:#3368ff;}
+.planView .inbox li.planList div.schedule-title.hol {border:1px solid #e85050;color:#e85050;}
+.planView .inbox li.planList div.schedule-contents {display:block;overflow:hidden;text-align:left;padding-left:110px;}
+.planView .inbox li.planList p.title {font-size:14px;text-align:left !important;padding-bottom:0 !important;}
+.planView .inbox li.planList p.datetime {font-weight:bold;color:#333;}
+.planView .inbox li.planList p.title {margin-bottom:5px;}
+.planView .inbox li.planList p.title em {display:block;word-break:break-all;overflow:hidden;text-overflow:ellipsis;font-style:normal;color:#666;height:20px;}
+
+table caption {font-size:0;text-indent:-9999px;width:0;height:0;}
+
+@media all and (max-width:1024px){
+	#main1 .main1_wrap .main1-right-box .title h3{font-size:30px;}
+	#main1 .main1_wrap .main1-right-box .title a{top:5px;}
+}
+
+@media all and (max-width:768px){
+	#main1 .main1_wrap .main1-right-box .title h3{font-size:25px;}
+}
+
+@media all and (max-width:600px){
+	#main1 .main1_wrap .main1-right-box .title h3{font-size:19px;}
+	#main1 .main1_wrap .main1-right-box .title a{top:0;}
+}
+
+@media all and (max-width:550px){
+	#main1{margin-bottom:30px;}
+}
