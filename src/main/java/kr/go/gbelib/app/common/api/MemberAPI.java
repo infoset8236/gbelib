@@ -597,6 +597,8 @@ public class MemberAPI {
 		}
 		if ( member.getMobile_no() != null ) {
 			param.put("vMobileNo", member.getMobile_no().replaceAll("-", ""));
+		} else if (member.getCell_phone() != null) {
+			param.put("vMobileNo", member.getCell_phone().replaceAll("-", ""));
 		}
 
 		Document doc = CommonAPI.sendILUS(param);
