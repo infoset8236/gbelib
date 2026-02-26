@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.module.delivery.DeliveryDao">
+    <insert id="addDelivery">
+        INSERT INTO DELIVERY
+            (
+                homepage_id, delivery_idx, member_id, member_name, member_cell_phone,
+                member_address, delivery_reqst_date, delivery_return_date, delivery_delete_date, delivery_status,
+                book_title, book_loca_name, book_call_no, book_acsson_no, delivery_return_status,
+                delivery_delete_yn
+            )
+        VALUES
+            (
+                #{homepage_id}, DELIVERY_SEQ.NEXTVAL, #{member_id}, #{member_name}, #{member_cell_phone},
+                #{member_address}, TO_CHAR(SYSDATE, 'yyyyMMdd'), #{delivery_return_date}, #{delivery_delete_date}, 0,
+                #{book_title}, #{book_loca_name}, #{book_call_no}, #{book_acsson_no}, #{delivery_return_status},
+                #{delivery_delete_yn}
+            )
+    </insert>
+    <select id="getAllDeliveryList" resultType="kr.go.gbelib.app.module.delivery.Delivery">
+        ${pagingTop}
+        SELECT delivery_idx, member_id, member_name, member_cell_phone, member_address,
+               delivery_reqst_date, delivery_return_date, delivery_delete_date, delivery_status, book_title,
+               book_loca_name, book_call_no, book_acsson_no, delivery_return_status
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        ORDER BY
+            delivery_idx DESC
+        ${pagingBottom}
+    </select>
+    <select id="getDeliveryList" resultType="kr.go.gbelib.app.module.delivery.Delivery">
+        ${pagingTop}
+        SELECT delivery_idx, member_id, member_name, member_cell_phone, member_address,
+               delivery_reqst_date, delivery_return_date, delivery_delete_date, delivery_status, book_title,
+               book_loca_name, book_call_no, book_acsson_no, delivery_return_status
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        AND
+            member_id = #{member_id}
+        AND
+            delivery_delete_yn = 'N'
+        ORDER BY
+            delivery_idx DESC
+        ${pagingBottom}
+    </select>
+    <select id="getReturnDeliveryList" resultType="kr.go.gbelib.app.module.delivery.Delivery">
+        ${pagingTop}
+        SELECT delivery_idx, member_id, member_name, member_cell_phone, member_address,
+               delivery_reqst_date, delivery_return_date, delivery_delete_date, delivery_status, book_title,
+               book_loca_name, book_call_no, book_acsson_no, delivery_return_status
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        AND
+            member_id = #{member_id}
+        AND
+            delivery_delete_yn = 'N'
+        AND
+            delivery_status = 1
+        AND
+            delivery_return_status IS NOT NULL
+        ORDER BY
+            delivery_idx DESC
+        ${pagingBottom}
+    </select>
+    <select id="getApprovalReturnDeliveryList" resultType="kr.go.gbelib.app.module.delivery.Delivery">
+        ${pagingTop}
+        SELECT delivery_idx, member_id, member_name, member_cell_phone, member_address,
+               delivery_reqst_date, delivery_return_date, delivery_delete_date, delivery_status, book_title,
+               book_loca_name, book_call_no, book_acsson_no, delivery_return_status
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        AND
+            delivery_delete_yn = 'N'
+        AND
+            delivery_status = 1
+        AND
+            delivery_return_status IN (1, 2)
+        ORDER BY
+            delivery_return_date DESC
+        ${pagingBottom}
+    </select>
+    <select id="getAllDeliveryListCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        ORDER BY
+            delivery_idx DESC
+    </select>
+    <select id="getDeliveryListCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        AND
+            member_id = #{member_id}
+        AND
+            delivery_delete_yn = 'N'
+        ORDER BY
+            delivery_idx DESC
+    </select>
+    <select id="getReturnDeliveryListCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+          AND
+            member_id = #{member_id}
+          AND
+            delivery_delete_yn = 'N'
+          AND
+            delivery_status = 1
+          AND
+            delivery_return_status IS NOT NULL
+        ORDER BY
+            delivery_idx DESC
+    </select>
+    <select id="getApprovalReturnDeliveryListCount" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+          AND
+            delivery_delete_yn = 'N'
+          AND
+            delivery_status = 1
+          AND
+            delivery_return_status IN (1, 2)
+        ORDER BY
+            delivery_idx DESC
+    </select>
+    <select id="getDuplicateDelivery" resultType="java.lang.Integer">
+        SELECT
+            COUNT(*)
+        FROM
+            DELIVERY
+        WHERE
+            homepage_id = #{homepage_id}
+        AND
+            delivery_delete_yn = 'N'
+        AND
+            (delivery_return_status IS NULL
+        OR
+             delivery_return_status IN (0, 1))
+        AND
+            member_id = #{member_id}
+        AND
+            book_acsson_no = #{book_acsson_no}
+    </select>
+    <update id="updateDelivery">
+        UPDATE
+            DELIVERY
+        SET
+            delivery_status = #{delivery_status},
+            delivery_return_status = #{delivery_return_status},
+            delivery_return_date = TO_CHAR(sysdate + 30, 'yyyyMMdd')
+        WHERE
+            homepage_id = #{homepage_id}
+          AND
+            delivery_idx = #{delivery_idx}
+    </update>
+    <update id="updateReturnDelivery">
+        UPDATE
+            DELIVERY
+        SET
+            delivery_return_status = #{delivery_return_status}
+        WHERE
+            homepage_id = #{homepage_id}
+          AND
+            delivery_idx = #{delivery_idx}
+    </update>
+    <delete id="deleteDelivery">
+        UPDATE
+            DELIVERY
+        SET
+            delivery_delete_date = TO_CHAR(SYSDATE, 'yyyyMMdd'),
+            delivery_delete_yn = 'Y'
+        WHERE
+            homepage_id = #{homepage_id}
+          AND
+            delivery_idx = #{delivery_idx}
+    </delete>
+</mapper>

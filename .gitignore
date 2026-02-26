@@ -1,0 +1,12 @@
+/target/
+/.settings/
+/GBELIB/.settings/
+/.classpath
+/.project
+src/main/resources/rebel.xml
+/GBELIB/src/main/resources/rebel.xml
+
+#*#
+*~
+*.bak
+/.idea

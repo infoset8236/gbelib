@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.student2.Student2Dao">
+	<select id="getStudent2ListAll" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_ID, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH
+			, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+			, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD, PAY1_YN, PAY2_YN, PAY3_YN
+			, SELF_INFO_YN, APPLY_TYPE, APPLY_STATUS, TO_CHAR(ADD_DATE, 'yyyy-mm-dd hh24:mi') AS ADD_DATE, CANCEL_ID, CANCEL_DATE, FAMILY_RELATION, FAMILY_NAME, FAMILY_CELL_PHONE, FAMILY_CONFIRM_YN, FAMILY_DESC,
+			student_ban, student_remark, student_family_count,
+			getCodeIdToCodeName('CMS', 'C0020', STUDENT_HACK) AS student_hack_str, web_id,
+			student_location_code,
+			getCodeIdToCodeName('CMS', 'C0022', student_location_code) AS student_location_code_str,
+			student_neis_cd,
+			student_training_num,
+			student_organization, student_rank, student_course_taken_yn, belong_name
+		FROM
+			TRAINING_STUDENT
+		WHERE DELETE_YN 		= 'N' AND
+			HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			<if test="apply_status != null and apply_status != ''">
+			 AND APPLY_STATUS 	= #{apply_status}
+			</if>
+		ORDER BY
+			APPLY_STATUS,
+			STUDENT_IDX ASC
+	</select>
+
+	<select id="getStudent2List" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		${pagingTop}
+		SELECT A.*,
+			CASE
+				WHEN A.CNT = 0
+				THEN '2'
+				WHEN (A.ATTEND_CNT/A.CNT)*100 >= #{cert_percent}
+				THEN '1'
+				ELSE '2'
+			END AS STUDENT_STATUS,
+			(SELECT COUNT(*) FROM BLACKLIST WHERE HOMEPAGE_ID = A.HOMEPAGE_ID AND MEMBER_KEY = A.MEMBER_KEY AND INSTR(BLACK_TYPE, '10') != 0) as isBlackList
+		FROM
+			(
+				SELECT
+					HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_ID, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH
+					, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+					, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD
+					, SELF_INFO_YN, APPLY_TYPE, APPLY_STATUS, TO_CHAR(a.ADD_DATE, 'yyyy-mm-dd hh24:mi') AS ADD_DATE, CANCEL_ID, CANCEL_DATE, WEB_ID
+					, (SELECT TRAINING_COUNT FROM TRAINING WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX) AS CNT
+					, (SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0) FROM TRAINING_BOOK
+						WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX) as ATTEND_CNT
+					, student_ban, student_remark, student_family_count,
+					student_location_code,
+					getCodeIdToCodeName('CMS', 'C0022', student_location_code) AS student_location_code_str,
+					student_neis_cd,
+					student_training_num,
+					student_organization, student_rank, student_course_taken_yn, belong_name
+				FROM
+					TRAINING_STUDENT a
+				WHERE
+					a.DELETE_YN = 'N' AND a.HOMEPAGE_ID = #{homepage_id} AND a.GROUP_IDX = #{group_idx} AND a.CATEGORY_IDX = #{category_idx} AND a.TRAINING_IDX = #{training_idx}
+					<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+						AND	${search_type} LIKE '%'||#{search_text}||'%'
+					</if>
+			) A
+			ORDER BY
+			A.APPLY_STATUS,
+			A.STUDENT_IDX ASC
+		${pagingBottom}
+	</select>
+
+	<select id="getStudent2ListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			(
+				SELECT
+					HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_ID, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH
+					, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+					, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD
+					, SELF_INFO_YN, APPLY_TYPE, APPLY_STATUS, TO_CHAR(a.ADD_DATE, 'yyyy-mm-dd hh24:mi') AS ADD_DATE, CANCEL_ID, CANCEL_DATE
+					, (SELECT TRAINING_COUNT FROM TRAINING WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX) AS CNT
+					, (SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0) FROM TRAINING_BOOK
+						WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX) as ATTEND_CNT
+					, student_ban, student_remark, student_family_count
+				FROM
+					TRAINING_STUDENT a
+				WHERE
+					a.DELETE_YN = 'N' AND a.HOMEPAGE_ID = #{homepage_id} AND a.GROUP_IDX = #{group_idx} AND a.CATEGORY_IDX = #{category_idx} AND a.TRAINING_IDX = #{training_idx}
+					<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+						AND	${search_type} LIKE '%'||#{search_text}||'%'
+					</if>
+			) A
+	</select>
+
+	<select id="getStudent2One" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_ID, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH, web_id
+			, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+			, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD
+			, SELF_INFO_YN, APPLY_TYPE, APPLY_STATUS, TO_CHAR(ADD_DATE, 'yyyy-mm-dd hh24:mi') AS ADD_DATE, cancel_id, cancel_date
+			, FAMILY_RELATION, FAMILY_NAME, FAMILY_CELL_PHONE, FAMILY_CONFIRM_YN, FAMILY_DESC
+			, student_ban, student_remark, student_family_count,
+			student_location_code,
+			getCodeIdToCodeName('CMS', 'C0022', student_location_code) AS student_location_code_str,
+			student_neis_cd,
+			student_training_num,
+			student_organization, student_rank, student_course_taken_yn
+		FROM
+			TRAINING_STUDENT
+		WHERE DELETE_YN = 'N'
+			AND HOMEPAGE_ID 	= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			<if test="student_idx != null and student_idx > 0">
+			AND STUDENT_IDX 	= #{student_idx}
+			</if>
+			<if test="member_key != null and member_key != ''">
+			AND MEMBER_KEY 		= #{member_key}
+			AND APPLY_STATUS 	!= '99'
+			</if>
+	</select>
+
+	<insert id="addStudent2">
+		<selectKey keyProperty="student_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(STUDENT_IDX),0)+1 FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx}
+		</selectKey>
+
+		INSERT INTO TRAINING_STUDENT
+		(
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_ID, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH, web_id
+			, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+			, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD
+			, SELF_INFO_YN, APPLY_TYPE, APPLY_STATUS, ADD_DATE, ADD_ID, DELETE_YN, FAMILY_RELATION, FAMILY_NAME, FAMILY_CELL_PHONE, FAMILY_CONFIRM_YN, FAMILY_DESC
+			, student_ban, student_remark, student_family_count, student_location_code, student_neis_cd, student_training_num, BELONG_IDX, BELONG_NAME
+			,	student_organization, student_rank, student_course_taken_yn
+		) VALUES
+		(
+			#{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{student_idx}, #{member_id}, #{member_key}, #{applicant_name}, #{applicant_birth}, #{web_id}
+			, #{applicant_old}, #{applicant_sex}, #{applicant_zipcode}, #{applicant_address}, #{applicant_address_detail}, #{applicant_phone}, #{applicant_cell_phone}, #{self_yn}
+			, #{student_name}, #{student_birth}, #{student_sex}, #{student_zipcode}, #{student_address}, #{student_address_detail}, #{student_school}, #{student_hack}, #{student_old}
+			, #{self_info_yn}, #{apply_type}, #{apply_status}, SYSDATE, #{add_id}, 'N', #{family_relation}, #{family_name}, #{family_cell_phone}, #{family_confirm_yn}, #{family_desc}
+			, #{student_ban}, #{student_remark}, #{student_family_count},
+			#{student_location_code}, #{student_neis_cd}, #{student_training_num}, #{belong_idx}, #{belong_name},
+			#{student_organization}, #{student_rank}, #{student_course_taken_yn}
+		)
+	</insert>
+
+	<update id="modifyStudent2">
+		UPDATE
+			TRAINING_STUDENT
+		SET
+			APPLICANT_NAME 			= #{applicant_name},
+			APPLICANT_BIRTH 		= #{applicant_birth},
+			APPLICANT_OLD 			= #{applicant_old},
+			APPLICANT_SEX 			= #{applicant_sex},
+			APPLICANT_ZIPCODE 		= #{applicant_zipcode},
+			APPLICANT_ADDRESS 		= #{applicant_address},
+			APPLICANT_ADDRESS_DETAIL= #{applicant_address_detail},
+			APPLICANT_PHONE 		= #{applicant_phone},
+			APPLICANT_CELL_PHONE 	= #{applicant_cell_phone},
+			SELF_YN 				= #{self_yn},
+			STUDENT_NAME 			= #{student_name},
+			STUDENT_BIRTH			= #{student_birth},
+			STUDENT_SEX 			= #{student_sex},
+			STUDENT_ZIPCODE			= #{student_zipcode},
+			STUDENT_ADDRESS			= #{student_address},
+			STUDENT_ADDRESS_DETAIL	= #{student_address_detail},
+			STUDENT_SCHOOL 			= #{student_school},
+			STUDENT_HACK 			= #{student_hack},
+			STUDENT_OLD 			= #{student_old},
+			SELF_INFO_YN 			= #{self_info_yn},
+			student_ban = #{student_ban},
+			student_remark = #{student_remark},
+			student_family_count = #{student_family_count},
+			student_location_code = #{student_location_code},
+			student_neis_cd = #{student_neis_cd},
+			student_training_num = #{student_training_num},
+			student_organization = #{student_organization},
+			student_rank = #{student_rank},
+			student_course_taken_yn = #{student_course_taken_yn},
+			APPLY_STATUS 			= #{apply_status},
+			FAMILY_RELATION			= #{family_relation},
+			FAMILY_NAME				= #{family_name},
+			FAMILY_CELL_PHONE		= #{family_cell_phone},
+			FAMILY_CONFIRM_YN		= #{family_confirm_yn},
+			FAMILY_DESC				= #{family_desc},
+			MOD_ID					= #{mod_id},
+			MOD_DATE				= SYSDATE
+		WHERE
+			HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+			AND DELETE_YN 		= 'N'
+	</update>
+
+	<update id="cancelStudent2">
+		UPDATE
+			TRAINING_STUDENT
+		SET
+			APPLY_STATUS 	= '99',
+			CANCEL_DATE 	= SYSDATE,
+			CANCEL_ID 		= #{cancel_id}
+		WHERE
+			DELETE_YN 			= 'N'
+			AND HOMEPAGE_ID 	= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+	</update>
+
+	<delete id="deleteStudent2">
+		UPDATE TRAINING_STUDENT
+		SET DELETE_YN 					= 'Y'
+			,APPLY_STATUS				= '99'
+			<!-- , MEMBER_KEY				= ''
+			, APPLICANT_NAME 			= ''
+			, APPLICANT_ZIPCODE 		= ''
+			, APPLICANT_ADDRESS 		= ''
+			, APPLICANT_ADDRESS_DETAIL 	= ''
+			, APPLICANT_PHONE 			= ''
+			, APPLICANT_CELL_PHONE 		= ''
+			, STUDENT_NAME 				= ''
+			, STUDENT_BIRTH				= ''
+			, STUDENT_ZIPCODE			= ''
+			, STUDENT_ADDRESS			= ''
+			, STUDENT_ADDRESS_DETAIL	= ''
+			, STUDENT_SCHOOL 			= ''
+			, STUDENT_BAN 				= ''
+			, STUDENT_BUN 				= ''  -->
+			, MOD_ID					= #{mod_id}
+			, MOD_DATE					= SYSDATE
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx}
+			<if test="student_idx != null and student_idx > 0">
+			AND STUDENT_IDX = #{student_idx}
+			</if>
+	</delete>
+
+	<select id="getCertificateInfo" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			REPLACE(a.END_DATE, '-', '')||'-'||LPAD(REPLACE(a.HOMEPAGE_ID, 'h', ''), 2, '0')||a.CATEGORY_IDX||LPAD(TRAINING_IDX, 2, '0')||'-'||LPAD(b.NUM, 3, '0') AS NUM,
+			a.END_DATE, a.TRAINING_NAME, a.TRAINING_STAGE, a.START_DATE||' ~ '||a.END_DATE AS TRAINING_DATE, (to_date(a.end_time, 'HH24:MI') - to_date(a.start_time, 'HH24:MI'))*24 as training_status,
+			b.STUDENT_NAME, c.HOMEPAGE_NAME, b.student_organization, replace(b.student_birth, '-', '.') student_birth, 
+			a.CERTIFICATE_TEXT, a.TRAINING_COURSE, a.TRAINING_PERIOD,
+			 (
+		      SELECT
+					code_name
+				FROM
+					TRAINING_CODE2
+				WHERE
+					training_code = a.large_category_idx
+		      ) as family_name
+		FROM
+			TRAINING a, CMS_HOMEPAGE c, ( SELECT rownum num, Z.*
+						FROM (
+							SELECT
+								STUDENT_IDX, STUDENT_NAME, APPLY_STATUS, student_organization, student_birth
+							FROM
+								TRAINING_STUDENT
+							WHERE
+								DELETE_YN 		= 'N'
+								AND HOMEPAGE_ID 	= #{homepage_id}
+								AND GROUP_IDX 		= #{group_idx}
+								AND CATEGORY_IDX 	= #{category_idx}
+								AND TRAINING_IDX 		= #{training_idx}
+							ORDER BY STUDENT_NAME
+						) Z ) b
+		WHERE
+			a.HOMEPAGE_ID 		= c.homepage_id
+			AND a.HOMEPAGE_ID 	= #{homepage_id}
+			AND a.GROUP_IDX 	= #{group_idx}
+			AND a.CATEGORY_IDX 	= #{category_idx}
+			AND a.TRAINING_IDX 	= #{training_idx}
+			AND b.STUDENT_IDX 	= #{student_idx}
+	</select>
+
+	<select id="checkStudent2" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING_STUDENT
+		WHERE DELETE_YN 		= 'N'
+			AND APPLY_STATUS 	!= '99'
+			AND HOMEPAGE_ID 	= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND MEMBER_KEY 		= #{member_key}
+	</select>
+
+	<select id="checkStudent2SameTraining" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			APPLY_STATUS 	!= '99'
+			AND MEMBER_KEY 	= #{member_key}
+			AND TRAINING_IDX 	!= #{training_idx}
+			AND (HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX)
+				IN (SELECT HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX
+					FROM TRAINING
+					WHERE HOMEPAGE_ID = #{homepage_id}
+					AND TRAINING_NAME = (SELECT TRAINING_NAME FROM TRAINING WHERE HOMEPAGE_ID = #{homepage_id} AND TRAINING_IDX = #{training_idx}))
+	</select>
+
+	<select id="getTrainingCertificateList" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT A.*,
+			CASE
+				WHEN A.CNT = 0
+				THEN '2'
+				WHEN (A.ATTEND_CNT/A.CNT)*100 >= #{cert_percent}
+				THEN '1'
+				ELSE '2'
+			END AS STUDENT_STATUS
+		FROM (
+				SELECT
+					a.STUDENT_IDX, a.BELONG_IDX, a.BELONG_NAME, a.STUDENT_NAME, a.STUDENT_ADDRESS, a.STUDENT_ADDRESS_DETAIL, a.STUDENT_BIRTH, a.STUDENT_OLD
+					, (SELECT TRAINING_COUNT FROM TRAINING WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX) AS CNT
+					, (SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0) FROM TRAINING_BOOK
+						WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX) as ATTEND_CNT
+				FROM
+					TRAINING_STUDENT a
+				WHERE
+					a.DELETE_YN 		= 'N'
+					AND a.HOMEPAGE_ID 	= #{homepage_id}
+					AND a.GROUP_IDX 	= #{group_idx}
+					AND a.CATEGORY_IDX 	= #{category_idx}
+					AND a.TRAINING_IDX 	= #{training_idx}
+			  ) A
+	</select>
+
+	<select id="getFirstBackupMember" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, MEMBER_KEY, APPLICANT_NAME, APPLICANT_BIRTH
+			, APPLICANT_OLD, APPLICANT_SEX, APPLICANT_ZIPCODE, APPLICANT_ADDRESS, APPLICANT_ADDRESS_DETAIL, APPLICANT_PHONE, APPLICANT_CELL_PHONE, SELF_YN
+			, STUDENT_NAME, STUDENT_BIRTH, STUDENT_SEX, STUDENT_ZIPCODE, STUDENT_ADDRESS, STUDENT_ADDRESS_DETAIL, STUDENT_SCHOOL, STUDENT_HACK, STUDENT_OLD
+			, SELF_INFO_YN, APPLY_STATUS, TO_CHAR(ADD_DATE, 'yyyy-mm-dd hh24:mi') AS ADD_DATE, cancel_id, cancel_date
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			(HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX)
+			IN ( SELECT
+					HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, MIN(STUDENT_IDX)
+				 FROM
+				 	TRAINING_STUDENT
+				 WHERE
+				 	DELETE_YN = 'N' AND HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx} AND APPLY_STATUS = 2
+				 GROUP BY HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX )
+	</select>
+
+	<update id="updateJoinToBackupMember" >
+		UPDATE
+		   TRAINING_STUDENT
+		SET
+		   APPLY_STATUS = 1
+		WHERE
+			HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+		  	AND DELETE_YN 		= 'N'
+	</update>
+
+	<select id="getCertificateListByDate" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT result.*,  CASE
+				WHEN result.TRAINING_COUNT = 0
+				THEN '2'
+				WHEN result.ATTEND_CNT <![CDATA[<]]> 70
+				THEN '2'
+				WHEN result.ATTEND_CNT >= 70
+				THEN '1'
+				END AS STUDENT_STATUS
+		FROM  (SELECT
+					a.TRAINING_COUNT,
+					b.homepage_id, b.group_idx, b.category_idx, b.training_idx, b.student_idx,
+					b.member_id, b.member_key, b.applicant_name, b.applicant_birth, b.applicant_old,
+					b.applicant_sex, b.applicant_zipcode, b.applicant_address, b.applicant_address_detail, b.applicant_phone,
+					b.applicant_cell_phone, b.self_yn, b.student_name, b.student_birth, b.student_old,
+					b.student_sex, b.student_zipcode, b.student_address, b.student_address_detail, b.student_school,
+					b.student_hack, b.self_info_yn, b.apply_type, b.apply_status, b.pay1_yn,
+					b.pay2_yn, b.pay3_yn, b.cancel_date, b.cancel_id, b.add_date,
+					b.add_id, b.mod_date, b.mod_id, b.delete_yn, b.family_relation,
+					b.family_name, b.family_confirm_yn, b.family_desc, b.web_id, b.student_family_count,
+					b.student_ban, b.student_remark, b.sub_category_idx, b.student_location_code, b.student_neis_cd,
+					b.student_training_num, b.large_category_idx, b.group_temp, b.category_temp, b.training_temp,
+					CASE WHEN a.training_count = 0 THEN 0 ELSE ((SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0) FROM TRAINING_BOOK WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = b.STUDENT_IDX)/a.training_count)*100 END as ATTEND_CNT
+				FROM (SELECT
+              				homepage_id, group_idx, category_idx, training_idx, training_name,
+							training_desc, training_etc, training_stage, training_target, training_status,
+							training_join_unit, training_limit_count, training_backup_count, training_offline_count, teacher_idx,
+							training_join_limit_unit, training_join_limit_value, start_join_date, start_join_time, end_join_date,
+							end_join_time, training_day, start_date, start_time, end_date,
+							end_time, training_count, plan_file_name, real_file_name, file_extension,
+							file_size, member_yn, use_yn, print_seq, certificate_yn,
+							certificate_rate, survey_idx, add_date, add_id, mod_date,
+							mod_id, delete_yn, training_same_limit_count, image_plan_file_name, image_real_file_name,
+							image_file_extension, image_file_size, family_yn, limit_hak, calendar_view_yn,
+							limit_hak_yn, family_count_yn, agent_yn, school_info_yn, remark_yn,
+							limit_hak2, program_classification1, program_classification2, program_classification3, program_subject,
+							program_age_div, sub_category_idx, neis_location_yn, neis_cd_yn, neis_training_num_yn,
+							large_category_idx, group_temp, category_temp, training_temp
+						FROM TRAINING
+						WHERE HOMEPAGE_ID = #{homepage_id}
+						AND DELETE_YN = 'N'
+						AND START_DATE > #{search_start_date} OR END_DATE <![CDATA[<]]> #{search_end_date}
+						) a, TRAINING_STUDENT b
+				WHERE b.HOMEPAGE_ID = a.HOMEPAGE_ID
+				AND b.GROUP_IDX = a.GROUP_IDX
+				AND b.CATEGORY_IDX = a.CATEGORY_IDX
+				AND b.TRAINING_IDX = a.TRAINING_IDX
+				AND b.DELETE_YN = 'N'
+				AND b.APPLY_STATUS = '1'
+				<if test="apply_status != null and apply_status != ''">
+				AND	b.
+				</if>
+				) result
+	</select>
+	
+	<select id="getCertificateListByDate2" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			*
+		FROM
+		(
+		SELECT result.*,  CASE
+				WHEN result.TRAINING_COUNT = 0
+				THEN '2'
+				WHEN result.ATTEND_CNT <![CDATA[<]]> 70
+				THEN '2'
+				WHEN result.ATTEND_CNT >= 70
+				THEN '1'
+				END AS STUDENT_STATUS
+		FROM  (SELECT
+					a.training_name,
+					a.training_desc, a.training_etc, a.training_stage, a.training_target, a.training_status,
+					a.training_join_unit, a.training_limit_count, a.training_backup_count, a.training_offline_count, a.teacher_idx,
+					a.training_join_limit_unit, a.training_join_limit_value, a.start_join_date, a.start_join_time, a.end_join_date,
+					a.end_join_time, a.training_day, a.start_date, a.start_time, a.end_date,
+					a.end_time, a.training_count, a.plan_file_name, a.real_file_name, a.file_extension,
+					a.file_size, a.member_yn, a.use_yn, a.print_seq, a.certificate_yn,
+					a.certificate_rate, a.survey_idx,
+					a.training_same_limit_count, a.image_plan_file_name, a.image_real_file_name,
+					a.image_file_extension, a.image_file_size, a.family_yn, a.limit_hak, a.calendar_view_yn,
+					a.limit_hak_yn, a.family_count_yn, a.agent_yn, a.school_info_yn, a.remark_yn,
+					a.limit_hak2, a.program_classification1, a.program_classification2, a.program_classification3, a.program_subject,
+					a.program_age_div, a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn,
+					b.homepage_id, b.group_idx, b.category_idx, b.training_idx, b.student_idx,
+					b.member_id, b.member_key, b.applicant_name, b.applicant_birth, b.applicant_old,
+					b.applicant_sex, b.applicant_zipcode, b.applicant_address, b.applicant_address_detail, b.applicant_phone,
+					b.applicant_cell_phone, b.self_yn, b.student_name, b.student_birth, b.student_old,
+					b.student_sex, b.student_zipcode, b.student_address, b.student_address_detail, b.student_school,
+					b.student_hack, b.self_info_yn, b.apply_type, b.apply_status, b.pay1_yn,
+					b.pay2_yn, b.pay3_yn, b.cancel_date, b.cancel_id, b.add_date,
+					b.add_id, b.mod_date, b.mod_id, b.delete_yn, b.family_relation,
+					b.family_name, b.family_confirm_yn, b.family_desc, b.web_id, b.student_family_count,
+					b.student_ban, b.student_remark, b.sub_category_idx, b.student_location_code, b.student_neis_cd,
+					b.student_training_num, b.large_category_idx, b.group_temp, b.category_temp, b.training_temp,
+					CASE WHEN a.training_count = 0 THEN 0 ELSE ((SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0) FROM TRAINING_BOOK WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = b.STUDENT_IDX)/a.training_count)*100 END as ATTEND_CNT
+				FROM (SELECT
+							homepage_id, group_idx, category_idx, training_idx, training_name,
+							training_desc, training_etc, training_stage, training_target, training_status,
+							training_join_unit, training_limit_count, training_backup_count, training_offline_count, teacher_idx,
+							training_join_limit_unit, training_join_limit_value, start_join_date, start_join_time, end_join_date,
+							end_join_time, training_day, start_date, start_time, end_date,
+							end_time, training_count, plan_file_name, real_file_name, file_extension,
+							file_size, member_yn, use_yn, print_seq, certificate_yn,
+							certificate_rate, survey_idx, add_date, add_id, mod_date,
+							mod_id, delete_yn, training_same_limit_count, image_plan_file_name, image_real_file_name,
+							image_file_extension, image_file_size, family_yn, limit_hak, calendar_view_yn,
+							limit_hak_yn, family_count_yn, agent_yn, school_info_yn, remark_yn,
+							limit_hak2, program_classification1, program_classification2, program_classification3, program_subject,
+							program_age_div, sub_category_idx, neis_location_yn, neis_cd_yn, neis_training_num_yn,
+							large_category_idx, group_temp, category_temp, training_temp
+						FROM TRAINING
+						WHERE HOMEPAGE_ID = #{homepage_id}
+						AND DELETE_YN = 'N'
+						) a, TRAINING_STUDENT b
+				WHERE b.HOMEPAGE_ID = a.HOMEPAGE_ID
+				AND b.GROUP_IDX = a.GROUP_IDX
+				AND b.CATEGORY_IDX = a.CATEGORY_IDX
+				AND b.TRAINING_IDX = a.TRAINING_IDX
+				AND b.DELETE_YN = 'N'
+				AND b.APPLY_STATUS = '1'
+				AND	b.member_key = #{member_key}
+				) result
+		)
+		WHERE
+			student_status = '1'
+	</select>
+
+	<select id="checkStudent2Setting" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	member_key = #{userNo}
+		AND	add_date >= #{fromDate}
+		AND	add_date <![CDATA[<=]]> #{toDate}
+	</select>
+
+	<select id="checkStudent2Setting2" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	group_idx = #{group_idx}
+		AND	category_idx = #{category_idx}
+		AND	member_key = #{userNo}
+		AND	add_date >= TO_DATE(#{fromDateStr}, 'YYYYMMDD')
+		AND	add_date <![CDATA[<=]]> TO_DATE(#{toDateStr}, 'YYYYMMDD')
+		AND	apply_status = '1'
+	</select>
+
+	<select id="checkStudent2Setting3" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	group_idx = #{group_idx}
+<!-- 		AND	category_idx = #{category_idx} -->
+		AND	member_key = #{userNo}
+		AND	add_date >= TO_DATE(#{fromDateStr}, 'YYYYMMDD')
+		AND	add_date <![CDATA[<=]]> TO_DATE(#{toDateStr}, 'YYYYMMDD')
+		AND	apply_status = '1'
+	</select>
+
+	<select id="getBackupMemberList" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, APPLICANT_CELL_PHONE
+		FROM
+			TRAINING_STUDENT
+		WHERE HOMEPAGE_ID = #{homepage_id}
+			AND GROUP_IDX = #{group_idx}
+			AND CATEGORY_IDX = #{category_idx}
+			AND TRAINING_IDX = #{training_idx}
+			AND APPLY_STATUS = 2
+	</select>
+
+	<update id="modifyStudent2Status">
+		UPDATE
+			TRAINING_STUDENT
+		SET
+			APPLY_STATUS = #{apply_status}
+		WHERE HOMEPAGE_ID = #{homepage_id}
+			AND GROUP_IDX = #{group_idx}
+			AND CATEGORY_IDX = #{category_idx}
+			AND TRAINING_IDX = #{training_idx}
+			AND STUDENT_IDX = #{student_idx}
+	</update>
+
+	<select id="sendSmsTrainingCancle" resultType="kr.go.gbelib.app.cms.module.training.student2.Student2">
+		SELECT
+			homepage_id, training_idx, student_idx, member_id, member_key, applicant_cell_phone
+		FROM
+			TRAINING_STUDENT
+		WHERE
+			training_idx = #{training_idx}
+		AND	apply_status != 99
+	</select>
+
+</mapper>

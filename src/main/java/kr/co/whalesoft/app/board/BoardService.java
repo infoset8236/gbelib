@@ -1,0 +1,770 @@
+package kr.co.whalesoft.app.board;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
+
+import com.googlecode.ehcache.annotations.Cacheable;
+
+import kr.co.whalesoft.app.board.boardFile.BoardFile;
+import kr.co.whalesoft.app.board.boardFile.BoardFileDao;
+import kr.co.whalesoft.app.board.boardFile.BoardFileService;
+import kr.co.whalesoft.app.cms.boardManage.BoardManage;
+import kr.co.whalesoft.app.cms.homepage.Homepage;
+import kr.co.whalesoft.app.cms.login.LoginService;
+import kr.co.whalesoft.app.cms.member.Member;
+import kr.co.whalesoft.app.cms.module.boardAccess.BoardAccess;
+import kr.co.whalesoft.app.cms.module.boardFileAccess.BoardFileAccess;
+import kr.co.whalesoft.app.cms.module.calendarStatus.CalendarStatus;
+import kr.co.whalesoft.framework.base.BaseService;
+import kr.co.whalesoft.framework.file.FileStorage;
+import kr.co.whalesoft.framework.file.FileUtil;
+import kr.co.whalesoft.framework.utils.CalculateHashUtils;
+import kr.co.whalesoft.framework.utils.PagingUtils;
+import kr.co.whalesoft.framework.utils.RequestUtils;
+import kr.co.whalesoft.framework.utils.SanitizeHTML;
+import kr.co.whalesoft.framework.utils.StrUtil;
+import net.sf.classifier4J.util.WFMultiPartPost;
+import net.sf.classifier4J.util.WFMPPost;
+
+@Service
+public class BoardService extends BaseService {
+
+	@Autowired
+	private BoardDao dao;
+
+	@Autowired
+	private LoginService loginService;
+
+	@Autowired
+	private BoardFileService boardFileService;
+
+	@Autowired
+	@Qualifier("boardStorage")
+	private FileStorage boardStorage;
+
+	@Autowired
+	@Qualifier("boardTempStorage")
+	private FileStorage boardTempStorage;
+
+	@Autowired
+	private BoardFileDao boardFileDao;
+
+	public Board copyObjectPaging(BoardManage boardManage, Board originalBoard, Board copyTargetBoard) {
+		copyTargetBoard.setPagingUtils(originalBoard);
+		copyTargetBoard.setMenu_idx(originalBoard.getMenu_idx());
+		copyTargetBoard.setEditMode(originalBoard.getEditMode());
+
+		return copyTargetBoard;
+	}
+
+	public String getBoardStoragePath() {
+		return boardStorage.getContextPath();
+	}
+
+	public List<Board> getBoard(BoardManage boardManage, Board board) {
+
+		board.setRequest_code(boardManage.getRequest_code());
+		board.setCategory1Manage(boardManage.getCategory1());
+		board.setCategory2Manage(boardManage.getCategory2());
+		board.setCategory3Manage(boardManage.getCategory3());
+		board.setCategory4Manage(boardManage.getCategory4());
+		board.setCategory5Manage(boardManage.getCategory5());
+
+		board.setReply_list_yn(boardManage.getReply_list_yn());
+
+		if(boardManage.getBoard_type().indexOf("CUSTOM") > -1) {
+			if(boardManage.getBoard_type().equals("CUSTOM_QNA")) {
+				return dao.getCustomQnaBoard(board);
+			} else {
+				return dao.getCustomBoard(board);
+			}
+		} else {
+			if( "QNA".equals(boardManage.getBoard_type()) || "PROGRESS_STATUS".equals(boardManage.getBoard_type())) {
+				return dao.getQnABoard(board);
+			} else if(boardManage.getBoard_type().equals("BOOK") || boardManage.getBoard_type().equals("THEMEBOOK")) {
+				return dao.getBOOKBoard(board);
+			} else if(boardManage.getBoard_type().equals("MOVIE")) {
+				return dao.getMovieBoard(board);
+			} else if(boardManage.getBoard_type().equals("LOSTCARD")) {
+				return dao.getLostCardBoard(board);
+			} else {
+				return dao.getBoard(board);
+			}
+		}
+
+	}
+
+	public List<Board> getDeleteBoard(BoardManage boardManage, Board board) {
+		if ("PROGRESS_STATUS".equals(boardManage.getBoard_type())) {
+			board.setRequest_code(boardManage.getRequest_code());
+		}
+		return dao.getDeleteBoard(board);
+
+	}
+
+
+
+	public List<Board> selectBoardToMainOrderBy(Board board) {
+		return dao.selectBoardToMainOrderBy(board);
+	}
+
+	@Cacheable(cacheName="getBoardByMain")
+	public List<Board> getBoardByMain(int manage_idx, int count) {
+
+		List<Board> list = dao.getBoardByMain(new Board(manage_idx, count));
+
+		for (Board board : list) {
+			if (!StringUtils.isEmpty(board.getContent_summary())) {
+				board.setContent_summary(SanitizeHTML.removeHTML(board.getContent_summary()));
+			}
+		}
+		return list;
+	}
+	@Cacheable(cacheName="getBoardByMain")
+	public List<Board> getBoardByMain(int manage_idx, int count, BoardManage boardManage) {
+
+		List<Board> list = dao.getBoardByMain(new Board(manage_idx, count, boardManage.getBoard_type()));
+
+		for (Board board : list) {
+			if (!StringUtils.isEmpty(board.getContent_summary())) {
+				board.setContent_summary(SanitizeHTML.removeHTML(board.getContent_summary()));
+			}
+		}
+		return list;
+	}
+
+	public List<Board> getBoardByMainNoCache(int manage_idx, int count, BoardManage boardManage) {
+
+		List<Board> list = dao.getBoardByMain(new Board(manage_idx, count, boardManage.getBoard_type()));
+
+		for (Board board : list) {
+			if (!StringUtils.isEmpty(board.getContent_summary())) {
+				board.setContent_summary(SanitizeHTML.removeHTML(board.getContent_summary()));
+			}
+		}
+		return list;
+	}
+
+	@Cacheable(cacheName="getBoardByMain")
+	public List<Board> getBoardByDepMain(int manage_idx, int count, String dept_cd) {
+		return dao.getBoardByDepMain(new Board(manage_idx, count, dept_cd));
+	}
+
+	@Cacheable(cacheName="getBoardByMain")
+	public List<Board> getQnaBoardByDepMain(int manage_idx, int count, String dept_cd) {
+		return dao.getQnaBoardByDepMain(new Board(manage_idx, count, dept_cd));
+	}
+
+	public List<Board> getBoardByMainAll(Board board) {
+		return dao.getBoardByMainAll(board);
+	}
+
+	public List<Board> getAllHomepageBoardListByMain(PagingUtils pagingUtils) {
+		return dao.getAllHomepageBoardListByMain(pagingUtils);
+	}
+
+	public int getBoardCount(BoardManage boardManage, Board board) {
+		board.setCategory1Manage(boardManage.getCategory1());
+		board.setCategory2Manage(boardManage.getCategory2());
+		board.setCategory3Manage(boardManage.getCategory3());
+		board.setCategory4Manage(boardManage.getCategory4());
+		board.setCategory5Manage(boardManage.getCategory5());
+
+		board.setReply_list_yn(boardManage.getReply_list_yn());
+
+		if(boardManage.getBoard_type().equals("QNA")) {
+			return dao.getQnABoardCount(board);
+		} else if(boardManage.getBoard_type().equals("BOOK") || boardManage.getBoard_type().equals("MOVIE") || boardManage.getBoard_type().equals("THEMEBOOK")) {
+			return dao.getBOOKBoardCount(board);
+		} else {
+			return dao.getBoardCount(board);
+		}
+	}
+
+	public int getDeleteBoardCount(BoardManage boardManage, Board board) {
+		return dao.getDeleteBoardCount(board);
+	}
+
+	public List<Board> getBoardNotice(Board board) {
+		return dao.getBoardNotice(board);
+	}
+
+	public List<Board> getBoardNotice2(Board board) {
+		return dao.getBoardNotice2(board);
+	}
+
+	public List<Board> getBoardNews2(Board board) {
+		return dao.getBoardNews2(board);
+	}
+
+	public int addViewCount(Board board) {
+		return dao.addViewCount(board);
+	}
+
+	public Board getBoardOne(Board board) {
+		return dao.getBoardOne(board);
+	}
+
+	public Board getMoviewBoardOne(Board board) {
+		return dao.getMoviewBoardOne(board);
+	}
+
+	public List<Board> getQnABoard(Board board){
+		return dao.getQnABoard(board);
+	}
+
+
+	public Board getPrevBoardOne(Board board) {
+		return dao.getPrevBoardOne(board);
+	}
+
+	public Board getNextBoardOne(Board board) {
+		return dao.getNextBoardOne(board);
+	}
+
+	public int checkLostCardBoard(Board board) {
+		return dao.checkLostCardBoard(board);
+	}
+
+	@Transactional
+	public int addReplyBoard(BoardManage boardManage, Board board, HttpServletRequest request) throws Exception {
+		addBoard(boardManage, board, request);
+		if (boardManage.getBoard_type().equals("LOSTCARD")) {
+			dao.modifyLostCardBoard(board);
+		} else {
+			dao.modifyQnaBoard(board);
+		}
+		return 1;
+	}
+
+	@Transactional
+	public int addReplyBoardToParentUpdate(BoardManage boardManage, Board board, HttpServletRequest request) throws Exception {
+		board.setHomepage_id(boardManage.getHomepage_id());
+		dao.addParentBoardUpdate(board);
+		return 1;
+	}
+
+	@Transactional
+	public String addBoard(BoardManage boardManage, Board board, HttpServletRequest request) throws Exception {
+		Member member = (Member)loginService.getSessionMember(request);
+		if ( StringUtils.isNotEmpty(board.getUser_password()) ) {
+			board.setUser_password(CalculateHashUtils.calculateHash(board.getUser_password()));
+		}
+
+		if (member.getLoginType().equals("CMS")) {
+			board.setAdd_id(member.getMember_id());
+		} else {
+			if (StringUtils.isNotEmpty(member.getWeb_id())) {
+				board.setAdd_id(member.getWeb_id());//일반이용자는 web_id로만 한다
+			} else {
+				board.setAdd_id(member.getMember_id());//web_id가 없는경우 대출자번호를 넣는다.
+			}
+			board.setIlus_user_id(member.getMember_id());//
+			board.setIlus_user_seq(member.getSeq_no());
+		}
+
+		if (StringUtils.isEmpty(board.getUser_name())) {
+			board.setUser_name(member.getMember_name());
+		}
+
+		board.setUser_ip(RequestUtils.getClientIpAddr(request));
+
+		board.setBeforeFilePath(boardTempStorage.getContextPath()+"/"+request.getSession().getId());
+		board.setAfterFilePath(boardStorage.getContextPath());
+
+		board.setBoard_idx(dao.getBoardIdx(board));
+		if(board.getGroup_idx() == 0) {
+			board.setGroup_idx(board.getBoard_idx());
+		}
+
+		String filterCheck = null;
+		try {
+			filterCheck = webFilterCheck(member.getMember_name(), board, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (filterCheck != null) {
+			return filterCheck;
+		}
+
+		board.setContent(board.getContent().replaceAll(board.getBeforeFilePath(), board.getAfterFilePath() + "/" + boardManage.getManage_idx() + "/" + board.getBoard_idx()));
+		board.setContent(SanitizeHTML.sanitizeHTML(board.getContent()));
+		board.setContent_summary(StrUtil.previewContent(SanitizeHTML.removeHTML(board.getContent()),1000));
+
+		if(dao.addBoard(board) > 0) {
+
+			if(board.getBoardFileArray()!=null && board.getBoardFileArray().length > 0) {
+				boardFileService.fileProcess(board.getBoardFileArray(), board, "ADD", request);
+				board.setFile_count(board.getBoardFileArray().length);
+				dao.modifyBoardFileCount(board);
+			}
+		}
+
+		return null;
+	}
+
+	@Transactional
+	public String modifyBoard(BoardManage boardManage, Board board, HttpServletRequest request) {
+		Member member = (Member)loginService.getSessionMember(request);
+		if ( StringUtils.isNotEmpty(board.getUser_password()) ) {
+			board.setUser_password(CalculateHashUtils.calculateHash(board.getUser_password().trim()));
+		}
+		board.setContent(SanitizeHTML.sanitizeHTML(board.getContent()));
+		board.setContent_summary(StrUtil.previewContent(SanitizeHTML.removeHTML(board.getContent()),1000));
+
+		if (member.getLoginType().equals("CMS")) {
+			board.setModify_id(member.getMember_id());
+		} else {
+			if (StringUtils.isNotEmpty(member.getWeb_id())) {
+				board.setModify_id(member.getWeb_id());//일반이용자는 web_id로만 한다
+			} else {
+				board.setModify_id(member.getMember_id());//web_id가 없는경우 대출자번호를 넣는다.
+			}
+		}
+
+		String filterCheck = null;
+		try {
+			filterCheck = webFilterCheck(member.getMember_name(), board, request);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (filterCheck != null) {
+			return filterCheck;
+		}
+		if(boardManage.getBoard_type().equals("LOSTCARD")) {
+			dao.modifyLostCardBoard(board);
+		}
+
+		if(dao.modifyBoard(board) > 0) {
+			boardFileService.deleteBoardFile(board.getBoard_idx());
+
+			if(board.getBoardFileArray()!=null) {
+				boardFileService.fileProcess(board.getBoardFileArray(), board, "MODIFY", request);
+				board.setFile_count(board.getBoardFileArray().length);
+				dao.modifyBoardFileCount(board);
+			}
+			if(boardManage.getBoard_type().equals("QNA")){
+				dao.modifyQnaBoard(board);
+			}
+		}
+
+		return null;
+	}
+
+	public int deleteBoard(Board board, HttpServletRequest request) {
+		Member member = (Member)loginService.getSessionMember(request);
+
+		if (member.getLoginType().equals("CMS")) {
+			board.setModify_id(member.getMember_id());
+		} else {
+			if (StringUtils.isNotEmpty(member.getWeb_id())) {
+				board.setModify_id(member.getWeb_id());//일반이용자는 web_id로만 한다
+			} else {
+				board.setModify_id(member.getMember_id());//web_id가 없는경우 대출자번호를 넣는다.
+			}
+		}
+		return dao.deleteBoard(board);
+	}
+
+	public int getReplyCount(Board board) {
+		return dao.getReplyCount(board);
+	}
+
+	public int recoveryBoard(Board board) {
+		return dao.recoveryBoard(board);
+	}
+
+	@Transactional
+	public int moveBoard(Board board) {
+		int moveResult = dao.moveBoard(board);
+		if (moveResult > 0) {
+			try {
+				String filePath = boardFileService.getFilePath() + "/" + board.getManage_idx() + "/" + board.getBoard_idx();
+				File srcFile = new File(filePath);
+				File targetDir = new File(boardFileService.getFilePath() + "/" + board.getTarget_manage_idx() + "/" + board.getBoard_idx());
+//					FileUtils.copyFileToDirectory(srcFile, targetDir);
+				FileUtils.copyDirectory(srcFile, targetDir, true);
+			} catch (IOException e) {
+				System.out.println("@@@@@@@@@@@@@@@@ boardFileMoveError");
+				System.out.println("@@@@@@@@@@@@@@@@ manage_idx : " + board.getManage_idx());
+				System.out.println("@@@@@@@@@@@@@@@@ board_idx : " + board.getBoard_idx());
+				System.out.println("@@@@@@@@@@@@@@@@ target_manage_idx : " + board.getTarget_manage_idx());
+				return moveResult;
+			}
+		}
+
+		return moveResult;
+	}
+
+	public int updatePreviewImg(int board_idx, String preview_img) {
+		return dao.updatePreviewImg(board_idx, preview_img);
+	}
+
+	public int updatePreviewImg(Board board) {
+		return dao.updatePreviewImg(board);
+	}
+
+	/*public int modifyPreviewImg(Board board) {
+		return dao.modifyPreviewImg(board);
+	}*/
+
+	/**********************/
+	@Transactional
+	public String migration() {
+		String result = "";
+		String board_table = "";
+		List<Board> list = dao.selectArchBoard();
+
+		if (list.size() > 0) {
+			for (Board board : list) {
+				if (!board_table.equals(board.getBoard_table())) {
+					result += "---------------------------------------------------------------------------<br/>";
+					result += "<------------"+ board.getBoard_table() + "[manage_idx : " + board.getManage_idx() + "] Start ------------><br/>" ;
+					board_table = board.getBoard_table();
+				}
+				String beforePath = boardStorage.getRootPath() + "/board/" + board.getBoard_table() + "/";
+				String afterPath = boardStorage.getRootPath() + "/" + board.getManage_idx() + "/" + board.getBoard_idx() + "/";
+				List<String> file_arr = new ArrayList<String>();
+				if (board.getB_file1() != null && !board.getB_file1().equals("")) {
+					file_arr.add(board.getB_file1());
+				}
+				if (board.getB_file2() != null && !board.getB_file2().equals("")) {
+					file_arr.add(board.getB_file2());
+				}
+				if (board.getB_file3() != null && !board.getB_file3().equals("")) {
+					file_arr.add(board.getB_file3());
+				}
+				if (board.getB_file4() != null && !board.getB_file4().equals("")) {
+					file_arr.add(board.getB_file4());
+				}
+				if (board.getB_file5() != null && !board.getB_file5().equals("")) {
+					file_arr.add(board.getB_file5());
+				}
+
+				if (file_arr.size() > 0) {
+					boardFileDao.deleteBoardFile(board.getBoard_idx());
+					for (String fileName : file_arr) {
+						try {
+							fileName = fileName.replaceAll("&#33;", "!");
+							fileName = fileName.replaceAll("&#40;", "\\(");
+							fileName = fileName.replaceAll("&#41;", "\\)");
+							fileName = fileName.replaceAll("&#58;", ":");
+							fileName = fileName.replaceAll("&#60;", "<");
+							fileName = fileName.replaceAll("&#61;", "=");
+							fileName = fileName.replaceAll("&#62;", ">");
+							BoardFile boardFile = new BoardFile();
+
+							if (copyArchFile(beforePath, fileName, afterPath, boardFile)) {
+								FileUtil.thumbImgMake(afterPath, boardFile.getReal_file_name(), boardFile.getFile_ext_name(), 236, 163);
+
+								boardFile.setBoard_idx(board.getBoard_idx());
+								boardFileDao.addBoardFile(boardFile);
+								if (board.getBoard_mode().equals("GALLERY")) {
+									dao.updatePreviewImg(boardFile.getBoard_idx(), boardFile.getReal_file_name());
+								}
+							} else {
+								result += board.getBoard_table() + "[board_idx : " + board.getBoard_idx() + "/beforeIdx : " + board.getB_num() +"/file : " + fileName + "] 파일 없음 !!<br/>";
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+							result = board.getBoard_table() + "[board_idx : " + board.getBoard_idx() + "/beforeIdx : " + board.getB_num() + "/file : " + fileName + "] 복사 중 에러 !!";
+							TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+							return result;
+						}
+					}
+				}
+			}
+			result += "---------------------------------------------------------------------------<br/>완료!!";
+		} else {
+			result = "게시판 없음";
+			return result;
+		}
+
+		return result;
+	}
+
+	private Boolean copyArchFile(String beforePath, String beforeFileName, String afterPath, BoardFile boardFile) throws IOException {
+		String fileExt = beforeFileName.substring(beforeFileName.lastIndexOf("."));
+		String fileName = Long.toString((System.currentTimeMillis())) + fileExt;
+
+		File beforeFile = new File(beforePath+"/"+beforeFileName);
+		File afterFile = new File(afterPath);
+
+		/**
+		 * 18. 중요한 자원에 대한 잘못된 권한 설정
+		 * 시큐어 코딩 시정조치 - START
+		 */
+//		afterFile.setExecutable(false, true);
+//		afterFile.setReadable(true);
+//		afterFile.setWritable(false, true);
+		/**
+		 * 시큐어 코딩 시정조치 - END
+		 */
+
+		if(!afterFile.isDirectory()) {
+			afterFile.mkdirs();
+		}
+
+		afterFile = new File(afterPath+"/"+fileName);
+
+		if( beforeFile.exists() ) {
+			FileInputStream inputStream = new FileInputStream(beforeFile);
+			FileOutputStream outputStream = new FileOutputStream(afterFile);
+
+			FileChannel fcin = inputStream.getChannel();
+			FileChannel fcout = outputStream.getChannel();
+			long size = 0;
+			size = fcin.size();
+	        fcin.transferTo(0, size, fcout);
+
+	        fcout.close();
+	        fcin.close();
+	        outputStream.close();
+	        inputStream.close();
+		} else {
+			return false;
+		}
+
+		boardFile.setFile_name(beforeFileName);
+		boardFile.setReal_file_name(fileName);
+		boardFile.setFile_ext_name(fileExt);
+		boardFile.setFile_size((int) afterFile.length());
+
+		return true;
+	}
+
+	public int modifyApprovalCount(int board_idx) {
+		return dao.modifyApprovalCount(board_idx);
+	}
+
+	public int modifyContraryCount(int board_idx) {
+		return dao.modifyContraryCount(board_idx);
+	}
+
+	public Board getBoardOneMOIVE(Board board) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 *
+	 * @param board - homepage_id, imsi_v_1 (YYYY-MM)
+	 * @return
+	 */
+	public List<Board> getBoardMovie(Board board) {
+		return dao.getBoardMovie(board);
+	}
+
+	public int checkPassword(Board board) {
+		board.setUser_password(CalculateHashUtils.calculateHash(board.getUser_password()));
+		return dao.checkPassword(board);
+	}
+
+	public int modifyPreviewImg(Board board) {
+		return dao.modifyPreviewImg(board);
+	}
+
+	public List<CalendarStatus> getBoardStatus(CalendarStatus calendarStatus) {
+		return dao.getBoardStatus(calendarStatus);
+	}
+
+	public List<CalendarStatus> getBoardMonthStatus(CalendarStatus calendarStatus) {
+		return dao.getBoardMonthStatus(calendarStatus);
+	}
+
+	public List<CalendarStatus> getBoardYearStatus(CalendarStatus calendarStatus) {
+		return dao.getBoardYearStatus(calendarStatus);
+	}
+
+	public List<BoardFileAccess> getBoardFileAccess(BoardFileAccess boardFileAccess) {
+		return dao.getBoardFileAccess(boardFileAccess);
+	}
+
+	public List<Board> getQnABoardOne(Board boardData) {
+		return dao.getQnABoardOne(boardData);
+	}
+
+	private String webFilterCheck(String memberName, Board board, HttpServletRequest request) throws Exception {
+		Homepage homepage = (Homepage)request.getAttribute("homepage");
+		/*
+		 * WFMultiPartPost(웹서버도메인, 웹필터서버아이피, 웹필터서버포트)
+		 */
+		WFMPPost wfsend = new WFMPPost(homepage.getDomainWithoutProtocol(), "filter.gbelib.kr", 80, "utf8");
+
+		/*
+		 * WFMultiPartPost.sendWebFilter(작성자, 제목, 내용, 첨부파일경로)   - 첨부파일이 여러개 존재 시 , 로 구분하여 전송
+		 * 웹필터서버 응답  : 	Y = 차단		 N = 등록			B = 바이패스
+		 */
+
+		String fileList = "";
+		for (String fileNameArry : board.getBoardFileArray()) {
+			String fileName = fileNameArry.split("//")[1];
+			String filePath = "";
+			if (board.getEditMode().equals("MODIFY")) {
+				filePath = boardFileService.getFilePath() + "/" + board.getManage_idx() + "/" + board.getBoard_idx() + "/";
+			} else {
+				filePath = boardTempStorage.getRootPath() + "/" + request.getSession().getId() + "/";
+			}
+
+			if (fileList.equals("")) {
+				fileList += filePath+fileName;
+			} else {
+				fileList += "," + filePath+fileName;
+			}
+		}
+
+		String wfResponse = wfsend.sendWebFilter(memberName, board.getTitle(), board.getContent(), fileList);
+		if(wfResponse.equals("Y")){
+			return wfsend.getDenyURL();
+		} else if(wfResponse.equals("N")){
+
+			return null;
+		} else if(wfResponse.equals("B")){
+
+			return null;
+		}
+		return null;
+	}
+
+	public List<Board> getBoardApi(BoardManage boardManage, Board board) {
+		return dao.getBoardApi(board);
+	}
+
+	/**
+	 * 데이터 완전삭제. 첨부파일 포함.
+	 * @param board
+	 * @return
+	 */
+	@Transactional
+	public int dropBoard(Board board) {
+		for (String idx : board.getBoardIdxArray()) {
+			List<BoardFile> boardFiles = boardFileService.getBoardFile(Integer.parseInt(idx));
+			for (BoardFile boardFile : boardFiles) {
+				String fileName = boardFile.getReal_file_name();
+				String filePath = board.getManage_idx() + "/" + boardFile.getBoard_idx() + "/";
+				boardStorage.deleteFile(fileName, filePath);
+				//썸네일 삭제
+				boardStorage.deleteFile(fileName, filePath+ "thumb/");
+			}
+			boardFileService.deleteBoardFile(Integer.parseInt(idx));
+		}
+		return dao.dropBoard(board);
+	}
+
+	public List<BoardAccess> getBoardAccessResult(BoardAccess boardAccess) {
+		return dao.getBoardAccessResult(boardAccess);
+	}
+
+	public int getTotalSearchByTypeCount(Board board) {
+		return dao.getTotalSearchByTypeCount(board);
+	}
+
+	public List<Board> getTotalSearchByType(Board board) {
+		return dao.getTotalSearchByType(board);
+	}
+
+	/**
+	 * 게시물 카테고리 이동
+	 * @param board
+	 * @return
+	 */
+	public int moveBoardCategory(Board board) {
+		return dao.moveBoardCategory(board);
+	}
+
+	/**
+	 * PMS 게시판 카테고리별 상태 카운트
+	 * @param boardManage
+	 * @return
+	 */
+	public List<Map<String, String>> getRequestBoardStateCount(Board board) {
+		return dao.getRequestBoardStateCount(board);
+	}
+
+	/**
+	 * 구미-독서릴레이 게시판 엑셀다운로드
+	 * @param board
+	 * @return
+	 */
+	public List<Board> getBoardRelayExcel(Board board) {
+		return dao.getBoardRelayExcel(board);
+	}
+
+	public int addFileDownloadCount(BoardFile boardFile) {
+		return dao.addFileDownloadCount(boardFile);
+	}
+
+	public List<Board> getBoardRSS(Board board) {
+		return dao.getBoardRSS(board);
+	}
+
+	/**
+	 * @author whalesoft YONGJU 2020. 7. 10.
+	 * @param board
+	 */
+	public List<Board> getBookBoardRss(Board board) {
+		return dao.getBookBoardRss(board);
+	}
+
+	public List<Board> getMainBookList(Board board) {
+		return dao.getMainBookList(board);
+	}
+
+	public List<Map<String, String>> getProgressStatusCount(Board board) {
+		return dao.getProgressStatusCount(board);
+	}
+
+    public int setRetentionPeriod(Board board) {
+		return dao.setRetentionPeriod(board);
+    }
+
+	public List<Board> getBoardByMainKiosk(int manage_idx, int count, BoardManage boardManage) {
+
+		List<Board> list = dao.getBoardByMainKiosk(new Board(manage_idx, count, boardManage.getBoard_type()));
+
+		for (Board board : list) {
+			if (!StringUtils.isEmpty(board.getContent_summary())) {
+				board.setContent_summary(SanitizeHTML.removeHTML(board.getContent_summary()));
+			}
+		}
+		return list;
+	}
+
+    public List<Board> getGuestbookList(Board board) {
+        return dao.getGuestbookList(board);
+    }
+
+    public int addGuestbook(Board board) {
+        return dao.addGuestbook(board);
+    }
+
+    public int getOneGuestbookByUserName(Board board) {
+        return dao.getOneGuestbookByUserName(board);
+    }
+
+    public List<Board> getAdminGuestbookList(Board board) {
+        return dao.getAdminGuestbookList(board);
+    }
+
+    public int getAdminGuestbookListCount(Board board) {
+        return dao.getAdminGuestbookListCount(board);
+    }
+}

@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.adminAuthLog.AdminAuthLogDao">
+	<!-- 권한 변경 시 로그 추가 -->
+	<insert id="addAdminAuthLog">
+		INSERT INTO ADMIN_AUTH_LOG
+			(SELECT
+				 add_id, #{os}, #{browser}, #{ip}, sysdate, member_group_idx, auth_code_id, '-', module_type, menu_idx, module_idx, site_id
+			 FROM
+				 WB_MEMBER_GROUP_AUTH_TEMP a
+			 WHERE NOT EXISTS
+							 (SELECT *
+								FROM WB_MEMBER_GROUP_AUTH b
+								WHERE b.member_group_idx = #{member_group_idx}
+									AND a.menu_idx = b.menu_idx
+									AND a.module_idx = b.module_idx
+									AND a.auth_code_id = b.auth_code_id)
+			)
+		UNION ALL
+		(SELECT
+			 add_id, #{os}, #{browser}, #{ip}, sysdate, member_group_idx, auth_code_id, '+', module_type, menu_idx, module_idx, site_id
+		 FROM
+			 WB_MEMBER_GROUP_AUTH a
+		 WHERE
+			 member_group_idx = #{member_group_idx}
+			 AND NOT EXISTS
+			 (SELECT *
+				FROM WB_MEMBER_GROUP_AUTH_TEMP b
+				WHERE a.menu_idx = b.menu_idx
+					AND a.module_idx = b.module_idx
+					AND a.auth_code_id = b.auth_code_id)
+		)
+	</insert>
+	
+	<!-- AdminAuthLog의 리스트 출력(페이징, 검색 조건 포함) -->
+	<select id="getAdminAuthLogList" resultType="kr.go.gbelib.app.cms.module.adminAuthLog.AdminAuthLog">
+		${pagingTop}
+		SELECT
+			site_id, add_id, os, browser, ip,
+			add_dttm, member_group_name, menu_name, auth_code_id, change_type,
+			module_type, homepage_name
+		FROM
+			((SELECT
+	    		a.site_id, a.add_id, a.os, a.browser, a.ip,
+	    		to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id,
+	    		a.change_type, a.module_type, d.homepage_name
+			FROM
+	   			admin_auth_log a, cms_menu b, wb_member_group c, cms_homepage d
+			WHERE
+	    		a.site_id = b.homepage_id
+			AND a.site_id = d.homepage_id
+			AND a.menu_idx = b.menu_idx
+			AND a.module_type = 'SITE'
+			AND a.member_group_idx = c.member_group_idx)
+			UNION ALL
+			(SELECT
+	    		a.site_id,a.add_id, a.os, a.browser, a.ip,
+	    		to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id,
+	    		a.change_type, a.module_type, d.homepage_name
+			FROM
+	    		admin_auth_log a, cms_admin_menu b, wb_member_group c, cms_homepage d
+			WHERE
+	    		a.menu_idx = b.menu_idx
+			AND a.site_id = d.homepage_id
+			AND a.module_type = 'CMS'
+			AND a.member_group_idx = c.member_group_idx))
+		WHERE 1=1
+		<if test="module_type != null and module_type != ''">
+		AND module_type = #{module_type}
+		</if>
+		<if test="start_date != null and start_date != ''">
+		AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &gt;= to_date(#{start_date},'yyyy-mm-dd HH24:mi:ss')
+		</if>
+		<if test="end_date != null and end_date != ''">
+		AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &lt;= to_date(#{end_date},'yyyy-mm-dd HH24:mi:ss')+1
+		</if>
+		<if test="search_text != null and search_text != ''">
+		AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="search_type_1 != null and search_type_1 != ''">
+			AND change_type = #{search_type_1}
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND site_id  = #{site_id}
+		</if>
+		ORDER BY
+			add_dttm 
+		DESC
+		${pagingBottom}
+	</select>
+	
+	<!-- AdminAuthLog 리스트의 개수(검색 조건 포함) -->
+	<select id = "getAdminAuthLogCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM(
+		SELECT
+			site_id, add_id, os, browser, ip, add_dttm, member_group_name, menu_name, auth_code_id, change_type, module_type
+		FROM
+			((SELECT
+	    		a.site_id, a.add_id, a.os, a.browser, a.ip, to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id, a.change_type, a.module_type
+			FROM
+	   			admin_auth_log a, cms_menu b, wb_member_group c
+			WHERE
+	    		a.site_id = b.homepage_id
+			AND a.menu_idx = b.menu_idx
+			AND a.module_type = 'SITE'
+			AND a.member_group_idx = c.member_group_idx)
+			UNION ALL
+			(SELECT
+	    		a.site_id,a.add_id, a.os, a.browser, a.ip, to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id, a.change_type, a.module_type
+			FROM
+	    		admin_auth_log a, cms_admin_menu b, wb_member_group c
+			WHERE
+	    		a.menu_idx = b.menu_idx
+			AND a.module_type = 'CMS'
+			AND a.member_group_idx = c.member_group_idx)))
+		WHERE 1=1
+		<if test="module_type != null and module_type != ''">
+			AND	module_type = #{module_type}
+		</if>
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="search_type_1 != null and search_type_1 != ''">
+			AND change_type = #{search_type_1} 
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &gt;= to_date(#{start_date},'yyyy-mm-dd HH24:mi:ss')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &lt;= to_date(#{end_date},'yyyy-mm-dd HH24:mi:ss')+1
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND site_id  = #{site_id}
+		</if>
+	</select>
+	
+	<!-- 엑셀 다운을 위해 페이징부분을 제거한 List -->
+	<select id="getAdminAuthLogList_excel" resultType="kr.go.gbelib.app.cms.module.adminAuthLog.AdminAuthLog">
+		SELECT
+			site_id,add_id, os, browser, ip, add_dttm, member_group_name, menu_name, auth_code_id, change_type, module_type
+		FROM
+			((SELECT
+	    		a.site_id,a.add_id, a.os, a.browser, a.ip, to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id, a.change_type, a.module_type
+			FROM
+	   			admin_auth_log a, cms_menu b, wb_member_group c
+			WHERE
+	    		a.site_id = b.homepage_id
+			AND a.menu_idx = b.menu_idx
+			AND a.module_type = 'SITE'
+			AND a.member_group_idx = c.member_group_idx)
+			UNION ALL
+			(SELECT
+	    		a.site_id,a.add_id, a.os, a.browser, a.ip, to_char(a.add_dttm,'yyyy-mm-dd HH24:mi:ss') as add_dttm, c.member_group_name, menu_name, a.auth_code_id, a.change_type, a.module_type
+			FROM
+	    		admin_auth_log a, cms_admin_menu b, wb_member_group c
+			WHERE
+	    		a.menu_idx = b.menu_idx
+			AND a.module_type = 'CMS'
+			AND a.member_group_idx = c.member_group_idx))
+		WHERE 1=1
+		<if test="module_type != null and module_type != ''">
+		AND module_type = #{module_type}
+		</if>
+		<if test="start_date != null and start_date != ''">
+		AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &gt;= to_date(#{start_date},'yyyy-mm-dd HH24:mi:ss')
+		</if>
+		<if test="end_date != null and end_date != ''">
+		AND to_date(add_dttm,'yyyy-mm-dd HH24:mi:ss') &lt;= to_date(#{end_date},'yyyy-mm-dd HH24:mi:ss')+1
+		</if>
+		<if test="search_text != null and search_text != ''">
+		AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="search_type_1 != null and search_type_1 != ''">
+			AND change_type = #{search_type_1}
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND site_id  = #{site_id}
+		</if>
+		ORDER BY
+			add_dttm 
+		DESC
+	</select>
+</mapper>
+

@@ -1,0 +1,108 @@
+package kr.go.gbelib.app.module.bookKeyword;
+
+import kr.co.whalesoft.framework.utils.PagingUtils;
+
+public class BookKeyword extends PagingUtils {
+	
+	private int keyword_idx;
+	private String keyword_name;
+	private int limit_keyword_count = 20;
+
+	private String sex;
+	private String age;
+
+	private String book_name;
+	private String author;
+	private String isbn;
+	private String bookimgUrl;
+	private String publisher;
+	private String keyword_beat;
+
+	public int getKeyword_idx() {
+		return keyword_idx;
+	}
+	
+	public void setKeyword_idx(int keyword_idx) {
+		this.keyword_idx = keyword_idx;
+	}
+	
+	public String getKeyword_name() {
+		return keyword_name;
+	}
+	
+	public void setKeyword_name(String keyword_name) {
+		this.keyword_name = keyword_name;
+	}
+	
+	public int getLimit_keyword_count() {
+		return limit_keyword_count;
+	}
+	
+	public void setLimit_keyword_count(int limit_keyword_count) {
+		this.limit_keyword_count = limit_keyword_count;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getAge() {
+		return age;
+	}
+
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getBook_name() {
+		return book_name;
+	}
+
+	public void setBook_name(String book_name) {
+		this.book_name = book_name;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getBookimgUrl() {
+		return bookimgUrl;
+	}
+
+	public void setBookimgUrl(String bookimgUrl) {
+		this.bookimgUrl = bookimgUrl;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getKeyword_beat() {
+		return keyword_beat;
+	}
+
+	public void setKeyword_beat(String keyword_beat) {
+		this.keyword_beat = keyword_beat;
+	}
+}

@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBookDao">
+	
+	<sql id="search">
+		<choose>
+		<when test='approved_yn == "N"'>
+		AND approved_yn = 'N'
+		</when>
+		<otherwise>
+		AND approved_yn != 'N'
+		</otherwise>
+		</choose>
+		<if test="search_text != '' and search_text != '' ">
+		AND	UPPER(REPLACE(a.book_name, ' ')) LIKE '%'||UPPER(REPLACE(#{search_text}, ' '))||'%'
+		</if>
+		<if test="parent_id != null and parent_id != ''">
+		AND a.parent_id = #{parent_id}
+		</if>
+		<if test="cate_id != null and cate_id != ''">
+		AND a.parent_id = #{cate_id}
+		</if>
+		<if test="com_code != null and com_code != ''">
+		AND a.com_code = #{com_code}
+		</if>
+		<if test="library_code != null and library_code != ''">
+		AND a.library_code = #{library_code}
+		</if>
+		<if test="device != null and device != ''">
+		AND a.device = #{device}
+		</if>
+	</sql>
+	
+	<sql id="sort">
+		<choose>
+		<when test="sortField != null and sortField != ''">
+		ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.${sortField} ${sortType} NULLS LAST, a.book_idx DESC
+		</when>
+		<otherwise>
+		ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.book_idx DESC NULLS LAST, a.book_name
+		</otherwise>
+		</choose>
+	</sql>
+
+	<select id="getBookListCntUpload" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK a
+		WHERE 1=1
+		<include refid="search"/>
+	</select>
+	
+	<select id="getBookListUpload" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		SELECT
+			a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+			a.book_pubname, a.isbn13, a.book_lend,
+			a.lend_total, a.max_lend, a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt,
+			a.book_regdt, a.use_yn, a.type,
+			a.format, a.book_image, a.parent_id,
+			a.recommend_cnt, a.library_code,
+			a.approved_yn,
+			(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = a.cate_id) AS cate_name,
+			CASE WHEN a.library_code = '9999999' THEN '통합' ELSE e.homepage_name END AS library_name,
+			(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = a.parent_id) AS parent_name,
+			(SELECT z.comp_name FROM ELIB_COMPANY z WHERE INSTR(z.com_code, a.com_code) > 0) AS comp_name,
+			a.device,
+			CASE a.device
+			WHEN '1' THEN 'PC'
+			WHEN '2' THEN 'PC, 태블릿'
+			WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+			END AS label
+		FROM
+			ELIB_HOPE_BOOK a,
+			ELIB_HOPE_BOOKINFO d,
+			CMS_HOMEPAGE e
+		WHERE 1=1
+		AND a.book_idx = d.book_idx
+		AND a.library_code = e.homepage_code
+		<include refid="search"/>
+		<include refid="sort"/>
+	</select>
+
+	<select id="getBookListAll" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		${pagingTop}
+		SELECT
+			a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+			a.book_pubname, a.isbn13, a.book_lend, a.lend_total, a.max_lend,
+			a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
+			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
+			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
+			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+			CASE
+				WHEN a.library_code = '9999999' THEN '통합'
+				ELSE e.homepage_name
+				END AS library_name,
+				ep.cate_name AS parent_name,
+				cmp.comp_name AS comp_name,
+			CASE a.device
+				WHEN '1' THEN 'PC'
+				WHEN '2' THEN 'PC, 태블릿'
+				WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+			END AS label
+		FROM
+			ELIB_HOPE_BOOK a
+			JOIN CMS_HOMEPAGE e ON a.library_code = SUBSTR(e.homepage_code, 1, 8)
+			LEFT JOIN ELIB_CATEGORY ec ON ec.cate_id = a.cate_id
+			LEFT JOIN ELIB_CATEGORY ep ON ep.cate_id = a.parent_id
+			LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
+		WHERE
+			a.use_yn != 'N'
+			AND a.type = #{type}
+			AND a.application_status IS NULL
+			<include refid="search"/>
+			<include refid="sort"/>
+		${pagingBottom}
+	</select>
+
+	<select id="getBookListCnt" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK a
+		WHERE
+		a.use_yn != 'N'
+		AND a.application_status IS NULL
+		<if test="type != null and type != ''">
+			AND a.type = #{type}
+		</if>
+		<include refid="search"/>
+	</select>
+
+	<select id="getBookListCmsAll" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		${pagingTop}
+		SELECT
+		a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+		a.book_pubname, a.isbn13, a.book_lend, a.lend_total, a.max_lend,
+		a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
+		a.use_yn, a.type, a.format, a.book_image, a.parent_id,
+		a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
+		a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+		CASE
+		WHEN a.library_code = '9999999' THEN '통합'
+		ELSE e.homepage_name
+		END AS library_name,
+		ep.cate_name AS parent_name,
+		cmp.comp_name AS comp_name,
+		CASE a.device
+		WHEN '1' THEN 'PC'
+		WHEN '2' THEN 'PC, 태블릿'
+		WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+		END AS label
+		FROM
+		ELIB_HOPE_BOOK a
+		JOIN CMS_HOMEPAGE e ON a.library_code = SUBSTR(e.homepage_code, 1, 8)
+		LEFT JOIN ELIB_CATEGORY ec ON ec.cate_id = a.cate_id
+		LEFT JOIN ELIB_CATEGORY ep ON ep.cate_id = a.parent_id
+		LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
+		WHERE
+		a.type = #{type}
+		<include refid="search"/>
+		<include refid="sort"/>
+		${pagingBottom}
+	</select>
+
+	<select id="getBookListCmsCnt" resultType="int">
+		SELECT
+		COUNT(*) AS cnt
+		FROM
+		ELIB_HOPE_BOOK a
+		WHERE
+		    1=1
+		<if test="type != null and type != ''">
+			AND a.type = #{type}
+		</if>
+		<include refid="search"/>
+	</select>
+
+	<select id="codeDupCheck" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK
+		WHERE
+			book_code = #{book_code}
+		AND library_code = #{library_code}
+		AND com_code = #{com_code}
+	</select>
+	
+	<select id="elearningCodeDupCheck" resultType="int"> 
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_COURSE
+		WHERE
+			lesson_name = #{lesson_name}
+		AND lesson_no = #{lesson_no}
+	</select>
+	
+	<select id="audiobookCodeDupCheck" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_AUDIOBOOK
+		WHERE
+			audio_name = #{audio_name}
+		AND audio_no = #{audio_no}
+	</select>
+	
+	<select id="getBookIdx" resultType="Integer">
+		SELECT
+			book_idx
+		FROM
+			ELIB_HOPE_BOOK
+		WHERE
+			book_code = #{book_code}
+		AND	library_code = #{library_code}
+		AND com_code = #{com_code}
+	</select>
+
+	<select id="getCourseIdx" resultType="Integer">
+		SELECT
+			course_idx
+		FROM
+			ELIB_HOPE_COURSE
+		WHERE
+			lesson_name = #{lesson_name}
+		AND lesson_no = #{lesson_no}
+	</select>
+	
+	<select id="getAudioIdx" resultType="Integer">
+		SELECT
+			audio_idx
+		FROM
+			ELIB_HOPE_AUDIOBOOK
+		WHERE
+			audio_name = #{audio_name}
+		AND audio_no = #{audio_no}
+	</select>
+	<select id="getDupHopeBookCheck" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK
+		WHERE
+			book_code = #{book_code}
+		AND book_idx = #{book_idx}
+		AND application_status IS NOT NULL
+	</select>
+
+	<select id="getHopeBookApplicationListCnt" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK a
+		WHERE
+			a.use_yn != 'N'
+			AND a.application_status IS NOT NULL
+			AND a.application_user_id = #{application_user_id}
+		<include refid="search"/>
+		<include refid="sort"/>
+	</select>
+
+	<select id="getHopeBookApplicationList" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		${pagingTop}
+		SELECT
+			a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+			a.book_pubname, a.isbn13, a.book_lend, a.lend_total, a.max_lend,
+			a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
+			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
+			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
+			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+			CASE
+			WHEN a.library_code = '9999999' THEN '통합'
+			ELSE e.homepage_name
+			END AS library_name,
+			ep.cate_name AS parent_name,
+			cmp.comp_name AS comp_name,
+			CASE a.device
+			WHEN '1' THEN 'PC'
+			WHEN '2' THEN 'PC, 태블릿'
+			WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+			END AS label
+		FROM
+			ELIB_HOPE_BOOK a
+			JOIN CMS_HOMEPAGE e ON a.library_code = SUBSTR(e.homepage_code, 1, 8)
+			LEFT JOIN ELIB_CATEGORY ec ON ec.cate_id = a.cate_id
+			LEFT JOIN ELIB_CATEGORY ep ON ep.cate_id = a.parent_id
+			LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
+		WHERE
+			a.use_yn != 'N'
+			AND a.application_status IS NOT NULL
+			AND a.application_user_id = #{application_user_id}
+		<include refid="search"/>
+		<include refid="sort"/>
+		${pagingBottom}
+	</select>
+
+	<select id="getHopeBookAdminListCnt" resultType="java.lang.Integer">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			ELIB_HOPE_BOOK a
+		WHERE
+			a.use_yn != 'N'
+			AND a.application_status IS NOT NULL
+		<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+			AND	UPPER(REPLACE(a.${search_type}, ' ')) LIKE '%'||UPPER(REPLACE(#{search_text}, ' '))||'%'
+		</if>
+		<if test="application_status != null and application_status != '' ">
+			AND	UPPER(REPLACE(a.APPLICATION_STATUS, ' ')) LIKE '%'||UPPER(REPLACE(#{application_status}, ' '))||'%'
+		</if>
+	</select>
+	<select id="getHopeBookAdminList" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		${pagingTop}
+		SELECT
+			a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+			a.book_pubname, a.isbn13, a.book_lend, a.lend_total, a.max_lend,
+			a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
+			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
+			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
+			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+			a.application_cancel_date, a.application_cancel_id, a.application_remarks, a.application_approval_date, a.application_approval_id,
+			CASE
+			WHEN a.library_code = '9999999' THEN '통합'
+			ELSE e.homepage_name
+			END AS library_name,
+			ep.cate_name AS parent_name,
+			cmp.comp_name AS comp_name,
+			CASE a.device
+			WHEN '1' THEN 'PC'
+			WHEN '2' THEN 'PC, 태블릿'
+			WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+			END AS label
+		FROM
+		ELIB_HOPE_BOOK a
+			JOIN CMS_HOMEPAGE e ON a.library_code = SUBSTR(e.homepage_code, 1, 8)
+			LEFT JOIN ELIB_CATEGORY ec ON ec.cate_id = a.cate_id
+			LEFT JOIN ELIB_CATEGORY ep ON ep.cate_id = a.parent_id
+			LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
+		WHERE
+				a.use_yn != 'N'
+				AND a.application_status IS NOT NULL
+		<if test="search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+			AND	UPPER(REPLACE(a.${search_type}, ' ')) LIKE '%'||UPPER(REPLACE(#{search_text}, ' '))||'%'
+		</if>
+		<if test="application_status != null and application_status != '' ">
+			AND	UPPER(REPLACE(a.APPLICATION_STATUS, ' ')) LIKE '%'||UPPER(REPLACE(#{application_status}, ' '))||'%'
+		</if>order by a.application_add_date desc
+		${pagingBottom}
+	</select>
+
+
+
+	<select id="getHopeElibBookOne" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		SELECT
+			ADD_DATE, ADD_ID, APPLICATION_ADD_DATE, APPLICATION_APPROVAL_DATE, APPLICATION_APPROVAL_ID,
+			APPLICATION_CANCEL_DATE, APPLICATION_CANCEL_ID, APPLICATION_REMARKS, APPLICATION_STATUS, APPLICATION_USER_ID,
+			APPLICATION_USER_NAME, APPLICATION_USER_NO, APPROVED_YN, AUTHOR_NAME, BOOK_CODE,
+			BOOK_IDX, BOOK_IMAGE, BOOK_LEND, BOOK_NAME, BOOK_PUBDT,
+			BOOK_PUBNAME, BOOK_REGDT, BOOK_RESERVE, CATE_ID, COM_CODE,
+			DEVICE, FORMAT, ISBN13, LEND_TOTAL, LIBRARY_CODE,
+			MAX_LEND, MOD_DATE, MOD_ID, PARENT_ID, RECOMMEND_CNT,
+			TYPE, USE_YN
+			FROM
+				ELIB_HOPE_BOOK
+		WHERE
+		    BOOK_IDX = #{book_idx}
+		AND BOOK_CODE = #{book_code}
+	</select>
+
+
+	<insert id="addBook">
+		<selectKey keyProperty="book_idx" order="BEFORE" resultType="int">
+			SELECT NVL(MAX(book_idx),0)+1 FROM ELIB_HOPE_BOOK
+		</selectKey>
+		
+		INSERT INTO ELIB_HOPE_BOOK (
+			book_idx, book_code, book_name, author_name, book_pubname,
+			isbn13, format, book_image, parent_id, device,
+			library_code, max_lend, use_yn, book_lend,
+			book_reserve, com_code, book_pubdt, book_regdt,
+			type, add_id, add_date, approved_yn, cate_id
+		) VALUES (
+			#{book_idx}, #{book_code}, #{book_name}, #{author_name}, #{book_pubname},
+			#{isbn13}, #{format}, #{book_image}, #{parent_id}, #{device},
+			#{library_code}, #{max_lend}, #{use_yn}, #{book_lend},
+			#{book_reserve}, #{com_code}, TO_DATE(#{book_pubdt}, 'YYYY-MM-DD'), SYSDATE,
+			#{type}, #{add_id}, SYSDATE, #{approved_yn},
+			<choose>
+			<when test="type == 'ADO'">
+			#{parent_id}
+			</when>
+			<otherwise>
+			#{cate_id}
+			</otherwise>
+			</choose>
+		)
+	</insert>
+	
+	<insert id="addBookInfo">
+		INSERT INTO ELIB_HOPE_BOOKINFO (
+			book_idx, book_code, book_info, author_info, book_table, add_id, add_date
+		) VALUES (
+			#{book_idx}, #{book_code}, #{book_info}, #{author_info}, #{book_table}, #{add_id}, SYSDATE
+		)
+	</insert>
+
+	<update id="modifyBook">
+		UPDATE ELIB_HOPE_BOOK SET
+			book_code = #{book_code},
+			book_name = #{book_name},
+			author_name = #{author_name},
+			book_pubname = #{book_pubname},
+			isbn13 = #{isbn13},
+			format = #{format},
+			book_image = #{book_image},
+			book_lend = #{book_lend},
+			book_reserve = #{book_reserve},
+			library_code = #{library_code},
+			com_code = #{com_code},
+			type = #{type},
+			use_yn = #{use_yn},
+			max_lend = #{max_lend},
+			parent_id = #{parent_id},
+			device = #{device},
+			mod_id = #{mod_id},
+			mod_date = SYSDATE,
+			<choose>
+			<when test="type == 'ADO'">
+			cate_id = #{parent_id}
+			</when>
+			<otherwise>
+			cate_id = #{cate_id}
+			</otherwise>
+			</choose>
+		WHERE
+			book_idx = #{book_idx}
+	</update>
+	
+	<update id="modifyBookInfo">
+		UPDATE ELIB_HOPE_BOOKINFO SET
+			book_code = #{book_code},
+			book_info = #{book_info},
+			author_info = #{author_info},
+			book_table = #{book_table},
+			mod_id = #{mod_id},
+			mod_date = SYSDATE
+		WHERE
+			book_idx = #{book_idx}
+	</update>
+
+	
+	<delete id="deleteBook">
+		DELETE FROM ELIB_HOPE_BOOK
+		WHERE book_idx = #{book_idx}
+	</delete>
+
+
+	<delete id="deleteBookInfo">
+		DELETE FROM ELIB_HOPE_BOOKINFO WHERE book_idx = #{book_idx}
+	</delete>
+	
+	<insert id="addAudiobook">
+		<selectKey keyProperty="audio_idx" order="BEFORE" resultType="int">
+			SELECT NVL(MAX(audio_idx),0)+1 FROM ELIB_HOPE_AUDIOBOOK
+		</selectKey>
+		INSERT INTO ELIB_HOPE_AUDIOBOOK (
+			audio_idx, book_idx, link_url, mobile_link_url, add_id, add_date, audio_no, audio_name
+		) values (
+			#{audio_idx}, #{book_idx}, #{link_url}, #{mobile_link_url}, #{add_id}, SYSDATE, #{audio_no}, #{audio_name}
+		)
+	</insert>
+	
+	<update id="modifyAudiobook">
+		UPDATE ELIB_HOPE_AUDIOBOOK SET
+			link_url = #{link_url},
+			mobile_link_url = #{mobile_link_url},
+			mod_id = #{mod_id},
+			mod_date = SYSDATE
+		WHERE
+			book_idx = #{book_idx}
+	</update>
+	
+	<delete id="deleteAudiobook">
+		DELETE FROM ELIB_HOPE_AUDIOBOOK WHERE book_idx = #{book_idx}
+	</delete>
+	
+	<insert id="addElearning">
+		<selectKey keyProperty="course_idx" order="BEFORE" resultType="int">
+			SELECT NVL(MAX(course_idx),0)+1 FROM ELIB_HOPE_COURSE
+		</selectKey>
+		INSERT INTO ELIB_HOPE_COURSE (
+			course_idx, lesson_no, lesson_name, lesson_url, book_idx, mobile_url
+		) VALUES (
+			#{course_idx}, #{lesson_no}, #{lesson_name}, #{lesson_url}, #{book_idx}, #{mobile_url}
+		)
+	</insert>
+	
+	<update id="modifyElearning">
+		UPDATE ELIB_HOPE_COURSE SET
+			lesson_no = #{lesson_no},
+			lesson_name = #{lesson_name},
+			lesson_url = #{lesson_url},
+			mobile_url = #{mobile_url}
+		WHERE
+			course_idx = #{course_idx}
+	</update>
+	
+	<update id="deleteElearning">
+		DELETE FROM ELIB_HOPE_COURSE WHERE book_idx = #{book_idx}
+	</update>
+	
+	<update id="approveBook">
+		UPDATE ELIB_HOPE_BOOK SET
+			approved_yn = 'Y'
+		WHERE
+			book_idx = #{book_idx}
+	</update>
+	
+	<update id="disapproveBook">
+		UPDATE ELIB_HOPE_BOOK SET
+			approved_yn = 'N'
+		WHERE
+			book_idx = #{book_idx}
+	</update>
+	
+	<update id="approveBookAll">
+		UPDATE ELIB_HOPE_BOOK SET
+			approved_yn = 'Y'
+		WHERE
+			approved_yn != 'Y'
+	</update>
+
+	<update id="updateApplicationHopeElibBook">
+		UPDATE
+			ELIB_HOPE_BOOK
+		SET
+		    application_user_no = #{member.user_no},
+		    application_user_id = #{member.member_id},
+		    application_user_name = #{member.member_name},
+		    application_status = #{hopeElibBook.application_status},
+		    application_add_date = SYSDATE
+		WHERE
+		    BOOK_IDX = #{hopeElibBook.book_idx}
+	</update>
+
+	<update id="updateCancelHopeElibBook">
+		UPDATE
+			ELIB_HOPE_BOOK
+		SET
+		    APPLICATION_STATUS      = #{application_status},
+				APPLICATION_CANCEL_ID   = #{application_user_id},
+				APPLICATION_CANCEL_DATE = SYSDATE
+		WHERE
+		    BOOK_IDX = #{book_idx}
+			AND BOOK_CODE = #{book_code}
+			AND APPLICATION_USER_ID = #{application_user_id}
+			AND APPLICATION_STATUS = '1'
+			AND APPLICATION_USER_NO = #{application_user_no}
+	</update>
+
+	<update id="updateApplicationStatusAdmin">
+		UPDATE
+		ELIB_HOPE_BOOK
+		SET
+		APPLICATION_STATUS = #{application_status},
+		APPLICATION_REMARKS = #{application_remarks},
+		<choose>
+			<when test="application_status == 1 or application_status == 2 or application_status == 3">
+				APPLICATION_APPROVAL_ID = #{application_user_id},
+				APPLICATION_APPROVAL_DATE = SYSDATE
+			</when>
+			<when test="application_status == 5">
+				APPLICATION_CANCEL_ID = #{application_user_id},
+				APPLICATION_CANCEL_DATE = SYSDATE
+			</when>
+		</choose>
+		WHERE
+		BOOK_IDX = #{book_idx}
+		AND BOOK_CODE = #{book_code}
+	</update>
+
+
+
+
+	<select id="getBookInfo" resultType="kr.go.gbelib.app.cms.module.elib.book.Book">
+		SELECT
+			a.book_idx, a.book_code, a.cate_id, a.book_name, a.author_name,
+			a.book_pubname, a.isbn13, a.book_lend,
+			a.lend_total, a.max_lend, a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt,
+			TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date,
+			TO_CHAR(a.book_regdt, 'YYYY-MM-DD') AS book_regdt, a.use_yn, a.type,
+			a.format, a.book_image, a.parent_id,
+			a.recommend_cnt, a.library_code,
+			a.approved_yn,
+			(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = a.cate_id) AS cate_name,
+			d.book_info, d.author_info, d.book_table,
+			CASE WHEN a.library_code = '9999999' THEN '통합' ELSE e.homepage_name END AS library_name,
+			(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = a.parent_id) AS parent_name,
+			(SELECT z.comp_name FROM ELIB_COMPANY z WHERE INSTR(z.com_code, a.com_code) > 0) AS comp_name,
+			g.bestbook_idx, h.cat_bestbook_idx, a.device,
+			CASE a.device
+				WHEN '1' THEN 'PC'
+				WHEN '2' THEN 'PC, 태블릿'
+				WHEN '3' THEN 'PC, 태블릿, 스마트폰'
+				END AS label
+		FROM
+			ELIB_BOOK a,
+			ELIB_BOOKINFO d,
+			CMS_HOMEPAGE e
+			,ELIB_BESTBOOK g
+			,ELIB_CATEGORY_BESTBOOK h
+		WHERE
+			a.book_idx = #{book_idx}
+			AND a.book_idx = d.book_idx
+			AND a.book_idx = g.book_idx (+)
+			AND a.book_code = h.book_code (+)
+			AND a.library_code = SUBSTR(e.homepage_code, 1, 8)
+	</select>
+
+
+</mapper>

@@ -1,0 +1,1277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.TrainingDao">
+
+	<select id="getTrainingListForCalendar" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, START_DATE, END_DATE, TRAINING_NAME, TRAINING_DAY
+		FROM
+			TRAINING
+		WHERE
+			HOMEPAGE_ID = #{homepage_id}
+			<!-- AND (START_DATE LIKE #{plan_date}||'%' or END_DATE LIKE #{plan_date}||'%') -->
+			AND SUBSTR(START_DATE, 1, 7) <![CDATA[ <= ]]> #{plan_date}
+			AND SUBSTR(END_DATE, 1, 7) >= #{plan_date}
+			AND DELETE_YN = 'N'
+			AND CALENDAR_VIEW_YN = 'Y'
+		ORDER BY
+			START_DATE, END_DATE
+	</select>
+
+	<select id="getTrainingListAll" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+			a.TRAINING_STATUS, a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+			a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME, a.TRAINING_COUNT,
+			a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.MEMBER_YN, a.USE_YN, a.CERTIFICATE_YN, a.SURVEY_IDX, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,TO_CHAR(a.ADD_DATE, 'YYYY-MM-DD') AS ADD_DATE,
+			b.TEACHER_NAME, b.TEACHER_BIRTH, A.family_count_yn, A.agent_yn, A.school_info_yn, A.school_grade_yn, A.remark_yn,
+			c.CATEGORY_NAME, d.GROUP_NAME, a.add_guide,
+			NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+			NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+			NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+			a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+			getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+			getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+			a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+			(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+			program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+			(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.program_subject) as program_subject_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = '--' AND small_code = '--') as program_classification1_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = '--') as program_classification2_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = a.program_classification3) as program_classification3_name,
+			a.qr_check, a.qr_check_count
+		FROM
+			TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+		WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+			AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+			AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+			AND a.GROUP_IDX = c.GROUP_IDX(+)
+			AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+			AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+			AND a.GROUP_IDX = d.GROUP_IDX(+)
+			<if test="large_category_idx > 0">
+			AND a.large_category_idx = #{large_category_idx}
+			</if>
+			<if test="group_idx > 0">
+			AND a.GROUP_IDX = #{group_idx}
+			</if>
+			<if test="category_idx > 0">
+			AND a.CATEGORY_IDX = #{category_idx}
+			</if>
+			AND a.HOMEPAGE_ID = #{homepage_id}
+			AND a.DELETE_YN = 'N'
+		ORDER BY
+			(TO_DATE(a.START_JOIN_DATE,'yyyy-mm-dd') - SYSDATE) DESC,
+			(TO_DATE(a.END_JOIN_DATE,'yyyy-mm-dd') - SYSDATE) DESC,
+			a.PRINT_SEQ ASC
+	</select>
+
+	<select id="getTrainingList" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		${pagingTop}
+			SELECT
+				a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK,a.LIMIT_HAK2,
+				a.TRAINING_STATUS, a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+				a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME, a.TRAINING_COUNT,
+				a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.USE_YN, a.CERTIFICATE_YN, a.SURVEY_IDX, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+				b.TEACHER_NAME, b.TEACHER_BIRTH, A.family_count_yn, A.agent_yn, A.school_info_yn, A.school_grade_yn, A.remark_yn,
+				c.CATEGORY_NAME, d.GROUP_NAME, a.ADD_GUIDE,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+				a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+				program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+			(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.program_subject) as program_subject_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = '--' AND small_code = '--') as program_classification1_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = '--') as program_classification2_name,
+			(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = a.program_classification3) as program_classification3_name
+			FROM
+				TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+			WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+				AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+				AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = c.GROUP_IDX(+)
+				AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+				AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = d.GROUP_IDX(+)
+				AND a.HOMEPAGE_ID = #{homepage_id}
+				<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+				AND	${search_type} LIKE '%'||#{search_text}||'%'
+				</if>
+				<if test="large_category_idx > 0">
+				AND a.large_category_idx = #{large_category_idx}
+				</if>
+				<if test="group_idx > 0">
+				AND a.GROUP_IDX = #{group_idx}
+				</if>
+				<if test="category_idx > 0">
+				AND a.CATEGORY_IDX = #{category_idx}
+				</if>
+				AND a.DELETE_YN = 'N'
+			ORDER BY
+				a.ADD_DATE desc
+		${pagingBottom}
+	</select>
+
+	<select id="getTrainingListCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+		WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+			AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+			AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+			AND a.GROUP_IDX = c.GROUP_IDX(+)
+			AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+			AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+			AND a.GROUP_IDX = d.GROUP_IDX(+)
+			AND a.HOMEPAGE_ID = #{homepage_id}
+			<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' ">
+			AND	${search_type} LIKE '%'||#{search_text}||'%'
+			</if>
+			<if test="large_category_idx > 0">
+			AND a.large_category_idx = #{large_category_idx}
+			</if>
+			<if test="group_idx > 0">
+			AND a.GROUP_IDX = #{group_idx}
+			</if>
+			<if test="category_idx > 0">
+			AND a.CATEGORY_IDX = #{category_idx}
+			</if>
+			AND a.DELETE_YN = 'N'
+	</select>
+
+	<select id="getTrainingOne" resultType="kr.go.gbelib.app.cms.module.training.Training">
+			SELECT
+				a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.CALENDAR_VIEW_YN,a.LIMIT_HAK2,
+				a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+				a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME, a.PRINT_SEQ, a.TRAINING_COUNT,
+				a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.USE_YN,
+				a.CERTIFICATE_YN, a.SURVEY_IDX, a.TEACHER_IDX, a.TRAINING_SAME_LIMIT_COUNT, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE, a.FAMILY_YN,
+				b.TEACHER_NAME, b.TEACHER_BIRTH, a.ADD_GUIDE, a.CERTIFICATE_TEXT, a.TRAINING_COURSE,
+				a.TRAINING_PERIOD,
+				c.CATEGORY_NAME, d.GROUP_NAME,
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx} AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX) AS TRAINING_JOIN_COUNT,
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx} AND APPLY_STATUS='2' GROUP BY TRAINING_IDX) AS TRAINING_BACKUP_JOIN_COUNT,
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx} AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX) AS TRAINING_OFF_JOIN_COUNT,
+				CASE
+				WHEN TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= a.end_date || ' ' || a.end_time
+				THEN '1'
+				ELSE '2'
+				END training_status, A.family_count_yn, A.agent_yn, A.school_info_yn, A.school_grade_yn, A.remark_yn,
+				a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+				program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.program_subject) as program_subject_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = '--' AND small_code = '--') as program_classification1_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = '--') as program_classification2_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = a.program_classification3) as program_classification3_name,
+				a.CANCLE_USE_YN, a.START_CANCLE_DATE, a.END_CANCLE_DATE, a.START_CANCLE_TIME, a.END_CANCLE_TIME, a.CANCLE_GUID,
+				a.APPLY_LIMIT, a.qr_check, a.qr_check_count
+			FROM
+				TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+			WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+				AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+				AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = c.GROUP_IDX(+)
+				AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+				AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = d.GROUP_IDX(+)
+				AND a.HOMEPAGE_ID = #{homepage_id}
+				<if test="large_category_idx > 0">
+				AND a.large_category_idx = #{large_category_idx}
+				</if>
+				AND a.GROUP_IDX = #{group_idx}
+				AND a.CATEGORY_IDX = #{category_idx}
+				AND a.TRAINING_IDX = #{training_idx}
+				AND a.DELETE_YN = 'N'
+	</select>
+
+	<select id="getNextTrainingIdx" resultType="int">
+		SELECT NVL(MAX(TRAINING_IDX),0)+1 FROM TRAINING
+<!-- 		WHERE HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} -->
+	</select>
+
+	<insert id="addTraining">
+
+		INSERT INTO TRAINING
+		(
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, TRAINING_NAME, TRAINING_DESC, TRAINING_ETC, TRAINING_STAGE, TRAINING_TARGET, LIMIT_HAK, LIMIT_HAK2, CALENDAR_VIEW_YN,
+			TRAINING_STATUS, TRAINING_LIMIT_COUNT, TRAINING_JOIN_UNIT, TRAINING_BACKUP_COUNT, TRAINING_OFFLINE_COUNT, TEACHER_IDX, START_JOIN_DATE, LIMIT_HAK_YN,
+			START_JOIN_TIME, END_JOIN_DATE, END_JOIN_TIME, TRAINING_DAY, START_DATE, START_TIME,
+			CANCLE_USE_YN, START_CANCLE_DATE, END_CANCLE_DATE, START_CANCLE_TIME, END_CANCLE_TIME, CANCLE_GUID, 
+			APPLY_LIMIT, END_DATE, END_TIME, PRINT_SEQ, TRAINING_COUNT, ADD_GUIDE, 
+			certificate_text, training_course, training_period,
+			<if test="real_file_name != null and real_file_name != '' ">
+			PLAN_FILE_NAME,
+			REAL_FILE_NAME,
+			FILE_EXTENSION,
+			FILE_SIZE,
+			</if>
+			<if test="image_real_file_name != null and image_real_file_name != '' ">
+			IMAGE_PLAN_FILE_NAME,
+			IMAGE_REAL_FILE_NAME,
+			IMAGE_FILE_EXTENSION,
+			IMAGE_FILE_SIZE,
+			</if>
+			FAMILY_YN, MEMBER_YN, USE_YN, CERTIFICATE_YN, SURVEY_IDX, ADD_DATE, ADD_ID, TRAINING_JOIN_LIMIT_UNIT, TRAINING_JOIN_LIMIT_VALUE,
+			family_count_yn, agent_yn, school_info_yn, school_grade_yn, remark_yn,
+			neis_location_yn, neis_cd_yn, neis_training_num_yn, large_category_idx, organization_yn, rank_yn, course_taken_yn,
+			program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+		 	qr_check, qr_check_count
+		) VALUES (
+			#{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{training_name}, #{training_desc}, #{training_etc}, #{training_stage}, #{training_target}, #{limit_hak}, #{limit_hak2}, #{calendar_view_yn},
+			#{training_status}, #{training_limit_count}, #{training_join_unit}, #{training_backup_count}, #{training_offline_count}, #{teacher_idx}, #{start_join_date}, #{limit_hak_yn},
+			#{start_join_time}, #{end_join_date}, #{end_join_time}, #{training_day}, #{start_date}, #{start_time},
+			#{cancle_use_yn}, #{start_cancle_date}, #{end_cancle_date}, #{start_cancle_time}, #{end_cancle_time}, #{cancle_guid},
+			#{apply_limit}, #{end_date}, #{end_time}, #{print_seq}, #{training_count}, #{add_guide}, 
+			#{certificate_text}, #{training_course}, #{training_period},
+			<if test="real_file_name != null and real_file_name != '' ">
+			#{plan_file_name},
+			#{real_file_name},
+			#{file_extension},
+			#{file_size},
+			</if>
+			<if test="image_real_file_name != null and image_real_file_name != '' ">
+			#{image_plan_file_name},
+			#{image_real_file_name},
+			#{image_file_extension},
+			#{image_file_size},
+			</if>
+			#{family_yn}, #{member_yn}, #{use_yn}, #{certificate_yn}, #{survey_idx}, SYSDATE, #{add_id}, #{training_join_limit_unit}, #{training_join_limit_value},
+			#{family_count_yn}, #{agent_yn}, #{school_info_yn}, #{school_grade_yn}, #{remark_yn},
+			#{neis_location_yn}, #{neis_cd_yn}, #{neis_training_num_yn}, #{large_category_idx}, #{organization_yn}, #{rank_yn}, #{course_taken_yn},
+			#{program_classification1}, #{program_classification2}, #{program_classification3}, #{program_subject}, #{program_age_div},
+		    #{qr_check}, #{qr_check_count}
+		)
+	</insert>
+
+	<update id="modifyTraining">
+		UPDATE
+			TRAINING
+		SET
+			TRAINING_NAME 			= #{training_name},
+			TRAINING_DESC 			= #{training_desc},
+			TRAINING_ETC 			= #{training_etc},
+			TRAINING_STAGE 		= #{training_stage},
+			TRAINING_TARGET 		= #{training_target},
+			LIMIT_HAK			= #{limit_hak},
+			LIMIT_HAK2			= #{limit_hak2},
+			LIMIT_HAK_YN		= #{limit_hak_yn},
+			TRAINING_STATUS 	= #{training_status},
+			CERTIFICATE_TEXT 	= #{certificate_text},
+			TRAINING_COURSE 	= #{training_course},
+			TRAINING_PERIOD 	= #{training_period},
+			<if test="training_count != null and training_count != ''">
+			TRAINING_COUNT = #{training_count},
+			</if>
+			<if test="training_join_unit != null and training_join_unit != ''">
+			TRAINING_JOIN_UNIT 	= #{training_join_unit},
+			</if>
+			TRAINING_LIMIT_COUNT 	= #{training_limit_count},
+			TRAINING_BACKUP_COUNT 	= #{training_backup_count},
+			TRAINING_OFFLINE_COUNT = #{training_offline_count},
+			TEACHER_IDX 		= #{teacher_idx},
+			<if test="start_join_date != null and start_join_date != ''">
+			START_JOIN_DATE 	= #{start_join_date},
+			</if>
+			<if test="start_join_time != null and start_join_time != ''">
+			START_JOIN_TIME 	= #{start_join_time},
+			</if>
+			<if test="end_join_date != null and end_join_date != ''">
+			END_JOIN_DATE 		= #{end_join_date},
+			</if>
+			<if test="end_join_time != null and end_join_time != ''">
+			END_JOIN_TIME 		= #{end_join_time},
+			</if>
+			CANCLE_USE_YN = #{cancle_use_yn},
+			<if test="start_cancle_date != null and start_cancle_date != ''">
+			START_CANCLE_DATE = #{start_cancle_date},
+			</if>
+			<if test="end_cancle_date != null and end_cancle_date != ''">
+			END_CANCLE_DATE = #{end_cancle_date},
+			</if>
+			<if test="start_cancle_time != null and start_cancle_time != ''">
+			START_CANCLE_TIME = #{start_cancle_time},
+			</if>
+			<if test="end_cancle_time != null and end_cancle_time">
+			END_CANCLE_TIME = #{end_cancle_time},
+			</if>
+			CANCLE_GUID = #{cancle_guid},
+			APPLY_LIMIT = #{apply_limit},
+			TRAINING_SAME_LIMIT_COUNT = #{training_same_limit_count},
+			<if test="training_day != null and training_day != ''">
+			TRAINING_DAY 			= #{training_day},
+			</if>
+			<if test="start_date != null and start_date != ''">
+			START_DATE 			= #{start_date},
+			</if>
+			<if test="start_time != null and start_time != ''">
+			START_TIME 			= #{start_time},
+			</if>
+			<if test="end_date != null and end_date != ''">
+			END_DATE 			= #{end_date},
+			</if>
+			<if test="end_time != null and end_time != ''">
+			END_TIME 			= #{end_time},
+			</if>
+			training_join_limit_unit = #{training_join_limit_unit},
+			training_join_limit_value = #{training_join_limit_value},
+
+			<if test="real_file_name != null and real_file_name != '' ">
+			plan_file_name 		= #{plan_file_name},
+			real_file_name 		= #{real_file_name},
+			file_extension 		= #{file_extension},
+			file_size	 		= #{file_size},
+			</if>
+			<if test="image_real_file_name != null and image_real_file_name != '' ">
+			image_plan_file_name 		= #{image_plan_file_name},
+			image_real_file_name 		= #{image_real_file_name},
+			image_file_extension 		= #{image_file_extension},
+			image_file_size	 		= #{image_file_size},
+			</if>
+			family_count_yn = #{family_count_yn},
+			agent_yn = #{agent_yn},
+			school_info_yn = #{school_info_yn},
+			school_grade_yn = #{school_grade_yn},
+			remark_yn = #{remark_yn},
+			neis_location_yn = #{neis_location_yn},
+			neis_cd_yn = #{neis_cd_yn},
+			neis_training_num_yn = #{neis_training_num_yn},
+			organization_yn = #{organization_yn},
+			rank_yn = #{rank_yn},
+			course_taken_yn = #{course_taken_yn},
+			calendar_view_yn	= #{calendar_view_yn},
+			member_yn			= #{member_yn},
+			family_yn			= #{family_yn},
+			print_seq			= #{print_seq},
+			use_yn 				= #{use_yn},
+			certificate_yn		= #{certificate_yn},
+			survey_idx			= #{survey_idx},
+			mod_id				= #{mod_id},
+			mod_date			= SYSDATE,
+			program_classification1 = #{program_classification1},
+			program_classification2 = #{program_classification2},
+			program_classification3 = #{program_classification3},
+			program_subject = #{program_subject},
+			program_age_div = #{program_age_div},
+			add_guide = #{add_guide},
+			qr_check = #{qr_check},
+			qr_check_count = #{qr_check_count}
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	large_category_idx = #{large_category_idx}
+		AND group_idx = #{group_idx}
+		AND category_idx = #{category_idx}
+		AND training_idx = #{training_idx}
+		AND delete_yn = 'N'
+	</update>
+
+	<delete id="deleteTraining">
+		UPDATE
+			TRAINING
+		SET
+			DELETE_YN = 'Y'
+		WHERE
+			homepage_id = #{homepage_id}
+		AND group_idx = #{group_idx}
+		AND category_idx = #{category_idx}
+		AND training_idx = #{training_idx}
+	</delete>
+
+	<select id="getTrainingListForUser" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			CASE
+			WHEN TO_DATE(A.end_date || ' ' || A.end_time, 'YYYY-MM-DD HH24:MI') &lt; SYSDATE
+			THEN '9'
+			WHEN A.status = 0
+				AND	A.cancle_use_yn = 'Y'
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.start_cancle_date || ' ' || A.start_cancle_time
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.end_cancle_date || ' ' || A.end_cancle_time
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.start_date || ' ' || start_time
+				AND A.apply_limit = 'Y'
+			THEN '44'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count > A.training_join_count
+			THEN '0'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count > A.training_backup_join_count
+			THEN '1'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count &lt;= A.training_backup_join_count
+			THEN '5'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_start_date
+			THEN '6'
+			WHEN A.status = 0
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			WHEN A.status = 1 AND A.apply_status = '1'
+				AND	((
+					A.cancle_use_yn != 'Y'
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					)
+				OR	(
+					A.cancle_use_yn = 'Y'
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.start_cancle_date || ' ' || A.start_cancle_time
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.end_cancle_date || ' ' || A.end_cancle_time
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.start_date || ' ' || start_time	
+					))
+			THEN '2'
+			WHEN A.status = 1 AND A.apply_status = '1'
+				AND	A.cancle_use_yn = 'Y'
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '10'
+			WHEN A.status = 1 AND A.apply_status = '2'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '3'
+			WHEN A.status = 1 AND A.apply_status = '99'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '7'
+			WHEN A.status = 1
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			END
+			as TRAINING_STATUS, A.HOMEPAGE_ID, A.GROUP_IDX, A.CATEGORY_IDX, A.TRAINING_IDX, A.TRAINING_NAME, A.TRAINING_DESC, A.TRAINING_ETC, A.TRAINING_STAGE, A.TRAINING_TARGET, A.LIMIT_HAK, a.LIMIT_HAK2,
+				A.TRAINING_LIMIT_COUNT, A.TRAINING_JOIN_UNIT, A.TRAINING_BACKUP_COUNT, A.TRAINING_OFFLINE_COUNT, A.START_JOIN_DATE,
+				A.START_JOIN_TIME, A.END_JOIN_DATE, A.END_JOIN_TIME, A.TRAINING_DAY, A.START_DATE, A.START_TIME,
+				A.END_DATE, A.END_TIME, A.CANCLE_USE_YN, A.START_CANCLE_DATE, A.START_CANCLE_TIME, A.END_CANCLE_DATE, A.END_CANCLE_TIME, A.CANCLE_GUID,
+				A.APPLY_LIMIT, A.PLAN_FILE_NAME, A.REAL_FILE_NAME, A.FILE_EXTENSION, A.FILE_SIZE, A.MEMBER_YN, A.CERTIFICATE_YN, A.TEACHER_NAME,A.MEMBER_KEY,
+				A.CATEGORY_NAME, A.TRAINING_JOIN_COUNT, A.TRAINING_BACKUP_JOIN_COUNT, A.TRAINING_OFF_JOIN_COUNT, A.GROUP_NAME,
+				A.IMAGE_PLAN_FILE_NAME, A.IMAGE_REAL_FILE_NAME, A.IMAGE_FILE_EXTENSION, A.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+				program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.program_subject) as program_subject_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = '--' AND small_code = '--') as program_classification1_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = '--') as program_classification2_name,
+				(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = a.program_classification3) as program_classification3_name
+		FROM
+		(
+			SELECT
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as STATUS,
+				(SELECT APPLY_STATUS FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as APPLY_STATUS,
+				a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+				a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+				a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME,
+				a.END_DATE, a.END_TIME, a.cancle_use_yn, a.start_cancle_date, a.start_cancle_time, a.end_cancle_date, a.end_cancle_time, a.cancle_guid,
+				a.APPLY_LIMIT, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.CERTIFICATE_YN, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+				b.TEACHER_NAME,b.MEMBER_KEY,
+				c.CATEGORY_NAME,d.GROUP_NAME, a.START_JOIN_DATE||' '||a.START_JOIN_TIME REQ_START_DATE, a.END_JOIN_DATE||' '||a.END_JOIN_TIME REQ_END_DATE,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+				a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+				(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+				program_classification1, program_classification2, program_classification3, program_subject, program_age_div
+			FROM
+				TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+			WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+				AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+				AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = c.GROUP_IDX(+)
+				AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+				AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = d.GROUP_IDX(+)
+				AND a.HOMEPAGE_ID = #{homepage_id}
+				<if test="searchCate1 != null and searchCate1 != ''">
+				AND a.large_category_idx IN (${searchCate1})
+				</if>
+				<if test="searchCate2 != null and searchCate2 != ''">
+				AND a.GROUP_IDX IN (${searchCate2})
+				</if>
+				<if test="searchCate3 != null and searchCate3 != ''">
+				AND a.category_idx IN (${searchCate3})
+				</if>
+				<if test="searchAge != null and searchAge != ''">
+				AND REGEXP_LIKE(REGEXP_REPLACE('//'||a.program_age_div, ',', ',//'),'//'||#{searchAge})
+				</if>
+				<if test="group_idx_list != null and group_idx_list != ''">
+				AND a.GROUP_IDX IN (${group_idx_list})
+				</if>
+				<if test="group_idx != null and group_idx > 0">
+				AND a.GROUP_IDX = #{group_idx}
+				</if>
+				<if test="category_idx != null and category_idx > 0">
+				AND a.CATEGORY_IDX = #{category_idx}
+				</if>
+				AND a.USE_YN = 'Y'
+				AND a.DELETE_YN = 'N'
+			ORDER BY
+				ABS(SYSDATE - (TO_DATE(a.START_JOIN_DATE ||' '|| a.START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				ABS(SYSDATE - (TO_DATE(a.END_JOIN_DATE ||' '|| a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				a.PRINT_SEQ ASC
+		) A
+	</select>
+
+	<select id="getTrainingListForAllHomepage" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		${pagingTop}
+		SELECT
+			*
+		FROM
+		(
+			SELECT
+				CASE
+				WHEN TO_DATE(A.end_date || ' ' || A.end_time, 'YYYY-MM-DD HH24:MI') &lt; SYSDATE
+				THEN '9'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count > A.training_join_count
+				THEN '0'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count &lt;= A.training_join_count
+					AND A.training_backup_count > A.training_backup_join_count
+				THEN '1'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count &lt;= A.training_join_count
+					AND A.training_backup_count &lt;= A.training_backup_join_count
+				THEN '5'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_start_date
+				THEN '6'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+				THEN '4'
+				WHEN A.status = 1 AND A.apply_status = '1'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '2'
+				WHEN A.status = 1 AND A.apply_status = '2'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '3'
+				WHEN A.status = 1 AND A.apply_status = '99'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '7'
+				WHEN A.status = 1
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+				THEN '4'
+				END
+				as TRAINING_STATUS, A.HOMEPAGE_ID, A.GROUP_IDX, A.CATEGORY_IDX, A.TRAINING_IDX, A.TRAINING_NAME, A.TRAINING_DESC, A.TRAINING_ETC, A.TRAINING_STAGE, A.TRAINING_TARGET, A.LIMIT_HAK, a.LIMIT_HAK2,
+					A.TRAINING_LIMIT_COUNT, A.TRAINING_JOIN_UNIT, A.TRAINING_BACKUP_COUNT, A.TRAINING_OFFLINE_COUNT, A.START_JOIN_DATE,
+					A.START_JOIN_TIME, A.END_JOIN_DATE, A.END_JOIN_TIME, A.TRAINING_DAY, A.START_DATE, A.START_TIME,
+					A.END_DATE, A.END_TIME, A.PLAN_FILE_NAME, A.REAL_FILE_NAME, A.FILE_EXTENSION, A.FILE_SIZE, A.MEMBER_YN, A.CERTIFICATE_YN, A.TEACHER_NAME,A.MEMBER_KEY,
+					A.CATEGORY_NAME, A.TRAINING_JOIN_COUNT, A.TRAINING_BACKUP_JOIN_COUNT, A.TRAINING_OFF_JOIN_COUNT, A.GROUP_NAME,
+					A.IMAGE_PLAN_FILE_NAME, A.IMAGE_REAL_FILE_NAME, A.IMAGE_FILE_EXTENSION, A.IMAGE_FILE_SIZE,
+					(SELECT HOMEPAGE_ALIAS FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS HOMEPAGE_ALIAS,
+					(SELECT CONTEXT_PATH FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS CONTEXT_PATH,
+					req_start_date, req_end_date, APPLY_STATUS, a.LIMIT_HAK_YN,
+					a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+					getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+					getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+					a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+					(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+					program_classification1, program_classification2, program_classification3, program_subject, program_age_div,
+					(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.program_subject) as program_subject_name,
+					(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = '--' AND small_code = '--') as program_classification1_name,
+					(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = '--') as program_classification2_name,
+					(SELECT code_name FROM TRAINING_CODE WHERE large_code = a.program_classification1 AND mid_code = a.program_classification2 AND small_code = a.program_classification3) as program_classification3_name
+			FROM
+			(
+				SELECT
+					(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as STATUS,
+					(SELECT APPLY_STATUS FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as APPLY_STATUS,
+					a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+					a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+					a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME,
+					a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.CERTIFICATE_YN, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+					b.TEACHER_NAME,b.MEMBER_KEY,
+					c.CATEGORY_NAME,d.GROUP_NAME, a.START_JOIN_DATE||' '||a.START_JOIN_TIME REQ_START_DATE, a.END_JOIN_DATE||' '||a.END_JOIN_TIME REQ_END_DATE,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+					a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+					a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+					a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.large_category_idx, a.organization_yn, a.rank_yn, a.course_taken_yn,
+					(SELECT code_name FROM TRAINING_CODE2 WHERE training_code = a.large_category_idx) as large_category_name,
+					program_classification1, program_classification2, program_classification3, program_subject, program_age_div
+				FROM
+					(SELECT * FROM TRAINING WHERE 1 = 1
+					<if test="search_text != null and search_text != ''">
+					AND TRAINING_NAME LIKE '%'||#{search_text}||'%'
+					</if>
+					<if test="searchKeyword1 != null and searchKeyword1 != ''">
+					AND TRAINING_NAME LIKE '%'||#{searchKeyword1}||'%'
+					</if>
+					<if test="searchKeyword2 != null and searchKeyword2 != '' and logicFunction1 != null and logicFunction1 != ''">
+					${logicFunction1} TRAINING_NAME LIKE '%'||#{searchKeyword2}||'%'
+					</if>
+					<if test="searchKeyword3 != null and searchKeyword3 != '' and logicFunction2 != null and logicFunction2 != ''">
+					${logicFunction2} TRAINING_NAME LIKE '%'||#{searchKeyword3}||'%'
+					</if>
+					<if test="searchKeyword4 != null and searchKeyword4 != '' and logicFunction3 != null and logicFunction3 != ''">
+					${logicFunction3} TRAINING_NAME LIKE '%'||#{searchKeyword4}||'%'
+					</if>
+					<if test="start_date != null and start_date != ''">
+					AND START_DATE >= #{start_date}
+					</if>
+					<if test="end_date != null and end_date != ''">
+					AND START_DATE <![CDATA[<=]]> #{end_date}
+					</if>
+					<if test="start_join_date != null and start_join_date != ''">
+					AND START_JOIN_DATE >= #{start_join_date}
+					</if>
+					<if test="end_join_date != null and end_join_date != ''">
+					AND START_JOIN_DATE <![CDATA[<=]]> #{end_join_date}
+					</if>
+					<if test="homepage_id != 'h1' and homepage_id != null and homepage_id != ''">
+					AND homepage_id = #{homepage_id}
+					</if>
+					<if test='large_category_idx != "0"'>
+					AND large_category_idx = #{large_category_idx}
+					</if>
+					<if test="program_age_div != null and program_age_div != ''">
+					AND REGEXP_LIKE(program_age_div,#{program_age_div})
+					</if>
+					<if test='group_idx != "0"'>
+					AND group_idx = #{group_idx}
+					</if>
+					<if test='category_idx != "0"'>
+					AND category_idx = #{category_idx}
+					</if>
+					AND USE_YN = 'Y'
+					AND DELETE_YN = 'N'
+					) a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+				WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+					AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+					AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+					AND a.GROUP_IDX = c.GROUP_IDX(+)
+					AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+					AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+					AND a.GROUP_IDX = d.GROUP_IDX(+)
+
+					--AND SYSDATE &lt; TO_DATE(a.END_JOIN_DATE||' '||a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI')
+
+				ORDER BY
+					ABS(SYSDATE - (TO_DATE(a.START_JOIN_DATE ||' '|| a.START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+					ABS(SYSDATE - (TO_DATE(a.END_JOIN_DATE ||' '|| a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC
+			) A
+		)
+		<if test="status != null and status != ''">
+		WHERE
+			<if test='status == "4"'>
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= req_end_date
+			</if>
+			<if test='status != "4"'>
+			TRAINING_STATUS = #{status}
+			</if>
+		</if>
+		${pagingBottom}
+	</select>
+
+	<select id="getTrainingListForAllHomepageCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+		(
+			SELECT
+				CASE
+				WHEN TO_DATE(A.end_date || ' ' || A.end_time, 'YYYY-MM-DD HH24:MI') &lt; SYSDATE
+				THEN '9'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count > A.training_join_count
+				THEN '0'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count &lt;= A.training_join_count
+					AND A.training_backup_count > A.training_backup_join_count
+				THEN '1'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					AND A.training_limit_count &lt;= A.training_join_count
+					AND A.training_backup_count &lt;= A.training_backup_join_count
+				THEN '5'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_start_date
+				THEN '6'
+				WHEN A.status = 0
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+				THEN '4'
+				WHEN A.status = 1 AND A.apply_status = '1'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '2'
+				WHEN A.status = 1 AND A.apply_status = '2'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '3'
+				WHEN A.status = 1 AND A.apply_status = '99'
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				THEN '7'
+				WHEN A.status = 1
+					AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+				THEN '4'
+				END
+				as TRAINING_STATUS, A.HOMEPAGE_ID, A.GROUP_IDX, A.CATEGORY_IDX, A.TRAINING_IDX, A.TRAINING_NAME, A.TRAINING_DESC, A.TRAINING_ETC, A.TRAINING_STAGE, A.TRAINING_TARGET, A.LIMIT_HAK, a.LIMIT_HAK2,
+					A.TRAINING_LIMIT_COUNT, A.TRAINING_JOIN_UNIT, A.TRAINING_BACKUP_COUNT, A.TRAINING_OFFLINE_COUNT, A.START_JOIN_DATE,
+					A.START_JOIN_TIME, A.END_JOIN_DATE, A.END_JOIN_TIME, A.TRAINING_DAY, A.START_DATE, A.START_TIME,
+					A.END_DATE, A.END_TIME, A.PLAN_FILE_NAME, A.REAL_FILE_NAME, A.FILE_EXTENSION, A.FILE_SIZE, A.MEMBER_YN, A.CERTIFICATE_YN, A.TEACHER_NAME,A.MEMBER_KEY,
+					A.CATEGORY_NAME, A.TRAINING_JOIN_COUNT, A.TRAINING_BACKUP_JOIN_COUNT, A.TRAINING_OFF_JOIN_COUNT, A.GROUP_NAME,
+					A.IMAGE_PLAN_FILE_NAME, A.IMAGE_REAL_FILE_NAME, A.IMAGE_FILE_EXTENSION, A.IMAGE_FILE_SIZE,
+					(SELECT HOMEPAGE_ALIAS FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS HOMEPAGE_ALIAS,
+					(SELECT CONTEXT_PATH FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS CONTEXT_PATH,
+					req_start_date, req_end_date, APPLY_STATUS, a.LIMIT_HAK_YN,
+					a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+					getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+					getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR
+			FROM
+			(
+				SELECT
+					(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as STATUS,
+					(SELECT APPLY_STATUS FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as APPLY_STATUS,
+					a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+					a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+					a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME,
+					a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.CERTIFICATE_YN, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+					b.TEACHER_NAME,b.MEMBER_KEY,
+					c.CATEGORY_NAME,d.GROUP_NAME, a.START_JOIN_DATE||' '||a.START_JOIN_TIME REQ_START_DATE, a.END_JOIN_DATE||' '||a.END_JOIN_TIME REQ_END_DATE,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+					NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+					a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+					a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+					a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.organization_yn, a.rank_yn, a.course_taken_yn
+				FROM
+					(SELECT * FROM TRAINING WHERE 1 = 1
+					<if test="search_text != null and search_text != ''">
+					AND TRAINING_NAME LIKE '%'||#{search_text}||'%'
+					</if>
+					<if test="searchKeyword1 != null and searchKeyword1 != '' ">
+					AND TRAINING_NAME LIKE '%'||#{searchKeyword1}||'%'
+					</if>
+					<if test="searchKeyword2 != null and searchKeyword2 != '' and logicFunction1 != null and logicFunction1 != ''">
+					${logicFunction1} TRAINING_NAME LIKE '%'||#{searchKeyword2}||'%'
+					</if>
+					<if test="searchKeyword3 != null and searchKeyword3 != '' and logicFunction2 != null and logicFunction2 != ''">
+					${logicFunction2} TRAINING_NAME LIKE '%'||#{searchKeyword3}||'%'
+					</if>
+					<if test="searchKeyword4 != null and searchKeyword4 != '' and logicFunction3 != null and logicFunction3 != ''">
+					${logicFunction3} TRAINING_NAME LIKE '%'||#{searchKeyword4}||'%'
+					</if>
+					<if test="start_date != null and start_date != ''">
+					AND START_DATE >= #{start_date}
+					</if>
+					<if test="end_date != null and end_date != ''">
+					AND START_DATE <![CDATA[<=]]> #{end_date}
+					</if>
+					<if test="start_join_date != null and start_join_date != ''">
+					AND START_JOIN_DATE >= #{start_join_date}
+					</if>
+					<if test="end_join_date != null and end_join_date != ''">
+					AND START_JOIN_DATE <![CDATA[<=]]> #{end_join_date}
+					</if>
+					<if test="homepage_id != 'h1' and homepage_id != null and homepage_id != ''">
+					AND homepage_id = #{homepage_id}
+					</if>
+					<if test='large_category_idx != "0"'>
+					AND large_category_idx = #{large_category_idx}
+					</if>
+					<if test='group_idx != "0"'>
+					AND group_idx = #{group_idx}
+					</if>
+					<if test='category_idx != "0"'>
+					AND category_idx = #{category_idx}
+					</if>
+					AND USE_YN = 'Y'
+					AND DELETE_YN = 'N'
+					) a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+				WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+					AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+					AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+					AND a.GROUP_IDX = c.GROUP_IDX(+)
+					AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+					AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+					AND a.GROUP_IDX = d.GROUP_IDX(+)
+					--AND SYSDATE &lt; TO_DATE(a.END_JOIN_DATE||' '||a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI')
+				ORDER BY
+					ABS(SYSDATE - (TO_DATE(a.START_JOIN_DATE ||' '|| a.START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+					ABS(SYSDATE - (TO_DATE(a.END_JOIN_DATE ||' '|| a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+					a.PRINT_SEQ ASC
+			) A
+		)
+		<if test="status != null and status != ''">
+		WHERE
+			<if test='status == "4"'>
+			TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= req_end_date
+			</if>
+			<if test='status != "4"'>
+			TRAINING_STATUS = #{status}
+			</if>
+		</if>
+	</select>
+
+	<select id="getTrainingDetailForUser" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			CASE
+			WHEN TO_DATE(A.end_date || ' ' || A.end_time, 'YYYY-MM-DD HH24:MI') &lt; SYSDATE
+			THEN '9'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count > A.training_join_count
+			THEN '0'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count > A.training_backup_join_count
+			THEN '1'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count &lt;= A.training_backup_join_count
+			THEN '5'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_start_date
+			THEN '6'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			WHEN A.status = 1 AND A.apply_status = '1'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '2'
+			WHEN A.status = 1 AND A.apply_status = '2'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '3'
+			WHEN A.status = 1 AND A.apply_status = '99'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '7'
+			WHEN A.status = 1
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			END
+			as training_status, A.HOMEPAGE_ID, A.GROUP_IDX, A.CATEGORY_IDX, A.TRAINING_IDX, A.TRAINING_NAME, A.TRAINING_DESC, A.TRAINING_ETC, A.TRAINING_STAGE, A.TRAINING_TARGET, A.LIMIT_HAK, a.LIMIT_HAK2,
+				A.TRAINING_LIMIT_COUNT, A.TRAINING_JOIN_UNIT, A.TRAINING_BACKUP_COUNT, A.TRAINING_OFFLINE_COUNT, A.START_JOIN_DATE,
+				A.START_JOIN_TIME, A.END_JOIN_DATE, A.END_JOIN_TIME, A.TRAINING_DAY, A.START_DATE, A.START_TIME,
+				A.END_DATE, A.END_TIME, A.PLAN_FILE_NAME, A.REAL_FILE_NAME, A.FILE_EXTENSION, A.FILE_SIZE, A.MEMBER_YN, A.CERTIFICATE_YN, A.TEACHER_NAME,
+				A.CATEGORY_NAME, A.TRAINING_JOIN_COUNT, A.TRAINING_BACKUP_JOIN_COUNT, A.TRAINING_OFF_JOIN_COUNT, A.GROUP_NAME,
+				A.IMAGE_PLAN_FILE_NAME, A.IMAGE_REAL_FILE_NAME, A.IMAGE_FILE_EXTENSION, A.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+				getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.organization_yn, a.rank_yn, a.course_taken_yn
+		FROM
+		(
+			SELECT
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99') as STATUS,
+				(SELECT APPLY_STATUS FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND MEMBER_KEY = #{member_key} AND apply_status != '99' AND DELETE_YN != 'Y') as APPLY_STATUS,
+				a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+				a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+				a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME,
+				a.END_DATE, a.END_TIME, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.CERTIFICATE_YN, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+				b.TEACHER_NAME,
+				c.CATEGORY_NAME,d.GROUP_NAME, a.START_JOIN_DATE||' '||a.START_JOIN_TIME REQ_START_DATE, a.END_JOIN_DATE||' '||a.END_JOIN_TIME REQ_END_DATE,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+				a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE, a.LIMIT_HAK_YN,
+				a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.organization_yn, a.rank_yn, a.course_taken_yn
+			FROM
+				TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d
+			WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+				AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+				AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = c.GROUP_IDX(+)
+				AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+				AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = d.GROUP_IDX(+)
+				AND a.HOMEPAGE_ID = #{homepage_id}
+				AND a.GROUP_IDX = #{group_idx}
+				AND a.CATEGORY_IDX = #{category_idx}
+				AND a.TRAINING_IDX = #{training_idx}
+			ORDER BY
+				ABS(SYSDATE - (TO_DATE(a.START_JOIN_DATE ||' '|| a.START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				ABS(SYSDATE - (TO_DATE(a.END_JOIN_DATE ||' '|| a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				a.PRINT_SEQ ASC
+		) A
+	</select>
+
+	<select id="getApplyList" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			CASE
+			WHEN TO_DATE(A.end_date || ' ' || A.end_time, 'YYYY-MM-DD HH24:MI') &lt; SYSDATE
+			THEN '9'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count > A.training_join_count
+			THEN '0'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count > A.training_backup_join_count
+			THEN '1'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+				AND A.training_limit_count &lt;= A.training_join_count
+				AND A.training_backup_count &lt;= A.training_backup_join_count
+			THEN '5'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_start_date
+			THEN '6'
+			WHEN A.status = 0
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			WHEN A.status = 1 AND A.apply_status = '1'
+				AND	((
+					A.cancle_use_yn != 'Y'
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+					)
+				OR	(
+					A.cancle_use_yn = 'Y'
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.start_cancle_date || ' ' || A.start_cancle_time
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.end_cancle_date || ' ' || A.end_cancle_time
+					AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.start_date || ' ' || start_time	
+					))
+			THEN '2'
+			WHEN A.status = 1 AND A.apply_status = '1'
+				AND	A.cancle_use_yn = 'Y'
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND	TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '10'
+			WHEN A.status = 1 AND A.apply_status = '2'
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_start_date
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') &lt; A.req_end_date
+			THEN '3'
+			WHEN A.status = 1 AND A.apply_status = '99' AND A.CANCEL_ID IS NOT NULL
+			THEN '8'
+			WHEN A.status = 1 AND A.apply_status = '99'
+			THEN '7'
+			WHEN A.status = 1
+				AND TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI') >= A.req_end_date
+			THEN '4'
+			END
+			as training_status, A.HOMEPAGE_ID, A.BELONG_NAME, A.GROUP_IDX, A.CATEGORY_IDX, A.TRAINING_IDX, A.TRAINING_NAME, A.TRAINING_DESC, A.TRAINING_ETC, A.TRAINING_STAGE, A.TRAINING_TARGET, A.LIMIT_HAK, a.LIMIT_HAK2,
+				A.TRAINING_LIMIT_COUNT, A.TRAINING_JOIN_UNIT, A.TRAINING_BACKUP_COUNT, A.TRAINING_OFFLINE_COUNT, A.START_JOIN_DATE,
+				A.START_JOIN_TIME, A.END_JOIN_DATE, A.END_JOIN_TIME, A.TRAINING_DAY, A.START_DATE, A.START_TIME,
+				A.END_DATE, A.END_TIME, A.CANCLE_USE_YN, A.START_CANCLE_DATE, A.START_CANCLE_TIME, A.END_CANCLE_DATE, A.END_CANCLE_TIME, A.CANCLE_GUID,
+				A.APPLY_LIMIT, A.PLAN_FILE_NAME, A.REAL_FILE_NAME, A.FILE_EXTENSION, A.FILE_SIZE, A.MEMBER_YN, A.CERTIFICATE_YN, A.TEACHER_NAME,
+				A.CATEGORY_NAME, A.TRAINING_JOIN_COUNT, A.TRAINING_BACKUP_JOIN_COUNT, A.TRAINING_OFF_JOIN_COUNT, A.GROUP_NAME, A.STUDENT_IDX,A.STUDENT_NAME, A.STUDENT_BIRTH, A.STUDENT_SEX,
+			CASE
+				WHEN A.CNT = 0
+				THEN '2'
+				WHEN (A.ATTEND_CNT/A.CNT)*100 >= 70 AND a.END_DATE &lt;= TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+				THEN '1'
+				ELSE '2'
+			END AS STUDENT_STATUS,
+			A.IMAGE_PLAN_FILE_NAME, A.IMAGE_REAL_FILE_NAME, A.IMAGE_FILE_EXTENSION, A.IMAGE_FILE_SIZE,
+			a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+			getCodeIdToCodeName('CMS', 'C0020', a.limit_hak) AS LIMIT_HAK_STR,
+			getCodeIdToCodeName('CMS', 'C0020', a.limit_hak2) AS LIMIT_HAK2_STR,
+			a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.organization_yn, a.rank_yn, a.course_taken_yn
+		FROM
+		(
+			SELECT
+				(SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND STUDENT_IDX = e.STUDENT_IDX AND MEMBER_KEY = e.MEMBER_KEY) as STATUS,
+				e.APPLY_STATUS,
+				a.HOMEPAGE_ID, a.GROUP_IDX, a.CATEGORY_IDX, a.TRAINING_IDX, a.TRAINING_NAME, a.TRAINING_DESC, a.TRAINING_ETC, a.TRAINING_STAGE, a.TRAINING_TARGET, a.LIMIT_HAK, a.LIMIT_HAK2,
+				a.TRAINING_LIMIT_COUNT, a.TRAINING_JOIN_UNIT, a.TRAINING_BACKUP_COUNT, a.TRAINING_OFFLINE_COUNT, a.START_JOIN_DATE,
+				a.START_JOIN_TIME, a.END_JOIN_DATE, a.END_JOIN_TIME, a.TRAINING_DAY, a.START_DATE, a.START_TIME,
+				a.END_DATE, a.END_TIME, a.cancle_use_yn, a.start_cancle_date, a.start_cancle_time, a.end_cancle_date, a.end_cancle_time, a.cancle_guid,
+				a.APPLY_LIMIT, a.PLAN_FILE_NAME, a.REAL_FILE_NAME, a.FILE_EXTENSION, a.FILE_SIZE, a.MEMBER_YN, a.CERTIFICATE_YN, a.TRAINING_JOIN_LIMIT_UNIT, a.TRAINING_JOIN_LIMIT_VALUE,
+				b.TEACHER_NAME, e.CANCEL_ID, e.student_name, e.student_birth, e.student_sex,
+				c.CATEGORY_NAME,d.GROUP_NAME, a.START_JOIN_DATE||' '||a.START_JOIN_TIME REQ_START_DATE, a.END_JOIN_DATE||' '||a.END_JOIN_TIME REQ_END_DATE,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE != 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='2' GROUP BY TRAINING_IDX), 0) AS TRAINING_BACKUP_JOIN_COUNT,
+				NVL((SELECT COUNT(*) FROM TRAINING_STUDENT WHERE DELETE_YN = 'N' AND HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND APPLY_STATUS='1' AND APPLY_TYPE = 'CMS' GROUP BY TRAINING_IDX), 0) AS TRAINING_OFF_JOIN_COUNT,
+				(SELECT COUNT(*) FROM TRAINING_BOOK_TIME WHERE HOMEPAGE_ID = e.HOMEPAGE_ID AND GROUP_IDX = e.GROUP_IDX AND CATEGORY_IDX = e.CATEGORY_IDX and TRAINING_IDX = e.TRAINING_IDX) CNT,
+				(SELECT NVL(SUM(DECODE(status, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(status, '2', 1, 0))/3), 0)
+					FROM TRAINING_BOOK
+					WHERE HOMEPAGE_ID = e.HOMEPAGE_ID AND GROUP_IDX = e.GROUP_IDX AND CATEGORY_IDX = e.CATEGORY_IDX AND TRAINING_IDX = e.TRAINING_IDX AND STUDENT_IDX = e.STUDENT_IDX) as ATTEND_CNT
+				, e.student_idx,
+				a.IMAGE_PLAN_FILE_NAME, a.IMAGE_REAL_FILE_NAME, a.IMAGE_FILE_EXTENSION, a.IMAGE_FILE_SIZE,
+				a.family_count_yn, a.agent_yn, a.school_info_yn, a.school_grade_yn, a.remark_yn,
+				a.neis_location_yn, a.neis_cd_yn, a.neis_training_num_yn, a.organization_yn, a.rank_yn, a.course_taken_yn, e.BELONG_NAME
+			FROM
+				TRAINING a, TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d, TRAINING_STUDENT e
+			WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+				AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+				AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = c.GROUP_IDX(+)
+				AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+				AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+				AND a.GROUP_IDX = d.GROUP_IDX(+)
+				AND a.HOMEPAGE_ID = e.HOMEPAGE_ID
+				AND a.GROUP_IDX = e.GROUP_IDX
+				AND a.CATEGORY_IDX = e.CATEGORY_IDX
+				AND a.TRAINING_IDX = e.TRAINING_IDX
+				AND a.HOMEPAGE_ID = #{homepage_id}
+				AND e.MEMBER_KEY = #{member_key}
+				AND e.DELETE_YN = 'N'
+			<if test="searchDateFrom != null and searchDateFrom != ''">
+				AND	e.add_date >= TO_DATE(#{searchDateFrom}, 'YYYY-MM-DD')
+			</if>
+			<if test="searchDateTo != null and searchDateTo != ''">
+				AND	e.add_date <![CDATA[<=]]> TO_DATE(#{searchDateTo}, 'YYYY-MM-DD')+1
+			</if>
+			<if test='searchStatus == "Y"'>
+				<if test="status != null and status != ''">
+				<choose>
+				<when test='status == "noCancel"'>
+				AND	e.apply_status != 99
+				</when>
+				<otherwise>
+				AND	e.apply_status = #{status}
+				</otherwise>
+				</choose>
+				</if>
+			</if>
+			<if test='searchStatus == "N"'>
+				AND	e.add_date <![CDATA[<=]]> TO_DATE(#{searchDateTo}, 'YYYY-MM-DD')+1
+			</if>
+			ORDER BY
+				ABS(SYSDATE - (TO_DATE(a.START_JOIN_DATE ||' '|| a.START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				ABS(SYSDATE - (TO_DATE(a.END_JOIN_DATE ||' '|| a.END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				a.PRINT_SEQ ASC
+		 ) A
+	</select >
+
+	<update id="changeTrainingStatus">
+		UPDATE
+			TRAINING
+		SET TRAINING_STATUS = #{training_status}
+		WHERE HOMEPAGE_ID = #{homepage_id}
+			AND GROUP_IDX = #{group_idx}
+			AND CATEGORY_IDX = #{category_idx}
+			AND TRAINING_IDX = #{training_idx}
+	</update>
+
+	<select id="getPrintMaxValue" resultType="int">
+		SELECT
+			NVL(MAX(PRINT_SEQ),0)+1
+		FROM
+			TRAINING
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND DELETE_YN = 'N'
+	</select>
+
+	<select id="getTrainingListOfStudent" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT a.TRAINING_IDX, b.START_DATE, b.START_TIME, b.END_DATE, b.END_TIME
+		FROM TRAINING_STUDENT a, TRAINING b
+		WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID
+			AND a.GROUP_IDX = b.GROUP_IDX
+			AND a.CATEGORY_IDX = b.CATEGORY_IDX
+			AND a.TRAINING_IDX = b.TRAINING_IDX
+			AND a.HOMEPAGE_ID = #{homepage_id} AND a.MEMBER_KEY = #{member_key}
+			AND b.END_DATE > TO_CHAR(SYSDATE, 'yyyy-mm-dd')
+	</select>
+
+	<select id="getSameTrainingByName" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			TO_CHAR(ADD_DATE, 'yyyy-mm-dd') as ADD_DATE, TRAINING_NAME, TRAINING_SAME_LIMIT_COUNT
+		FROM
+			TRAINING
+		WHERE DELETE_YN = 'N'
+			AND HOMEPAGE_ID 	= #{homepage_id}
+<!-- 			AND GROUP_IDX 		= #{group_idx} -->
+<!-- 			AND CATEGORY_IDX 	= #{category_idx} -->
+			AND TRAINING_NAME 		= #{training_name}
+			<if test="training_idx != null and training_idx > 0" >
+			AND TRAINING_IDX 		!= #{training_idx}
+			</if>
+
+	</select>
+
+	<select id="getMainViewTrainingList" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT A.*, (SELECT HOMEPAGE_ALIAS FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS HOMEPAGE_ALIAS
+		FROM (
+			SELECT
+				HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX,  TRAINING_NAME, START_DATE, END_DATE, START_TIME, END_TIME, TRAINING_DAY, TRAINING_TARGET, TRAINING_DESC, IMAGE_REAL_FILE_NAME, TRAINING_STAGE
+			FROM
+				TRAINING
+			WHERE 1 = 1
+				AND HOMEPAGE_ID = #{homepage_id}
+				AND DELETE_YN = 'N' AND USE_YN = 'Y'
+			ORDER BY
+				ABS(SYSDATE - (TO_DATE(START_JOIN_DATE ||' '|| START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				ABS(SYSDATE - (TO_DATE(END_JOIN_DATE ||' '|| END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				PRINT_SEQ ASC
+		) A
+		WHERE ROWNUM <![CDATA[<=]]> #{main_view_count}
+	</select>
+
+	<select id="getMainViewTrainingListForAllHomepage" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT A.*
+			, (SELECT HOMEPAGE_ALIAS FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = a.HOMEPAGE_ID) AS HOMEPAGE_ALIAS
+			, (SELECT CONTEXT_PATH FROM CMS_HOMEPAGE WHERE HOMEPAGE_ID = A.HOMEPAGE_ID) AS CONTEXT_PATH
+		FROM (
+			SELECT
+				HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX,  TRAINING_NAME, START_DATE, END_DATE, START_TIME, END_TIME, TRAINING_DAY, TRAINING_TARGET, TRAINING_DESC, IMAGE_REAL_FILE_NAME, TRAINING_STAGE
+			FROM
+				TRAINING a
+			WHERE
+				DELETE_YN = 'N' AND USE_YN = 'Y'
+			ORDER BY
+				ABS(SYSDATE - (TO_DATE(START_JOIN_DATE ||' '|| START_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				ABS(SYSDATE - (TO_DATE(END_JOIN_DATE ||' '|| END_JOIN_TIME, 'YYYY-MM-DD HH24:MI'))) ASC,
+				PRINT_SEQ ASC
+		) A
+		WHERE ROWNUM <![CDATA[<=]]> #{main_view_count}
+	</select>
+
+	<update id="deleteFile">
+		UPDATE
+			TRAINING
+		SET
+			PLAN_FILE_NAME = '',
+			REAL_FILE_NAME = '',
+			FILE_EXTENSION = '',
+			FILE_SIZE = ''
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx}
+	</update>
+
+	<update id="deleteImage">
+		UPDATE
+			TRAINING
+		SET
+			image_real_file_name = '',
+			image_plan_file_name = '',
+			image_file_extension = '',
+			image_file_size = ''
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx}
+	</update>
+
+
+	<insert id="addTrainingHolidays">
+		INSERT INTO
+			TRAINING_HOLIDAYS
+		(
+			homepage_id, group_idx, category_idx, training_idx, holiday
+		)
+			VALUES
+		(
+			#{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{holiday}
+		)
+	</insert>
+
+	<delete id="deleteTrainingHolidays">
+		DELETE FROM
+			TRAINING_HOLIDAYS
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	group_idx = #{group_idx}
+		AND	category_idx = #{category_idx}
+		AND	training_idx = #{training_idx}
+	</delete>
+
+	<select id="getHolidays" resultType="string">
+		SELECT
+			holiday
+		FROM
+			TRAINING_HOLIDAYS
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	group_idx = #{group_idx}
+		AND	category_idx = #{category_idx}
+		AND	training_idx = #{training_idx}
+	</select>
+	
+	<select id="getSchaduleTraining" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+			homepage_id, training_idx, cancle_use_yn, start_cancle_date, start_cancle_time,
+			end_cancle_date, end_cancle_time, cancle_guid, sms_flag, apply_limit
+		FROM
+			TRAINING
+		WHERE
+			cancle_use_yn = 'Y'
+<!-- 		AND	TO_CHAR(SYSDATE, 'yyyy-MM-dd HH24:MI') >= start_cancle_date || ' ' || start_cancle_time -->
+<!-- 		AND	TO_CHAR(SYSDATE, 'yyyy-MM-dd HH24:MI') &lt; end_cancle_date || ' ' || end_cancle_time -->
+		AND	TO_DATE(TO_CHAR(SYSDATE, 'yyyy-MM-dd')) - TO_DATE(start_cancle_date, 'yyyy-MM-dd') = 0
+	</select>
+	
+	<update id="modifySmsFlag">
+		UPDATE
+			TRAINING
+		SET
+			sms_flag = 1
+		WHERE
+			training_idx = #{training_idx}
+	</update>
+	
+	<select id="getWaitingNumber" resultType="int">
+		SELECT wait_num FROM
+			(
+			SELECT ROWNUM AS wait_num, training_idx, member_key FROM
+				(
+				SELECT
+					member_key, training_idx
+				FROM
+					TRAINING_STUDENT
+				WHERE
+					homepage_id = #{homepage_id}
+				AND	training_idx = #{training_idx}
+				AND	apply_status = 2
+				AND	delete_yn = 'N'
+				ORDER BY apply_status ASC, student_idx ASC
+				)
+			)
+		WHERE
+			member_key = #{member_key}
+	</select>
+
+	<update id="modifyToken">
+		UPDATE
+			TRAINING
+		SET
+			token = #{token}
+		WHERE
+		    homepage_id = #{homepage_id}
+		AND training_idx = #{training_idx}
+	</update>
+
+	<select id="getTrainingByQr" resultType="kr.go.gbelib.app.cms.module.training.Training">
+		SELECT
+		    homepage_id, group_idx, category_idx, training_idx, training_name,
+		    qr_check, qr_check_count, token
+		FROM
+		    TRAINING
+		WHERE
+		    homepage_id = #{homepage_id}
+		AND training_idx = #{training_idx}
+	</select>
+	
+</mapper>

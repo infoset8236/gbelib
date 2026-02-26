@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.intro.bookImage.BookImageDao">
+	<select id="getImage" resultType="String">
+		SELECT
+			URL
+		FROM
+			IMAGE_THUMBNAILURL_INFO_TBL
+		WHERE
+			isbn = #{isbn}
+		AND 
+			ROWNUM = 1
+	</select>
+	
+	<insert id="addImage">
+		INSERT INTO 
+			IMAGE_THUMBNAILURL_INFO_TBL
+		(
+			ISBN, URL
+		) VALUES (
+			#{0}, #{1}
+		)
+	</insert>
+</mapper>

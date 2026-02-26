@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLogDao">
+
+	<insert id="addExcelDownLog">
+		INSERT INTO excel_down_log
+		(
+			idx, add_id, os, browser, ip,
+		 add_date, teach_idx, type, site_id
+		)
+		VALUES
+		(
+			excel_down_log_seq.NEXTVAL, #{add_id}, #{os}, #{browser}, #{ip},
+		 sysdate, #{teach_idx}, #{type}, #{site_id}
+		)
+	</insert>
+	
+	<select id = "getAllExcelDownLogCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			excel_down_log a JOIN teach b ON a.teach_idx = b.teach_idx
+		WHERE 1=1
+		<if test="type != null and type != ''">
+			AND	type = #{type}
+		</if>
+		<if test="search_text != null and search_text != '' and search_type == 'add_id'">
+			AND a.${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="search_text != null and search_text != '' and search_type == 'teach_name'">
+			AND b.${search_type} LIKE '%' || #{search_text} || '%'
+			</if>
+		<if test="start_date != null and start_date != ''">
+			AND a.add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND a.add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+	</select>
+	
+	<select id="getAllExcelDownLog" resultType="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLog">
+		${pagingTop}
+		SELECT
+			a.add_id, a.os, a.browser, a.ip, to_char(a.add_date,'yyyy-mm-dd HH24:mi:ss') as add_date,
+			a.type, b.teach_idx, b.teach_name, a.site_id, c.homepage_name
+		FROM
+			excel_down_log a, teach b, cms_homepage c
+		WHERE
+			a.teach_idx = b.teach_idx
+			AND a.site_id = c.homepage_id
+			<if test="type != null and type != ''">
+			AND a.type = #{type}
+			</if>
+			<if test="search_text != null and search_text != '' and search_type == 'add_id'">
+			AND a.${search_type} LIKE '%' || #{search_text} || '%'
+			</if>
+			<if test="search_text != null and search_text != '' and search_type == 'teach_name'">
+			AND b.${search_type} LIKE '%' || #{search_text} || '%'
+			</if>
+			<if test="start_date != null and start_date != ''">
+			AND a.add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+			</if>
+			<if test="end_date != null and end_date != ''">
+			AND a.add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+			</if>
+			<if test="site_id != null and site_id != ''">
+				AND a.site_id  = #{site_id}
+			</if>
+		ORDER BY
+			a.add_date
+		DESC
+		${pagingBottom}
+	</select>
+	
+	<select id="getAllExcelDownLog_excel" resultType="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLog">
+		SELECT
+			a.add_id, a.os, a.browser, a.ip, to_char(a.add_date,'yyyy-mm-dd HH24:mi:ss') as add_date,
+			a.type, b.teach_idx, b.teach_name, a.site_id, c.homepage_name
+		FROM
+			excel_down_log a, teach b, cms_homepage c
+		WHERE
+			a.teach_idx = b.teach_idx
+			AND a.site_id = c.homepage_id
+			<if test="type != null and type != ''">
+			AND a.type = #{type}
+			</if>
+			<if test="search_text != null and search_text != '' and search_type == 'add_id'">
+			AND a.${search_type} LIKE '%' || #{search_text} || '%'
+			</if>
+			<if test="search_text != null and search_text != '' and search_type == 'teach_name'">
+			AND b.${search_type} LIKE '%' || #{search_text} || '%'
+			</if>
+			<if test="start_date != null and start_date != ''">
+			AND a.add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+			</if>
+			<if test="end_date != null and end_date != ''">
+			AND a.add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+			</if>
+		ORDER BY
+			a.add_date
+		DESC
+	</select>
+
+	<insert id="addExcelDownLogReason">
+		<selectKey keyProperty="idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(idx),0)+1 FROM EXCEL_DOWN_REASON_LOG
+		</selectKey>
+		INSERT INTO EXCEL_DOWN_REASON_LOG
+		(
+			idx, homepage_id, excel_down_reason, add_id, add_ip,
+			add_date, menu_path, type
+		)
+		VALUES
+			(
+				#{idx}, #{homepage_id}, #{excel_down_reason}, #{add_id}, #{ip},
+				sysdate, #{menu_url}, #{type}
+			)
+	</insert>
+
+	<select id = "getExcelDownLogReasonCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			EXCEL_DOWN_REASON_LOG
+		WHERE 1=1
+		<if test="type != null and type != ''">
+			AND	type = #{type}
+		</if>
+		<if test="homepage_id != null and homepage_id != ''">
+			AND homepage_id = #{homepage_id}
+		</if>
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+	</select>
+
+	<select id="getExcelDownLogReasonList" resultType="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLog">
+		${pagingTop}
+		SELECT
+			idx, homepage_id, excel_down_reason, add_id, add_ip,
+			TO_CHAR(add_date,'yyyy-mm-dd HH24:mi:ss') as add_date, menu_path, type,
+			(SELECT B.homepage_name FROM CMS_HOMEPAGE B WHERE B.homepage_id = A.homepage_id AND ROWNUM = 1) AS homepage_name
+		FROM
+			EXCEL_DOWN_REASON_LOG A
+		WHERE
+			1=1
+		<if test="type != null and type != ''">
+			AND type = #{type}
+		</if>
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="homepage_id != null and homepage_id != ''">
+			AND homepage_id = #{homepage_id}
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+		ORDER BY
+			add_date
+		DESC
+		${pagingBottom}
+	</select>
+
+	<select id="getAllExcelDownLogReasonList" resultType="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLog">
+		SELECT
+			idx, homepage_id, excel_down_reason, add_id, add_ip,
+			TO_CHAR(add_date,'yyyy-mm-dd HH24:mi:ss') as add_date, menu_path, type,
+			(SELECT B.homepage_name FROM CMS_HOMEPAGE B WHERE B.homepage_id = A.homepage_id AND ROWNUM = 1) AS homepage_name
+		FROM
+			EXCEL_DOWN_REASON_LOG A
+		WHERE
+			1=1
+		<if test="idx != null and idx != ''">
+			AND idx = #{idx}
+		</if>
+		<if test="type != null and type != ''">
+			AND type = #{type}
+		</if>
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="homepage_id != null and homepage_id != ''">
+			AND homepage_id = #{homepage_id}
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+		ORDER BY
+			add_date
+		DESC
+	</select>
+
+	<select id="getExcelDownLogReason" resultType="kr.go.gbelib.app.cms.module.excelDownLog.ExcelDownLog">
+		SELECT
+			idx, homepage_id, excel_down_reason, add_id, add_ip,
+			TO_CHAR(add_date,'yyyy-mm-dd HH24:mi:ss') as add_date, menu_path, type,
+			(SELECT B.homepage_name FROM CMS_HOMEPAGE B WHERE B.homepage_id = A.homepage_id AND ROWNUM = 1) AS homepage_name
+		FROM
+			EXCEL_DOWN_REASON_LOG A
+		WHERE
+			idx = #{idx}
+	</select>
+</mapper>
+

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.trainingBelong.TrainingBelongDao">
+	
+	<select id="getTraingBelongListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM
+			TRAINING_BELONG
+		WHERE HOMEPAGE_ID = #{homepage_id}
+		<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' "> 
+			AND	${search_type} LIKE '%'||#{search_text}||'%'
+		</if>
+		ORDER BY
+			BELONG_IDX DESC
+	</select>
+	
+	<select id="getTrainingBelongList" resultType="kr.go.gbelib.app.cms.module.trainingBelong.TrainingBelong">
+		${pagingTop}
+			SELECT
+				BELONG_IDX, HOMEPAGE_ID, BELONG_NAME, GROUP_NAME, ZIP_CODE, ADDRESS,
+				USE_YN, MANAGER_NAME, MANAGER_PHONE, ADD_ID, MOD_ID,
+				TO_CHAR(ADD_DATE, 'yyyy.MM.dd') AS ADD_DATE,
+				TO_CHAR(ADD_DATE, 'yyyy.MM.dd') AS MOD_DATE
+			FROM
+				TRAINING_BELONG
+			WHERE HOMEPAGE_ID = #{homepage_id}
+			<if test=" search_type != null and search_type != '' and search_text != '' and search_text != '' "> 
+					AND	${search_type} LIKE '%'||#{search_text}||'%'
+			</if>
+			ORDER BY
+				BELONG_IDX DESC
+		${pagingBottom}	
+	</select>
+	
+	<select id="getTrainingBelongOne" resultType="kr.go.gbelib.app.cms.module.trainingBelong.TrainingBelong">
+		SELECT
+			BELONG_IDX, HOMEPAGE_ID, BELONG_NAME, GROUP_NAME, ZIP_CODE, ADDRESS,
+			USE_YN, MANAGER_NAME, MANAGER_PHONE, ADD_ID, MOD_ID
+		FROM
+			TRAINING_BELONG
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} 
+			AND BELONG_IDX = #{belong_idx}
+	</select>
+	
+	<select id="checkSameTrainingBelong" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			TRAINING_BELONG
+		WHERE HOMEPAGE_ID = #{homepage_id}
+			AND BELONG_NAME = #{belong_name}
+	</select>
+	
+	<insert id="addTrainingBelong">
+		<selectKey keyProperty="belong_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BELONG_IDX),0)+1 FROM TRAINING_BELONG WHERE HOMEPAGE_ID = #{homepage_id}
+		</selectKey>
+			INSERT INTO TRAINING_BELONG
+			(
+				BELONG_IDX, HOMEPAGE_ID, GROUP_NAME, ZIP_CODE, ADDRESS,
+			  USE_YN, MANAGER_NAME, MANAGER_PHONE, BELONG_NAME, ADD_DATE, ADD_ID
+			) VALUES
+			(
+				#{belong_idx}, #{homepage_id}, #{group_name}, #{zip_code}, #{address}, #{use_yn},
+				#{manager_name}, #{manager_phone}, #{belong_name}, SYSDATE, #{add_id}
+			)
+	</insert>
+	
+	<update id="modifyTrainingBelong">
+		UPDATE 
+			TRAINING_BELONG
+		SET
+			BELONG_NAME = #{belong_name},
+			GROUP_NAME = #{group_name},
+			ZIP_CODE = #{zip_code},
+			ADDRESS = #{address},
+			USE_YN = #{use_yn},
+			MANAGER_NAME = #{manager_name},
+			MANAGER_PHONE = #{manager_phone},
+			MOD_DATE = SYSDATE,
+			MOD_ID = #{mod_id}
+		WHERE 
+			HOMEPAGE_ID = #{homepage_id} 
+		AND BELONG_IDX = #{belong_idx}
+	</update>
+	
+	<delete id="deleteTrainingBelong">
+		DELETE FROM
+			TRAINING_BELONG
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	belong_idx = #{belong_idx}
+	</delete>
+	<delete id="deleteAlltrainingBelong">
+		DELETE FROM
+			TRAINING_BELONG
+		WHERE
+			homepage_id = #{homepage_id}
+		AND	belong_idx IN
+			<foreach collection="belong_idx_arr" item='item' index='i' open="(" close=")" separator=",">
+				#{item}
+			</foreach>
+	</delete>
+
+	<insert id="excelUploadSave">
+		<selectKey keyProperty="belong_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(BELONG_IDX),0)+1 FROM TRAINING_BELONG WHERE HOMEPAGE_ID = #{homepage_id}
+		</selectKey>
+		INSERT INTO TRAINING_BELONG
+		(
+		BELONG_IDX, HOMEPAGE_ID, GROUP_NAME, ZIP_CODE, ADDRESS,
+		USE_YN, MANAGER_NAME, MANAGER_PHONE, BELONG_NAME, ADD_DATE, ADD_ID
+		) VALUES
+		(
+		#{belong_idx}, #{homepage_id}, #{group_name}, #{zip_code}, #{address}, #{use_yn},
+		#{manager_name}, #{manager_phone}, #{belong_name}, SYSDATE, #{add_id}
+		)
+	</insert>
+</mapper>

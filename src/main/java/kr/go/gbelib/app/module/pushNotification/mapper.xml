@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.module.pushNotification.PushNotificationDao">
+	
+	<select id="getPushNotificationList" resultType="kr.go.gbelib.app.module.pushNotification.PushNotification">
+		SELECT
+			idx, TO_CHAR(dttm, 'YYYY.MM.DD') AS dttm, member_id, title, body
+		FROM
+			PUSH_NOTIFICATION
+		WHERE
+			member_id = #{member_id}
+		ORDER BY dttm DESC, idx DESC
+	</select>
+	
+	<insert id="addPushNotification">
+		INSERT INTO PUSH_NOTIFICATION(
+			idx, dttm, member_id, title, body		
+		) VALUES (
+			PUSH_NOTIFICATION_SEQ.NEXTVAL, TO_DATE(#{dttm}, 'YYYY-MM-DD HH24:MI:SS'), #{member_id}, #{title}, #{body}
+		)
+	</insert>
+	
+	<delete id="deletePushNotification">
+		DELETE FROM
+			PUSH_NOTIFICATION
+		WHERE 1=1
+		AND member_id = #{member_id}
+		AND idx IN
+		<foreach collection="idx_arr" item="i" open="(" close=")" separator=",">
+		#{i}
+		</foreach>
+	</delete>
+	
+</mapper>

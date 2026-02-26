@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2Dao">
+	
+	<select id="getCategoryListCnt" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND depth = #{depth}
+		ORDER BY display_seq
+	</select>
+	
+	<select id="getCategoryList" resultType="kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2">
+		SELECT
+			training_code, code_name, depth, display_seq, parent_id, code_type
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND depth = #{depth}
+		ORDER BY display_seq
+	</select>
+	
+	<select id="getCategoryWithCntList" resultType="kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2">
+		SELECT
+			a.training_code, a.code_name, a.depth, a.display_seq, a.parent_id, a.code_type,
+			(SELECT COUNT(*) FROM ELIB_BOOK b WHERE b.use_yn != 'N' AND a.code_type = b.code_type AND a.training_code = b.parent_id) AS cnt
+		FROM
+			TRAINING_CODE2 a
+		WHERE
+			delete_yn = 'N'
+		AND depth = #{depth}
+		ORDER BY display_seq
+	</select>
+	
+	<select id="getCategoryInfo" resultType="kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2">
+		SELECT
+			training_code, code_name, depth, display_seq, parent_id, code_type
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND training_code = #{training_code}
+	</select>
+	
+	<select id="getSubcategories" resultType="kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2">
+		SELECT
+			training_code, code_name, depth, display_seq, parent_id, code_type
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND parent_id = #{training_code}
+	</select>
+	
+	<select id="subCategoryCheck" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND parent_id = #{training_code}
+	</select>
+	
+	<select id="nameDupCheck" resultType="int">
+		SELECT
+			COUNT(*) AS cnt
+		FROM
+			TRAINING_CODE2
+		WHERE
+			delete_yn = 'N'
+		AND parent_id = #{parent_id}
+		AND code_name = #{code_name}
+		<if test="training_code != null and training_code != ''">
+		AND training_code != #{training_code}
+		</if>
+	</select>
+	
+	<select id="getDepth" resultType="int">
+		SELECT NVL(MAX(depth),0)+1 FROM TRAINING_CODE2 WHERE delete_yn = 'N' AND training_code = #{parent_id}
+	</select>
+	
+	<select id="getMaxDisplaySeq" resultType="int">
+		SELECT NVL(MAX(display_seq),0)+1 AS display_seq FROM TRAINING_CODE2 WHERE delete_yn = 'N' AND depth = #{depth}
+	</select>
+	
+	<insert id="addCategory">
+		<selectKey keyProperty="training_code" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(training_code),0)+1 FROM TRAINING_CODE2
+		</selectKey>
+		
+		INSERT INTO TRAINING_CODE2 (
+			training_code, code_name, depth, display_seq, parent_id, code_type, add_date, add_id
+		) VALUES (
+			#{training_code}, #{code_name}, #{depth}, #{display_seq}, #{parent_id}, #{code_type}, SYSDATE, #{add_id}
+		)
+	</insert>
+	
+	<update id="modifyCategory">
+		UPDATE TRAINING_CODE2 SET
+			code_name = #{code_name},
+			mod_date = SYSDATE,
+			mod_id = #{mod_id}
+		WHERE
+			training_code = #{training_code}
+	</update>
+	
+	<delete id="deleteCategory">
+		UPDATE TRAINING_CODE2 SET
+			delete_yn = 'Y'
+		WHERE
+			training_code = #{training_code}
+	</delete>
+	
+	<delete id="forceDeleteCategory">
+		DELETE FROM TRAINING_CODE2 WHERE training_code = #{training_code} OR parent_id = #{parent_id}
+	</delete>
+	
+	<update id="modifyDisplaySeq">
+		UPDATE TRAINING_CODE2 SET
+			display_seq = #{display_seq},
+			mod_date = SYSDATE,
+			mod_id = #{mod_id}
+		WHERE
+			training_code = #{training_code}
+	</update>
+	
+</mapper>

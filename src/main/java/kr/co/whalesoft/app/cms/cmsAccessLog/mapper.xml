@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.whalesoft.app.cms.cmsAccessLog.CmsAccessLogDao">
+
+	<insert id="addAccessLog">
+		INSERT INTO CMS_ACCESS_LOG (
+			year, month, day, time, worker_id,
+			menu_id, access_type, access_log, site_id
+			<if test="access_ip != null and access_ip != ''">
+			, access_ip
+			</if>
+		) VALUES (
+			TO_CHAR(SYSDATE, 'YYYY'), TO_CHAR(SYSDATE, 'MM'), TO_CHAR(SYSDATE, 'DD'), TO_CHAR(SYSTIMESTAMP, 'HH24MISS.FF'),
+			#{worker_id}, #{menu_id}, #{access_type}, #{access_log}, #{site_id}
+			<if test="access_ip != null and access_ip != ''">
+			, #{access_ip}
+			</if>
+		)
+	</insert>
+
+	<select id="getAccessLogListCnt" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			CMS_ACCESS_LOG a, cms_homepage b
+		WHERE a.SITE_ID = b.HOMEPAGE_ID
+		AND a.site_id != 'CMS'
+		<if test="worker_id != null and worker_id != ''">
+		AND worker_id = #{worker_id}
+		</if>
+		<if test="access_type != null and access_type != ''">
+		AND access_type = #{access_type}
+		</if>
+		<if test="start_date != null and start_date != ''">
+		AND #{start_date} &lt;= TO_DATE(year||month||day, 'YYYYMMDD')
+		</if>
+		<if test="end_date != null and end_date != ''">
+		AND TO_DATE(year||month||day, 'YYYYMMDD') &lt;= #{end_date}
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND site_id  = #{site_id}
+		</if>
+		ORDER BY year DESC, month DESC, day DESC, time DESC
+	</select>
+
+	<select id="getAccessLogList" resultType="kr.co.whalesoft.app.cms.cmsAccessLog.CmsAccess">
+		${pagingTop}
+		SELECT
+			a.YEAR, a.MONTH, a.DAY, a.TIME, a.WORKER_ID,
+			a.MENU_ID, a.ACCESS_TYPE, a.ACCESS_LOG, a.ACCESS_IP, a.SITE_ID,
+			b.HOMEPAGE_NAME, (select member_name from cms_member where a.worker_id = member_id) as member_name
+		FROM
+			CMS_ACCESS_LOG a, CMS_HOMEPAGE b
+		WHERE a.SITE_ID = b.HOMEPAGE_ID
+		AND a.site_id != 'CMS'
+		<if test="worker_id != null and worker_id != ''">
+		AND worker_id = #{worker_id}
+		</if>
+		<if test="access_type != null and access_type != ''">
+		AND access_type = #{access_type}
+		</if>
+		<if test="start_date != null and start_date != ''">
+		AND #{start_date} &lt;= TO_DATE(year||month||day, 'YYYYMMDD')
+		</if>
+		<if test="end_date != null and end_date != ''">
+		AND TO_DATE(year||month||day, 'YYYYMMDD') &lt;= #{end_date}
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND a.site_id  = #{site_id}
+		</if>
+		ORDER BY year DESC, month DESC, day DESC, time DESC
+		${pagingBottom}
+	</select>
+
+	<select id="getAllAccessLogList" resultType="kr.co.whalesoft.app.cms.cmsAccessLog.CmsAccess">
+		SELECT
+			a.YEAR, a.MONTH, a.DAY, a.TIME, a.WORKER_ID,
+			a.MENU_ID, a.ACCESS_TYPE, a.ACCESS_LOG, a.ACCESS_IP, a.SITE_ID,
+			b.HOMEPAGE_NAME, c.MEMBER_NAME
+		FROM
+		CMS_ACCESS_LOG a, CMS_HOMEPAGE b, CMS_MEMBER c
+		WHERE
+		a.SITE_ID = b.HOMEPAGE_ID
+		AND a.site_id != 'CMS'
+		AND a.worker_id = c.member_id
+		<if test="worker_id != null and worker_id != ''">
+		AND worker_id = #{worker_id}
+		</if>
+		<if test="access_type != null and access_type != ''">
+		AND access_type = #{access_type}
+		</if>
+		<if test="start_date != null and start_date != ''">
+		AND #{start_date} &lt;= TO_DATE(year||month||day, 'YYYYMMDD')
+		</if>
+		<if test="end_date != null and end_date != ''">
+		AND TO_DATE(year||month||day, 'YYYYMMDD') &lt;= #{end_date}
+		</if>
+		<if test="site_id != null and site_id != ''">
+			AND a.site_id  = #{site_id}
+		</if>
+		ORDER BY year DESC, month DESC, day DESC, time DESC
+	</select>
+
+    <select id="getWorkerList" resultType="kr.co.whalesoft.app.cms.cmsAccessLog.CmsAccess">
+        SELECT DISTINCT
+            worker_id, (select member_name from cms_member where a.worker_id = member_id) as member_name
+        FROM
+            CMS_ACCESS_LOG a
+        ORDER BY
+            worker_id
+    </select>
+</mapper>

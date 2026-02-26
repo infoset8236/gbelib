@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.memberGroupAuthLog.MemberGroupAuthLogDao">
+
+	<insert id="addMemberGroupAuthLogDao">
+		<selectKey keyProperty="member_group_auth_log_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(member_group_auth_log_idx),0)+1 FROM MEMBER_GROUP_AUTH_LOG
+		</selectKey>
+		INSERT INTO MEMBER_GROUP_AUTH_LOG
+		(
+			member_group_auth_log_idx, member_id, add_date, add_ip, mod_id,
+			authGroupIdxList, authGroupIdxModList
+		)
+		VALUES
+		(
+			#{member_group_auth_log_idx}, #{member_id}, SYSDATE, #{add_ip}, #{mod_id},
+			#{authGroupIdxList}, #{authGroupIdxModList}
+		)
+	</insert>
+	
+	<select id = "getMemberGroupAuthLogCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			MEMBER_GROUP_AUTH_LOG
+		WHERE 1=1
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+	</select>
+	
+	<select id="getMemberGroupAuthLogList" resultType="kr.go.gbelib.app.cms.module.memberGroupAuthLog.MemberGroupAuthLog">
+		${pagingTop}
+		SELECT
+			member_group_auth_log_idx, member_id, TO_CHAR(ADD_DATE, 'yyyy-mm-dd hh24:mm:ss') AS ADD_DATE, add_ip, mod_id,
+			authGroupIdxList, authGroupIdxModList
+		FROM
+			MEMBER_GROUP_AUTH_LOG
+		WHERE 1=1
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+		ORDER BY
+			member_group_auth_log_idx
+		DESC
+		${pagingBottom}
+	</select>
+
+	<select id="getMemberGroupAuthLogListExcel" resultType="kr.go.gbelib.app.cms.module.memberGroupAuthLog.MemberGroupAuthLog">
+		SELECT
+			member_group_auth_log_idx, member_id, TO_CHAR(ADD_DATE, 'yyyy-mm-dd hh24:mm:ss') AS ADD_DATE, add_ip, mod_id,
+			authGroupIdxList, authGroupIdxModList
+		FROM
+			MEMBER_GROUP_AUTH_LOG
+		WHERE 1=1
+		<if test="search_text != null and search_text != ''">
+			AND ${search_type} LIKE '%' || #{search_text} || '%'
+		</if>
+		<if test="start_date != null and start_date != ''">
+			AND add_date &gt;= to_date(#{start_date},'yyyy-mm-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND add_date &lt;= to_date(#{end_date},'yyyy-mm-dd')+1
+		</if>
+		ORDER BY
+			member_group_auth_log_idx
+		DESC
+	</select>
+
+</mapper>
+

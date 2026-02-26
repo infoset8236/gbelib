@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.statistics.TrainingStatisticsDao">
+	
+	<select id="getTrainingStatistics" resultType="kr.go.gbelib.app.cms.module.training.statistics.TrainingStatistics">
+		SELECT  d.GROUP_NAME, c.CATEGORY_NAME, b.TEACHER_NAME, training.TRAINING_NAME, training.START_DATE, training.END_DATE, training.TRAINING_LIMIT_COUNT, training.TRAINING_BACKUP_COUNT, training.TRAINING_OFFLINE_COUNT
+			, (SELECT COUNT(*) FROM TRAINING_STUDENT WHERE HOMEPAGE_ID = a.HOMEPAGE_ID AND GROUP_IDX = a.GROUP_IDX AND CATEGORY_IDX = a.CATEGORY_IDX AND TRAINING_IDX = a.TRAINING_IDX AND DELETE_YN = 'N' AND APPLY_STATUS = '1') AS JOIN_COUNT
+			, CERT_OK_COUNT,
+			(SELECT code_name FROM TRAINING_CODE2 where training_code = a.large_category_idx) as large_category_name
+		FROM (
+			SELECT trainingList.HOMEPAGE_ID, trainingList.GROUP_IDX, trainingList.CATEGORY_IDX, trainingList.TRAINING_IDX, MIN(trainingList.TEACHER_IDX) AS TEACHER_IDX, COUNT(CASE WHEN ((studentList.ATTEND_CNT / trainingList.TRAINING_COUNT) * 100) > 70 THEN 1 END) CERT_OK_COUNT,
+					MIN(trainingList.TRAINING_COUNT) as TRAINING_COUNT, MIN(trainingList.TRAINING_NAME) as TRAINING_NAME, MIN(trainingList.START_DATE) as START_DATE, MIN(trainingList.END_DATE) as END_DATE, MIN(trainingList.TRAINING_LIMIT_COUNT) as TRAINING_LIMIT_COUNT, MIN(trainingList.TRAINING_BACKUP_COUNT) as TRAINING_BACKUP_COUNT, MIN(trainingList.TRAINING_OFFLINE_COUNT) as TRAINING_OFFLINE_COUNT
+					,trainingList.large_category_idx
+			FROM 
+				(
+					SELECT
+						HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, TEACHER_IDX, TRAINING_COUNT, TRAINING_NAME, START_DATE, END_DATE, TRAINING_LIMIT_COUNT, TRAINING_BACKUP_COUNT, TRAINING_OFFLINE_COUNT
+						, large_category_idx
+					FROM
+						TRAINING
+					WHERE HOMEPAGE_ID = #{homepage_id} AND DELETE_YN = 'N'
+						<if test="large_category_idx > 0">
+						AND large_category_idx = #{large_category_idx}
+						</if>
+						<if test="group_idx > 0">
+						AND GROUP_IDX = #{group_idx}
+						</if>
+						<if test="category_idx > 0">
+						AND CATEGORY_IDX = #{category_idx}
+						</if>
+						<if test="start_date != null and start_date != ''">
+						AND START_DATE >= #{start_date}
+						</if>
+						<if test="end_date != null and end_date != ''">
+						AND END_DATE &lt;= #{end_date}
+						</if>
+				) TRAININGLIST,
+				(	
+					SELECT 
+						s.HOMEPAGE_ID, s.large_category_idx, s.GROUP_IDX, s.CATEGORY_IDX, s.TRAINING_IDX, s.STUDENT_IDX, NVL(SUM(DECODE(t.STATUS, '1', 1, '2', 1, 0)) - TRUNC(SUM(DECODE(t.STATUS, '2', 1, 0))/3), 0) AS ATTEND_CNT
+					FROM 
+						TRAINING_STUDENT s, TRAINING_BOOK t
+					WHERE 
+						s.HOMEPAGE_ID = t.HOMEPAGE_ID 
+						AND s.GROUP_IDX = t.GROUP_IDX 
+						AND s.CATEGORY_IDX = t.CATEGORY_IDX 
+						AND s.TRAINING_IDX = t.TRAINING_IDX 
+						AND s.STUDENT_IDX = t.STUDENT_IDX
+						AND s.HOMEPAGE_ID = #{homepage_id}
+						<if test="large_category_idx > 0">
+						AND s.large_category_idx = #{large_category_idx}
+						</if>
+						<if test="group_idx > 0">
+						AND s.GROUP_IDX = #{group_idx}
+						</if>
+						<if test="category_idx > 0">
+						AND s.CATEGORY_IDX = #{category_idx}
+						</if>
+					GROUP BY 
+						s.HOMEPAGE_ID, s.large_category_idx, s.GROUP_IDX, s.CATEGORY_IDX, s.TRAINING_IDX, s.STUDENT_IDX
+				) studentList
+			WHERE trainingList.HOMEPAGE_ID = studentList.HOMEPAGE_ID(+)
+				AND trainingList.large_category_idx = studentList.large_category_idx(+)
+				AND trainingList.GROUP_IDX = studentList.GROUP_IDX(+)
+				AND trainingList.CATEGORY_IDX = studentList.CATEGORY_IDX(+)
+				AND trainingList.TRAINING_IDX = studentList.TRAINING_IDX(+)
+			GROUP BY
+				trainingList.HOMEPAGE_ID, trainingList.large_category_idx, trainingList.GROUP_IDX, trainingList.CATEGORY_IDX, trainingList.TRAINING_IDX
+			
+			) a ,TRAINING_TEACHER b, TRAINING_CATEGORY c, TRAINING_CATEGORY_GROUP d, TRAINING training
+		WHERE a.HOMEPAGE_ID = b.HOMEPAGE_ID(+)
+			AND a.TEACHER_IDX = b.TEACHER_IDX(+)
+			AND a.HOMEPAGE_ID = c.HOMEPAGE_ID(+) 
+			AND a.GROUP_IDX = c.GROUP_IDX(+)
+			AND a.CATEGORY_IDX = c.CATEGORY_IDX(+)
+			AND a.HOMEPAGE_ID = d.HOMEPAGE_ID(+)
+			AND a.GROUP_IDX = d.GROUP_IDX(+)
+			AND a.HOMEPAGE_ID = training.HOMEPAGE_ID
+			AND a.GROUP_IDX = training.GROUP_IDX
+			AND a.CATEGORY_IDX = training.CATEGORY_IDX
+			AND a.TRAINING_IDX = training.TRAINING_TRAINING		ORDER BY a.START_DATE, a.END_DATE
+	</select>
+</mapper>

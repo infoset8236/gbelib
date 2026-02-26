@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.trainingCategoryTerms.TrainingCategoryTermsDao">
+
+
+	<select id="getTrainingCategoryTermsList" resultType="kr.go.gbelib.app.cms.module.trainingCategoryTerms.TrainingCategoryTerms">
+		SELECT
+			A.HOMEPAGE_ID, A.LARGE_CATEGORY_IDX, A.GROUP_IDX, A.CATEGORY_IDX, A.TERMS_IDX, A.ADD_DATE, A.ADD_ID, B.TITLE,
+			(SELECT C.CODE_NAME FROM CMS_CODE C WHERE C.GROUP_ID = 'C0014' AND C.CODE_ID = B.TERMS_TYPE) AS TERMS_TYPE_NAME
+		FROM
+		    CMS_TRAINING_CATEGORY_TERMS A
+			left outer join CMS_TRAINING_TERMS B on A.TERMS_IDX = B.TERMS_IDX
+		WHERE 			
+			A.HOMEPAGE_ID = #{homepage_id}
+			AND A.LARGE_CATEGORY_IDX = #{large_category_idx}
+			AND A.GROUP_IDX = #{group_idx}
+			<if test="category_idx > 0">
+				AND A.CATEGORY_IDX = #{category_idx}
+			</if>
+			AND B.DELETE_YN = 'N'
+			AND B.USE_YN = 'Y'
+			AND B.TITLE IS NOT NULL
+			AND B.CONTENTS IS NOT NULL
+		ORDER BY
+			A.ADD_DATE ASC
+	</select>
+	
+	<select id="getTrainingCategoryTermsCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			CMS_TRAINING_CATEGORY_TERMS A
+			left outer join CMS_TRAINING_TERMS B on A.TERMS_IDX = B.TERMS_IDX
+		WHERE 			
+			A.HOMEPAGE_ID = #{homepage_id}
+			AND A.LARGE_CATEGORY_IDX = #{large_category_idx}
+			AND A.GROUP_IDX = #{group_idx}
+			<if test="category_idx > 0">
+				AND A.CATEGORY_IDX = #{category_idx}
+			</if>
+			<if test="terms_idx > 0">
+				AND A.TERMS_IDX = #{terms_idx}
+			</if>
+			AND B.DELETE_YN = 'N'
+			AND B.USE_YN = 'Y'
+		ORDER BY
+			A.TERMS_IDX ASC
+	</select>
+
+	<insert id="addTrainingCategoryTerms">		
+		INSERT INTO CMS_TRAINING_CATEGORY_TERMS
+		(
+			HOMEPAGE_ID, LARGE_CATEGORY_IDX, GROUP_IDX, CATEGORY_IDX, TERMS_IDX, ADD_DATE, ADD_ID
+		) VALUES (
+			#{homepage_id}, #{large_category_idx}, #{group_idx}, #{category_idx}, #{terms_idx}, SYSDATE, #{add_id}
+		)
+	</insert>	
+	
+	<update id="deleteTrainingCategoryTerms">
+		DELETE FROM
+			CMS_TRAINING_CATEGORY_TERMS		
+		WHERE
+			HOMEPAGE_ID = #{homepage_id}
+			AND LARGE_CATEGORY_IDX = #{large_category_idx}
+			AND GROUP_IDX = #{group_idx}
+			<if test="category_idx > 0">
+				AND CATEGORY_IDX = #{category_idx}
+			</if>
+			AND TERMS_IDX = #{terms_idx}
+	</update>
+
+</mapper>

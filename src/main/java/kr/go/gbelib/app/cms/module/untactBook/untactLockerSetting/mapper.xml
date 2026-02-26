@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.untactBook.untactLockerSetting.UntactLockerSettingDao">
+	
+	<select id="getUntactLockerSettingList" resultType="kr.go.gbelib.app.cms.module.untactBook.untactLockerSetting.UntactLockerSetting">
+		SELECT
+			homepage_id, locker_number, locker_type
+		FROM
+			UNTACT_BOOK_LOCKER_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+		ORDER BY
+			locker_number
+	</select>
+	
+	<select id="showLockerState" resultType="kr.go.gbelib.app.cms.module.untactBook.untactLockerSetting.UntactLockerSetting">
+		SELECT
+			locker_number, locker_type
+		FROM
+			UNTACT_BOOK_LOCKER_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+
+	<select id="getMaxUntactLocker" resultType="int">
+		SELECT
+			NVL(MAX(locker_number), 0)
+		FROM
+			UNTACT_BOOK_LOCKER_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+
+	<delete id="deleteUntactLocker">
+		DELETE FROM UNTACT_BOOK_LOCKER_SETTING
+		WHERE
+		    homepage_id = #{homepage_id}
+		AND locker_number > #{locker_number}
+	</delete>
+
+	<insert id="insertUntactLocker">
+		INSERT INTO UNTACT_BOOK_LOCKER_SETTING
+		(
+		 	homepage_id, locker_number, locker_type
+		) VALUES
+		(
+			#{homepage_id}, #{locker_number}, #{locker_type}
+		)
+	</insert>
+	
+	<update id="modifyUntactLockerSetting">
+		UPDATE
+			UNTACT_BOOK_LOCKER_SETTING
+		SET
+			locker_type = #{locker_type}
+		WHERE
+			homepage_id = #{homepage_id}
+		AND locker_number = #{locker_number}
+	</update>
+	
+	<update id="modifyUntactLockerSettingALL">
+		UPDATE
+			UNTACT_BOOK_LOCKER_SETTING
+		SET
+			locker_type = #{locker_type}
+		WHERE
+			homepage_id = #{homepage_id}
+		AND locker_number IN
+		<foreach collection="locker_number_arr" item="i" open="(" close=")" separator=",">
+		${i}
+		</foreach>
+	</update>
+	
+	<select id="getUntactLockerSettingCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			UNTACT_BOOK_LOCKER_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+		AND locker_type = '도서대출'
+	</select>
+	
+
+	<select id="getUntactBookSettingOne" resultType="kr.go.gbelib.app.cms.module.untactBook.untactLockerSetting.UntactBookSetting">
+		SELECT
+			homepage_id, locker_use_yn, row_count, total_count, reservation_max_count, 
+			SUBSTR(loan_time,0,2) AS start_hour,
+			SUBSTR(loan_time,4,2) AS start_minute,
+			SUBSTR(loan_time,7,2) AS end_hour, 
+			SUBSTR(loan_time,10,2) AS end_minute,
+			locker_use_type, vFromPhone, password_yn, sms_use_yn, rentalPlace
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+
+	<update id="mergeUntactBookSetting">
+		MERGE INTO
+			UNTACT_BOOK_SETTING a
+			USING dual
+			ON
+				(a.homepage_id = #{homepage_id})
+			WHEN MATCHED THEN
+				UPDATE SET
+				    a.locker_use_yn = #{locker_use_yn},
+					a.row_count = #{row_count},
+					a.total_count = #{total_count},
+					a.reservation_max_count = #{reservation_max_count},
+					a.loan_time = #{start_hour}||':'||#{start_minute}||'~'||#{end_hour}||':'||#{end_minute},
+					a.locker_use_type = #{locker_use_type},
+					a.vFromPhone = #{vFromPhone},
+					a.password_yn = #{password_yn},
+					a.sms_use_yn = #{sms_use_yn},
+					a.rentalPlace = #{rentalPlace}
+			WHEN NOT MATCHED THEN
+				INSERT (
+					homepage_id, locker_use_yn, row_count, total_count, reservation_max_count,
+					loan_time, locker_use_type, vFromPhone, password_yn, sms_use_yn, rentalPlace
+				) VALUES (
+					#{homepage_id}, #{locker_use_yn}, #{row_count}, #{total_count}, #{reservation_max_count},
+					#{start_hour}||':'||#{start_minute}||'~'||#{end_hour}||':'||#{end_minute}, #{locker_use_type}, #{vFromPhone}, #{password_yn}, #{sms_use_yn}, #{rentalPlace}
+				)
+	</update>
+	
+	<select id="reservationTimeCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+		AND (TO_CHAR(SYSDATE, 'HH24:MI') <![CDATA[<]]> TO_CHAR(SUBSTR(loan_time,0,2)||':'||SUBSTR(loan_time,4,2))
+		OR TO_CHAR(SYSDATE, 'HH24:MI') > TO_CHAR(SUBSTR(loan_time,7,2)||':'||SUBSTR(loan_time,10,2)))
+	</select>
+	
+	<select id="reservationMaxCount" resultType="int">
+		SELECT
+			reservation_max_count
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+	
+	<select id="getLoanTime" resultType="String">
+		SELECT
+			loan_time
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+	
+	<select id="getLockerUseType" resultType="String">
+		SELECT
+			locker_use_type
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+	
+	<select id="getLockerMaxCount" resultType="int">
+		SELECT
+			NVL(MAX(total_count),0)
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+	
+	<select id="getLockerUseYN" resultType="String">
+		SELECT
+			locker_use_yn
+		FROM
+			UNTACT_BOOK_SETTING
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+</mapper>

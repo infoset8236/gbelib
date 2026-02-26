@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.whalesoft.app.cms.notificationZone.NotificationZoneDao">
+	
+	<select id="getNotificationZoneList" resultType="kr.co.whalesoft.app.cms.notificationZone.NotificationZone">
+		${pagingTop}
+		SELECT 
+			homepage_id, notification_zone_idx, notification_zone_code, title, sub_title, contents,
+			start_date, end_date, link_type, link_target, link_url, use_yn, add_date, add_id, modify_date, modify_id,
+			(SELECT code_name FROM CMS_CODE WHERE HOMEPAGE_ID = 'h31' AND GROUP_ID = 'A0001' AND CODE_ID = A.notification_zone_code) AS notification_zone_code_name
+		FROM 
+			CMS_NOTIFICATION_ZONE A
+		WHERE
+			homepage_id = #{homepage_id}
+		<if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+		AND	${search_type} LIKE '%'||#{search_text}||'%'
+		</if>
+		ORDER BY ADD_DATE DESC
+		${pagingBottom}
+	</select>
+	
+	<select id="getNotificationZoneCount" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			CMS_NOTIFICATION_ZONE
+		WHERE
+			homepage_id = #{homepage_id}
+	</select>
+	
+	<select id="getNotificationZoneOne" resultType="kr.co.whalesoft.app.cms.notificationZone.NotificationZone">
+		SELECT 
+			homepage_id, notification_zone_idx, notification_zone_code, title, sub_title, contents,
+			start_date, end_date, link_type, link_target, link_url, use_yn, add_date, add_id, modify_date, modify_id
+		FROM 
+			CMS_NOTIFICATION_ZONE
+		WHERE
+			homepage_id = #{homepage_id}
+		AND notification_zone_idx = #{notification_zone_idx}
+	</select>
+	
+	<select id="getUsedNotificationZoneOne" resultType="kr.co.whalesoft.app.cms.notificationZone.NotificationZone">
+		SELECT * FROM (
+		    SELECT
+		        homepage_id, notification_zone_idx, notification_zone_code,
+		        (SELECT code_name FROM cms_code WHERE homepage_id = #{homepage_id} AND group_id = 'A0001' AND code_id = A.notification_zone_code) AS notification_zone_code_name,
+		        title, sub_title, contents, start_date, end_date,
+		        link_type, link_target, link_url, use_yn,
+		        add_date, add_id, modify_date, modify_id
+		    FROM 
+		    	cms_notification_zone A
+		    WHERE 
+		    	homepage_id = #{homepage_id}
+		    	AND notification_zone_code = #{notification_zone_code}
+		        AND use_yn = 'Y'
+		        AND SYSDATE >= TO_DATE(start_date||'000000', 'YYYY-MM-DDhh24MISS')
+		        AND SYSDATE <![CDATA[<=]]> TO_DATE(end_date||'235959', 'YYYY-MM-DDhh24MISS')
+		    ORDER BY notification_zone_idx DESC
+		)
+		WHERE ROWNUM = 1
+	</select>
+
+	<insert id="addNotificationZone">
+		<selectKey keyProperty="notification_zone_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(notification_zone_idx),0)+1 FROM CMS_NOTIFICATION_ZONE
+		</selectKey>
+		INSERT INTO CMS_NOTIFICATION_ZONE 
+		(
+			homepage_id, notification_zone_idx, notification_zone_code, title, sub_title,
+			contents, start_date, end_date, link_type, link_target, link_url, use_yn,
+			add_date, add_id, modify_date, modify_id
+		) VALUES (
+			#{homepage_id}, #{notification_zone_idx}, #{notification_zone_code}, #{title}, #{sub_title},
+			#{contents}, #{start_date}, #{end_date}, #{link_type}, #{link_target}, #{link_url}, #{use_yn},
+			SYSDATE, #{auth_id}, SYSDATE, #{auth_id}
+		)
+	</insert>
+	
+	<update id="modifyNotificationZone">
+		UPDATE
+		    CMS_NOTIFICATION_ZONE
+		SET
+		    title = #{title},
+		    sub_title = #{sub_title},
+		    contents = #{contents},
+		    start_date = #{start_date},
+		    end_date = #{end_date},
+		    link_type = #{link_type},
+		    link_target = #{link_target},
+		    link_url = #{link_url},
+		    use_yn = #{use_yn},
+		    modify_date = #{modify_date},
+		    modify_id = #{auth_id}
+		WHERE
+		    homepage_id = #{homepage_id}
+		AND notification_zone_idx = #{notification_zone_idx}
+	</update>
+	
+	<delete id="deleteNotificationZone">
+		DELETE FROM CMS_NOTIFICATION_ZONE
+		WHERE
+			homepage_id = #{homepage_id}
+		AND notification_zone_idx = #{notification_zone_idx}
+	</delete>
+</mapper>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCodeDao">
+    
+       <insert id="addCodeGroup">
+        INSERT INTO TRAINING_CATEGORY_CODE
+        (
+        	training_group_id, training_code_id, training_code_name, remark, up_training_code_id,
+        	print_seq, add_id, modify_id
+		)
+		VALUES
+		(
+			#{training_group_id}, '--', #{training_code_name}, #{remark}, #{up_training_code_id},
+			0, #{add_id}, #{modify_id}
+		)
+    </insert>
+    
+    <insert id="modifyCodeGroup">
+        UPDATE
+        	TRAINING_CATEGORY_CODE
+        SET
+			training_code_name = #{training_code_name},
+			remark = #{remark},
+			modify_date = SYSDATE,
+			modify_id = #{modify_id}
+			<if test='up_training_code_id != null and up_training_code_id != ""'>
+			, training_up_code_id = #{training_up_code_id}
+			</if>
+		WHERE
+			training_group_id = #{training_group_id}
+		AND	training_code_id = '--'
+    </insert>
+    
+       <insert id="addCode">
+        INSERT INTO TRAINING_CATEGORY_CODE
+        (
+        	training_group_id, training_code_id, training_code_name, remark, print_seq,
+        	add_id, modify_id
+		)
+		VALUES
+		(
+			#{training_group_id}, #{training_code_id}, #{training_code_name}, #{remark}, #{print_seq},
+			#{add_id}, #{modify_id}
+		)        	
+    </insert>
+    
+    <update id="modifyCode">
+        UPDATE
+        	TRAINING_CATEGORY_CODE 
+       	SET
+        	training_code_name = #{training_code_name}, 
+        	remark = #{remark}, 
+			print_seq = #{print_seq},
+			modify_date = SYSDATE,
+			modify_id = #{modify_id}
+		WHERE
+			training_code_id = #{training_code_id}
+		AND	training_group_id = #{training_group_id}
+    </update>
+    
+    <delete id="deleteCode">
+		DELETE
+			TRAINING_CATEGORY_CODE 
+		WHERE
+			training_code_id = #{training_code_id}        
+    </delete>
+    
+	<!-- 대분류 전체를 가져온다. -->
+	<select id="getRootGroup" resultType="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCode">
+		SELECT
+			*
+		FROM
+			TRAINING_CATEGORY_CODE
+		WHERE
+			training_group_id = 'GROUP_DIV'
+		AND	training_code_id != '--'
+		ORDER BY print_seq
+	</select>
+	
+	<!-- 특정 대분류를 가져온다. -->
+	<select id="getRootGroupOne" resultType="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCode">
+		SELECT 
+			* 
+		FROM 
+			TRAINING_CATEGORY_CODE 
+		WHERE 
+			training_group_id = 'GROUP_DIV'
+		AND	training_code_id = #{training_code_id}
+	</select>
+	
+	<!-- 대분류를 등록한다. -->
+	<insert id="addRootGroupCode">
+		INSERT INTO
+			TRAINING_CATEGORY_CODE
+		(
+			training_group_id, training_code_id, training_code_name, print_seq,
+			add_id, modify_id
+		)
+			VALUES
+		(
+			'GROUP_DIV', #{training_code_id}, #{training_code_name}, #{print_seq},
+			#{add_id}, #{modify_id}
+		)
+	</insert>
+	
+	<!-- 대분류를 수정한다. -->
+	<update id="modifyRootGroupCode">
+		UPDATE 
+			TRAINING_CATEGORY_CODE
+		SET
+			training_code_name = #{training_code_name},
+			print_seq = #{print_seq},
+			modify_date = SYSDATE,
+			modify_id = #{modify_id}
+		WHERE
+			training_code_id = #{training_code_id}
+		AND	training_group_id = 'GROUP_DIV'
+	</update>
+	
+	<!-- 전체 중분류를 가져온다. -->
+	<select id="getMiddleGroup" resultType="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCode">
+		SELECT 
+			* 
+		FROM
+			TRAINING_CATEGORY_CODE 
+		WHERE
+			training_code_id =  <![CDATA[ '--' ]]>
+		ORDER BY up_training_code_id
+	</select>
+	
+	<!-- 특정 중분류를 가져온다. -->
+	<select id="getMiddleGroupOne" resultType="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCode">
+		SELECT 
+			* 
+		FROM
+			TRAINING_CATEGORY_CODE 
+		WHERE
+			training_code_id =  <![CDATA[ '--' ]]>
+		AND	training_group_id = #{training_group_id}
+	</select>
+	
+	<!-- 소분류를 가져온다. -->
+	<select id="getCode" resultType="kr.go.gbelib.app.cms.module.training.trainingCategoryCode.TrainingCategoryCode">
+		SELECT 
+			training_code_name, training_code_id , print_seq, training_group_id
+		FROM 
+			TRAINING_CATEGORY_CODE
+		WHERE training_group_id = #{training_group_id}
+		AND	training_code_id <![CDATA[ <> '--' ]]> 
+		ORDER BY print_seq
+	</select>
+</mapper>

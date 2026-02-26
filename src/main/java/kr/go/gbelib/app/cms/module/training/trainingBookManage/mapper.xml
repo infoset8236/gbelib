@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManageDao">
+    <sql id="field">
+        training_book_manage_idx, homepage_id, training_idx, student_idx, student_name,
+        web_id, student_birth, belong_name, applicant_cell_phone, student_rank,
+        qr_count, training_status, training_type, training_date, TO_CHAR(add_date, 'YYYY-MM-DD HH24:MI:SS') AS add_date,
+        add_id
+    </sql>
+
+    <insert id="addTrainingBookManage">
+        INSERT INTO TRAINING_BOOK_MANAGE
+        (
+            training_book_manage_idx, homepage_id, training_idx, student_idx, student_name,
+            web_id, belong_name, student_birth, applicant_cell_phone, student_rank,
+            qr_count, training_status, training_type, training_date, add_date,
+            add_id
+        )
+        SELECT
+            TRAINING_BOOK_MANAGE_SEQ.NEXTVAL, homepage_id, training_idx, student_idx, student_name,
+            CASE WHEN ts.apply_type = 'CMS' THEN ts.member_id ELSE ts.web_id END AS web_id,
+            CASE WHEN ts.apply_type = 'CMS' THEN ts.student_organization ELSE ts.belong_name END AS belong_name,
+            student_birth, applicant_cell_phone, student_rank, #{qr_count}, '1',
+            #{training_type}, #{training_date}, SYSDATE, #{add_id}
+        FROM
+            TRAINING_STUDENT ts
+        WHERE
+            homepage_id = #{homepage_id}
+        AND training_idx = #{training_idx}
+        AND apply_status in ('1', '5')
+        AND NOT EXISTS (
+            SELECT
+                tbm.web_id
+            FROM
+                TRAINING_BOOK_MANAGE tbm
+            WHERE
+                tbm.web_id = CASE WHEN ts.apply_type = 'CMS' THEN ts.member_id ELSE ts.web_id END
+            AND tbm.training_idx = ts.training_idx
+            AND tbm.homepage_id = ts.homepage_id
+            AND tbm.qr_count = #{qr_count}
+            AND TRUNC(tbm.add_date) = TRUNC(SYSDATE)
+        )
+    </insert>
+
+    <select id="getTrainingBookManage" resultType="kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManage">
+        ${pagingTop}
+        SELECT
+            <include refid="field" />
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            homepage_id = #{homepage_id}
+        AND training_idx = #{training_idx}
+        <if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+            AND	${search_type} LIKE '%'||#{search_text}||'%'
+        </if>
+        <if test="attendance_status != null and attendance_status != '' and attendance_status != 'ALL'">
+            AND training_status = #{attendance_status}
+        </if>
+        <if test="search_start_date != null and search_start_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') >= #{search_start_date}
+        </if>
+        <if test="search_end_date != null and search_end_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') &lt;= #{search_end_date}
+        </if>
+        <if test="qr_count != null and qr_count != ''">
+            AND qr_count = #{qr_count}
+        </if>
+        ORDER BY
+            add_date desc
+        ${pagingBottom}
+    </select>
+
+    <select id="getTrainingBookManageCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            homepage_id = #{homepage_id}
+        AND training_idx = #{training_idx}
+        <if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+            AND	${search_type} LIKE '%'||#{search_text}||'%'
+        </if>
+        <if test="attendance_status != null and attendance_status != '' and attendance_status != 'ALL'">
+            AND training_status = #{attendance_status}
+        </if>
+        <if test="search_start_date != null and search_start_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') >= #{search_start_date}
+        </if>
+        <if test="search_end_date != null and search_end_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') &lt;= #{search_end_date}
+        </if>
+        <if test="qr_count != null and qr_count != ''">
+            AND qr_count = #{qr_count}
+        </if>
+        ORDER BY
+            add_date desc
+    </select>
+
+    <select id="checkTrainingBookManage" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            training_idx = #{training_idx}
+        AND qr_count = #{qr_count}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <select id="checkTrainingStudent" resultType="kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManage">
+        SELECT
+            <include refid="field"/>
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            training_idx = #{training_idx}
+        AND web_id = #{web_id}
+        AND qr_count = #{qr_count}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <select id="checkTrainingStudentCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            training_idx = #{training_idx}
+        AND web_id = #{web_id}
+        AND qr_count = #{qr_count}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <update id="modifyTrainingStudent">
+        UPDATE
+            TRAINING_BOOK_MANAGE
+        SET
+            training_type = #{training_type},
+            training_status = #{training_status},
+            training_date = SYSDATE
+        WHERE
+            training_idx = #{training_idx}
+        AND web_id = #{web_id}
+        AND qr_count = #{qr_count}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </update>
+
+    <update id="modifyTrainingStudentByIdx">
+        UPDATE
+            TRAINING_BOOK_MANAGE
+        SET
+            training_type = #{training_type},
+            training_status = #{training_status},
+            <choose>
+                <when test="editMode == 'notQR'">
+                    training_date = NULL
+                </when>
+                <otherwise>
+                    training_date = SYSDATE
+                </otherwise>
+            </choose>
+        <where>
+            <choose>
+                <when test="training_book_manage_idx_arr != null and training_book_manage_idx_arr.size() > 0">
+                    training_book_manage_idx IN <foreach collection="training_book_manage_idx_arr" item="i" open="(" close=")" separator=",">#{i}</foreach>
+                </when>
+                <otherwise>
+                    training_book_manage_idx = #{training_book_manage_idx}
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <select id="getExcelTrainingBookManage" resultType="kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManage">
+        SELECT
+            <include refid="field"/>
+        FROM
+            TRAINING_BOOK_MANAGE
+        WHERE
+            training_idx = #{training_idx}
+        ORDER BY
+            qr_count, add_date desc, training_date desc
+    </select>
+
+</mapper>

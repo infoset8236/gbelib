@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.trainingBook.TrainingBookDao">
+
+	<select id="getTrainingBookList" resultType="kr.go.gbelib.app.cms.module.trainingBook.TrainingBook">
+		SELECT HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, TRAINING_DATE, STATUS
+		FROM TRAINING_BOOK
+		WHERE HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+	</select>
+
+	<insert id="addTrainingBook">
+		INSERT INTO TRAINING_BOOK (HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, TRAINING_DATE, STATUS, ADD_ID, DELETE_YN)
+		VALUES (#{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{student_idx}, #{training_date}, #{status}, #{add_id}, 'N')
+	</insert>
+	
+	<update id="mergeTrainingBook">
+		MERGE INTO TRAINING_BOOK
+        USING DUAL
+        ON ( HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx} AND STUDENT_IDX = #{student_idx} AND TRAINING_DATE = #{training_date})
+            	WHEN MATCHED THEN
+                    UPDATE 
+                    SET STATUS = #{status}
+					, MOD_DATE = SYSDATE
+					, MOD_ID = #{mod_id}
+            	WHEN NOT MATCHED THEN
+                    INSERT (HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, STUDENT_IDX, TRAINING_DATE, STATUS, ADD_ID, DELETE_YN)
+                    VALUES (#{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{student_idx}, #{training_date}, #{status}, #{add_id}, 'N')
+	</update>
+	
+	<select id="checkTrainingBookStudentByDate" resultType="int">
+		SELECT 
+			COUNT(*)
+		FROM 
+			TRAINING_BOOK
+		WHERE HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+			AND TRAINING_DATE 		= #{training_date}
+	</select>
+	
+	<update id="modifyTrainingBook">
+		UPDATE 
+			TRAINING_BOOK
+		SET 
+			<choose>
+				<when test="status == 0">
+					STATUS = null 
+				</when>
+				<otherwise>
+					STATUS = #{status}
+				</otherwise>
+			</choose>
+			, MOD_DATE = SYSDATE
+			, MOD_ID = #{mod_id}
+		WHERE HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+			AND TRAINING_DATE 		= #{training_date}
+	</update>
+
+	<delete id="deleteTrainingBook">
+		DELETE FROM TRAINING_BOOK
+		WHERE HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+			AND TRAINING_DATE 		= #{training_date}
+	</delete>
+	
+	<update id="modifyStudentPay">
+		UPDATE TRAINING_STUDENT
+		SET ${pay_type} = #{pay_value}
+		WHERE HOMEPAGE_ID 		= #{homepage_id}
+			AND GROUP_IDX 		= #{group_idx}
+			AND CATEGORY_IDX 	= #{category_idx}
+			AND TRAINING_IDX 		= #{training_idx}
+			AND STUDENT_IDX 	= #{student_idx}
+	</update>
+
+	<select id="getTrainingBookDateList" resultType="kr.go.gbelib.app.cms.module.trainingBook.TrainingBook">
+		SELECT 
+			TRAINING_BOOK_TIME_IDX, HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, TRAINING_DATE
+		FROM
+			TRAINING_BOOK_TIME
+		WHERE
+			HOMEPAGE_ID = #{homepage_id} AND
+			GROUP_IDX = #{group_idx} AND
+			CATEGORY_IDX = #{category_idx} AND
+			TRAINING_IDX = #{training_idx} AND
+			DELETE_YN = 'N'
+		ORDER BY
+			TRAINING_DATE ASC
+	</select>
+	
+	<select id="getTrainingBookDetailByDate" resultType="kr.go.gbelib.app.cms.module.trainingBook.TrainingBook">
+		SELECT 
+			a.STUDENT_IDX, a.STUDENT_NAME, b.TRAINING_BOOK_TIME_IDX, b.TRAINING_DATE,
+			(SELECT STATUS FROM TRAINING_BOOK_DETAIL WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX AND TRAINING_BOOK_TIME_IDX = b.TRAINING_BOOK_TIME_IDX ) as STATUS,
+			(SELECT PAY1 FROM TRAINING_BOOK_DETAIL WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX AND TRAINING_BOOK_TIME_IDX = b.TRAINING_BOOK_TIME_IDX ) as PAY1,
+			(SELECT PAY2 FROM TRAINING_BOOK_DETAIL WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX AND TRAINING_BOOK_TIME_IDX = b.TRAINING_BOOK_TIME_IDX ) as PAY2,
+			(SELECT PAY3 FROM TRAINING_BOOK_DETAIL WHERE HOMEPAGE_ID = b.HOMEPAGE_ID AND GROUP_IDX = b.GROUP_IDX AND CATEGORY_IDX = b.CATEGORY_IDX AND TRAINING_IDX = b.TRAINING_IDX AND STUDENT_IDX = a.STUDENT_IDX AND TRAINING_BOOK_TIME_IDX = b.TRAINING_BOOK_TIME_IDX ) as PAY3
+		FROM 
+			TRAINING_STUDENT a, TRAINING_BOOK_TIME b
+		WHERE
+			a.HOMEPAGE_ID = b.HOMEPAGE_ID(+) AND
+			a.GROUP_IDX = b.GROUP_IDX(+) AND
+			a.CATEGORY_IDX = b.CATEGORY_IDX(+) AND
+			a.TRAINING_IDX = b.TRAINING_IDX(+) AND
+			a.HOMEPAGE_ID = #{homepage_id} AND
+			a.GROUP_IDX = #{group_idx} AND
+			a.CATEGORY_IDX = #{category_idx} AND
+			a.TRAINING_IDX = #{training_idx} AND
+			b.TRAINING_DATE = #{training_date} AND
+			a.APPLY_STATUS = 1 AND
+			a.DELETE_YN = 'N'
+		ORDER BY 
+			STUDENT_NAME ASC
+	</select>
+	
+	<insert id="addTrainingBookTime">
+		<selectKey keyProperty="training_book_time_idx" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(TRAINING_BOOK_TIME_IDX), 0) + 1 FROM TRAINING_BOOK_TIME WHERE HOMEPAGE_ID = #{homepage_id} AND GROUP_IDX = #{group_idx} AND CATEGORY_IDX = #{category_idx} AND TRAINING_IDX = #{training_idx}
+		</selectKey>
+		MERGE INTO 
+			TRAINING_BOOK_TIME
+		USING DUAL ON (
+			HOMEPAGE_ID = #{homepage_id} AND
+			GROUP_IDX = #{group_idx} AND
+			CATEGORY_IDX = #{category_idx} AND
+			TRAINING_IDX = #{training_idx} AND
+			TRAINING_DATE = #{training_date}
+		)
+		<if test="delete_yn != null and delete_yn != ''">
+		WHEN MATCHED
+		THEN
+			UPDATE SET
+				DELETE_YN = #{delete_yn}
+		</if>
+		WHEN NOT MATCHED 
+		THEN	
+			INSERT
+			(
+				TRAINING_BOOK_TIME_IDX, HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, TRAINING_DATE
+			) VALUES
+			(
+				#{training_book_time_idx}, #{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{training_date}
+			)
+	</insert>
+	
+		
+	<update id="deleteTrainingBookTime">
+		UPDATE
+			TRAINING_BOOK_TIME
+		SET
+			DELETE_YN = 'Y'
+		WHERE
+			TRAINING_BOOK_TIME_IDX = #{training_book_time_idx}
+	</update>
+	
+	
+	<delete id="deleteTrainingBookDetail">
+		DELETE FROM
+			TRAINING_BOOK_DETAIL
+		WHERE HOMEPAGE_ID = #{homepage_id}
+			AND GROUP_IDX = #{group_idx}
+			AND CATEGORY_IDX = #{category_idx}
+			AND TRAINING_IDX = #{training_idx}
+			AND	TRAINING_BOOK_TIME_IDX = #{training_book_time_idx}
+			<if test="student_idx != null and student_idx > 0">
+			AND STUDENT_IDX = #{student_idx}
+			</if>
+	</delete>
+	
+	<insert id="addTrainingBookDetail">
+		MERGE INTO 
+			TRAINING_BOOK_DETAIL
+		USING DUAL ON (
+			HOMEPAGE_ID = #{homepage_id}
+			AND GROUP_IDX = #{group_idx}
+			AND CATEGORY_IDX = #{category_idx}
+			AND TRAINING_IDX = #{training_idx}
+			AND TRAINING_BOOK_TIME_IDX = #{training_book_time_idx} 
+			AND STUDENT_IDX = #{student_idx}
+		)
+		WHEN MATCHED
+		THEN
+			UPDATE SET
+				PAY1 = #{pay1},
+				PAY2 = #{pay2},
+				PAY3 = #{pay3},
+				STATUS = #{status},
+				MOD_DATE = SYSDATE,
+				MOD_ID = #{mod_id}
+		WHEN NOT MATCHED 
+		THEN	
+			INSERT ( HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TRAINING_IDX, TRAINING_BOOK_TIME_IDX, STUDENT_IDX, PAY1, PAY2, PAY3, STATUS, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID ) 
+			VALUES ( #{homepage_id}, #{group_idx}, #{category_idx}, #{training_idx}, #{training_book_time_idx}, #{student_idx}, #{pay1}, #{pay2}, #{pay3}, #{status}, SYSDATE, #{add_id}, SYSDATE, #{mod_id} )
+	</insert>
+	
+	<select id="getTrainingBookViewInfo" resultType="kr.go.gbelib.app.cms.module.trainingBook.TrainingBook">
+		SELECT 
+			a.STUDENT_NAME, a.STUDENT_ADDRESS, a.STUDENT_IDX, b.TRAINING_DATE, b.TRAINING_BOOK_TIME_IDX, c.STATUS, c.PAY1, c.PAY2, c.PAY3
+		FROM 
+			TRAINING_STUDENT a, TRAINING_BOOK_TIME b, TRAINING_BOOK_DETAIL c
+		WHERE 
+			a.HOMEPAGE_ID = b.HOMEPAGE_ID AND
+			a.GROUP_IDX = b.GROUP_IDX AND
+			a.CATEGORY_IDX = b.CATEGORY_IDX AND
+			a.TRAINING_IDX = b.TRAINING_IDX AND
+			a.STUDENT_IDX = c.STUDENT_IDX AND
+			b.HOMEPAGE_ID = c.HOMEPAGE_ID AND
+			b.GROUP_IDX = c.GROUP_IDX AND
+			b.CATEGORY_IDX = c.CATEGORY_IDX AND
+			b.TRAINING_IDX = c.TRAINING_IDX AND
+			a.STUDENT_IDX = c.STUDENT_IDX AND
+			b.TRAINING_BOOK_TIME_IDX = c.TRAINING_BOOK_TIME_IDX AND
+			a.HOMEPAGE_ID = #{homepage_id} AND
+			a.GROUP_IDX = #{group_idx} AND
+			a.CATEGORY_IDX = #{category_idx} AND
+			a.TRAINING_IDX = #{training_idx} AND
+			a.APPLY_STATUS = 1 AND
+			a.DELETE_YN = 'N' AND
+			b.DELETE_YN = 'N'
+		ORDER BY 
+			TRAINING_BOOK_TIME_IDX ASC
+	</select>
+	
+</mapper>
