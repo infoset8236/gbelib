@@ -1,0 +1,700 @@
+.container {
+    background-image: url("/resources/ict/typeD/star/img/star_bg.png");
+}
+
+.content {
+    height: 89.4278rem;
+    animation: fade-in-up 1s ease-out forwards;
+}
+
+.headerKoEnVert div:first-child{
+    color: #D4D6D7;
+}
+.headerKoEnVert div:last-child{
+    color: #FFF;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.mainBookList {
+    margin: 1.87rem 5.62rem 5.25rem;
+    padding: 3.69rem 4.12rem 3.97rem 5rem;
+    border-radius: 1.875rem;
+    background: rgba(255, 255, 255, 0.10);
+    backdrop-filter: blur(40px);
+}
+
+.mainBookListItem {
+    flex-direction: column;
+    gap: 4.95rem;
+}
+
+.bookInformation {
+    display: flex;
+    gap: 3.12rem;
+}
+
+.mainBookImage {
+    position: relative;
+    width: 25rem;
+    height: 25rem;
+    margin-top: 2.38rem;
+    border-radius: 50%;
+    background: rgba(238, 238, 238, 0.40);
+}
+
+.mainBookImage img {
+    position: absolute;
+    top: -1.44rem;
+    left: 2.81rem;
+    width: 19.375rem;
+    height: 27.84375rem;
+    border-radius: 1.25rem;
+    box-shadow: 20px 40px 80px 0 rgb(0 0 0 / 16%);
+    object-fit: fill;
+}
+
+.mainBookImage div {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: normal;
+    position: absolute;
+    z-index: 1;
+    top: -2.38rem;
+    right: 1.56rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.625rem;
+    height: 5.625rem;
+    text-align: center;
+    color: #FFF;
+    border-radius: 50%;
+    background: #029951;
+}
+
+.mainBookTitle {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 2.5rem;
+    font-style: normal;
+    line-height: normal;
+    display: -webkit-box;
+    overflow: hidden;
+    width: 19.375rem;
+    margin-top: 1.13rem;
+    margin-bottom: 0.81rem;
+    text-overflow: ellipsis;
+    color: #fff;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.mainBookAuthor {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 19.375rem;
+    margin-bottom: 2.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #E5E8EB;
+}
+
+.mainBookMeta {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: 140%;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    gap: 0.37rem;
+}
+
+.mainBookMeta span {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: 140%;
+    display: inline-block;
+    width: 10rem;
+    margin-left: 1rem;
+    color: #E5E8EB;
+}
+
+.mainBookMeta div {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 140%;
+    display: flex;
+    align-items: center;
+    width: 20rem;
+    white-space: nowrap;
+    color: #fff;
+}
+
+.mainBookMeta div span {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 140%;
+    display: block;
+    overflow: hidden;
+    width: 15.22rem;
+    margin-left: 0.88rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #E5E8EB;
+}
+
+.trigger {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13.75rem;
+    height: 3.75rem;
+    margin-top: 2.5rem;
+    color: #191F28;
+    border-radius: 15.625rem;
+    background: #fff;
+}
+
+.callRobot {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 13.75rem;
+    height: 3.75rem;
+    margin-top: 0.5rem;
+    color: #191F28;
+    border-radius: 15.625rem;
+    background: #FFF;
+    border: 1px solid #191F28;
+}
+
+.mainBookDesc div:first-child {
+    font-family: PretendardBold, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: 180%;
+    margin-bottom: 1.88rem;
+    color: #fff;
+}
+
+.mainBookDesc div:last-child {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: 180%;
+    display: -webkit-box;
+    overflow: hidden;
+    overflow-y: auto;
+    align-items: center;
+    width: 46.25rem;
+    height: 17.25rem;
+    padding-right: 0.87rem;
+    color: #fff;;
+}
+
+.mainBookDesc div:last-child::-webkit-scrollbar {
+    width: 0.25rem;   /* 세로 스크롤바 두께 */
+}
+
+.mainBookDesc div:last-child::-webkit-scrollbar-track {
+    border-radius: 0.125rem;
+    background: #E0E4E8;
+}
+
+.mainBookDesc div:last-child::-webkit-scrollbar-thumb {
+    transition: background 0.3s;
+    border-radius: 0.125rem;
+    background: #ADB5BD;
+}
+
+.mainBookDesc div:last-child::-webkit-scrollbar-thumb:hover {
+    background: #ADB5BD;
+}
+
+.bookList {
+    width: 60rem;
+    margin: 0 auto;
+    height: fit-content;
+}
+
+.bookItem {
+    padding: 5rem 5.62rem 2rem;
+    gap: 2.63rem;
+}
+.book {
+    margin: 0 2rem;
+}
+.book img {
+    width: 7.1875rem;
+    height: 10.375rem;
+    margin-bottom: 0.88rem;
+    border: 2px solid transparent;
+    border-radius: 0.625rem;
+    box-shadow: 0.625rem 0.9375rem 1.875rem 0 rgb(0 0 0 / 16%);
+    object-fit: fill;
+}
+
+.book div:nth-child(2) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 0.9375rem;
+    font-style: normal;
+    line-height: 140%;
+    overflow: hidden;
+    width: 6rem;
+    margin-bottom: 0.19rem;
+    padding: 0 0.24rem;
+    white-space: nowrap;
+    letter-spacing: -0.02344rem;
+    text-overflow: ellipsis;
+    color: #fff;
+}
+
+.book div:nth-child(3) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 0.875rem;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 6rem;
+    margin-bottom: 0.19rem;
+    padding: 0 0.24456rem;
+    white-space: nowrap;
+    letter-spacing: -0.02188rem;
+    text-overflow: ellipsis;
+    color: #E5E8EB;
+}
+
+.bookList .slick-dots {
+    position: absolute;
+    left: 0;
+    bottom: -3rem;
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    gap: 1.25rem;
+}
+
+.bookList .slick-dots li {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0;
+}
+
+.bookList .slick-dots li button {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 50%;
+    background-color: #8B95A1;
+}
+
+.bookList .slick-dots li.slick-active button {
+    background-color: #fff;
+}
+
+.popup, .robotPopup {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 50%);
+}
+
+.popupContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 56.26rem;
+    padding: 3.75rem 0 ;
+    transform: translate(-50%, -50%);
+    border-radius: 3.125rem;
+    background: #fff;
+}
+
+.robotPopupContent {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 56.26rem;
+    padding: 3.75rem 0 ;
+    transform: translate(-50%, -50%);
+    border-radius: 3.125rem;
+    background: #fff;
+}
+
+.robotPopupContent div:nth-child(1) {
+    color: #374151;
+    text-align: center;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 3.5625rem;
+    font-style: normal;
+    line-height: 130%;
+    letter-spacing: -0.07125rem;
+}
+
+.robotPopupContent div:nth-child(2) {
+    color: #4B5563;
+    margin-top: 2rem;
+    text-align: center;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 2.21875rem;
+    font-style: normal;
+    line-height: 140%;
+    letter-spacing: -0.04438rem;
+    margin-bottom: 4rem;
+}
+
+.timer {
+    color: #252F3F;
+    text-align: center;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 3.65625rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 130%;
+    padding-top: 5rem;
+    background-size: 5rem;
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-image: url("/resources/ict/typeD/ai/img/timer.gif");
+    margin-bottom: 5rem;
+}
+
+.closeRobotPopup {
+    display: flex;
+    width: 29rem;
+    padding: 2.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    color: #FFF;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 2.5rem;
+    font-style: normal;
+    line-height: 130%;
+    letter-spacing: -0.05rem;
+    border-radius: 1.5rem;
+    background: #000;
+}
+
+.robotPopupContent img {
+    width: 50rem;
+    margin-bottom: 5rem;
+    height: 30.28125rem;
+}
+
+.popupContent .qrImage {
+    width: 17.5rem;
+    height: 17.3125rem;
+    margin-top: 2.95rem;
+    margin-bottom: 4.16rem;
+    padding: 3.3125rem;
+    border: 4px solid #ADB5BD;
+    border-radius: 2.25rem;
+    background: #FFF;
+}
+
+.locationDetail {
+    margin-bottom: 4.09rem;
+}
+
+.locationDetail div {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 2.125rem;
+    font-style: normal;
+    line-height: 2.75rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: #242424;
+}
+
+.locationDetail div span {
+    font-family: PretendardBold, sans-serif;
+}
+
+.btnWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 3.75rem;
+    gap: 0.63rem;
+}
+
+.btnWrapper button {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: -webkit-fill-available;
+    height: 6.25rem;
+    text-transform: uppercase;
+    border: 4px solid #000;
+    border-radius: 1.25rem;
+}
+
+.popup .close {
+    color: #242424;
+    background-color: #FFF;
+}
+
+.popup .print {
+    color: #FFF;
+    background-color: #000;
+}
+
+.qrWrapper {
+    height: fit-content;
+    padding: 1.06rem;
+    border: 4px solid #ADB5BD;
+    border-radius: 1.5rem;
+}
+
+.mapImage {
+    width: 50.625rem;
+    height: 30.65625rem;
+    margin: 0 auto;
+}
+
+.popupDetails{
+    width: 100%;
+}
+
+.popupDetailsMeta .metaBasic {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.popupDetailsMeta .metaBasic > div:nth-child(1),
+.popupDetailsMeta .metaBasic > div:nth-child(2),
+.popupDetailsMeta .metaBasic > div:nth-child(3) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    line-height: 140%;
+    display: flex;
+    color: #6B7684;
+    gap: 1rem;
+}
+
+.popupDetailsMeta .metaBasic > div:nth-child(1) span,
+.popupDetailsMeta .metaBasic > div:nth-child(2) span,
+.popupDetailsMeta .metaBasic > div:nth-child(3) span {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    line-height: 140%;
+    display: -webkit-box;
+    overflow: hidden;
+    max-width: 29.375rem;
+    text-overflow: ellipsis;
+    color: #191F28;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+
+.popupDetailsMeta .metaBasic > div:nth-child(4) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: 2.5rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #242424;
+}
+
+.popupDetailsMeta .metaBasic > div:nth-child(4) span {
+    font-family: PretendardBold, sans-serif;
+}
+
+
+.popupDetailsMeta .metaInfoWrap {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1.87rem;
+    padding: 2.19rem 3.75rem 0;
+}
+
+.popupDetailsMeta .metaShelf {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.popupDetailsMeta .metaShelfLabel {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.5rem;
+    line-height: 140%;
+    display: -webkit-box;
+    overflow: hidden;
+    width: 5.625rem;
+    text-align: center;
+    text-overflow: ellipsis;
+    color: #6B7684;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.popupDetailsMeta .metaShelfNum {
+    font-size: 2.625rem;
+    line-height: normal;
+    display: flex;
+    color: #191F28;
+    gap: 0.625rem;
+}
+
+.popupDetailsMeta .metaFloor {
+    font-family: PretendardRegular, sans-serif;
+    white-space: nowrap;
+}
+
+.popupDetailsMeta .metaSection {
+    font-family: PretendardSemiBold, sans-serif;
+}
+
+.qrSection { display: none; }
+.qrSection.has-canvas { display: flex; }
+
+.qrSection {
+    align-items: center;
+    justify-content: flex-end;
+    padding: 1.87rem 3.75rem 2.5rem;
+    border-top: 1px solid rgb(0 0 0 / 40%);
+    gap: 1.25rem;
+}
+
+.qrSection .qrTextWrap {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.qrSection .qrTextWrap .qrTitle {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.625rem;
+    line-height: 140%;
+    text-align: right;
+    letter-spacing: -0.04063rem;
+    text-transform: uppercase;
+    color: #191F28;
+}
+
+.qrSection .qrTextWrap .qrDescription {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 140%; /* 2.1rem */
+    text-align: right;
+    letter-spacing: -0.0375rem;
+    text-transform: uppercase;
+    color: #191F28;
+}
+
+.qrSection .qrImageWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.875rem;
+    height: 6.875rem;
+    padding: 0.15544rem 0.14075rem 0.14075rem 0.15544rem;
+    aspect-ratio: 1/1;
+}
+
+.qrSection .qrImageWrap > canvas {
+    width: 100%;
+}
+
+.qrSection .qrImageWrap > img {
+    width: 100%;
+}
+
+
+.robot {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: -webkit-fill-available;
+    margin-bottom: 4rem;
+    padding: 2rem;
+    border: 4px solid #ADB5BD;
+    border-radius: 1.5rem;
+}
+
+.robot div:nth-child(1) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: 2.5rem;
+    white-space: nowrap;
+    text-transform: uppercase;
+    color: #242424;
+}
+
+.timer {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 2.65625rem;
+    font-style: normal;
+    line-height: 130%;
+    margin-top: 1rem;
+    padding-top: 5rem;
+    text-align: center;
+    color: #252F3F;
+    background-image: url("/resources/ict/typeD/ai/img/timer.gif");
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 5rem;
+}
+.noData {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30%;
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}

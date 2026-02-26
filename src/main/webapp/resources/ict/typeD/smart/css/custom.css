@@ -1,0 +1,129 @@
+.container {
+    background-image: url("/resources/ict/typeD/smart/img/keyword/bg.png");
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 3.2rem;
+    animation: fade-in-up 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.title div:first-child {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 3.125rem;
+    font-style: normal;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: -0.07813rem;
+    color: #191F28;
+}
+
+.title div:last-child {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.04063rem;
+    color: #6B7684;
+}
+
+.bookSlide {
+    width: 100%;
+    height: 80.91rem;
+    padding: 0;
+}
+
+.wrapper {
+    display: grid !important;
+    padding: 3.63rem 5.63rem 5.75rem;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3.75rem 3.67rem;
+}
+
+.book img {
+    width: 11.3125rem;
+    height: 16.25rem;
+    margin-bottom: 1.25rem;
+    border-radius: 0.75rem;
+    box-shadow: 20px 40px 60px 0 rgb(0 0 0 / 16%);
+
+}
+
+.book div:nth-child(2) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 140%;
+    overflow: hidden;
+    width: 11.3125rem;
+    margin-bottom: 0.25rem;
+    white-space: nowrap;
+    letter-spacing: -0.0375rem;
+    text-overflow: ellipsis;
+    color: #191F28;
+}
+
+.book div:nth-child(3) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.25rem;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 11.3125rem;
+    white-space: nowrap;
+    letter-spacing: -0.03125rem;
+    text-overflow: ellipsis;
+    color: #6B7684;
+}
+
+.bookSlide .slick-dots {
+    position: absolute;
+    bottom: 0;
+    display: flex !important;
+    justify-content: center;
+    width: 100%;
+    gap: 1.25rem;
+}
+
+.bookSlide .slick-dots li {
+    width: 0.75rem;
+    height: 0.75rem;
+    margin: 0;
+}
+
+.bookSlide .slick-dots li button {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 50%;
+    background-color: #8B95A1;
+}
+
+.bookSlide .slick-dots li.slick-active button {
+    background-color: #121212;
+}

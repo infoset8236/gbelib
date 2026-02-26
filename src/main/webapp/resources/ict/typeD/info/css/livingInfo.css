@@ -1,0 +1,302 @@
+@charset "utf-8";
+
+
+.livingContainer {
+    background: url("/resources/ict/typeD/info/img/livingInfo-bg.png") top left / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+.livingContainer::after{
+    content: "";
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
+    width: 100%;
+    height: 40%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    row-gap: 0.5rem;
+}
+
+.livingContainer .livingHeader {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.livingContainer .livingHeader .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.livingContainer .livingHeader .headerKo {
+    color: #191F28;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+.livingContainer .livingWrap{
+    padding: 0 6.25rem;
+    z-index: 1;
+    position: relative;
+}
+.livingContainer .livingWrap .livingWeatherWrap {
+    margin-top: 12rem;
+    display: flex;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft {
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .weatherToday {
+    display: flex;
+    align-items: center;
+    gap: 1.875rem;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .weatherToday .weatherLabel {
+    color: #191F28;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .weatherToday .weatherCondition {
+    color: #191F28;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .temperature {
+    color: #191F28;
+    font-family: RobotoMedium, sans-serif;
+    font-size: 12.5rem;
+    line-height: normal;
+    letter-spacing: -0.5rem;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .feelsLike {
+    display: flex;
+    gap: 1.875rem;
+    align-items: center;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .feelsLike .label {
+    color: #191F28;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .feelsLike .value {
+    color: #191F28;
+    font-family: RobotoBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap {
+    margin-top: 4.44rem;
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.75rem;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap .airItem {
+    display: flex;
+    width: 21.875rem;
+    padding: 1.0625rem 2.5rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 3.125rem;
+    gap: 1.25rem;
+    background: rgba(17, 17, 17, 0.60);
+    box-sizing: border-box;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap .airItem .airLabel {
+    color: #FFF;
+    font-family: Pretendard;
+    font-size: 1.875rem;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap .airItem .airLabel::before{
+    content: "";
+    display: flex;
+    background: url("/resources/ict/typeD/info/img/life/dust.svg") top left no-repeat;
+    width: 1.875rem;
+    height: 1.875rem;
+    background-size: 1.875rem;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap .airItem:nth-child(2) .airLabel::before{
+    content: "";
+    background: url("/resources/ict/typeD/info/img/life/food.svg") top left no-repeat;
+    width: 1.875rem;
+    height: 1.875rem;
+    background-size: 1.875rem;
+}
+.livingContainer .livingWrap .livingWeatherWrap .weatherLeft .airInfoWrap .airItem .airValue {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherRight {
+    width: 18.75rem;
+    height: 18.75rem;
+}
+
+.livingContainer .livingWrap .livingWeatherWrap .weatherRight img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap {
+    margin-top: 28rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap .scheduleItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap .scheduleItem .scheduleImage {
+    width: 5.625rem;
+    height: 5.625rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap .scheduleItem .scheduleImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap .scheduleItem .scheduleTemp {
+    color: #FFF;
+    text-align: center;
+    font-family: RobotoMedium, sans-serif;
+    font-size: 2.25rem;
+    line-height: normal;
+    margin-top: 0.75rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .scheduleWrap .scheduleItem .scheduleDate {
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.5rem;
+    line-height: normal;
+    margin-top: 1.25rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap {
+    margin-top: 3.12rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap .newsSlide{}
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap .newsItem{
+    margin-top: 1.25rem;
+}
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap .newsTitle {
+    display: flex;
+    padding: 0.625rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3125rem;
+    border-radius: 0.75rem;
+    background: #000;
+    width: fit-content;
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.5rem;
+    line-height: normal;
+    letter-spacing: -0.0375rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap .newsContent {
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    width: 100%;
+    height: 5.25rem;
+    overflow: hidden;
+    color: #FFF;
+    text-overflow: ellipsis;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.875rem;
+    line-height: 140%;
+    letter-spacing: -0.04688rem;
+}
+
+.livingContainer .livingWrap .livingScheduleNewsWrap .newsWrap .newsDate {
+    overflow: hidden;
+    color: #ADB5BD;
+    text-overflow: ellipsis;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.625rem;
+    line-height: 140%;
+    letter-spacing: -0.04063rem;
+    margin-top: 0.3rem;
+}
+
+.livingContainer .livingCopyright {
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #191F28;
+}

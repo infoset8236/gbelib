@@ -1,0 +1,212 @@
+.container {
+    background-image: url("/resources/ict/typeD/star/img/myStar/bg.png");
+}
+
+.headerKoEnVert div:last-child {
+    color: #fff !important;
+}
+
+.content {
+    position: relative;
+    padding-top: 33.41rem;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: fade-in-up 1s ease-out forwards;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.shootingStar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.shootingStar span {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.1;
+    animation: twinkle 1s infinite ease-in-out;
+}
+
+.shootingStar span:nth-child(1) {
+    left: 12.6%;
+    top: 6.2%;
+    animation-delay: 0s;
+    animation-duration: 2s;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.shootingStar span:nth-child(2) {
+    left: 55.5%;
+    top: 10.7%;
+    animation-delay: 0.8s;
+    animation-duration: 3s;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.shootingStar span:nth-child(3) {
+    left: 65%;
+    top: 0.3%;
+    animation-delay: 1.5s;
+    animation-duration: 2.2s;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.shootingStar span:nth-child(4) {
+    left: 71.5%;
+    top: 7%;
+    animation-delay: 1s;
+    animation-duration: 2s;
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.shootingStar span:nth-child(5) {
+    left: 14.7%;
+    top: 8%;
+    animation-delay: 0.6s;
+    animation-duration: 1.8s;
+    width: 5rem;
+    height: 5rem;
+    background: url(/resources/ict/typeD/star/img/light.png) no-repeat center;
+    background-size: 5rem;
+}
+
+.shootingStar span:nth-child(6) {
+    left: 4.9%;
+    top: 21%;
+    animation-delay: 1.9s;
+    animation-duration: 2.6s;
+    width: 9rem;
+    height: 9rem;
+    background: url(/resources/ict/typeD/star/img/light.png) no-repeat center;
+    background-size: 9rem;
+}
+
+.shootingStar span:nth-child(7) {
+    left: 32.2%;
+    top: 12.8%;
+    animation-delay: 1.2s;
+    animation-duration: 2.1s;
+    width: 9rem;
+    height: 9rem;
+    background: url(/resources/ict/typeD/star/img/light.png) no-repeat center;
+    background-size: 9rem;
+}
+
+@keyframes twinkle {
+    0% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.1);
+    }
+    100% {
+        opacity: 0.1;
+        transform: scale(1);
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.title {
+    color: #FFF;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 3.5rem;
+    font-style: normal;
+    line-height: 130%;
+    letter-spacing: -0.07rem;
+    margin-bottom: 5.25rem;
+}
+
+.selectBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.wrapper {
+    position: relative;
+    backdrop-filter: blur(40px);
+}
+
+.selectBox label {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    position: absolute;
+    top: 50%;
+    left: 2.5rem;
+    transform: translateY(-50%);
+    color: #E5E8EB;
+}
+
+.selectBox select {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    height: 5.625rem;
+    width: 20.625rem;
+    color: #FFF;
+    padding: 0 0.5rem 0 11rem;
+    border: 4px solid rgba(255, 255, 255, 0.60);
+    border-radius: 3.75rem;
+    background: rgba(255, 255, 255, 0.10) url("/resources/ict/typeD/star/img/myStar/arrow.svg") no-repeat center right 2.5rem;
+    background-size: 3rem;
+    appearance: none;
+    max-width: 20.624rem;
+}
+
+.selectBox select option {
+    background: #191F28;
+    color: #FFFFFF;
+}
+
+.submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2.5rem;
+    border-radius: 6.25rem;
+    background: #FFF;
+    width: 43.75rem;
+    height: 7.5rem;
+    color: #191F28;
+    text-align: center;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.9375rem;
+    font-style: normal;
+    line-height: normal;
+}

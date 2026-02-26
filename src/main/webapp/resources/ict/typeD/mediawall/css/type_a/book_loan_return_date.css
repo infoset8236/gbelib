@@ -1,0 +1,190 @@
+.loanReturn_wrap{
+	width: 100%;
+	height: 100vh;
+	background-color: #272930;
+}
+.loanReturn_wrap .header_wrap{
+	display: flex;
+	width: 100%;
+	padding: 100px 160px;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+.loanReturn_wrap .header_wrap .ict_tit_01{
+	color: #FFF;
+	font-family: Pretendard-SemiBold, sans-serif;
+	font-size: 32px;
+	font-weight: 600;
+	line-height: normal;
+}
+.loanReturn_wrap .header_wrap .ict_tit{
+	color: #8B95A1;
+	text-align: right;
+	font-family: Pretendard-SemiBold, sans-serif;
+	font-size: 32px;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: 3.2px;
+	text-transform: uppercase;
+}
+
+.loanReturn_wrap .daily_tit_wrap .large_tit{
+	color: #FFF;
+	text-align: center;
+	font-family: Pretendard-Medium, sans-serif;
+	font-size: 300px;
+	font-weight: 500;
+	line-height: normal;
+}
+.loanReturn_area{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 181px;
+}
+.loanReturn_container{
+	display: flex;
+	gap: 110px;
+}
+.loanReturn_container .loan_wrap,
+.loanReturn_container .return_wrap{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.loanReturn_wrap .loan_book_{
+	display: flex;
+	width: 1700px;
+	padding: 80px 120px;
+	justify-content: center;
+	align-items: center;
+	gap: 600px;
+	border-radius: 80px;
+	background: rgba(255, 255, 255, 0.20);
+	backdrop-filter: blur(50px);
+}
+.loanReturn_wrap .loan_book_ .lr_text{
+	color: #FFF;
+	font-family: Pretendard-SemiBold, sans-serif;
+	font-size: 92px;
+	font-style: normal;
+	line-height: 80px;
+}
+
+.loanReturn_wrap .return_book_{
+	display: flex;
+	width: 1700px;
+	padding: 80px 120px;
+	justify-content: center;
+	align-items: center;
+	border-radius: 80px;
+	background: rgba(254, 201, 98, 0.20);
+	backdrop-filter: blur(50px);
+}
+.loanReturn_wrap .return_book_ .lr_text{
+	color: #FFF;
+	font-family: Pretendard-SemiBold, sans-serif;
+	font-size: 92px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 80px;
+}
+
+.loanReturn_wrap .daily_num,
+.loanReturn_wrap .redaily_num{
+	display: flex;
+	align-items: center;
+	gap: 92px;
+}
+.loanReturn_wrap .month_wrap,
+.loanReturn_wrap .day_wrap{
+	display: flex;
+	align-items: baseline;
+}
+.loanReturn_wrap .month_num,
+.loanReturn_wrap .day_num{
+	font-family: 'Roboto', sans-serif;
+	font-size: 540px;
+	font-weight: 700;
+	color: #fff;
+}
+.loanReturn_wrap .month_kor,
+.loanReturn_wrap .day_kor{
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 120px;
+	font-weight: 500;
+	color: #fff;
+}
+
+.loanReturn_wrap .redaily_num .month_wrap .month_num{
+	color: #fec962;
+}
+
+.loanReturn_wrap .redaily_num .day_wrap .day_num{
+	color: #fec962;
+}
+
+@media (max-width: 1920px) {
+
+	.loanReturn_wrap .header_wrap{
+		padding: 50px 80px;
+	}
+	.loanReturn_wrap .header_wrap .ict_tit_01{
+		font-size: 16px;
+	}
+	.loanReturn_wrap .header_wrap .ict_tit{
+		font-size: 16px;
+		letter-spacing: 1.6px;
+	}
+
+	.loanReturn_wrap .daily_tit_wrap .large_tit{
+		font-size: 150px;
+	}
+	.loanReturn_area{
+		gap: 90.5px;
+	}
+	.loanReturn_container{
+		gap: 55px;
+	}
+
+
+	.loanReturn_wrap .loan_book_{
+		width: 850px;
+		padding: 40px 60px;
+		gap: 300px;
+		border-radius: 40px;
+	}
+	.loanReturn_wrap .loan_book_ .lr_text{
+		font-size: 46px;
+		line-height: 40px;
+	}
+
+	.loanReturn_wrap .return_book_{
+		width: 850px;
+		padding: 40px 60px;
+		border-radius: 40px;
+	}
+	.loanReturn_wrap .return_book_ .lr_text{
+		font-size: 46px;
+		line-height: 40px;
+	}
+
+	.loanReturn_wrap .daily_num,
+	.loanReturn_wrap .redaily_num{
+		gap: 46px;
+	}
+
+	.loanReturn_wrap .month_num,
+	.loanReturn_wrap .day_num{
+		font-size: 270px;
+	}
+	.loanReturn_wrap .month_kor,
+	.loanReturn_wrap .day_kor{
+		font-size: 60px;
+	}
+
+}

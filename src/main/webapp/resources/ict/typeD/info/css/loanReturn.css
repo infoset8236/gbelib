@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+
+.bookReturnContainer {
+    background: url("/resources/ict/typeD/info/img/loanReturn-bg.png")  top left / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.bookReturnContainer .bookReturnHeader {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 0.5rem;
+}
+
+.bookReturnContainer .bookReturnHeader .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.bookReturnContainer .bookReturnHeader .headerKo {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.bookReturnContainer .bookReturnContent {
+    padding: 0 6.25rem;
+    margin-top: 10.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10.5rem;
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnNotice {
+    color: #FFF;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 4.75rem;
+    line-height: 150%;
+    letter-spacing: -0.11875rem;
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo {
+
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateTitle{
+    width: 100%;
+    display: flex;
+    padding: 2.5rem 3.75rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2.5rem;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(50px);
+    box-sizing: border-box;
+}
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem:nth-child(2) .dateTitle{
+    background: rgba(254, 201, 98, 0.20);
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateTitle .dateLabelKo {
+    color: #FFF;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateTitle .dateLabelEn  {
+    color: #8B95A1;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateValue {
+    display: inline-flex;
+    gap: 2.875rem;
+    align-items: baseline;
+}
+
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateValue div:nth-child(odd) {
+    color: #FFF;
+    text-align: center;
+    font-family: RobotoBold, sans-serif;
+    font-size: 16.875rem;
+    line-height: normal;
+}
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem:nth-child(2) .dateValue div:nth-child(odd){
+    color: #FEC962;
+}
+.bookReturnContainer .bookReturnContent .bookReturnInfo .dateItem .dateValue div:nth-child(even){
+    color: #FFF;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 3.75rem;
+    line-height: normal;
+
+}
+.bookReturnCopyright{
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #191F28;
+}

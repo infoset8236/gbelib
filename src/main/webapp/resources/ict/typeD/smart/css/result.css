@@ -1,0 +1,141 @@
+.container {
+    background-image: url("/resources/ict/typeD/smart/img/result/bg.png");
+}
+
+.content {
+    margin-top: 1.8rem;
+    padding: 0 5.63rem;
+    animation: fade-in-up 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.totalCount {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.5625rem;
+    font-style: normal;
+    line-height: normal;
+    margin-bottom: 1.87rem;
+    text-transform: uppercase;
+    color: #191F28;
+}
+
+.totalCount span {
+    font-family: PretendardBold, sans-serif;
+}
+
+.resultList {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    height: 81.25rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    padding-left: 0;
+    gap: 0.88rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.resultList::-webkit-scrollbar {
+    display: none;
+}
+
+.resultItem {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 1.56rem;
+    border-radius: 1.5rem;
+    background: #FFF;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1.88rem;
+}
+
+.wrapper img {
+    width: 6.5625rem;
+    height: 9.375rem;
+    border-radius: 0.5rem;
+    box-shadow: 0.3125rem 0.46875rem 0.9375rem 0 rgb(0 0 0 / 15%);
+}
+
+.bookInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.38rem;
+}
+
+.bookInfo div:nth-child(1) {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 30.9375rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #191F28;
+}
+
+.bookInfo div:nth-child(2),
+.bookInfo div:nth-child(3),
+.bookInfo div:nth-child(4),
+.bookInfo div:nth-child(5) {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    line-height: 110%;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.0225rem;
+    text-transform: uppercase;
+    color: #191F28;
+}
+
+.bookInfo div:nth-child(2) span,
+.bookInfo div:nth-child(3) span,
+.bookInfo div:nth-child(4) span,
+.bookInfo div:nth-child(5) span {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.125rem;
+    line-height: 110%;
+    display: inline-block;
+    overflow: hidden;
+    width: 26.11562rem;
+    margin-left: 0.88rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #6B7684;
+}
+
+.resultItem a {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    line-height: 1.5625rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 11.25rem;
+    height: 3.125rem;
+    text-transform: uppercase;
+    color: #FFF;
+    border-radius: 1.5625rem;
+    background: #8B95A1;
+}

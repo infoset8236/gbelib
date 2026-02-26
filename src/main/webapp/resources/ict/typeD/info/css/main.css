@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+.introContainer {
+    width: 100%;
+    height: 100vh;
+    background: url("/resources/ict/typeD/info/img/main-bg.png") top left / cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.introContainer .introTextGroup {
+    margin-top: 31.25rem;
+}
+.introContainer .introTextGroup .introTitle {
+    color: #00278F;
+    text-align: center;
+    font-family: PretendardSemiBold, sans-serif;
+    text-transform: uppercase;
+    font-size: 4.625rem;
+    line-height: 5.25rem; /* 113.514% */
+    letter-spacing: -0.11563rem;
+}
+.introContainer .introTextGroup .introTitle:nth-child(2){
+    font-family: PretendardMedium, sans-serif;
+}
+.introContainer .introDesc {
+    color: #00278F;
+    text-align: center;
+    font-family: DINBold;
+    line-height: 140%;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+    margin-top: 1.5rem;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #191F28;
+}

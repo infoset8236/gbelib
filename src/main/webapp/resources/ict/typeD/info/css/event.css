@@ -1,0 +1,160 @@
+@charset "utf-8";
+
+.eventContainer {
+    background: url("/resources/ict/typeD/info/img/event-bg.png")  top left / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.eventContainer .eventHeader {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 0.5rem;
+}
+
+.eventContainer .eventHeader .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.eventContainer .eventHeader .headerKo {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.eventContainer .eventSlide {
+    margin-top: 33.28rem;
+    padding: 0 6.25rem;
+    box-sizing: border-box;
+}
+
+.eventContainer .eventSlide .slideItem {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 55rem !important;
+    row-gap: 5rem;
+    margin-right: 5rem;
+}
+
+.eventContainer .eventSlide .slideItem .itemInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+}
+
+.eventContainer .eventSlide .slideItem .itemInfo .infoRow {
+    display: flex;
+    width: 100%;
+    padding: 1.875rem 5rem;
+    align-items: center;
+    border-radius: 6.25rem;
+    gap: 0.625rem;
+    border: 3px solid rgba(229, 232, 235, 0.50);
+    box-sizing: border-box;
+    flex-direction: column;
+}
+
+.eventContainer .eventSlide .slideItem .itemInfo .infoRow .infoLabel {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.1875rem;
+}
+
+.eventContainer .eventSlide .slideItem .itemInfo .infoRow .infoValue {
+    color: #FFF;
+    text-align: center;
+    width: 100%;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 2.875rem;
+    line-height: normal;
+    letter-spacing: 0.2875rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.eventContainer .eventSlide .slideItem .itemTitle {
+    overflow: hidden;
+    color: #FFF;
+    text-align: center;
+    text-overflow: ellipsis;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 7.5rem;
+    line-height: normal;
+    letter-spacing: -0.1875rem;
+    display: -webkit-box;
+    width: 47.84894rem;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.eventContainer .slick-dots{
+    bottom: -7.5rem;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.88rem;
+}
+.eventContainer .slick-dots li{
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 100%;
+    background-color: #8B95A1;
+}
+.eventContainer .slick-dots li.slick-active{
+    background-color: #fff;
+}
+.eventContainer .eventCopyright {
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+}

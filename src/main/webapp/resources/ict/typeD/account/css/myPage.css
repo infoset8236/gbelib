@@ -1,0 +1,321 @@
+.container {
+    background: radial-gradient(62.78% 33.69% at 97.96% -1.46%, rgb(211 187 241 / 80%) 0%, rgb(211 187 241 / 0%) 100%), linear-gradient(180deg, #DAE4F4 0%, #F4E5E7 89.8%);
+}
+
+.content {
+    margin-top: 1.3rem;
+    padding: 0 5.63rem;
+    animation: fade-in-up 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loanSummary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8.75rem;
+    margin-bottom: 3.13rem;
+    border-radius: 1.875rem;
+    background: #FFF;
+    box-shadow: 20px 30px 60px 0 rgb(0 0 0 / 10%);
+    gap: 17rem;
+}
+
+.loanSummary div {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: normal;
+    position: relative;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-transform: uppercase;
+    color: #6B7684;
+}
+
+.loanSummary div span {
+    font-family: RobotoLight, sans-serif;
+    font-size: 3.125rem;
+    font-style: normal;
+    line-height: normal;
+    display: inline-block;
+    margin-left: 1.88rem;
+    color: #191F28;
+}
+
+.loanSummary div:not(:last-child)::after {
+    position: absolute;
+    top: 50%;
+    right: -8.5rem;
+    width: 0.0625rem;
+    height: 2.71875rem;
+    content: "";
+    transform: translateY(-50%);
+    background: #ADB5BD;
+}
+
+.tabMenu {
+    display: flex;
+    height: 5.625rem;
+    margin-bottom: 2.5rem;
+    border-radius: 2.8125rem;
+    background: #ADB5BD;
+}
+
+.tabMenu div {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.5625rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.75rem;
+    height: 100%;
+    text-align: center;
+    color: #FFF;
+    border-radius: 2.8125rem;
+}
+
+.tabMenu .active {
+    color: #FFF;
+    background: #191F28;
+}
+
+.filterArea {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    padding: 0.62rem 0;
+}
+
+.recentMonthFilter {
+    display: flex;
+    align-items: center;
+    gap: 1.88rem;
+}
+
+.filterItem {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #191F28;
+}
+
+.filterItem input[type="radio"] {
+    display: none;
+}
+
+.filterItem .customRadio {
+    display: inline-block;
+    width: 1.9rem;
+    height: 1.9rem;
+    margin-right: 0.62rem;
+    background-image: url('/resources/ict/typeD/account/img/unChecked.svg');
+    background-size: 1.875rem;
+}
+
+.filterItem .customRadio.selected {
+    background-image: url('/resources/ict/typeD/account/img/checked.svg');
+}
+
+.customDateFilter {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.filterLabel {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    color: #191F28;
+}
+
+.filterInput input {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.375rem;
+    font-style: normal;
+    line-height: normal;
+    padding: 0.625rem 1.625rem;
+    color: #191F28;
+    border-radius: 1.875rem;
+    background: rgb(255 255 255 / 80%);
+}
+
+.resultList {
+    display: flex;
+    overflow-y: auto;
+    flex-direction: column;
+    height: 61.1rem;
+    margin-top: 0;
+    margin-bottom: 2.13rem;
+    padding: 0;
+    gap: 0.63rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.resultList::-webkit-scrollbar {
+    display: none;
+}
+
+.resultItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5625rem;
+    border-radius: 1.25rem;
+    background: #FFF;
+}
+
+.bookInfo {
+    display: flex;
+    align-items: center;
+    gap: 1.88rem;
+}
+
+.bookInfo img {
+    width: 5rem;
+    height: 6.875rem;
+    border-radius: 0.625rem;
+    box-shadow: 10px 15px 30px 0 rgb(0 0 0 / 16%);
+}
+
+.bookDetail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.88rem;
+}
+
+.bookTitle {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.5rem;
+    font-style: normal;
+    line-height: 140%;
+    overflow: hidden;
+    width: 36.875rem;
+    white-space: nowrap;
+    letter-spacing: -0.0375rem;
+    text-transform: uppercase;
+    text-overflow: ellipsis;
+    color: #121212;
+}
+
+.bookMeta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 0.38rem 1.25rem;
+}
+
+.bookMeta div {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    line-height: 110%;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.02813rem;
+    text-transform: uppercase;
+    color: #191F28;
+}
+
+.bookMeta div span {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    line-height: 110%;
+    overflow: hidden;
+    margin-left: 0.88rem;
+    white-space: nowrap;
+    letter-spacing: -0.02813rem;
+    text-overflow: ellipsis;
+    color: #6B7684;
+}
+
+.dataRoom span, .loanDate span {
+    display: inline-block;
+    width: 14.0625rem;
+}
+
+.libraryName span, .returnDate span {
+    display: inline-block;
+    width: 6rem;
+}
+
+.loanStatus {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    line-height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5.625rem;
+    height: 5.46428rem;
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 50%;
+}
+
+.code1 {
+    color: #0074E5;
+    background: #DDF4FF;
+}
+
+.code2 {
+    color: #F3AB31;
+    background: #FCF5E4;
+}
+
+.code3 {
+    color: #029951;
+    background: #EEF7EE;
+}
+
+.code4 {
+    color: #6B7684;
+    border: 1px solid #8B95A1;
+    background: #FFF;
+}
+
+.code5 {
+    color: #6B7684;
+    background: #EFF1F3;
+}
+
+.noData {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 2.5rem;
+    font-style: normal;
+    line-height: 130%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    letter-spacing: -0.0625rem;
+    color: #191F28;
+}

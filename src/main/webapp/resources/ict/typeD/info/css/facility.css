@@ -1,0 +1,208 @@
+@charset "utf-8";
+
+.facilityContainer {
+    background: url("/resources/ict/typeD/info/img/facility/facility-bg.png") top left / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+}
+
+.facilityContainer .facilityHeader {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 0.5rem;
+}
+
+.facilityContainer .facilityHeader .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.facilityContainer .facilityHeader .headerKo {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.facilityContainer .facilityTab {
+    padding: 0 2.58rem;
+}
+
+.facilityContainer .facilityTab .tabImage {
+    width: 100%;
+    padding: 2.83rem 0;
+}
+
+.facilityContainer .facilityTab .tabImage img {
+    aspect-ratio: 1995.00/897.37;
+    width: 100%;
+}
+
+.facilityContainer .facilityTab .tabTitle {
+    color: #FFF;
+    font-family: PretendardExtraLight, sans-serif;
+    font-size: 10.625rem;
+    line-height: 10.625rem;
+    margin: 2.37rem auto 0;
+    width: 55rem;
+}
+
+.facilityContainer .facilityTab .facilitySlide {
+    margin: 5.5rem auto 0;
+    width: 55rem;
+}
+.facilityContainer .facilityTab .facilitySlide .slideItem{
+    width: 55rem !important;
+    margin-right: 5rem;
+}
+.facilityContainer .facilityTab .facilitySlide .slideItem .subTitle {
+    color: #FFF;
+    font-family: PretendardSemiBold ,sans-serif ;
+    font-size: 3.75rem;
+    line-height: normal;
+}
+
+.facilityContainer .facilityTab .facilitySlide .slideItem .checkList {
+    display: flex;
+    padding: 1.25rem 0.875rem;
+    flex-direction: column;
+    gap: 0.625rem;
+    margin-top: 1.25rem;
+}
+
+.facilityContainer .facilityTab .facilitySlide .slideItem .checkList .checkItem {
+    color: #FFF;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: 140%;
+    letter-spacing: -0.04688rem;
+    padding-left: 3.3rem;
+    background: url("/resources/ict/typeD/info/img/checkIcon.svg") top 0.3rem left / cover no-repeat;
+    background-size: 2.125rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.facilityContainer .facilityTab .facilitySlide .slideItem .textBox {
+    display: flex;
+    padding: 1.875rem 2.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 1.5rem;
+    background: rgba(0, 0, 0, 0.30);
+    margin-top: 2rem;
+}
+
+.facilityContainer .facilityTab .facilitySlide .slideItem .textBox > .facilityDesc{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    line-height: 150%;
+    color: #EFF1F3;
+
+}
+.facilityContainer .tabMenu{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5.51rem;
+    margin-top: 12rem;
+}
+.facilityContainer .tabMenu .tabMenuItem{
+    width: 7.53rem;
+    height: 3.44rem;
+    transition: 0.3s;
+}
+.facilityContainer .tabMenu .tabMenuItem a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.47384rem;
+    color: #ADB5BD;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 2.5rem;
+    line-height: normal;
+}
+.facilityContainer .tabMenu .tabMenuItem a::after{
+    content: "";
+    padding-top: 0.47rem;
+    width: 2.76406rem;
+    border-radius: 3rem;
+    height: 1px;
+    background-color: #ADB5BD;
+}
+.facilityContainer .tabMenu .tabMenuItem.active a{
+    color: #FEC962;
+}
+.facilityContainer .tabMenu .tabMenuItem.active a::after{
+    background-color: #FEC962;
+}
+
+.facilitySlide .slick-dots{
+    bottom: -5.38rem;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.88rem;
+}
+.facilitySlide .slick-dots li{
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 100%;
+    background-color: #8B95A1;
+}
+.facilitySlide .slick-dots li.slick-active{
+    background-color: #fff;
+}
+
+.facilityContainer .facilityCopyright {
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #191F28;
+}

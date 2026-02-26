@@ -1,0 +1,168 @@
+@charset "utf-8";
+
+.infoSection {
+  background-color: #f9f7f7;
+}
+.infoSection .infoBody {
+  background: url("/resources/ict/typeD/info/img/info-horizon-bg.png") top -6.7rem left / cover no-repeat;
+  width: 100%;
+  height: 100vh;
+}
+.infoSection .infoHeader {
+  display: flex;
+  padding: 3.34rem 3.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  row-gap: 0.5rem;
+}
+.infoSection .infoHeader .infoTitleEn {
+  color: #8b95a1;
+  text-align: center;
+  font-family: PretendardExtraBold, sans-serif;
+  font-size: 1rem;
+  line-height: normal;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
+.infoSection .infoHeader .infoTitleKo {
+  color: #fff;
+  font-family: PretendardMedium, sans-serif;
+  font-size: 1.875rem;
+  line-height: normal;
+}
+
+.infoSection .infoBody .infoArea {
+  display: flex;
+  margin-top: 4rem;
+}
+
+.infoSection .infoBody .infoGroup {
+  padding: 1.88rem 0;
+  display: flex;
+  column-gap: 5.5rem;
+  margin-bottom: 1.88rem;
+}
+.infoSection .infoBody .infoGroup .infoLabel {
+  width: 14.69rem;
+  color: #191f28;
+  font-family: PretendardSemiBold, sans-serif;
+  font-size: 1.75rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.04375rem;
+  position: relative;
+  text-align: right;
+}
+.infoSection .infoBody .infoGroup .infoLabel::after {
+  content: "";
+  position: absolute;
+  width: 2.76406rem;
+  height: 6px;
+  top: 2.97rem;
+  right: 0;
+  background-color: #191f28;
+}
+.infoSection .infoBody .infoGroup .infoTable {
+  border-radius: 0.75rem;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.infoSection .infoBody .infoGroup .infoTable caption {
+  display: none;
+}
+.infoSection .infoBody .infoGroup .infoTable thead {
+  background-color: #6b7684;
+}
+.infoSection .infoBody .infoGroup .infoTable thead tr {
+}
+.infoSection .infoBody .infoGroup .infoTable thead th {
+  padding: 1rem 1.25rem;
+  color: #fff;
+  text-align: center;
+  font-family: PretendardMedium, sans-serif;
+  font-size: 1.375rem;
+  line-height: normal;
+  letter-spacing: -0.03438rem;
+}
+
+.infoSection .infoBody .infoGroup .infoTable tbody {
+  background-color: #fff;
+}
+.infoSection .infoBody .infoGroup .infoTable tbody tr {
+  border-bottom: 1px solid #e5e8eb;
+}
+.infoSection .infoBody .infoGroup .infoTable tbody td {
+  padding: 1rem 1.25rem;
+  color: #191f28;
+  text-align: center;
+  font-family: PretendardMedium, sans-serif;
+  font-size: 1.375rem;
+  line-height: normal;
+  letter-spacing: -0.03438rem;
+}
+
+.infoSection .infoBody .infoGroup .listGap {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.63rem;
+}
+.infoSection .infoBody .infoGroup .bulletList {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.infoSection .infoBody .infoGroup .bulletList::before {
+  content: "·";
+  font-size: 4rem;
+  padding-left: 0.5rem;
+}
+
+.infoSection .infoBody .infoGroup .checkTxt {
+  background: url("/resources/ict/typeD/info/img/checkIcon.svg") top 0.3rem left / cover no-repeat;
+  background-size: 2.125rem;
+  color: #191f28;
+  font-family: PretendardRegular, sans-serif;
+  font-size: 1.875rem;
+  line-height: 140%;
+  letter-spacing: -0.04688rem;
+  padding-left: 3.3rem;
+}
+
+.libraryCopyright {
+  color: #adb5bd;
+  text-align: center;
+  font-family: PretendardMedium, sans-serif;
+  font-size: 1rem;
+  line-height: normal;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  padding: 2.5rem 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+.lbEmpty {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.lbEmpty > img {
+  width: 30rem;
+  height: 30rem;
+}
+.lbEmpty > div {
+  font-family: "PretendardMedium", sans-serif;
+  font-size: 2.5rem;
+  line-height: 140%;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+  color: #191f28;
+}

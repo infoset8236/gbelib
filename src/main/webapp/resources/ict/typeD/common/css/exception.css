@@ -1,0 +1,236 @@
+.container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    padding-left: 260px;
+    background-image: url("/resources/ict/typeD/common/img/common/errorBg2.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    background-size: cover;
+}
+
+.caption {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 72px;
+    font-style: normal;
+    line-height: normal;
+    width: 1800px;
+    margin-top: 200px;
+    margin-bottom: 80px;
+    color: #6B7684;
+}
+
+.title {
+    font-family: NanumMyeongjo, sans-serif;
+    font-size: 100px;
+    font-style: normal;
+    line-height: 150%;
+    width: 1800px;
+    margin-bottom: 50px;
+    letter-spacing: -2px;
+    color: #191F28;
+}
+
+.description {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 52px;
+    font-style: normal;
+    line-height: normal;
+    color: #6B7684;
+}
+
+.message {
+    position: fixed;
+    bottom: 100px;
+    left: 260px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1800px;
+    height: 240px;
+    padding: 0;
+    transform: translateY(50px);
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.message div {
+    font-family: PretendardRegular, sans-serif;
+    font-size: 52px;
+    font-style: normal;
+    line-height: 150%;
+    padding-left: 97px;
+    color: #4E5968;
+    background-image: url("/resources/ict/typeD/common/img/common/info.svg");
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: 80px;
+}
+
+.message a {
+    display: none;
+}
+
+@media (max-width: 2160px) {
+    .container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        padding-left: 0;
+        background-image: url("/resources/ict/typeD/common/img/common/errorBg.jpg");
+        background-repeat: no-repeat;
+        background-position: bottom left;
+        background-size: cover;
+    }
+
+    .caption {
+        font-family: PretendardMedium, sans-serif;
+        font-size: 48px;
+        font-style: normal;
+        line-height: normal;
+        width: 1800px;
+        margin-top: 915px;
+        margin-bottom: 80px;
+        text-align: center;
+        color: #6B7684;
+    }
+
+    .title {
+        font-family: NanumMyeongjo, sans-serif;
+        font-size: 100px;
+        font-style: normal;
+        line-height: 150%;
+        width: 1800px;
+        margin-bottom: 50px;
+        text-align: center;
+        letter-spacing: -2px;
+        color: #191F28;
+    }
+
+    .description {
+        font-family: PretendardMedium, sans-serif;
+        font-size: 52px;
+        font-style: normal;
+        line-height: normal;
+        color: #6B7684;
+    }
+
+    .message {
+        position: fixed;
+        bottom: 260px;
+        left: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 1800px;
+        height: 240px;
+        padding: 0 40px 0 80px;
+        transform: translate(-50%, 50px);
+        animation: slideUp 0.6s ease-out forwards;
+        opacity: 0;
+        border-radius: 60px;
+        background: rgba(255, 255, 255, 0.20);
+        box-shadow: 20px 40px 80px 0 rgba(67, 98, 122, 0.16);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 50px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .message div {
+        font-family: PretendardRegular, sans-serif;
+        font-size: 52px;
+        font-style: normal;
+        line-height: 150%;
+        padding-left: 97px;
+        color: #4E5968;
+        background-image: url("/resources/ict/typeD/common/img/common/info.svg");
+        background-repeat: no-repeat;
+        background-position: center left;
+        background-size: 80px;
+    }
+
+    .message a {
+        display: block;
+        width: 120px;
+        height: 120px;
+        background-image: url("/resources/ict/typeD/common/img/common/back.svg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 120px;
+    }
+}
+
+@media (max-width: 1080px) {
+    .caption {
+        font-size: 24px;
+        width: 900px;
+        margin-top: 458px;
+        margin-bottom: 40px;
+    }
+
+    .title {
+        font-size: 50px;
+        width: 900px;
+        margin-bottom: 25px;
+        letter-spacing: -1px;
+    }
+
+    .description {
+        font-size: 26px;
+    }
+
+    .message {
+        bottom: 130px;
+        width: 900px;
+        height: 120px;
+        padding: 0 20px 0 40px;
+        transform: translate(-50%, 25px);
+        border-radius: 30px;
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translate(-50%, 25px);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    .message div {
+        font-size: 26px;
+        padding-left: 49px;
+        background-size: 40px;
+    }
+
+    .message a {
+        width: 60px;
+        height: 60px;
+        background-size: 60px;
+    }
+}

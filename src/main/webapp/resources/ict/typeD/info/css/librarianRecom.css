@@ -1,0 +1,180 @@
+@charset "utf-8";
+
+.recBookSection {
+    background: url('/resources/ict/typeD/info/img/librarianRecom-bg.png') top left / cover no-repeat;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.recBookSection .recBookHeader {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 0.5rem;
+}
+
+.recBookSection .recBookHeader .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.recBookSection .recBookHeader .headerKo {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.recBookSection .recBookContent {
+    height: 100%;
+    padding: 0 8.63rem;
+}
+
+.recBookSection .recBookContent .recBookSlide {
+    width: 50.25rem;
+    height: 92.68rem;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookGroup{
+    display: grid !important;
+    width: 50.25rem !important;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 4.37rem 6.25rem;
+    margin-right: 5rem;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem {
+    display: flex;
+    width: 22rem;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookImgWrap {
+    border-radius: 1.25rem;
+    box-shadow: 20px 20px 60px 0 rgba(25, 33, 61, 0.40);
+    width: 22rem;
+    overflow: hidden;
+    height: 31.71875rem;
+}
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookImgWrap > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookImgWrap img {
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookInfo .recBookTitle {
+    overflow: hidden;
+    color: #95CACF;
+    text-overflow: ellipsis;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 2.25rem;
+    line-height: 140%;
+    letter-spacing: -0.05625rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookInfo .recBookAuthor {
+    color: #8B95A1;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: -0.04688rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookInfo .recBookPublisher {
+    color: #8B95A1;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: -0.04688rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.recBookSection .recBookContent .recBookSlide .recBookSlideItem .recBookInfo .recBookYear {
+    color: #8B95A1;
+    font-family: PretendardRegular, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: -0.04688rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.recBookSlide .slick-dots{
+    bottom: -3.75rem;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0.88rem;
+}
+.recBookSlide .slick-dots li{
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 100%;
+    background-color: #8B95A1;
+}
+.recBookSlide .slick-dots li.slick-active{
+    background-color: #fff;
+}
+.recBookCopyright{
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #FFF;
+}

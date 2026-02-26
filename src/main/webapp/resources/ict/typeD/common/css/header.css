@@ -1,0 +1,28 @@
+.headerKoEnVert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10.625rem;
+    padding: 0 3.75rem;
+    gap: 0.5rem;
+}
+
+.headerKoEnVert div:first-child {
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    font-style: normal;
+    line-height: normal;
+    margin: 0 0.31rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+    color: #8B95A1;
+}
+
+.headerKoEnVert div:last-child {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 2.375rem;
+    font-style: normal;
+    line-height: normal;
+    color: #191F28;
+}

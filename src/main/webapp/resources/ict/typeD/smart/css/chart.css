@@ -1,0 +1,166 @@
+.container {
+    background-image: url("/resources/ict/typeD/smart/img/chart/bg.png");
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1.87rem;
+    padding: 0 5.63rem;
+    animation: fade-in-up 1s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fade-in-up {
+    0% {
+        opacity: 0;
+        transform: translateY(2rem);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.title div:first-child {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 3.125rem;
+    font-style: normal;
+    line-height: 130%;
+    text-align: center;
+    letter-spacing: -0.07813rem;
+    color: #191F28;
+}
+
+.title div:last-child {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.04063rem;
+    color: #6B7684;
+}
+
+.bubbleBox {
+    position: relative;
+    width: 56.25rem;
+    height: 46.875rem;
+    margin-top: 3.63rem;
+    margin-bottom: 2.69rem;
+}
+
+.change {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    line-height: normal;
+    height: 2.3128rem;
+    margin-bottom: 2.5rem;
+    padding-left: 3.1rem;
+    letter-spacing: -0.04063rem;
+    color: #6B7684;
+    background-image: url("/resources/ict/typeD/smart/img/chart/refresh.svg");
+    background-repeat: no-repeat;
+    background-position: center left;
+    background-size: 2.32181rem;
+}
+
+.selectedKeyword {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4.625rem;
+    margin-bottom: 2.5rem;
+    gap: 1.25rem;
+}
+
+.selectedKeyword span {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    color: #6B7684;
+}
+
+.selectedKeyword button {
+    font-family: PretendardBold, sans-serif;
+    font-size: 1.625rem;
+    font-style: normal;
+    line-height: normal;
+    height: 4.625rem;
+    padding: 0 5.875rem 0 3rem;
+    color: #1773EB;
+    border: 4px solid #1773EB;
+    border-radius: 3.75rem;
+    background-color: #FFF;
+    background-image: url("/resources/ict/typeD/smart/img/chart/close.svg");
+    background-repeat: no-repeat;
+    background-position: center right 2.5rem;
+    background-size: 2.125rem;
+}
+
+.selectBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.87rem;
+    gap: 1.25rem;
+}
+
+.selectBox div {
+    position: relative;
+}
+
+.selectBox label {
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    position: absolute;
+    top: 50%;
+    left: 2.5rem;
+    transform: translateY(-50%);
+    color: #6B7684;
+}
+
+.selectBox select {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    height: 5.625rem;
+    padding: 0 9.75rem 0 7.63rem;
+    color: #191F28;
+    border-radius: 3.75rem;
+    background: #FFF url("/resources/ict/typeD/smart/img/chart/select.svg") no-repeat center right 2.5rem;
+    background-size: 3rem;
+    appearance: none;
+}
+
+.submit {
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 43.75rem;
+    height: 7.5rem;
+    margin-bottom: 2.2rem;
+    text-align: center;
+    color: #FFF;
+    border-radius: 6.25rem;
+    background: #191F28;
+}

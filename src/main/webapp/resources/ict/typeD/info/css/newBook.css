@@ -1,0 +1,222 @@
+@charset "utf-8";
+
+.newBookSection {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    transition: 0.1s;
+    overflow: hidden;
+}
+
+.newBookSection::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(140px);
+    z-index: 1;
+}
+
+.newBookSection > * {
+    position: relative;
+    z-index: 2;
+}
+
+.newBookSection .header {
+    display: flex;
+    padding: 3.34rem 3.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    row-gap: 0.5rem;
+}
+
+.newBookSection .header .headerEn {
+    color: #8B95A1;
+    text-align: center;
+    font-family: PretendardExtraBold, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.newBookSection .header .headerKo {
+    color: #FFF;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+}
+
+.newBookSection .content {
+    padding: 0 6.25rem;
+    display: flex;
+    gap: 3.905rem;
+}
+
+.newBookSection .leftPane {
+    width: 43.28rem;
+}
+
+.newBookSection .leftPane .mainSlide {
+}
+
+.newBookSection .leftPane .mainSlide .slideItem {
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideImg {
+    width: 39.375rem;
+    height: 58.25rem;
+    border-radius: 0.75rem;
+    box-shadow: 40px 40px 80px 0 rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+}
+.newBookSection .leftPane .mainSlide .slideItem .slideImg > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.newBookSection .leftPane .mainSlide .slideItem .slideTxt{
+    display: flex;
+    flex-direction: column;
+    row-gap: 1.88rem;
+    margin-top: 6rem;
+    width: 39.375rem;
+}
+.newBookSection .leftPane .mainSlide .slideItem .slideTxt .slideInfo {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.625rem;
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideTxt .slideInfo .slideAuthor {
+    color: #191F28;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.04688rem;
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideTxt .slideInfo .slideSeparator {
+    color: #191F28;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: -0.04688rem;
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideTxt .slideInfo .slidePublisher {
+    overflow: hidden;
+    color: #4E5968;
+    text-overflow: ellipsis;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: normal;
+    letter-spacing: -0.04688rem;
+    white-space: nowrap;
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideTitle {
+    color: #191F28;
+    font-family: PretendardSemiBold, sans-serif;
+    font-size: 3.75rem;
+    line-height: normal;
+    letter-spacing: -0.09375rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.newBookSection .leftPane .mainSlide .slideItem .slideDesc {
+    overflow: hidden;
+    color: #191F28;
+    text-overflow: ellipsis;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1.875rem;
+    line-height: 150%;
+    letter-spacing: -0.04688rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.newBookSection .rightPane {
+    width: 11.715rem;
+}
+
+.newBookSection .rightPane .subSlide {
+    width: 11.715rem;
+    height: 94rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.newBookSection .rightPane .subSlide .slideItem {
+    width: 7.8125rem !important;
+    margin-bottom: 4.56rem;
+    box-shadow: 20px 20px 40px 0 rgba(0, 0, 0, 0.2);
+}
+
+.newBookSection .rightPane .subSlide .slideItem .slideImg {
+    width: 7.8125rem;
+    height: 11.25rem;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+.newBookSection .rightPane .subSlide .slideItem .slideImg > img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.newBookCopyright {
+    color: #ADB5BD;
+    text-align: center;
+    font-family: PretendardMedium, sans-serif;
+    font-size: 1rem;
+    line-height: normal;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    padding: 2.5rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.lbEmpty{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.lbEmpty > img{
+    width: 30rem;
+    height: 30rem;
+}
+.lbEmpty > div{
+    font-family: 'PretendardMedium', sans-serif;
+    font-size: 2.5rem;
+    line-height: 140%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    color: #191F28;
+}
+
+@media (max-width: 1080px) {
+    .newBookSection .leftPane .mainSlide .slideItem .slideImg {
+        box-shadow: 20px 20px 40px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .newBookSection .rightPane .subSlide .slideItem {
+        box-shadow: 10px 10px 20px 0 rgba(0, 0, 0, 0.2);
+    }
+
+}
