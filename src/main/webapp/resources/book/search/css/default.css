@@ -1,0 +1,336 @@
+@charset "utf-8";
+
+.search-wrap{font-size:110%}
+.search-wrap .smain{overflow:hidden}
+.search-wrap table{border-top:2px solid #5f6062;border-bottom:2px solid #d2d2d2}
+.search-wrap table th,
+.search-wrap table td{border-bottom:1px solid #d9d9d9;border-left:0;border-right:0;font-size:90%;text-align:center}
+.search-wrap table th{padding:8px 5px;border:0;font-size:90%;border-bottom:1px solid #ccc}
+.search-wrap table td{padding:6px 5px}
+.search-wrap table tr:hover td{background:#f5f6f8}
+.search-wrap .item td.n,
+.search-wrap .og{color:#f75100!important}
+.search-wrap b i{font-style:normal}
+.search-wrap i.fa-sort-down{position:relative;top:-2px}
+
+.search-wrap label {font-family:'Malgun gothic';/*font-size:18px;color:#333;padding-bottom:20px;*/display:inline-block;padding-left:10px;}
+
+.resve-req{padding: 5px 13px;border: 1px solid #d5d5d5;border-radius: 3px;color: #4c4c4c;}
+.resve-req:hover {color: #000;}
+
+/*.search-form{margin-bottom:50px;}*/
+.search-form p{text-align:right;padding:5px 0 0;font-size:85%;height:16px}
+.search-form .select2-container--default .select2-selection--single{border:0}
+.search-form .box1{float:left;padding-right:13px;width:20%;height:70px;}
+.search-form .box1 select{margin:12px 0 0 10px;font-family:'Malgun gothic';font-size:21px;}
+.search-form .box span{display:inline-block;padding:10px 20px;}
+.search-form .box{position:relative;width:100%;margin:0 auto;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;border-style:solid;-o-border-image:linear-gradient(to right, #39adaf 0%, #4f489c 50%, #c364c2 100%);border-image:-webkit-gradient(linear, left top, right top, from(#39adaf), color-stop(50%, #4f489c), to(#c364c2));border-image:linear-gradient(to right, #39adaf 0%, #4f489c 50%, #c364c2 100%);border-image-slice:1;background:#fff;border-image-width:20px;padding:15px;margin-bottom:40px;}
+.search-form input.text{display:block;border:0;padding:0;background:#fff;width:65%;font-size:18px;font-weight:500;}
+.search-form input.text:focus{outline:none}
+.search-form input.text2{font-family:'Malgun gothic';display:block;border:0;padding:0;background:#fff;width:65%;margin-top: -60px; padding-left: 50px;font-size:21px;}
+.search-form input.text2:focus{outline:none}
+.search-form .b1{padding:0 10px}
+.search-form .b2{position:absolute;top:25px;right:30px;width:10%}
+.search-form button{background:#3a3a3a;border:0;color:#fff;font-size:20px;text-align:center}
+.search-form button{width:100%}
+.search-form button,
+.search-form input,
+.search-form select,
+.search-form .select2-container .select2-selection--single,
+.search-form .select2-container--default .select2-selection--single .select2-selection__arrow,
+.search-form .select2-container--default .select2-selection--single .select2-selection__rendered{height:48px;line-height:48px}
+.search-form select,
+.search-form .select2-container .select2-selection--single,
+.search-form .select2-container--default .select2-selection--single .select2-selection__arrow,
+.search-form .select2-container--default .select2-selection--single .select2-selection__rendered{height:48px;line-height:48px}
+.search-form .select2-container--default .select2-selection--single .select2-selection__rendered{padding-left:10px}
+.search-form .select2-container--default .select2-selection--single .select2-selection__arrow{padding-right:3px}
+.search-form .box1 .select2-container{border:1px solid #bbb;border-radius:5px;overflow:hidden}
+
+@media all and (max-width:768px){
+	.search-form .box1{width:23%}
+	.search-form .box1 select{font-size:17px;}
+	.search-form input.text2{width:60%;font-size:17px;}
+}
+@media all and (max-width:555px){
+	.search-form .box1{width:28%}
+	.search-form .box1 select{font-size:14px;}
+	.search-form input.text2{width:50%;font-size:14px;}
+}
+
+.search-wrap .smain .ws-filter{float:right;width:21%;padding-left:3%}
+.search-wrap .smain .box{float:left;width:100%;margin-right:-24%}
+.search-wrap .smain .box .ws-toolbar,
+.search-wrap .smain .box .search-results{margin-right:24%}
+.search-wrap .smain .box .search-results.wide{margin-right:0}
+
+.srch-btn-box{text-align:center;}
+.srch-btn-box .btnNew{width:200px;padding:15px 0;background:#000;color:#fff;border-radius:5px;text-align:center;display:inline-block;}
+.srch-btn-box .btnNew1{width:200px;padding:15px 0;background:#494949;color:#fff;border-radius:5px;text-align:center;display:inline-block;}
+
+@media all and (max-width:768px){
+	.srch-btn-box .btnNew{width:150px;font-size:16px;}
+	.srch-btn-box .btnNew1{width:150px;font-size:16px;}
+}
+@media all and (max-width:555px){
+	.srch-btn-box .btnNew{width:120px;padding:10px 0;font-size:14px;}
+	.srch-btn-box .btnNew1{width:120px;padding:10px 0;font-size:14px;}
+}
+
+/* 도서검색 선택 */
+#libraryList input{margin-right:3px}
+#libraryList input,
+#libraryList label{vertical-align:middle;cursor:pointer}
+#libraryList li{width:33.33%;display:inline-block;zoom:1;*display:inline}
+#libraryList ul{font-size:0;line-height:0}
+
+@media all and (max-width:1000px){
+	#libraryList li{width:33.33%}
+}
+@media all and (max-width:850px){
+	#libraryList li{width:50%;vertical-align:top;font-size:12px;letter-spacing:-1px}
+}
+@media all and (max-width:450px){
+	#libraryList li{width:100%}
+}
+
+.ws-toolbar,
+.ws-filter h4{height:29px;/* padding:0 0 10px; */}
+
+.ws-filter h4{font-weight:bold;font-size:110%;border-bottom:1px solid #ddd;padding:5px 0}
+.ws-filter .search_h4 {font-size: 110%;color: #0563bb;font-weight: bold;font-size: 110%;border-bottom: 1px solid #ddd;padding: 5px 0;height:29px;display: block;}
+.ws-filter a{display:inline-block;zoom:1;*display:inline}
+.ws-filter>ul>li{padding-bottom:15px}
+.ws-filter>ul>li>a.bi{font-weight:bold;background:url('../img/ws-filter-by.gif') no-repeat right center;padding:5px 20px 5px 0}
+.ws-filter>ul>li>p,
+.ws-filter>ul>li>ul{display:none}
+.ws-filter>ul>li.active p,
+.ws-filter>ul>li.active ul{display:block}
+.ws-filter>ul>li.active>a.bi{background-image:url('../img/ws-filter-bn.gif')}
+.ws-filter>ul>li>p{font-size:85%;padding:0 15px 0 0;margin-top:-5px}
+.ws-filter>ul>li>p>a{color:#888}
+.ws-filter>ul>li>ul{padding:0 0 10px}
+.ws-filter>ul>li>ul>li>a{font-size:90%}
+.ws-filter>ul>li>ul>li>a>em{color:#888;font-style:normal;margin-left:5px}
+
+.ws-filter-top{display:none;}
+.ws-filter-top,
+.ws-filter-top h4{height:29px;/* padding:0 0 10px; */}
+.ws-filter-top>h4>a.bi2{font-weight:bold;background:url('../img/ws-filter-by.gif') no-repeat right center;padding:5px 20px 5px 0}
+
+.ws-filter-top h4{font-weight:bold;font-size:110%;border-bottom:1px solid #ddd;padding:5px 0}
+.ws-filter-top a{display:inline-block;zoom:1;*display:inline}
+.ws-filter-top>ul>li{padding-bottom:15px}
+.ws-filter-top>ul>li>a.bi{font-weight:bold;background:url('../img/ws-filter-by.gif') no-repeat right center;padding:5px 20px 5px 0}
+.ws-filter-top>ul>li>p,
+.ws-filter-top>ul>li>ul{display:none}
+.ws-filter-top>ul>li.active p,
+.ws-filter-top>ul>li.active ul{display:block}
+.ws-filter-top>ul>li.active>a.bi{background-image:url('../img/ws-filter-bn.gif')}
+.ws-filter-top>ul>li>p{font-size:85%;padding:0 15px 0 0;margin-top:-5px}
+.ws-filter-top>ul>li>p>a{color:#888}
+.ws-filter-top>ul>li>ul{padding:0 0 10px}
+.ws-filter-top>ul>li>ul>li>a{font-size:90%}
+.ws-filter-top>ul>li>ul>li>a>em{color:#888;font-style:normal;margin-left:5px}
+
+.search-wrap .search-info{padding:0 0 22px;margin-top:-16px}
+.search-wrap .search-info i{border-bottom:1px solid #feac86}
+.search-wrap .control{font-size:85%}
+.search-wrap .control i{margin:0 0 0 5px;font-weight:normal}
+.search-wrap .control .btn{background:#fff;padding:0 11px;line-height:25px;height:27px}
+.search-wrap .ws-toolbar{overflow:hidden; padding: 7px 5px;}
+.search-wrap .ws-toolbar .checkbox{float:left;padding:5px 0 0 1px}
+.search-wrap .ws-toolbar .control{float:right}
+.search-wrap .ws-toolbar { background-color: #fbfbfb; border-top: 1px solid #d3d3d3; border-bottom: 1px solid #eaeaea;}
+
+.search-wrap .search-results .row{position:relative;padding: 28px 0;overflow:hidden;border-bottom: 1px dotted #d1d1d1;}
+.search-wrap .search-results .row .admin{z-index:1;width: 17px;float: left;margin-right: 5px;}
+.search-wrap .search-results .row .admin input{width:17px;height:17px}
+.search-wrap .search-results .row .thumb{float:left;font-size:0;line-height:0;width:118px;border:1px solid #ddd;margin-right:20px;}
+.search-wrap .search-results .row .thumb img{width:100%}
+.search-wrap .search-results .row .box{float:left;width:calc(100% - 140px);;margin-right:-140px;}
+.search-wrap .search-results .row .item{margin-right: 140px;}
+.search-wrap .search-results .row .item a.name{font-weight:800;font-size: 1.1rem;display:block;zoom:1;*display:inline;padding:7px 0 15px 0;}
+.search-wrap .search-results .row .item a.name em{font-style:normal}
+.search-wrap .search-results .row .item .stat{padding:13px 0 0}
+.search-wrap .search-results .row .item .stat a{margin:0 0 4px;margin-right:3px;padding:3px 8px;background: #f6fafb;color: #1b5e89;font-size:95%;font-weight:bold;border: 1px solid #beccd9;border-radius: 2px;}
+.search-wrap .search-results .row .item .stat a i{margin-left:4px;font-size:110%}
+.search-wrap .search-results .row .item .stat a,
+.search-wrap .search-results .row .item .stat span{display:inline-block;zoom:1;*display:inline}
+.search-wrap .search-results .row .item .bci{padding:15px 0 0}
+
+/*20260206 - 정성용선생님 요청에 따른 노이미지 처리-권기현*/
+.noimg-txt {position:absolute !important;left:0 !important;top:0 !important;padding:2px 6px !important;box-sizing:border-box !important;width:100% !important;height:100% !important;margin:0 !important;background:none !important;z-index:10;}
+.noimg-title {position:relative;font-size:15px;color:#808080;word-break:break-all;text-align:left;line-height:110%;padding-top:5px;display:block !important;}
+.noimg-author {position:relative;font-size:11px;color:#808080;word-break:break-all;text-align:left;padding-top:5px;display:block !important;}
+.noimg-publisher {position:absolute;width:100%;left:0;bottom:6px;font-size:11px;color:#808080;word-break:break-all;text-align:center;display:block !important;}
+
+.newBookGoDetail,
+.bestBookGoDetail {position:relative;display:inline-block;}
+/*20260206 - 정성용선생님 요청에 따른 노이미지 처리-권기현*/
+
+/* .sview{border-top:2px solid #5e6062} */
+.sview h4{font-size:130%;font-weight:bold;padding: 10px 0 10px 20px;}
+.sview .sinfo{margin:15px 0;background: #fffef9;overflow:hidden;padding: 25px 40px;border: 1.5px solid #f6f7e5;}
+@media all and (max-width:1000px){
+	.sview .sinfo{padding-left:5%;padding-right:5%}
+}
+@media all and (max-width:767px){
+	.sview .sinfo{padding-left:3%;padding-right:3%}
+	
+	.noimg-title {font-size:13px;}
+	.noimg-author {font-size:10px;}
+	.noimg-publisher {font-size:10px;}
+}
+@media all and (max-width:450px){
+	.noimg-title {font-size:12px;}
+	.noimg-author {font-size:9px;}
+	.noimg-publisher {font-size:9px;}
+}
+
+.sview .sinfo .thumb img{border:1px solid #d5d5d5}
+.sview .sinfo .thumb{float:left;width:20%;font-size:0;line-height:0}
+.sview .sinfo .info{float:left;width:100%;margin-right: -20%;}
+.sview .sinfo .info ul{margin: -1% 20% 1% 4%;}
+.sview .sinfo .info ul li{padding: 5px 0px;line-height:110%;}
+.sview b.title{font-size:135%;font-weight:800;line-height: 160%;}
+.sview .sinfo .info ul li.ibtn{border:0;text-align:right;padding:15px 0 0}
+.sview .sinfo .info ul li.ibtn a i{margin:0 0 0 5px}
+
+.sview .sbtn{text-align:center;padding:30px 0 20px}
+.sview .sbtn .btn{padding:7px 2%}
+.sview .sbtn .btn i{font-size:130%}
+.sview .sbtn .btn1{background:#fe6d02;border-color:#fe6d02}
+.sview .sbtn .btn2{background:#666;border-color:#666}
+
+/* 소장자료_2018.07.16 추가 */
+span.middot {background: url(/resources/common/img/doc-arr2.gif) no-repeat 0 10px; padding: 3px 0 4px; padding-left: 13px;}
+.search-area { text-align: right; padding-bottom: 7px;}
+.search-area i {font-size: 16px;color: #fff;margin-right: 6px;vertical-align: middle;margin-top: -3px;}
+.search-area .orange {padding: 4px 19px; display: inline-block; margin-left: 2px;background:#ff741f;border-radius: 20px;color: #fff; font-weight: 600; margin-bottom: 5px;}
+.search-area .blue {padding: 4px 19px; display: inline-block; margin-left: 2px;background:#5885c9;border-radius: 20px;color: #fff; font-weight: 600; margin-bottom: 5px;}
+
+.search-bot { width: 100%; height: auto; display: inline-block; padding-bottom: 15px;}
+.search-bot .notice {font-size: 105%; float: left; padding-left: 5px; width: 70%;line-height: 175%;}
+.search-bot p {float: right; padding-top: 0px; display: inline-block;}
+
+.bif {line-height: 180%; }
+.bif p { display: inline-block; line-height: 180%; }
+.bif .tit {color: #9a9a9a;}
+.bif .bar { padding: 0 8px; color: #d6d6d6;}
+.bif .txt {font-weight: 600;}
+.box .bif .tit {font-weight: normal;}
+
+.info .bar {color: #bababa;padding-right: 10px;padding-left: 10px;font-size: 12px;}
+.info .con {background: url(/resources/common/img/doc-arr3.gif) no-repeat 0 7px;background-size: 3px;padding: 0px 0 2px 10px;width: 20%;display: inline-block;vertical-align: top;line-height: 145%;}
+.info .con2 {background: url(/resources/common/img/doc-arr3.gif) no-repeat 0 10px;background-size: 3px;padding: 0px 0 2px 10px;width: 20%;display: inline-block;vertical-align: top;line-height: 145%;}
+.info .txt {display: inline-block;width: 72%;vertical-align: top;line-height: 145%;}
+
+.botbutton {padding-right: 3px;}
+.botbutton .blue_s {margin: 0 0 4px;margin-right: 3px;padding: 4px 10px;color: #155690;font-size: 95%;border: 1px solid #c6cfd8;border-radius: 1px;background: #f6fdff;display: inline-block;}
+.botbutton .blue_s img {vertical-align: middle;padding-right: 2px;}
+.botbutton .orange_s {margin: 0 0 4px;margin-right: 3px;padding: 4px 10px;color: #333333;font-size: 95%;border: 1px solid #c0c0c0;border-radius: 1px;font-weight: bold;display:  inline-block;}
+.botbutton .goStorage {background: url('/resources/common/img/dashBoard/folder.png') no-repeat;background-position: 7%;}
+.botbutton .addStorage {background: url('/resources/book/search/img/btn_my.png') no-repeat;background-position: 10%;}
+.botbutton .button1 {float: right;}
+.addMyLib{background:url('/resources/book/search/img/btn_my.png')no-repeat 5px 3px;padding-left:30px !important;}
+
+.ws-toolbar .checkbox input[type="checkbox"] {width: 17px; height: 17px; opacity: 100;}
+.ws-toolbar .checkbox label {padding-left: 0px;}
+.ws-toolbar .checkbox label::before {display: none;}
+.ws-toolbar .checkbox label::after {display: none;}
+
+textarea.textArea {width: 100%;height: 200px;border-top: 1px solid;}
+.search-wrap h3 { margin-top: 15px; clear: both;}
+.search-wrap .sview h4 {background: url(/resources/common/img/contents/h3Bg.gif) no-repeat 0 17px;margin-top: 15px;padding-left: 22px;}
+.search-wrap .bookintro td {padding: 22px;}
+
+.control img {vertical-align: middle; margin-top: -5px;margin-right: 1px;}
+
+.listArea {overflow: auto;height: 200px;border-top: 1px solid;border-left: 1px solid #cbcbcb;border-right: 1px solid #cbcbcb;border-bottom: 1px solid #cbcbcb;padding: 7px 20px 10px 20px;line-height: 2.08;}
+
+
+.kdcBookList2 {padding:0 0 30px 0;}
+.kdcBookList2 > li {overflow:hidden; position:relative; padding:15px 0 10px 0; border-bottom:1px solid #dfdfdf;}
+.kdcBookList2 .btnMore {position:absolute; top:15px; right:0; width:10px; height:10px; padding:5px; border:1px solid #d9d9d9; background:#fff;}
+.kdcBookList2 .kdcTitle {display:block; margin-bottom:8px; font-size:1.154em;}
+.kdcBookList2 .bookListz {display:block;overflow:hidden;padding:18px 0;}
+.kdcBookList2 .bookListz > li {float:left; width:25%; text-align:center; margin-bottom:18px;}
+.kdcBookList2 .bookListz .thumb {position:relative; max-width:160px; margin:0 auto 5px;}
+.kdcBookList2 .bookListz .thumb .img {display:block; width:160px; height:217px; border:1px solid #969696;}
+.kdcBookList2 .bookListz .thumb .img img {width:100%;height:100%;}
+.kdcBookList2 .bookListz .tit, 
+.kdcBookList2 .bookListz .author {display:block; overflow:hidden; margin:0; text-overflow:ellipsis; white-space:nowrap; word-break:normal;text-align:center;}
+.kdcBookList2 .bookListz .tit {font-size:14px;font-weight:bold;} 
+.kdcBookList2 .bookListz .author {font-size:13px;}
+
+@media all and (max-width:1000px){
+	.search-wrap .smain .ws-filter{display:none}
+	.ws-filter-top{display:inline}
+	.search-wrap .smain .box,
+	.search-wrap .smain .box .ws-toolbar,
+	.search-wrap .smain .box .search-results{float:none;margin:0}
+	.search-bot .notice {width: 67%!important;}
+	.info .txt{width: 67%;}
+}
+@media all and (max-width:767px){
+/* 	.search-wrap .control{display:none} */
+	.ws-toolbar,
+	.ws-filter h4{height:58px;/* padding:0 0 10px; */}
+	.search-wrap .search-results .row{position:relative}
+	.search-wrap .search-results .row .thumb,
+	.search-wrap .search-results .row .box{float:none}
+	.search-wrap .search-results .row .box{width:auto}
+	.search-wrap .search-results .row .box,
+	.search-wrap .search-results .row .item{margin:0}
+	.search-wrap .search-results .row .thumb{position:absolute;width:98px;margin-left: 25px;}
+	.search-wrap .search-results .row .item .bif{margin-left: 140px;min-height:150px;}
+	.search-form .b2{width:15%}
+	.bif .txt {display: block;}
+	.bif .bar {display: none;}
+
+	.search-form .detail_search .section dl dd input.text-area{width:95.5%;}
+	.search-wrap .search-results .row .bci {font-size:15px;}
+
+	.kdcBookList2 .bookListz > li {float:left; width:25%; text-align:center; margin-bottom:18px;}
+	.kdcBookList2 .bookListz .thumb {position:relative; max-width:100px; margin:0 auto 5px;}
+	.kdcBookList2 .bookListz .thumb .img {display:block; width:100px; height:147px; border:1px solid #969696;}
+	.kdcBookList2 .bookListz .tit {font-size:13px;letter-spacing:-1.5px;} 
+	.kdcBookList2 .bookListz .author {font-size:12px;}
+	
+	.sview .sinfo .thumb{float:none;width:140px;margin:0 auto;}
+	.sview .sinfo .info{float:none;width:100%;margin-right:0;}
+}
+
+@media all and (max-width:590px){
+	.info .con {width: 100%;}
+	.info .bar {display: none;}
+	.info .txt {width: 90%;padding-left: 10px;}
+
+	.search-bot .notice{font-size:90%;}
+
+	.search-wrap .search-results .row .item a.name{font-size:120%}
+
+	#search_detail .table_gray th, #search_detail .table_gray td {font-size:13px}
+	.bbs-result {font-size:14px;}
+
+	.search-wrap .search-results .row .bci {font-size:13px;}
+}
+
+	
+@media all and (max-width:450px){
+	.search-wrap .search-info{margin-top:5px}
+	.search-wrap .search-results .row .thumb{width:88px;margin-left: 25px;}
+	.search-wrap .search-results .row .item .bif{margin-left: 130px;min-height:140px;}
+	.search-wrap .search-results .row .item .bci th.first,
+	.search-wrap .search-results .row .item .bci td.first{display:none}
+	.search-bot .notice {width: 93%!important; padding-bottom: 5px;}
+	.search-wrap .search-results .row .admin {margin-top: 20%;}
+	
+	.kdcBookList2 .bookListz > li {width:50%;}
+}
+
+	
+/* @media all and (max-width:330px){
+	.botbutton .button1 {float: none;}
+	} */

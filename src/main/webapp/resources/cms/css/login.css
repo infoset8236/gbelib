@@ -1,0 +1,291 @@
+@charset "utf-8";
+
+body{background:#293649;font-size:14px}
+
+.wrap{position:fixed;width:800px;height:630px;left:50%;margin-left:-400px;top:50%;margin-top:-300px}
+.login-box{display:table;width:100%;height:600px;background:#fff;overflow:hidden;border-radius:6px}
+.login-box .info,
+.login-box .form{display:table-cell;width:300px;vertical-align:middle}
+.login-box .form{width:500px;background:#fbfbfb;text-align:center}
+.login-box .container{display:inline-block;zoom:1;display:inline}
+
+.login-box .info{background:url('../img/login_img.jpg') no-repeat 0 0;vertical-align:top;font-family:'Nanum Gothic'}
+.login-box .info .box{padding:30px}
+.login-box .info dt{font-size:24px;color:#0059ac;padding:10px 0 15px;color:#fff;line-height:100%}
+.login-box .info dt b{font-weight:800}
+.login-box .info dd img{width:30px}
+.login-box .info ul{margin-left:15px}
+.login-box .info li{list-style:outside disc;font-size:13px;padding:0 0 5px;color:#fff}
+
+.login-box .form .title{color:#bbb;font-size:24px}
+.login-box .form .title h1{line-height:100%;padding: 0px!important;margin: 0px;margin-bottom: 20px;}
+.login-box .form .title b{font-size:23px;font-weight:600;color:#4c4c4c;display:block;line-height:150%;font-family: sans-serif;text-shadow: #d6c5c5 0.2px 0px;}
+.login-box .form .title i{display:inline-block;zoom:1;*display:inline;padding: 3px;border:2px solid rgba(0,0,0,0.1);border-radius:50%;width:46px;height:46px;line-height:46px;margin-bottom: 19px;}
+.login-box .form fieldset{background:#f2f2f2;border:1px solid #ccc;border-radius:5px;margin:0 auto;padding:25px 0;width:300px;margin-bottom: 20px;}
+.login-box .form .input-group{border:1px solid rgba(0,0,0,0.1);margin:3px 0;border-radius:3px;overflow:hidden}
+.login-box .form .input-group span{display:block;float:left;width:46px;text-align:center;color:#888}
+.login-box .form .input-group input{display:block;float: right;width: 162px;border:none;outline:none;padding: 0px 10px 0px 10px;}
+.login-box .form .input-group span,
+.login-box .form .input-group input{line-height:34px;height:34px;background:#fff;}
+.login-box .form .form-group.button{margin:20px 0;margin-top: 30px;margin-bottom: 10px;}
+.login-box .form .input-group,
+.login-box .form .form-group.button{margin-left:35px;margin-right:35px}
+.login-box .form button{background:#82b440;color:#fff;width:100%;line-height:40px;display:block;border-radius:3px;font-size: 14px;letter-spacing: -1px;}
+.login-box .form .input-group .fa{padding-top: 10px;}
+
+.copyright{text-align:center}
+.copyright,
+.copyright a{color:#949aa4;font-size:12px;line-height:20px;padding-top:10px}
+
+/* .dialog-common{display:none}
+select{padding:3px} */
+
+input{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
+input[type="file"]{line-height:18px;height:22px;width:70%;padding:1px 5px}
+
+.center{text-align:center}
+
+select{padding:2px}
+.search .select2-container{margin-right:5px}
+select.selectmenu-search,
+select.selectmenu,
+select.selectmenu.select2-hidden-accessible{padding:5px 15px 5px 5px;!important}
+
+.btn.btn1{background-color:#364760;border-color:#364760;color:#fff}
+.btn.btn1:hover{background-color:#3f5370;border-color:#3f5370}
+
+/* 레이아웃 */
+.btn-group{font-size:0}
+#container{padding:10px 0;min-width:500px}
+
+.wrapper{background:url('../img/tab_line.gif') repeat-x 0 0}
+.wrapper,
+.wrapper-white{padding:30px 30px 25px}
+.wrapper-white{background:#fff}
+.wrapper-white > .page-subtitle{margin-bottom:10px}
+
+/* 탭메뉴 */
+.container-tabbed .container-tabs{display:block;float:left;margin:0px;padding-left:7px;list-style:none;margin-top:10px}
+.container-tabbed .container-tabs li{float:left}
+.container-tabbed .container-tabs li a{
+display:block;float:left;margin:0px -1px -1px 3px;border:1px solid #d9d9d9;border-bottom-color:transparent;background:#f7f7f7;line-height:39px;padding:0px 20px;color:#555;
+-webkit-transition:background-color 100ms linear;
+-moz-transition:background-color 100ms linear;
+-o-transition:background-color 100ms linear;
+-ms-transition:background-color 100ms linear;
+transition:background-color 100ms linear;
+}
+.container-tabbed .container-tabs li a:hover{text-decoration:none;background:#fcfcfc}
+.container-tabbed .container-tabs li.active a{position:relative;background:#fff;border-bottom-color:#fff;color:#999}
+.container-tabbed .container-tabs li.active a:after{
+position:absolute;content:" ";left:0px;top:-1px;height:3px;width:100%;background:#2d3b50}
+
+.container-tabbed .container-tabs li.active a:focus,
+.container-tabbed .container-tabs li.active a:hover{text-decoration:none}
+.container-tabbed .container-tab{float:left;width:100%;display:none}
+.container-tabbed .container-tab.active{display:block}
+
+/* 탭메뉴 */
+.tab-menu li,
+.tabmenu li{width:auto;font-size:13px}
+
+#container{position:relative}
+.mask{display:none;position:fixed;background:rgba(0,0,0,.35);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60000000,endColorstr=#60000000);width:100%;height:100%;top:0;left:0;z-index:10}
+.msg{position:absolute;width:100px;left:50%;margin-left:-50px;text-align:center;top:-25px;color:#999}
+.alert{padding:10px 0 0;color:#888;font-size:90%}
+.alert li{list-style:disc;margin-left:18px;padding-bottom:2px}
+.disableBox{position:relative}
+.disableBox > .mask{cursor:not-allowed;position:absolute;display:block;background:rgba(255,255,255,.40);
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60ffffff,endColorstr=#60ffffff);}
+
+.modal-dialog{visibility:hidden;display:table;position:fixed;width:800px;margin-left:-400px;height:100%;z-index:11;top:0;left:50%}
+.dialog-common{display:none}
+
+
+/* 모달창 */
+.ui-dialog-titlebar{font-size:130%;font-weight:normal}
+.ui-dialog-content .search label{margin-right:5px}
+.ui-dialog-content table .btn{padding:1px 8px;line-height:20px;height:20px}
+.ui-dialog-content table.type2.menuType-data th{text-align:center}
+.ui-dialog-content table.type2 em{font-style:normal;color:#888;font-size:90%;margin:0 5px}
+.ui-dialog-content table.type2 td{border-right:0}
+.ui-dialog-content table.type2 th{border-left:0;padding-left:10px}
+.ui-dialog-content table.type2 th em{color:#c00}
+.ui-dialog-content table.type2 td .ui-state-highlight,
+.ui-dialog-content table.type2 td .ui-state-error{overflow:hidden;padding:5px 8px;border-radius:3px;margin-top:3px}
+.ui-dialog-content table.type2 td .ui-state-highlight i,
+.ui-dialog-content table.type2 td .ui-state-error i{width:15px;padding-right:2px;text-align:center}
+.ui-dialog-content table.type2 td .ui-state-highlight i,
+.ui-dialog-content table.type2 td .ui-state-error i,
+.ui-dialog-content table.type2 td .ui-state-highlight em,
+.ui-dialog-content table.type2 td .ui-state-error em{float:left;line-height:140%}
+.ui-dialog-content table.type2 td .ui-state-highlight em,
+.ui-dialog-content table.type2 td .ui-state-error em{margin-left:-17px;padding-left:17px}
+.ui-dialog-content table.type2 td .ui-state-highlight,
+.ui-dialog-content table.type2 td .ui-state-highlight em{color:#3c763d}
+.ui-dialog-content table.type2 td .ui-state-error,
+.ui-dialog-content table.type2 td .ui-state-error em{color:#a94442}
+.ui-dialog-content table.type2 td .ui-state-error i{color:#c00}
+.ui-dialog-content table.type2 td.fan{border-left:0;border-right:0}
+
+.pageLoading{background:#fff url('../img/load.gif') no-repeat center center;position:fixed;top:0;left:0;width:100%;height:100%;z-index:980}
+.pageLoading{background:rgba(0,0,0,0.6);filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60000000,endColorstr=#60000000);}
+.pageLoading p{background:#fff url('../img/load.gif') no-repeat center -30px;
+margin:0 100px;position:fixed;width:300px;margin:-58px 0 0 -150px;left:50%;top:50%;
+height:46px;padding:70px 0 0;text-align:center;border-radius:7px}
+
+/* 모달창 - 닫기버튼 */
+.ui-dialog .ui-dialog-titlebar-close{outline:none;top:-31px;width:31px;height:31px;right:-10px;border-radius:50%;border:3px solid rgba(255,255,255,.5);
+background:url('/resources/common/img/ui-icon-fff-close.png') no-repeat center center}
+.ui-dialog .ui-dialog-titlebar-close:hover{border-color:#fff}
+.ui-dialog .ui-button.ui-dialog-titlebar-close .ui-icon{display:none}
+
+/* 메뉴 설정 */
+.group-menu{overflow:hidden}
+.group-menu .tree-area{float:left;width:40%}
+.group-menu .set-area{float:right;width:60%}
+.group-menu .set-area .button{padding:10px 0;overflow:hidden}
+.group-menu .set-area .button .left{float:left}
+.group-menu .set-area .button .right{float:right;color:#888}
+.group-menu .set-area .subImgView{text-align:center;font-size:0;line-height:0}
+.group-menu .set-area .permissionBox,
+.ui-dialog-content .styleBox,
+.group-menu .set-area .subImgView div{overflow:hidden;margin-top:3px;border:1px dashed #e8e4d9;background:#f9f7f2;border-radius:5px;padding:5px 10px 10px}
+.group-menu .set-area .subImgView div a.btn{float:right;margin-top:3px;font-size:11px;padding:1px 5px 0}
+.group-menu-header{overflow:hidden;height:35px}
+.group-menu-header,
+.group-menu .tree-box{margin-right:20px}
+.group-menu .tree-box{border:1px solid #d9d9d9;height:650px;overflow:auto;position:relative}
+.permissionBox table tbody th{background:none}
+
+.group-menu-header .title{float:left;line-height:29px}
+.group-menu-header .title i{width:20px;text-align:center;font-size:14px}
+.group-menu-header .title i,
+.group-menu-header .title span{vertical-align:middle}
+.group-menu-header .button{float:right}
+.group-menu .set-area{padding:8px 0 10px}
+.group-menu .set-info strong{display:block;font-size:14px;padding:0 0 10px}
+.group-menu .set-info ul{border-top:2px solid #adb5c0;padding:10px 0}
+.group-menu .set-info li{margin-left:18px;list-style:outside disc;font-size:13px;padding:0 0 2px}
+.group-menu .set-area input.menuName{width:90%}
+.group-menu .set-area .subImgView img{width:100%}
+.permissionBox,
+.group-menu .set-area .menuType{display:none;margin-top:10px;border:1px dashed #e8e4d9;background:#f9f7f2;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;padding:5px 10px 10px}
+.group-menu .set-area .menuType.none{padding:0;margin:0;border:0;height:0;overflow:hidden}
+.permissionBox table,
+.permissionBox th,
+.permissionBox td,
+.group-menu .set-area .menuType table,
+.group-menu .set-area .menuType th,
+.group-menu .set-area .menuType td{border:none}
+.group-menu .set-area table table th,
+.group-menu .set-area table table td,
+.group-menu .set-area .menuType th,
+.group-menu .set-area .menuType td{padding:5px 5px 2px}
+.group-menu .set-area table table tr.first th,
+.group-menu .set-area table table tr.first td,
+.group-menu .set-area .menuType tr.first th,
+.group-menu .set-area .menuType tr.first td{padding-top:10px}
+.group-menu .set-area .menuType th{width:70px;color:#427f10}
+.group-menu .set-area .menuType td input.text{width:95%;cursor:auto}
+/* .group-menu .set-area table table,
+.group-menu .set-area .menuType table{border-top:1px solid #e8e4d9;margin-top:10px} */
+.group-menu .set-area .menuType p.info{padding:5px 5px 0;color:#888}
+.group-menu .set-area .menuType select,
+.group-menu .set-area .menuType .select2,
+.group-menu .set-area .menuType a.btn{margin-top:5px}
+.group-menu .set-area tr.group th,
+.group-menu .set-area tr.group td{padding:3px 10px;border-bottom-width:0px}
+.group-menu .set-area tr.group.first th,
+.group-menu .set-area tr.group.first td{padding-top:10px}
+.group-menu .set-area tr.group.last th,
+.group-menu .set-area tr.group.last td{padding-bottom:10px;border-bottom-width:1px}
+
+.menuTypeBox .radio label.html,
+.menuTypeBox .radio label.bbs,
+.menuTypeBox .radio label.module,
+.menuTypeBox .radio label.link{padding-left:25px;background:url('../jqTree/img/icon-html.gif') no-repeat 5px center}
+.menuTypeBox .radio label.bbs{background-image:url('../jqTree/img/icon-bbs.gif')}
+.menuTypeBox .radio label.module{background-image:url('../jqTree/img/icon-program.gif')}
+.menuTypeBox .radio label.link{background-image:url('../jqTree/img/icon-link.gif')}
+
+/* 테이블 */
+table thead th{background:#adb5c0;color:#fff;border-color:#ced8da;border-bottom-color:#ced8da;border-top-color:#adb5c0}
+
+/* 테이블 스크롤 */
+.table-scroll tbody{background:#fff;display:block;height:622px;overflow-y:auto;overflow-x:hidden}
+.table-scroll thead,
+.table-scroll tbody tr{display:table;width:100%;table-layout:fixed}
+.table-scroll tbody tr{margin-top:-1px}
+.table-scroll thead{width:calc( 100% - 18px )}
+.table-scroll table{width:100%;background:#adb5c0;border-top:none}
+.table-scroll table td{background:#fff}
+
+table.border-all thead th,
+table.border-all tbody th,
+table.border-all tbody td{border-left-width:1px;border-right-width:1px}
+
+/* 셀렉트 공통 */
+.ui-selectmenu-menu{-webkit-box-shadow:0px 0px 3px 0px rgba(0,0,0,0.3);
+-moz-box-shadow:0px 0px 3px 0px rgba(0,0,0,0.3);
+box-shadow:0px 0px 3px 0px rgba(0,0,0,0.3);max-height:300px;overflow-y:auto;overflow-x:hidden}
+.ui-selectmenu-menu ul{height:100%}
+.ui-selectmenu-button{border-radius:2px;border-color:#ddd!important}
+
+/* 셀렉트 메뉴타입 선택 시 menuType */
+.form-group .select2-container .select2-selection--single{height:24px}
+.form-group .select2-container--default .select2-selection--single .select2-selection__rendered{line-height:22px}
+.form-group .select2-container--default .select2-selection--single .select2-selection__arrow{height:20px}
+
+/* 테이블 */
+table.type1 thead th{line-height:120%;padding-top:6px;padding-bottom:6px}
+table.type2{border-bottom-width:1px}
+table.type3{border-top:2px solid #adb5c0}
+table.type2 tbody th{font-weight:normal;border-color:#ced8da;background:#e8eef2;padding-left:15px;color:#4c4c4c}
+table.type3 th,
+table.type3 td{font-weight:normal;border-left:none;border-right:none;border-top:none}
+table.type3 th,
+table.type3 td{padding:8px 10px}
+table.type3 .form-group .radio{padding:2px 0}
+table.type3 .info{padding:4px 0 0;color:#999;font-size:90%}
+table.type2 td.fan{padding:0}
+table.type2 td.editor{padding:10px 0}
+table.type2 .btn{padding:0 12px;line-height:27px;height:27px}
+
+.scroll{overflow:auto}
+.scroll table th,
+.scroll table td{word-break:keep-all}
+.scroll .edit-btn{white-space:nowrap}
+.scroll tr{position:relative}
+.scroll tr div{position:absolute;right:13px;margin-top:-13px;background:#fff;font-size:0}
+.scroll tr div a.m,
+.scroll tr div a.d{width:40px;height:27px;line-height:27px;border-radius:0;border:0;color:#fff;font-size:13px;margin:0;padding:0}
+.scroll tr div a.m{background:#364760}
+.scroll tr div a.m:hover{background:#495c77}
+.scroll tr div a.d{background:#e74e40}
+.scroll tr div a.d:hover{background:#eb6b60}
+
+.column-edit{padding:5px 0}
+.column-edit h3{font-size:110%;padding:8px 8px 8px 10px;border:1px solid #0059ac;background:#1f6db6;color:#fff;margin-top:2px;line-height:13px;border-top-right-radius:3px;border-top-left-radius:3px}
+.column-edit table th.ceGroup{background:#adb5c0;color:#fff;border-color:#d9dde2;border-left-color:#adb5c0}
+.column-edit table th,
+.column-edit table td{padding:2px 5px;border:1px solid #eff1f3}
+.column-edit table th{background:#e8e8ed}
+.column-edit table td{padding:3px 5px}
+.column-edit table tr.gubun td{border-bottom:1px solid #d9dde2}
+.column-edit .select2-container{width:100%}
+.column-edit .select2-container .select2-selection--single{height:25px}
+.column-edit .select2-container--default .select2-selection--single .select2-selection__rendered{line-height:23px}
+.column-edit input.text{line-height:23px;height:23px;width:90px;background:#fcfcfc}
+.column-edit > div{border-bottom-right-radius:3px;border-bottom-left-radius:3px;padding:0px;border-top:none;background:fff;overflow:auto}
+
+table.chartData{clear:both;margin-top:10px}
+table.chartData th,
+table.chartData td{font-size:90%}
+table.chartData td.ratio{border-left:0}
+table.chartData td.ratio em,
+table.chartData em{font-style:normal;font-size:90%;color:#777}
+table.chartData td.ratioBar{border-right:0;padding-right:0}
+table.chartData td.ratioBar p{height:8px;background:#647080}
+
+.ui-dialog-buttonset button.btn1:hover{color:#fff}
