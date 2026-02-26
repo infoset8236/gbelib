@@ -1,0 +1,326 @@
+/**************************************강좌안내*************************************/
+.culture-wrap {
+	overflow: hidden;
+	width: 100%;
+	height: 3840px;
+	text-align: center;
+	color: #fff;
+	background: url('../../img/type_b/info/course_information/bg_lec.svg') no-repeat 0 0;
+	background-size: cover;
+}
+.faci_wrap .header p,
+.culture-wrap .header p {
+	color: #8b95a1 !important;
+}
+.culture-wrap .contents {
+	margin-top: 80px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0px 180px 0px;
+}
+.culture-wrap .bx-wrapper {
+	height: 100%;
+	margin: 40px 0 0 0;
+	border: 0;
+	background: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+.culture-wrap .bx-viewport {
+	height: 2763px !important;
+}
+.culture-list {
+	position: relative;
+	width: 100%;
+	height: 340px;
+	margin-bottom: 60px;
+	border-radius: 40px;
+	background: #fff;
+}
+.culture-list a {
+	color: #fff;
+}
+.culture-list .outer {
+	display: table;
+	width: 100%;
+	height: 100%;
+}
+.culture-list .inner {
+	display: table-cell;
+	text-align: left;
+	vertical-align: middle;
+}
+.culture-list .inner div {
+	display: inline-block;
+}
+.culture-list .cul-status {
+	width: 200px;
+	height: 200px;
+	margin-left: 70px;
+}
+.culture-list .cul-status span {
+	font-family: 'Pretendard-SemiBold', sans-serif;
+	font-size: 40px;
+	display: table-cell;
+	width: 200px;
+	height: 200px;
+	text-align: center;
+	vertical-align: middle;
+	letter-spacing: -0.3px;
+	border-radius: 200px;
+	line-height: normal;
+	padding:30px;
+	word-break: keep-all;
+}
+/*수강신청*/
+.culture-list .cul-status span.status_0 {
+	 color: #029951;
+  background-color: #E6F5EE ;
+}
+/*대기자신청*/
+.culture-list .cul-status span.status_1 {
+	 color: #029951;
+  background-color: #E6F5EE ;
+}
+/*신청완료*/
+.culture-list .cul-status span.status_2,.culture-list .cul-status span.status_10 {
+	color: #0969DA;
+  background-color: #DDF4FF ;
+}
+/*대기자 신청완료*/
+.culture-list .cul-status span.status_3 {
+	 color: #0969DA;
+  background-color: #DDF4FF ;
+}
+/*접수마감*/
+.culture-list .cul-status span.status_4,.culture-list .cul-status span.status_44 {
+	color: #6B7684;
+  background-color: #EFF1F3 ;
+}
+/*정원마감*/
+.culture-list .cul-status span.status_5 {
+	  color: #6B7684;
+  background-color: #EFF1F3 ;
+}
+/*신청대기*/
+.culture-list .cul-status span.status_6 {
+  color: #F1B55C;
+  background-color: #FEF8EF ;
+}
+/*대기자 신청완료 
+수강종료*/
+.culture-list .cul-status span.status_9 {
+  color: #6B7684;
+  background-color: #EFF1F3 ;
+}
+
+.culture-list .cul-info {
+	padding: 0 0 0 50px;
+	vertical-align: top;
+}
+.culture-list .cul-info li {
+	font-size: 44px;
+	display: block;
+	color: #252525;
+}
+.culture-list .cul-info li span {
+	color: #6b7684;
+}
+.culture-list .cul-info li:nth-child(1) {
+	font-size: 60px;
+	font-weight: 600;
+	line-height: 120%;
+	overflow: hidden;
+	width: 1080px;
+	padding-bottom: 10px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.culture-list .cul-cnt {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 290px;
+	height: 100%;
+}
+.culture-list .cul-cnt ul {
+	display: block;
+	width: 290px;
+	height: 100%;
+}
+.culture-list .cul-cnt li {
+	display: block;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	width: 290px;
+	height: 50%;
+	padding: 18px 0 20px 40px;
+}
+.culture-list .cul-cnt li:nth-child(1) {
+	border-top-right-radius: 40px;
+	background: #252525;
+}
+.culture-list .cul-cnt li:nth-child(2) {
+	border-bottom-right-radius: 40px;
+	background: #888888;
+}
+.culture-list .cul-cnt li p.cul-cnt-tit {
+	font-size: 36px;
+	color: #dbdbdb;
+}
+.culture-list .cul-cnt li p.cul-cnt-state {
+	font-family: 'Century Gothic';
+	font-size: 56px;
+	font-weight: 700;
+	line-height: normal;
+}
+.culture-list .cul-cnt li p.cul-cnt-state span{display:inline-block;margin: 0 6px;font-family: 'Century Gothic';}
+.culture-list .cul-cnt li p.cul-cnt-state span.counter {
+	color: #00f6ff;
+	margin:0;
+	font-family: 'Century Gothic';
+}
+.culture-list .cul-cnt li p.cul-cnt-state span.slash_01 {
+	color: #adb5bd;
+	margin: 0 16px;
+	width: 10px;
+}
+.culture-wrap .bx-wrapper .bx-pager {
+	position: unset;
+	bottom: 530px;
+	margin-top: 200px;
+	padding: 0;
+}
+.culture-wrap .bx-slide .culture-list:nth-child(7) {
+	margin-bottom: 0;
+}
+.culture-wrap .bx-wrapper .bx-pager.bx-default-pager a {
+	width: 24px;
+	height: 24px;
+	margin: 0 20px;
+	border-radius: 50%;
+	background: #adb5bd;
+}
+.faci_wrap .bx-wrapper .bx-pager.bx-default-pager a.active,
+.culture-wrap .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.faci_wrap .bx-wrapper .bx-pager.bx-default-pager a:focus,
+.culture-wrap .bx-wrapper .bx-pager.bx-default-pager a.active,
+.faci_wrap .bx-wrapper .bx-pager.bx-default-pager a:hover,
+.culture-wrap .bx-wrapper .bx-pager.bx-default-pager a:focus {
+	background: #191f28;
+}
+
+@media (max-width: 1080px) {
+	/*************************************강좌안내*************************************/
+	.culture-wrap {
+		width: 100%;
+		height: 1920px;
+	}
+	.culture-wrap .header {
+		padding: 60px 0 0px 0;
+		gap: 16px;
+	}
+	.culture-wrap .header h1 {
+		font-size: 38px;
+	}
+	.culture-wrap .header p {
+		font-size: 18px;
+		letter-spacing: 0.2em;
+		color: var(--gray600, #6b7684);
+	}
+	.culture-wrap .bx-wrapper {
+		margin: 20px 0 0 0;
+	}
+
+	.culture-wrap .contents {
+		margin-top: 40px;
+		padding: 0px 90px 0px;
+	}
+	.culture-wrap .bx-viewport {
+		height: 1382px !important;
+	}
+	.culture-list {
+		height: 170px;
+		margin-bottom: 30px;
+		border-radius: 20px;
+	}
+	.culture-list .cul-status {
+		width: 100px;
+		height: 100px;
+		margin-left: 35px;
+	}
+	.culture-list .cul-status span {
+		font-size: 20px;
+		width: 100px;
+		height: 100px;
+		text-align: center;
+		letter-spacing: -1.3px;
+		border-radius: 100px;
+		padding:15px;
+	}
+
+.culture-list .cul-cnt li p.cul-cnt-state span{display:inline-block;margin: 0 3px;}
+.culture-list .cul-cnt li p.cul-cnt-state span.counter {
+	color: #00f6ff;
+	margin:0;
+}
+.culture-list .cul-cnt li p.cul-cnt-state span.slash_01 {
+	color: #adb5bd;
+	margin: 0 8px;
+	width: 10px;
+}
+	
+	.culture-list .cul-info {
+		padding: 0 0 0 25px;
+	}
+	.culture-list .cul-info li {
+		font-size: 22px;
+	}
+	.culture-list .cul-info li:nth-child(1) {
+		font-size: 30px;
+		font-weight: 600;
+		line-height: 120%;
+		width: 540px;
+		padding-bottom: 5px;
+	}
+	.culture-list .cul-cnt {
+		width: 145px;
+	}
+	.culture-list .cul-cnt ul {
+		width: 145px;
+	}
+	.culture-list .cul-cnt li {
+		width: 145px;
+		height: 50%;
+		padding: 9px 0 10px 20px;
+	}
+	.culture-list .cul-cnt li:nth-child(1) {
+		border-top-right-radius: 20px;
+	}
+	.culture-list .cul-cnt li:nth-child(2) {
+		border-bottom-right-radius: 20px;
+	}
+	.culture-list .cul-cnt li p.cul-cnt-tit {
+		font-size: 18px;
+	}
+	.culture-list .cul-cnt li p.cul-cnt-state {
+		font-size: 28px;
+		font-weight: 700;
+	}
+	.culture-inner-box {
+		height: 1380px;
+	}
+	.culture-wrap .bx-wrapper .bx-pager {
+		bottom: 265px;
+		margin-top: 100px;
+	}
+	.culture-wrap .bx-slide .culture-list:nth-child(7) {
+		margin-bottom: 0px;
+	}
+
+	.culture-wrap .bx-wrapper .bx-pager.bx-default-pager a {
+		width: 12px;
+		height: 12px;
+		margin: 0 10px;
+	}
+}

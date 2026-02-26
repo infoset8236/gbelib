@@ -1,0 +1,99 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/notice/bg.png') no-repeat center center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.slide {
+  width: 3310px;
+}
+
+.slick-list {
+  padding: 94px 100px 100px 50px;
+}
+
+.slide_item {
+  width: 960px;
+  height: 1360px;
+  border-radius: 40px;
+  box-shadow: 30px 40px 60px 0 rgb(0 0 0 / 20%);
+  margin-right: 140px;
+}
+
+.slide_item img {
+  width: 960px;
+  height: 1360px;
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+.slick-dots {
+  bottom: -44px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+  width: 24px;
+  height: 24px;
+}
+
+.slick-dots li button::before {
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 24px;
+  background: #adb5bd;
+  content: '';
+}
+
+.slick-dots li.slick-active button::before {
+  background: #191f28;
+}
+
+@media (width <= 1920px) {
+  .slide {
+    width: 1655px;
+  }
+
+  .slick-list {
+    padding: 47px 50px 50px 25px;
+  }
+
+  .slide_item {
+    width: 480px;
+    height: 680px;
+    border-radius: 20px;
+    box-shadow: 15px 20px 30px 0 rgb(0 0 0 / 20%);
+    margin-right: 70px;
+  }
+
+  .slide_item img {
+    width: 480px;
+    height: 680px;
+    border-radius: 20px;
+  }
+
+  .slick-dots {
+    bottom: -22px;
+    gap: 16px;
+  }
+
+  .slick-dots li,
+  .slick-dots li button,
+  .slick-dots li button::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .slick-dots li button::before {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

@@ -1,0 +1,195 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: url('../../img/type_a/new_book/background.png') center center no-repeat;
+  background-size: cover;
+}
+
+.content {
+  width: calc(100% - 320px);
+  height: calc(100vh - 345.33px);
+  margin-left: 320px;
+  padding-top: 15px;
+}
+
+.swiper-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 3520px;
+}
+
+.swiper-slide {
+  display: grid;
+  padding: 0 230px;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, auto);
+  grid-row-gap: 60px;
+  grid-column-gap: 163px;
+  justify-items: center;
+}
+
+.slide-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.book_title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  overflow: hidden;
+  width: 100%;
+  max-width: 358px;
+  margin-top: 40px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  letter-spacing: -1.2px;
+  text-overflow: ellipsis;
+  color:  #191F28;
+}
+
+.writer {
+  font-family: "Pretendard", sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  overflow: hidden;
+  width: 100%;
+  max-width: 358px;
+  white-space: nowrap;
+  letter-spacing: -1px;
+  text-transform: capitalize;
+  text-overflow: ellipsis;
+  color: #4E5968;
+}
+
+.slide-item img {
+  width: 374px;
+  height: 540px;
+  border-radius: 24px;
+  box-shadow: 0 10px 30px 0 rgba(25, 33, 61, 0.20);
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  top: 1560px !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 40px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: #8B95A1;
+}
+
+
+.swiper-pagination-bullet-active {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+}
+
+@media (width: 1920px) {
+  .content {
+    width: calc(100% - 160px); /* 320px -> 160px */
+    height: calc(100vh - 172.67px); /* 345.33px -> 172.67px */
+    margin-left: 160px; /* 320px -> 160px */
+    padding-top: 7.5px; /* 15px -> 7.5px */
+  }
+
+  .swiper-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 1760px; /* 3520px -> 1760px */
+  }
+
+  .swiper-slide {
+    display: grid;
+    padding: 0 115px; /* 230px -> 115px */
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, auto);
+    grid-row-gap: 30px; /* 60px -> 30px */
+    grid-column-gap: 81.5px; /* 163px -> 81.5px */
+    justify-items: center;
+  }
+
+  .slide-item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .book_title {
+    font-family: "Pretendard", sans-serif;
+    font-size: 24px; /* 48px -> 24px */
+    font-weight: 500;
+    font-style: normal;
+    line-height: 140%;
+    overflow: hidden;
+    width: 100%;
+    max-width: 179px; /* 358px -> 179px */
+    margin-top: 20px; /* 40px -> 20px */
+    margin-bottom: 4px; /* 8px -> 4px */
+    white-space: nowrap;
+    letter-spacing: -0.6px; /* -1.2px -> -0.6px */
+    text-overflow: ellipsis;
+    color:  #191F28;
+  }
+
+  .writer {
+    font-family: "Pretendard", sans-serif;
+    font-size: 20px; /* 40px -> 20px */
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 100%;
+    max-width: 179px; /* 358px -> 179px */
+    white-space: nowrap;
+    letter-spacing: -0.5px; /* -1px -> -0.5px */
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    color: #4E5968;
+  }
+
+  .slide-item img {
+    width: 187px; /* 374px -> 187px */
+    height: 270px; /* 540px -> 270px */
+    border-radius: 12px; /* 24px -> 12px */
+    box-shadow: 0 5px 15px 0 rgba(25, 33, 61, 0.20);
+    object-fit: cover;
+  }
+
+  .swiper-pagination {
+    position: absolute !important;
+    top: 780px !important; /* 1560px -> 780px */
+    display: flex !important;
+    justify-content: center;
+    gap: 20px !important; /* 40px -> 20px */
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px; /* 24px -> 12px */
+    height: 12px; /* 24px -> 12px */
+    opacity: 1;
+    border-radius: 50%;
+    background-color: #8B95A1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 12px; /* 24px -> 12px */
+    height: 12px; /* 24px -> 12px */
+    background-color: #FFFFFF;
+  }
+}

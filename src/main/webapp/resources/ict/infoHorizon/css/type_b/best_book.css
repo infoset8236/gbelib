@@ -1,0 +1,253 @@
+.notice_wrap {
+    width:3840px;
+    position: relative;
+    height: 2160px;
+    background: url('../../img/type_b/best_book/bg_best.png') center center no-repeat;
+    background-size: cover;
+    overflow: hidden;
+  }
+  
+  .notice_wrap .header h1{color:#fff;}
+
+  .notice_wrap .content {
+    width: calc(100% - 320px);
+    height: calc(100vh - 345.33px);
+    margin-left: 320px;
+    /* padding-top: 290px; */
+    position: absolute;
+    top: 540px;
+  }
+  
+  .notice_wrap .swiper-container {
+    position: relative;
+    width: 100%;
+  }
+  
+  .notice_wrap .swiper-slide {
+    display: flex;
+    justify-content: center;
+    gap: 140px;
+  }
+  
+  .notice_wrap .slide-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 530px;
+  }
+  
+  .notice_wrap  .slide-item img {
+    width: 530px;
+    height: 820px;
+    border-radius: 30px;
+    box-shadow: 20px 30px 60px 0 rgba(0, 0, 0, 0.15);
+    object-fit: cover;
+  }
+  
+  .notice_wrap .swiper-pagination {
+    position: absolute !important;
+    top: 1200px !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 40px !important;
+  }
+  
+  .notice_wrap .swiper-pagination-bullet {
+    width: 24px;
+    height: 24px;
+    opacity: 1;
+    border-radius: 50%;
+    background-color: #8B95A1;
+  }
+  
+  
+  .notice_wrap .swiper-pagination-bullet-active {
+    width: 24px;
+    height: 24px;
+    background-color: #191f28;
+  }
+  .book_title {
+    font-family: "Pretendard-Medium", sans-serif;
+    font-size: 60px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 100%;
+    max-width: 530px;
+    margin-top: 59px;
+    margin-bottom: 24px;
+    white-space: nowrap;
+    letter-spacing: -1.2px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    color: #191F28;
+	display:block;
+  }
+  
+  .writer {
+    font-family: "Pretendard-Regular",sans-serif;
+    font-size: 50px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+    color: #6B7684;
+  }
+  .notice_wrap .writer span{ color: #6B7684; font-size: 50px;display: inline-block;margin-left: 8px;width:auto;}
+  .notice_wrap .writer span:nth-child(1){
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+	max-width:250px;
+  }
+  .notice_wrap .writer span:nth-child(2){
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: -1px;
+    text-transform: capitalize;
+    text-overflow: ellipsis;
+	max-width:250px;
+	margin-left:8px;
+  }
+  .ranking {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 60px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    position: absolute;
+    top: -70px;
+    left: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFF;
+    border-radius: 50%;
+    background-color: #000000;
+  } 
+
+  @media (width: 1920px) {
+    .notice_wrap {
+        width:1920px;
+        height: 1080px;
+      }
+      
+      .notice_wrap .content {
+      width: calc(100% - 160px); /* 320px -> 160px */
+      height: calc(100vh - 172.665px); /* 345.33px -> 172.665px */
+      margin-left: 160px; /* 320px -> 160px */
+      top: 270px; 
+    }
+  
+    .notice_wrap .swiper-container {
+      position: relative;
+      width: 100%;
+    }
+  
+    .notice_wrap .swiper-slide {
+      display: flex;
+      justify-content: center;
+      gap: 70px; /* 140px -> 70px */
+    }
+  
+    .notice_wrap .slide-item {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 265px; /* 530px -> 265px */
+    }
+  
+    .notice_wrap .slide-item img {
+      width: 265px; /* 530px -> 265px */
+      height: 410px; /* 820px -> 410px */
+      border-radius: 15px; /* 30px -> 15px */
+      box-shadow: 10px 15px 30px 0 rgba(0, 0, 0, 0.15); /* 20px 30px -> 10px 15px */
+      object-fit: cover;
+    }
+  
+    .notice_wrap .swiper-pagination {
+      position: absolute !important;
+      top: 600px !important; /* 1170px -> 585px */
+      display: flex !important;
+      justify-content: center;
+      gap: 10px !important; /* 40px -> 20px */
+    }
+  
+    .notice_wrap .swiper-pagination-bullet {
+      width: 12px; /* 24px -> 12px */
+      height: 12px; 
+    }
+  
+    .notice_wrap .book_title {
+      font-size: 30px; /* 60px -> 30px */
+      font-weight: 500;
+      font-style: normal;
+      line-height: normal;
+      overflow: hidden;
+      width: 100%;
+      max-width: 265px; /* 530px -> 265px */
+      margin-top: 29.5px; /* 59px -> 29.5px */
+      margin-bottom: 12px; /* 24px -> 12px */
+      white-space: nowrap;
+      letter-spacing: -0.6px; /* -1.2px -> -0.6px */
+      text-transform: capitalize;
+      text-overflow: ellipsis;
+      color: #191F28;
+    }
+  
+    .notice_wrap .writer {
+      font-size: 25px; /* 50px -> 25px */
+      font-weight: 400;
+      font-style: normal;
+      line-height: normal;
+      overflow: hidden;
+      white-space: nowrap;
+      letter-spacing: -0.5px; /* -1px -> -0.5px */
+      text-transform: capitalize;
+      text-overflow: ellipsis;
+      color: #4E5968;
+    }
+    .notice_wrap .writer span{ font-size: 25px;margin-left: 4px;}
+    .ranking {
+      font-family: "Century Gothic", sans-serif;
+      font-size: 30px; /* 60px -> 30px */
+      font-weight: 700;
+      font-style: normal;
+      line-height: normal;
+      position: absolute;
+      top: -35px; /* -70px -> -35px */
+      left: 95px; /* 190px -> 95px */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px; /* 160px -> 80px */
+      height: 80px; /* 160px -> 80px */
+      text-align: center;
+      text-transform: capitalize;
+      color: #FFF;
+      border-radius: 50%;
+      background-color: #000000;
+    }
+	.notice_wrap .writer span:nth-child(1){
+	max-width:125px;
+  }
+  .notice_wrap .writer span:nth-child(2){
+	max-width:125px;
+	  margin-left:4px;
+  }
+  }

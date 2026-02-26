@@ -1,0 +1,173 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/bestBook/bg.png') no-repeat center center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.slide {
+  margin-top: 80px;
+  width: 3280px;
+}
+
+.slick-list {
+  padding-right: 60px;
+  padding-left: 60px;
+}
+
+.slide_item {
+  margin-top: 194px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 128px;
+}
+
+.badge {
+  position: absolute;
+  top: -80px;
+  left: 185px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: normal;
+  text-align: center;
+  color: #fff;
+  background: #000;
+  font-family: 'Century Gothic', sans-serif;
+  font-style: normal;
+  text-transform: capitalize;
+}
+
+.slide_item img {
+  width: 530px;
+  height: 820px;
+  border-radius: 30px;
+  box-shadow: 20px 40px 40px 0 rgb(0 0 0 / 15%);
+}
+
+.title {
+  width: 530px;
+  margin: 60px 0 24px;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -1.2px;
+  color: #191f28;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.writer {
+  width: 530px;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -1px;
+  color: #6b7684;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-Regular, sans-serif;
+  font-style: normal;
+  text-transform: capitalize;
+}
+
+.slick-dots {
+  bottom: -226px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+  width: 24px;
+  height: 24px;
+}
+
+.slick-dots li button::before {
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 24px;
+  background: #adb5bd;
+  content: '';
+}
+
+.slick-dots li.slick-active button::before {
+  background: #191f28;
+}
+
+@media (width <= 1920px) {
+  .slide {
+    margin-top: 40px;
+    width: 1640px;
+  }
+
+  .slick-list {
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .slide_item {
+    margin-top: 97px;
+    margin-right: 64px;
+  }
+
+  .badge {
+    top: -40px;
+    left: 93px;
+    width: 80px;
+    height: 80px;
+    font-size: 30px;
+  }
+
+  .slide_item img {
+    width: 265px;
+    height: 410px;
+    border-radius: 15px;
+    box-shadow: 10px 20px 20px 0 rgb(0 0 0 / 15%);
+  }
+
+  .title {
+    width: 265px;
+    margin: 30px 0 12px;
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .writer {
+    width: 265px;
+    font-size: 25px;
+    letter-spacing: -1px;
+  }
+
+  .slick-dots {
+    bottom: -113px;
+    gap: 16px;
+  }
+
+  .slick-dots li,
+  .slick-dots li button,
+  .slick-dots li button::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .slick-dots li button::before {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

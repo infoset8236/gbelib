@@ -1,0 +1,246 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/newBook/bg.png') no-repeat center center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 34px;
+}
+
+.book_slide {
+  width: 3380px;
+}
+
+.book_slide_item {
+  display: flex;
+  gap: 700px;
+  align-items: flex-start;
+  padding-left: 100px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.book_img {
+  width: 880px;
+  height: 1274px;
+  border-radius: 40px;
+  box-shadow: 20px 40px 80px 0 rgb(0 0 0 / 20%);
+  margin-bottom: 80px;
+}
+
+.book_title {
+  display: -webkit-box;
+  width: 880px;
+  font-size: 80px;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: -2px;
+  text-align: center;
+  color: #191f28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.book_info {
+  display: grid;
+  justify-content: space-between;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  row-gap: 20px;
+  padding: 56px 100px;
+  border-radius: 32px;
+  background: #e5ddd8;
+  margin-bottom: 100px;
+}
+
+.book_info_item {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 110%;
+  color: #6b7684;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+}
+
+.book_info_item span {
+  width: 420px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 110%;
+  color: #191f28;
+  margin-left: 28px;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+}
+
+.summary {
+  display: -webkit-box;
+  width: 1600px;
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 160%;
+  letter-spacing: -1.2px;
+  text-align: center;
+  color: #191f28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-Regular, sans-serif;
+  font-style: normal;
+}
+
+.book_list_slide {
+  position: absolute;
+  right: 320px;
+  bottom: 472px;
+  width: 1600px;
+}
+
+.book_list_slide .slick-list {
+  padding: 50px 50px 50px 10px;
+}
+
+.book_list_slide_item {
+  width: 248px;
+  height: 360px;
+  margin-left: 80px;
+}
+
+.book_list_slide_item img {
+  width: 248px;
+  height: 360px;
+  border-radius: 16px;
+  box-shadow: 10px 10px 25px 4px rgb(0 0 0 / 20%);
+  object-fit: cover;
+}
+
+.slick-dots {
+  bottom: -174px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+  width: 24px;
+  height: 24px;
+}
+
+.slick-dots li button::before {
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 24px;
+  background: #adb5bd;
+  content: '';
+}
+
+.slick-dots li.slick-active button::before {
+  background: #191f28;
+}
+
+@media (width <= 1920px) {
+  .content {
+    padding-top: 17px;
+  }
+
+  .book_slide {
+    width: 1690px;
+  }
+
+  .book_slide_item {
+    gap: 350px;
+    padding-left: 50px;
+  }
+
+  .book_img {
+    width: 440px;
+    height: 637px;
+    border-radius: 20px;
+    box-shadow: 10px 20px 40px 0 rgb(0 0 0 / 20%);
+    margin-bottom: 40px;
+  }
+
+  .book_title {
+    width: 440px;
+    font-size: 40px;
+    letter-spacing: -1px;
+  }
+
+  .book_info {
+    row-gap: 10px;
+    padding: 28px 50px;
+    border-radius: 16px;
+    margin-bottom: 50px;
+  }
+
+  .book_info_item {
+    font-size: 24px;
+  }
+
+  .book_info_item span {
+    width: 210px;
+    font-size: 24px;
+    margin-left: 14px;
+  }
+
+  .summary {
+    width: 800px;
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  .book_list_slide {
+    right: 160px;
+    bottom: 236px;
+    width: 800px;
+  }
+
+  .book_list_slide .slick-list {
+    padding: 25px 25px 25px 5px;
+  }
+
+  .book_list_slide_item {
+    width: 124px;
+    height: 180px;
+    margin-left: 40px;
+  }
+
+  .book_list_slide_item img {
+    width: 124px;
+    height: 180px;
+    border-radius: 8px;
+    box-shadow: 5px 5px 13px 2px rgb(0 0 0 / 20%);
+  }
+
+  .slick-dots {
+    bottom: -87px;
+    gap: 16px;
+  }
+
+  .slick-dots li,
+  .slick-dots li button,
+  .slick-dots li button::before {
+    width: 12px;
+    height: 12px;
+  }
+
+  .slick-dots li button::before {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}

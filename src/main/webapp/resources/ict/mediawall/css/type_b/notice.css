@@ -1,0 +1,106 @@
+.notice_info .ict_tit_01 {
+	color: #fff;
+}
+.notice_info .notice_img {
+	width: 900px;
+	height: 1270px;
+	border-radius: 40px;
+	box-shadow: 30px 30px 25px 0 rgba(0, 0, 0, 0.1);
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+
+.notice_info .thum_frame {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: flex-start;
+	width: 900px;
+	gap: 80px;
+}
+.notice_info .notice_title {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+	flex-shrink: 0;
+	justify-content: center;
+	gap: 30px;
+}
+
+.notice_info .notice_title p {
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 52px;
+	font-weight: 500;
+	line-height: 140%;
+	position: relative;
+	display: -webkit-box;
+	overflow: hidden;
+	width: 780px;
+	text-align: left;
+	text-transform: uppercase;
+	color: #191f28;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+}
+.notice_info .notice_title span {
+	font-family: 'Century Gothic', sans-serif;
+	font-size: 64px;
+	font-weight: 800;
+	line-height: 100%;
+	position: relative;
+	text-align: left;
+	text-transform: uppercase;
+	color: #191f28;
+}
+.notice_info .notice_slider {
+	position: relative;
+	top: 380px;
+	width: 100%;
+	margin: 0 auto;
+}
+.notice_info .notice_slider .frame_img {
+	display: inline-block;
+	width: 900px !important;
+	margin: 0 120px;
+}
+
+.swiper-wrapper {
+	-o-transition-timing-function: linear !important;
+	-webkit-transition-timing-function: linear !important;
+	transition-timing-function: linear !important;
+}
+
+@media (max-width: 1920px) {
+	.notice_info .notice_img {
+		width: 450px;
+		height: 635px;
+		border-radius: 20px;
+		box-shadow: 15px 15px 12px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.notice_info .thum_frame {
+		width: 450px;
+		gap: 40px;
+	}
+	.notice_info .notice_title {
+		gap: 15px;
+	}
+
+	.notice_info .notice_title p {
+		font-size: 26px;
+		width: 390px;
+	}
+	.notice_info .notice_title span {
+		font-size: 32px;
+	}
+	.notice_info .notice_slider {
+		top: 190px;
+		/* width: 1600px; */
+	}
+	.notice_info .notice_slider .frame_img {
+		display: inline-block;
+		width: 450px !important;
+		margin: 0 60px;
+	}
+}

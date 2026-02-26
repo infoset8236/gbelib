@@ -1,0 +1,113 @@
+.container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-size: cover !important;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  padding: 120px 180px 80px;
+  gap: 16px;
+}
+
+.header div:first-child {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: 6.4px;
+  text-align: center;
+  color: #adb5bd;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+  text-transform: uppercase;
+}
+
+.header div:last-child {
+  font-size: 60px;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  color: #fff;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.gray {
+  color: #8b95a1 !important;
+}
+
+.black {
+  color: #191f28 !important;
+}
+
+.common_caption {
+  position: absolute;
+  bottom: 41px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ADB5BD;
+  text-align: center;
+  font-family: Pretendard-Medium, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+}
+
+.libraryBoard_nodata {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 48px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  color: #191f28
+}
+
+/*******  2026-02-03 권기현 정보센터 스탠바이미 2560 대응 추가 *******/
+@media (width <= 2560px) {
+	.common_caption {bottom:30px;font-size:24px;letter-spacing:1.4px;}
+}
+
+
+@media (width <= 1920px) {
+  .header {
+    padding: 60px 90px 40px;
+    gap: 8px;
+  }
+
+  .header div:first-child {
+    font-size: 16px;
+    letter-spacing: 3.2px;
+  }
+
+  .header div:last-child {
+    font-size: 30px;
+  }
+
+  .common_caption {
+    bottom: 20px;
+    font-size: 16px;
+    letter-spacing: 1.6px;
+  }
+
+  .libraryBoard_nodata {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+    color: #191f28
+  }
+}

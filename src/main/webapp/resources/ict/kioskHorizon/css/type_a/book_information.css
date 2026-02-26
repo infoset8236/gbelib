@@ -1,0 +1,698 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: url('../../img/type_a/book_information/background.png') center center no-repeat;
+  background-size: cover;
+}
+
+.content {
+  display: flex;
+  width: calc(100% - 320px);
+  height: calc(100vh - 345.33px);
+  margin-left: 320px;
+  padding: 39px 240px 216px 204px;
+  gap: 224px;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.book_wrapper {
+  position: relative;
+  width: 1012px;
+  height: 1012px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+
+.book_wrapper img {
+  position: absolute;
+  top: -2px;
+  left: 120px;
+  width: 760px;
+  height: 1100px;
+  border-radius: 24px;
+  box-shadow: 20px 20px 80px 8px rgba(0, 0, 0, 0.20);
+  object-fit: cover;
+}
+
+.badge {
+  font-family: "Pretendard", sans-serif;
+  font-size: 50px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  position: absolute;
+  right: 20px;
+  bottom: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 212px;
+  height: 212px;
+  letter-spacing: -1.25px;
+  color: #FFF;
+  border-radius: 50%;
+  background: #113B9E;
+}
+
+.title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 82px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  display: -webkit-box;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1012px;
+  margin-top: 150px;
+  text-align: center;
+  letter-spacing: -2.05px;
+  text-overflow: ellipsis;
+  color: #191F28;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.book_information {
+  display: flex;
+  gap: 74px;
+}
+
+.book_information_text span {
+  font-family: "Pretendard", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  margin-right: 48px;
+  letter-spacing: -1.2px;
+  color: #4E5968;
+}
+
+.book_information_text {
+  font-family: "Pretendard", sans-serif;
+  font-size: 48px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  overflow: hidden;
+  width: 100%;
+  min-width: 892px;
+  max-width: 892px;
+  white-space: nowrap;
+  letter-spacing: -1.2px;
+  text-overflow: ellipsis;
+  color: #191F28;
+}
+
+.mb {
+  margin-bottom: 17px;
+}
+
+.location {
+  font-family: "Pretendard", sans-serif;
+  font-size: 48px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 80px 0;
+  padding: 28px;
+  text-align: center;
+  color: #FFF;
+  border-radius: 10px;
+  background: #6B7684;
+}
+
+.summary {
+  font-family: "Pretendard", sans-serif;
+  font-size: 52px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 80px;
+  display: -webkit-box;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1840px;
+  text-align: justify;
+  text-overflow: ellipsis;
+  color: #252525;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.wrapper {
+  position: relative;
+}
+
+.swiper-container {
+  position: absolute;
+  right: -100px;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  margin-top: 110px;
+}
+
+.swiper-wrapper {
+  display: flex;
+  width: 2040px;
+  height: 640px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 100px;
+}
+
+.slide-item {
+  display: flex;
+  flex-direction: column;
+  width: 240px;
+  margin-top: 70px;
+}
+
+.book_title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 140%;
+  overflow: hidden;
+  width: 100%;
+  max-width: 224px;
+  margin-top: 28px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+  letter-spacing: -0.7px;
+  text-overflow: ellipsis;
+  color: #191F28;
+}
+
+.writer {
+  font-family: "Pretendard", sans-serif;
+  font-size: 26px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: normal;
+  overflow: hidden;
+  width: 100%;
+  max-width: 224px;
+  white-space: nowrap;
+  letter-spacing: -0.65px;
+  text-overflow: ellipsis;
+  color: #4E5968;
+}
+
+.slide-item img {
+  width: 240px;
+  height: 340px;
+  border-radius: 16px;
+  box-shadow: 20px 20px 80px 8px rgba(0, 0, 0, 0.20);
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  top:  600px !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 28px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: #8B95A1;
+}
+
+
+.swiper-pagination-bullet-active {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+}
+
+.modal {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 320px;
+  display: none;
+  width: calc(100% - 320px);
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal_content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 1800px;
+  height: 1470px;
+  transform: translate(-50%, -50%);
+  border-radius: 60px;
+  background-color: #fff;
+}
+
+.modal_header {
+  font-family: "Pretendard", sans-serif;
+  font-size: 72px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 108px 0 39px 0;
+  text-align: center;
+  text-transform: uppercase;
+  color: #242424;
+}
+
+.modal_wrapper {
+  padding: 0 90px 54px 90px;
+}
+
+.modal_wrapper img {
+  width: 1620px;
+  height: 981px;
+  object-fit: cover;
+}
+.modal_action {
+  display: flex;
+  width: 100%;
+  padding: 64px;
+  border-top: 2px solid #A2A2A2;
+}
+
+.close {
+  font-family: "Pretendard", sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  position: relative; /* 구분선을 위한 상대 위치 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  text-transform: uppercase;
+  color: #242424;
+  gap: 20px;
+}
+
+.close img {
+  width: 80px;
+  height: 80px;
+}
+
+.print {
+  font-family: "Pretendard", sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  text-transform: uppercase;
+  color: #242424;
+  gap: 20px;
+}
+
+.print img {
+  width: 80px;
+  height: 80px;
+}
+
+.modal_action::after {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  width: 2px;
+  height: 70px;
+  content: "";
+  transform: translateX(-50%);
+  background-color: #A2A2A2;
+}
+
+@media (width: 1920px) {
+  .content {
+    display: flex;
+    width: calc(100% - 160px);
+    height: calc(100vh - 172.665px);
+    margin-left: 160px;
+    padding: 19.5px 120px 108px 102px;
+    gap: 112px;
+  }
+
+  .book_wrapper {
+    position: relative;
+    width: 506px;
+    height: 506px;
+    border-radius: 50%;
+    background-color: #FFFFFF;
+  }
+
+  .book_wrapper img {
+    position: absolute;
+    top: -1px;
+    left: 60px;
+    width: 380px;
+    height: 550px;
+    border-radius: 12px;
+    box-shadow: 10px 10px 40px 4px rgba(0, 0, 0, 0.20);
+    object-fit: cover;
+  }
+
+  .badge {
+    font-family: "Pretendard", sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    position: absolute;
+    right: 10px;
+    bottom: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 106px;
+    height: 106px;
+    letter-spacing: -0.625px;
+    color: #FFF;
+    border-radius: 50%;
+    background: #113B9E;
+  }
+
+  .title {
+    font-family: "Pretendard", sans-serif;
+    font-size: 41px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 140%;
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    max-width: 506px;
+    margin-top: 75px;
+    text-align: center;
+    letter-spacing: -1.025px;
+    text-overflow: ellipsis;
+    color: #191F28;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .book_information {
+    display: flex;
+    justify-content: space-between;
+    gap: 33px;
+  }
+
+  .book_information_text span {
+    font-family: "Pretendard", sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    margin-right: 16px;
+    letter-spacing: -0.6px;
+    color: #4E5968;
+  }
+
+  .book_information_text {
+    font-family: "Pretendard", sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 100%;
+    max-width: 362px;
+    white-space: nowrap;
+    letter-spacing: -0.6px;
+    text-overflow: ellipsis;
+    color: #191F28;
+  }
+
+  .mb {
+    margin-bottom: 8.5px;
+  }
+
+  .location {
+    font-family: "Pretendard", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 40px 0;
+    padding: 14px;
+    text-align: center;
+    color: #FFF;
+    border-radius: 10px;
+    background: #6B7684;
+  }
+
+  .summary {
+    font-family: "Pretendard", sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 40px;
+    display: -webkit-box;
+    overflow: hidden;
+    width: 100%;
+    max-width: 920px;
+    text-align: justify;
+    text-overflow: ellipsis;
+    color: #252525;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+
+  .wrapper {
+    position: relative;
+  }
+
+  .swiper-container {
+    position: absolute;
+    right: -50px;
+    display: flex;
+    overflow: hidden;
+    justify-content: center;
+    margin-top: 55px;
+  }
+
+  .swiper-wrapper {
+    display: flex;
+    width: 1020px;
+    height: 320px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 50px;
+  }
+
+  .slide-item {
+    display: flex;
+    flex-direction: column;
+    width: 120px;
+    margin-top: 35px;
+  }
+
+  .book_title {
+    font-family: "Pretendard", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 140%;
+    overflow: hidden;
+    width: 100%;
+    max-width: 112px;
+    margin-top: 14px;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    letter-spacing: -0.35px;
+    text-overflow: ellipsis;
+    color: #191F28;
+  }
+
+  .writer {
+    font-family: "Pretendard", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 100%;
+    max-width: 112px;
+    white-space: nowrap;
+    letter-spacing: -0.325px;
+    text-overflow: ellipsis;
+    color: #4E5968;
+  }
+
+  .slide-item img {
+    width: 120px;
+    height: 170px;
+    border-radius: 8px;
+    box-shadow: 10px 10px 40px 4px rgba(0, 0, 0, 0.20);
+    object-fit: cover;
+  }
+
+  .swiper-pagination {
+    position: absolute !important;
+    top:  300px !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 14px !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    border-radius: 50%;
+    background-color: #8B95A1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+  }
+
+  .modal {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 160px;
+    display: none;
+    width: calc(100% - 160px);
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal_content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+    height: 735px;
+    transform: translate(-50%, -50%);
+    border-radius: 30px;
+    background-color: #fff;
+  }
+
+  .modal_header {
+    font-family: "Pretendard", sans-serif;
+    font-size: 36px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 54px 0 19.5px 0;
+    text-align: center;
+    text-transform: uppercase;
+    color: #242424;
+  }
+
+  .modal_wrapper {
+    padding: 0 45px 27px 45px;
+  }
+
+  .modal_wrapper img {
+    width: 810px;
+    height: 490.5px;
+    object-fit: cover;
+  }
+
+  .modal_action {
+    display: flex;
+    width: 100%;
+    padding: 32px;
+    border-top: 2px solid #A2A2A2;
+  }
+
+  .close {
+    font-family: "Pretendard", sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    text-transform: uppercase;
+    color: #242424;
+    gap: 10px;
+  }
+
+  .close img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .print {
+    font-family: "Pretendard", sans-serif;
+    font-size: 30px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    text-transform: uppercase;
+    color: #242424;
+    gap: 10px;
+  }
+
+  .print img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal_action::after {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    width: 1px;
+    height: 35px;
+    content: "";
+    transform: translateX(-50%);
+    background-color: #A2A2A2;
+  }
+}

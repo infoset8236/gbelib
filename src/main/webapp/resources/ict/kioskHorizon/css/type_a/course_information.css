@@ -1,0 +1,435 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: url('../../img/type_a/course_information/background.png') center center no-repeat;
+  background-size: cover;
+}
+
+.white {
+  color: #FFFFFF !important;
+}
+
+.content {
+  width: calc(100% - 320px);
+  height: calc(100vh - 345.33px);
+  margin-left: 320px;
+}
+
+.swiper-container {
+  position: relative;
+  width: 100%;
+  margin-left: 204px;
+}
+
+.swiper-slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 60px;
+  gap: 20px;
+}
+
+.slide-item {
+  display: flex;
+  width: 3112px;
+  height: 280px;
+  border-radius: 60px;
+  background-color: #FFFFFF;
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  width: 2446px;
+  padding: 40px 70px 40px 70px;
+  border-radius: 60px 0 0 60px;
+  gap: 48px;
+}
+
+.status {
+  font-family: "Pretendard", sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.progress {
+  color: #029951;
+  background: rgba(2, 153, 81, 0.10);
+}
+
+.apply {
+  color : #2F65CD;
+  background: rgba(47, 101, 205, 0.10);
+}
+
+.pending {
+  color: #F1B55C;
+  background: rgba(241, 181, 92, 0.10);
+}
+
+.done {
+  color: #6B7684;
+  background: #EFF1F3;
+}
+
+.text_wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.course_title {
+  font-family: "Pretendard", sans-serif;
+  font-size: 60px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: normal;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1080px;
+  white-space: nowrap;
+  letter-spacing: -1.5px;
+  text-overflow: ellipsis;
+  color: #191F28;
+}
+
+.course_detail {
+  font-family: "Pretendard", sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  margin-right: 24px;
+  color: #6B7684;
+}
+
+.course_detail span {
+  font-family: "Pretendard", sans-serif;
+  font-size: 44px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  margin-right: 60px;
+  margin-left: 24px;
+  color: #191F28;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  top: 1572px !important;
+  left: -280px !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 28px !important;
+}
+
+.right {
+  display: flex;
+  width: 100%;
+  max-width: 666px;
+  border-radius: 0 60px 60px 0;
+}
+
+.black {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  max-width: 333px;
+  padding: 78px 40px 78px 40px;
+  text-align: center;
+  background: #1C1C1C;
+}
+
+.gray {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  width: 50%;
+  max-width: 333px;
+  padding: 78px 40px 78px 40px;
+  text-align: center;
+  border-radius: 0 60px 60px 0;
+  background: #888888;
+}
+
+.black div:first-child, .gray div:first-child {
+  font-family: "Pretendard",sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
+  color: #FFF;
+}
+
+.black div:last-child, .gray div:last-child {
+  font-family: "Century Gothic", sans-serif;
+  font-size: 66px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  color: #FFF;
+}
+
+.highlight {
+  font-family: "Century Gothic", sans-serif;
+  font-size: 66px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
+  color: #00F6FF;
+}
+
+.dash {
+  font-family: "Century Gothic", sans-serif;
+  font-size: 66px;
+  font-weight: 700;
+  font-style: normal;
+  line-height: normal;
+  text-align: center;
+  color: #ADB5BD;
+}
+
+.swiper-pagination-bullet {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: #8B95A1;
+}
+
+
+.swiper-pagination-bullet-active {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+}
+
+@media (width: 1920px) {
+  .white {
+    color: #FFFFFF !important;
+  }
+
+  .content {
+    width: calc(100% - 160px);
+    height: calc(100vh - 172.665px);
+    margin-left: 160px;
+  }
+
+  .swiper-container {
+    position: relative;
+    width: 100%;
+    margin-left: 102px;
+  }
+
+  .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 30px;
+    gap: 10px;
+  }
+
+  .slide-item {
+    display: flex;
+    width: 1556px;
+    height: 140px;
+    border-radius: 30px;
+    background-color: #FFFFFF;
+  }
+
+  .left {
+    display: flex;
+    align-items: center;
+    width: 1223px;
+    padding: 20px 35px 20px 35px;
+    border-radius: 30px 0 0 30px;
+    gap: 24px;
+  }
+
+  .status {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    border-radius: 50%;
+  }
+
+  .progress {
+    color: #029951;
+    background: rgba(2, 153, 81, 0.10);
+  }
+
+  .apply {
+    color: #2F65CD;
+    background: rgba(47, 101, 205, 0.10);
+  }
+
+  .pending {
+    color: #F1B55C;
+    background: rgba(241, 181, 92, 0.10);
+  }
+
+  .done {
+    color: #6B7684;
+    background: #EFF1F3;
+  }
+
+  .text_wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .course_title {
+    font-family: "Pretendard", sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    font-style: normal;
+    line-height: normal;
+    overflow: hidden;
+    width: 100%;
+    max-width: 540px;
+    white-space: nowrap;
+    letter-spacing: -0.75px;
+    text-overflow: ellipsis;
+    color: #191F28;
+  }
+
+  .course_detail {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    margin-right: 12px;
+    color: #6B7684;
+  }
+
+  .course_detail span {
+    font-family: "Pretendard", sans-serif;
+    font-size: 22px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    margin-right: 30px;
+    margin-left: 12px;
+    color: #191F28;
+  }
+
+  .swiper-pagination {
+    position: absolute !important;
+    top: 786px !important;
+    left: -140px !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 14px !important;
+  }
+
+  .right {
+    display: flex;
+    width: 100%;
+    max-width: 333px;
+    border-radius: 0 30px 30px 0;
+  }
+
+  .black {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    max-width: 166px;
+    padding: 39px 20px 39px 20px;
+    text-align: center;
+    background: #1C1C1C;
+  }
+
+  .gray {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+    max-width: 166px;
+    padding: 39px 20px 39px 20px;
+    text-align: center;
+    border-radius: 0 30px 30px 0;
+    background: #888888;
+  }
+
+  .black div:first-child, .gray div:first-child {
+    font-family: "Pretendard", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    color: #FFF;
+  }
+
+  .black div:last-child, .gray div:last-child {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 33px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    color: #FFF;
+  }
+
+  .highlight {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 33px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    color: #00F6FF;
+  }
+
+  .dash {
+    font-family: "Century Gothic", sans-serif;
+    font-size: 33px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    color: #ADB5BD;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    border-radius: 50%;
+    background-color: #8B95A1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+  }
+}

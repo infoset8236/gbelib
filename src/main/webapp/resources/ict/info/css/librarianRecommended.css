@@ -1,0 +1,144 @@
+.container {
+background: url('/resources/ict/libraryBoard/img/librarianRecommend/bg.png') no-repeat center center;
+}
+
+.content {
+display: flex;
+justify-content: center;
+width: 100%;
+margin: 0 auto;
+}
+
+.slide {
+width: 3360px;
+margin-top: 34px;
+}
+
+.grid {
+display: grid !important;
+grid-template-columns: repeat(6, 1fr);
+grid-template-rows: repeat(2, auto);
+gap: 100px 200px;
+padding: 0 100px;
+}
+
+.slide_item {
+display: flex;
+flex-direction: column;
+}
+
+.slide_item img {
+width: 360px;
+height: 520px;
+border-radius: 24px;
+box-shadow: 15px 30px 60px 0 rgb(0 0 0 / 15%);
+}
+
+.title {
+width: 360px;
+margin: 40px 0 20px;
+font-size: 48px;
+font-weight: 500;
+line-height: normal;
+color: #191f28;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+font-family: Pretendard-Medium, sans-serif;
+font-style: normal;
+}
+
+.writer {
+width: 360px;
+font-size: 38px;
+font-weight: 400;
+line-height: normal;
+color: #6b7684;
+overflow: hidden;
+text-overflow: ellipsis;
+white-space: nowrap;
+font-family: Pretendard-Regular, sans-serif;
+font-style: normal;
+text-transform: capitalize;
+}
+
+.slick-dots {
+bottom: -134px;
+display: flex;
+justify-content: center;
+gap: 32px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+width: 24px;
+height: 24px;
+}
+
+.slick-dots li button::before {
+border-radius: 50%;
+font-size: 24px;
+line-height: 24px;
+background: #adb5bd;
+content: '';
+}
+
+.slick-dots li.slick-active button::before {
+background: #191f28;
+}
+
+@media (width <= 1920px) {
+.slide {
+width: 1680px;
+margin-top: 17px;
+}
+
+.grid {
+display: grid;
+grid-template-columns: repeat(5, 1fr);
+grid-template-rows: repeat(2, auto);
+gap: 50px 100px;
+padding: 0 50px;
+}
+
+.slide_item {
+box-sizing: border-box;
+text-align: center;
+}
+
+.slide_item img {
+width: 180px;
+height: 260px;
+border-radius: 12px;
+box-shadow: 8px 15px 30px 0 rgb(0 0 0 / 8%);
+}
+
+.title {
+width: 180px;
+margin: 20px 0 10px;
+font-size: 24px;
+}
+
+.writer {
+width: 180px;
+font-size: 19px;
+}
+
+.slick-dots {
+bottom: -67px;
+gap: 16px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+width: 12px;
+height: 12px;
+}
+
+.slick-dots li button::before {
+font-size: 12px;
+line-height: 12px;
+}
+}

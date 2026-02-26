@@ -1,0 +1,287 @@
+.returnlo_book_page .ict_tit {
+	color: #8b95a1;
+}
+.loan_book_ {
+	position: absolute;
+	top: 1006px;
+	left: 165px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	-ms-flex-direction: row;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 1700px;
+	padding: 80px 120px 80px 120px;
+	border-radius: 80px;
+	background: rgba(255, 255, 255, 0.2);
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	-webkit-backdrop-filter: blur(50px);
+	backdrop-filter: blur(50px);
+}
+.lr_text {
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 92px;
+	line-height: 80px;
+	position: relative;
+	text-align: left;
+	color: #ffffff;
+}
+.return_book_ {
+	position: absolute;
+	top: 1006px;
+	left: 1975px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	-ms-flex-direction: row;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 1700px;
+	padding: 80px 120px 80px 120px;
+	border-radius: 80px;
+	background: rgba(254, 201, 98, 0.2);
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	-webkit-backdrop-filter: blur(50px);
+	backdrop-filter: blur(50px);
+}
+.returnlo_book_page .daily_num {
+	position: absolute;
+	top: 1240px;
+	left: calc(50% - 1705.34px);
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	justify-content: flex-start;
+	-webkit-transform: unset;
+	transform: unset;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	gap: 92px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+}
+.returnlo_book_page .month_wrap,
+.returnlo_book_page .day_wrap {
+	position: static;
+	flex-shrink: 0;
+	width: 754px;
+	height: 631px;
+	-ms-flex-negative: 0;
+}
+.returnlo_book_page .month_inner {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: flex-end;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	justify-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	gap: 0;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+}
+.returnlo_book_page .month_inner_num,
+.returnlo_book_page .day_inner_num {
+	position: relative;
+	overflow: hidden;
+	flex-shrink: 0;
+	width: 618.33px;
+	height: 650px;
+	-ms-flex-negative: 0;
+}
+.returnlo_book_page .month_inner_text,
+.returnlo_book_page .day_inner_text {
+	font-family: 'Roboto', sans-serif;
+	font-size: 540px;
+	font-weight: 700;
+	position: absolute;
+	top: -1px;
+	left: -1px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	color: #ffffff;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+}
+
+.returnlo_book_page .re_book {
+	color: #fec962;
+}
+
+.returnlo_book_page .month_inner_kor,
+.returnlo_book_page .day_inner_kor {
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	overflow: hidden;
+	align-items: center;
+	-ms-flex-direction: column;
+	flex-direction: column;
+	flex-shrink: 0;
+	justify-content: center;
+	width: 136px;
+	padding: 0 0 20px 0;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	gap: 7px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+	-ms-flex-negative: 0;
+}
+.returnlo_book_page .month_inner_kor_text,
+.returnlo_book_page .day_inner_kor_text {
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 120px;
+	font-weight: 500;
+	position: relative;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	justify-content: center;
+	text-align: center;
+	color: #ffffff;
+	-ms-flex-item-align: stretch;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: center;
+	-ms-flex-pack: center;
+}
+.returnlo_book_page .day_inner {
+	position: absolute;
+	top: 0;
+	left: 846.33px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: flex-end;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	justify-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	gap: 0;
+	-webkit-box-align: end;
+	-ms-flex-align: end;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+}
+.returnlo_book_page .redaily_num {
+	position: absolute;
+	top: 1240px;
+	left: calc(50% - -105px);
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	justify-content: flex-start;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	gap: 92px;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	-webkit-box-pack: start;
+	-ms-flex-pack: start;
+}
+
+@media (max-width: 1920px) {
+	.loan_book_ {
+		top: 503px;
+		left: 83px;
+		width: 850px;
+		padding: 40px 60px 40px 60px;
+		border-radius: 40px;
+	}
+	.lr_text {
+		font-size: 46px;
+		line-height: 40px;
+	}
+	.return_book_ {
+		top: 503px;
+		left: 988px;
+		width: 850px;
+		padding: 40px 60px 40px 60px;
+		border-radius: 40px;
+	}
+	.returnlo_book_page .daily_num {
+		top: 620px;
+		left: calc(50% - 853px);
+		-ms-transform: unset;
+		-webkit-transform: unset;
+		transform: unset;
+		gap: 46px;
+	}
+	.returnlo_book_page .month_wrap,
+	.returnlo_book_page .day_wrap {
+		flex-shrink: 0;
+		width: 377px;
+		height: 316px;
+		-ms-flex-negative: 0;
+	}
+	.returnlo_book_page .month_inner_num,
+	.returnlo_book_page .day_inner_num {
+		flex-shrink: 0;
+		width: 310px;
+		height: 325px;
+		-ms-flex-negative: 0;
+	}
+	.returnlo_book_page .month_inner_text,
+	.returnlo_book_page .day_inner_text {
+		font-size: 270px;
+	}
+	.returnlo_book_page .month_inner_kor,
+	.returnlo_book_page .day_inner_kor {
+		width: 68px;
+		padding: 0px 0px 10px 0px;
+		gap: 4px;
+	}
+	.returnlo_book_page .month_inner_kor_text,
+	.returnlo_book_page .day_inner_kor_text {
+		font-size: 60px;
+	}
+	.returnlo_book_page .day_inner {
+		left: 423.165px;
+	}
+	.returnlo_book_page .redaily_num {
+		top: 620px;
+		left: calc(50% - -52px);
+		gap: 46px;
+	}
+}

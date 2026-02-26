@@ -1,0 +1,350 @@
+.info-wrap {
+	width: 100%;
+	height: 2160px;
+	background: url(../../img/type_b/information/bg_info.png) no-repeat;
+	background-size: cover;
+	position: relative;
+	overflow: hidden;
+	background-position: center;
+}
+
+body{background:#f5f0ee;}
+
+.content {
+	/* margin-top: 55px; */
+	margin-left: 320px;
+	padding: 0 180px 100px;
+	position: absolute;
+	top: 500px;
+	width: 3520px;
+	}
+  
+  .scroll {
+	display: flex;
+	overflow-y: scroll;
+	width: 100%;
+	height: 100%;
+	max-height: 1354px;
+	gap: 108px;
+	}
+  
+  .wrapper {
+	width: 50%;
+	padding-right: 72px;
+  }
+  
+  .label {
+	font-family: "Pretendard-SemiBold", sans-serif;
+	font-size: 56px;
+	font-weight: 600;
+	font-style: normal;
+	line-height: normal;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 50px;
+	letter-spacing: -1.4px;
+	color: #191F28;
+	gap: 27px;
+	}
+  
+  .label img {
+	width: 88.45px;
+  }
+  
+  .mb120 {
+	margin-bottom: 120px;
+  }
+  
+  .time_table {
+	width: 100%;
+	border-collapse: collapse;
+  }
+  
+  .time_table thead {
+	width: 100%;
+	background: #587590;
+	}
+  
+  .time_table thead th {
+	font-family: "Pretendard-Regular", sans-serif;
+	font-size: 44px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: normal;
+	padding: 32px 40px 32px 40px;
+	text-align: center;
+	letter-spacing: -1.1px;
+	color: #FFFFFF;
+	border: 4px solid #587590;
+	border-top: 0;
+	}
+  
+  .time_table tr th:first-child {
+	border-radius: 20px 0 0 0;
+	border-left: 0;
+	}
+  
+  .time_table tr th:last-child {
+	border-radius: 0 20px 0 0;
+	border-right: 0;
+	}
+  
+  .time_table tbody {
+	width: 100%;
+	background: #FFFFFF;
+  }
+  
+  .time_table tbody td {
+	font-family: "Pretendard-Medium", sans-serif;
+	font-size: 44px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: normal;
+	padding: 32px 40px 32px 40px;
+	text-align: center;
+	letter-spacing: -1.1px;
+	color: #191F28;
+	border-top: 1px solid #C8CDD2;
+	border-left: 1px solid #C8CDD2;
+	}
+
+.time_table tbody td:nth-child(1){
+	border-left: 0
+}
+  
+  .bold {
+	font-family: "Pretendard-Bold", sans-serif;
+	font-size: 44px;
+	/* font-weight: 600 !important; */
+	font-style: normal;
+	line-height: normal;
+	text-align: center;
+	letter-spacing: -1.1px;
+	color: #191F28;
+	}
+  
+  .time_table tbody tr:not(:last-child) {
+	/* border-bottom: 2px solid #E5E8EB; */
+	}
+  
+  .time_table tbody td.left_td {
+	border-radius: 0 0 0 20px;
+  }
+  
+  
+  .time_table tbody td.right_td {
+	border-radius: 0 0 20px 0;
+  }
+  
+  .text_wrapper {
+	/* font-family: "Pretendard-Medium", sans-serif; */
+	font-size: 60px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 140%;
+	display: flex;
+	letter-spacing: -1.5px;
+	color: #191F28;
+	gap: 24px;
+	}
+  
+  .text_wrapper img {
+	width: 68px;
+	height: 68px;
+	margin-top: 10px;
+  }
+  
+  .left {
+	text-align: left !important;
+  }
+  
+  .mb {
+	margin-bottom: 20px;
+  }
+  
+  .margin {
+	margin-top: 48px;
+	margin-bottom: 48px;
+  }
+  
+  ::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+	border-radius: 4px;
+	background: #E5E8EB;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+	border-radius: 4px;
+	background: #8B95A1;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+	background: #8B95A1;
+  }
+  
+  @media (width: 1920px) {
+	.info-wrap {
+		height: 1080px;
+	}
+	
+	.content {
+		margin-left: 160px;
+		padding: 0 90px 50px;
+		top: 250px;
+		width: 1760px;
+		}
+	  
+	  .scroll {
+		max-height: 677px;
+		gap: 54px;
+		}
+  
+	.wrapper {
+	  width: 50%; /* 비율이므로 유지 */
+	  padding-right: 36px; /* 72px / 2 */
+	}
+  
+	.label {
+	  font-family: "Pretendard-SemiBold", sans-serif;
+	  font-size: 28px; /* 56px / 2 */
+	  font-weight: 600;
+	  line-height: normal;
+	  display: flex;
+	  flex-direction: column;
+	  margin-bottom: 25px; /* 80px / 2 */
+	  letter-spacing: -0.7px; /* -1.4px / 2 */
+	  color: #191F28;
+	  gap: 14px; /* 27px / 2 */
+	}
+  
+	.label img {
+	  width: 44.225px; /* 88.45px / 2 */
+	}
+  
+	.mb120 {
+	  margin-bottom: 60px; /* 120px / 2 */
+	}
+  
+	.time_table {
+	  width: 100%;
+	  border-collapse: collapse;
+	}
+  
+	.time_table thead {
+	  width: 100%;
+	  background: #587590;
+	}
+  
+	.time_table thead th {
+	  font-family: "Pretendard", sans-serif;
+	  font-size: 22px; /* 44px / 2 */
+	  font-weight: 500;
+	  line-height: normal;
+	  padding: 16px 20px; /* (32px, 40px) / 2 */
+	  text-align: center;
+	  letter-spacing: -0.55px; /* -1.1px / 2 */
+	  color: #FFFFFF;
+	  border: 2px solid #587590;
+	  border-top: 0;
+	}
+  
+	.time_table tr th:first-child {
+	  border-radius: 20px 0 0 0; /* 비율이므로 유지 */
+	}
+  
+	.time_table tr th:last-child {
+	  border-radius: 0 20px 0 0; /* 비율이므로 유지 */
+	}
+  
+	.time_table tbody {
+	  width: 100%;
+	  background: #FFFFFF;
+	}
+  
+	.time_table tbody td {
+	  /* font-family: "Pretendard-Medium", sans-serif; */
+	  font-size: 22px; /* 44px / 2 */
+	  font-weight: 500;
+	  line-height: normal;
+	  padding: 16px 20px; /* (32px, 40px) / 2 */
+	  text-align: center;
+	  letter-spacing: -0.55px; /* -1.1px / 2 */
+	  color: #191F28;
+	}
+  
+	.bold {
+	  /* font-family: "Pretendard", sans-serif; */
+	  font-size: 22px; /* 44px / 2 */
+	  /* font-weight: 600 !important; */
+	  line-height: normal;
+	  text-align: center;
+	  letter-spacing: -0.55px; /* -1.1px / 2 */
+	  color: #191F28;
+	}
+  
+	.time_table tbody tr:not(:last-child) {
+	  /* border-bottom: 1px solid #E5E8EB; */ /* 2px / 2 */
+	}
+  
+	.time_table tbody td.left_td {
+	  border-radius: 0 0 0 10px; /* 20px / 2 */
+	}
+  
+	.time_table tbody td.right_td {
+	  border-radius: 0 0 10px 0; /* 20px / 2 */
+	}
+  
+	.text_wrapper {
+	  font-family: "Pretendard", sans-serif;
+	  font-size: 30px; /* 60px / 2 */
+	  font-weight: 400;
+	  line-height: 140%;
+	  display: flex;
+	  letter-spacing: -0.75px; /* -1.5px / 2 */
+	  color: #191F28;
+	  gap: 12px; /* 32px / 2 */
+	}
+  
+	.text_wrapper img {
+	  width: 34px; /* 68px / 2 */
+	  height: 34px; /* 68px / 2 */
+	  margin-top: 10px; /* 높이는 그대로 유지 */
+	}
+  
+	.left {
+	  text-align: left !important; /* 비율이므로 유지 */
+	}
+  
+	.mb {
+	  margin-bottom: 10px; /* 20px / 2 */
+	}
+  
+	.margin {
+	  margin-top: 24px; /* 48px / 2 */
+	  margin-bottom: 24px; /* 48px / 2 */
+	}
+  
+	::-webkit-scrollbar {
+	  width: 4px; /* 8px / 2 */
+	  height: 4px; /* 8px / 2 */
+	}
+  
+	::-webkit-scrollbar-track {
+	  border-radius: 4px;
+	  background: #E5E8EB; /* 비율이므로 유지 */
+	}
+  
+	::-webkit-scrollbar-thumb {
+	  border-radius: 4px;
+	  background: #8B95A1; /* 비율이므로 유지 */
+	}
+  
+	::-webkit-scrollbar-thumb:hover {
+	  background: #8B95A1; /* 비율이므로 유지 */
+	}
+  
+  }

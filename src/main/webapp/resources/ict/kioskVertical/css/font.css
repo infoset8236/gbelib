@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+/* -------- 프리텐다드 -------- */
+@font-face {
+    font-family:'Pretendard-ExtraLight';
+    font-style:normal;
+    font-weight:100;
+    src: local('Pretendard-ExtraLight'), local('Pretendard-ExtraLight'),
+    url(../fonts/pretendard/Pretendard-ExtraLight.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-ExtraLight.otf) format('opentype');
+}
+@font-face {
+    font-family:'Pretendard-Light';
+    font-style:normal;
+    font-weight:200;
+    src: local('Pretendard-Light'), local('Pretendard-Light'),
+    url(../fonts/pretendard/Pretendard-Light.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Light.otf) format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Thin';
+    font-style:normal;
+    font-weight:300;
+    src: local('Pretendard-Thin'), local('Pretendard-Thin'),
+    url(../fonts/pretendard/Pretendard-Thin.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Thin.otf) format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Regular';
+    font-style:normal;
+    font-weight:400;
+    src: local('Pretendard-Regular'), local('Pretendard-Regular'),
+    url(../fonts/pretendard/Pretendard-Regular.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Regular.otf) format('opentype');
+}
+@font-face {
+    font-family:'Pretendard-Medium';
+    font-style: normal;
+    font-weight:500;
+    src: local('Pretendard-Medium'), local('Pretendard-Medium'),
+    url(../fonts/pretendard/Pretendard-Medium.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Medium.otf) format('opentype');
+}
+@font-face {
+    font-family:'Pretendard-SemiBold';
+    font-style:normal;
+    font-weight:600;
+    src:local('Pretendard-SemiBold'), local('Pretendard-SemiBold'),
+    url(../fonts/pretendard/Pretendard-SemiBold.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-SemiBold.otf) format('opentype');
+}
+@font-face {
+    font-family:'Pretendard-Bold';
+    font-style:normal;
+    font-weight:700;
+    src:local('Pretendard-Bold'), local('Pretendard-Bold'),
+    url(../fonts/pretendard/Pretendard-Bold.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Bold.otf) format('opentype');
+}
+@font-face {
+    font-family:'Pretendard-ExtraBold';
+    font-style:normal;
+    font-weight:800;
+    src:local('Pretendard-ExtraBold'), local('Pretendard-ExtraBold'),
+    url(../fonts/pretendard/Pretendard-ExtraBold.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-ExtraBold.otf) format('opentype');
+}
+
+@font-face {
+    font-family:'Pretendard-Black';
+    font-style:normal;
+    font-weight:900;
+    src:local('Pretendard-Black'), local('Pretendard-Black'),
+    url(../fonts/pretendard/Pretendard-Black.woff) format('woff'),
+    url(../fonts/pretendard/Pretendard-Black.otf) format('opentype');
+}
+
+/* -------- 센추리고딕 -------- */
+
+@font-face {
+    font-family:'Century Gothic';
+    font-style:normal;
+    font-weight:100;
+    src: local('GOTHIC'), local('GOTHIC'),
+    url(../fonts/century_gothic/GOTHIC.TTF) format('truetype');
+}
+@font-face {
+    font-family:'Century Gothic';
+    font-style:normal;
+    font-weight:800;
+    src: local('GOTHICB'), local('GOTHICB'),
+     url(../fonts/century_gothic/GOTHICB.TTF) format('truetype');
+}
+
+/* -------- 서울한강체 -------- */
+@font-face {
+    font-family:'SeoulHangang-Light';
+    font-style:normal;
+    font-weight:200;
+    src: local('SeoulHangangL'), local('SeoulHangangL'),
+    url(../fonts/SeoulHangang/SeoulHangangL.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangang-Regular';
+    font-style:normal;
+    font-weight:400;
+    src: local('SeoulHangangM'), local('SeoulHangangM'),
+    url(../fonts/SeoulHangang/SeoulHangangM.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangang-Bold';
+    font-style:normal;
+    font-weight:700;
+    src:local('SeoulHangangB'), local('SeoulHangangB'),
+    url(../fonts/SeoulHangang/SeoulHangangB.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangang-ExtraBold';
+    font-style:normal;
+    font-weight:800;
+    src:local('SeoulHangangEB'), local('SeoulHangangEB'),
+    url(../fonts/SeoulHangang/SeoulHangangEB.ttf) format('truetype');
+}
+
+/* -------- 서울한강장체 -------- */
+@font-face {
+    font-family:'SeoulHangangCm-Light';
+    font-style:normal;
+    font-weight:200;
+    src: local('SeoulHangangCmL'), local('SeoulHangangCmL'),
+    url(../fonts/SeoulHangangCm/SeoulHangangCmL.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangangCm-Regular';
+    font-style:normal;
+    font-weight:400;
+    src: local('SeoulHangangCmM'), local('SeoulHangangCmM'),
+    url(../fonts/SeoulHangangCm/SeoulHangangCmM.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangangCm-Bold';
+    font-style:normal;
+    font-weight:700;
+    src:local('SeoulHangangCmB'), local('SeoulHangangCmB'),
+    url(../fonts/SeoulHangangCm/SeoulHangangCmB.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangangCm-ExtraBold';
+    font-style:normal;
+    font-weight:800;
+    src:local('SeoulHangangEB'), local('SeoulHangangEB'),
+    url(../../resources/ict/fonts/SeoulHangangCm/SeoulHangangEB.ttf) format('truetype');
+}
+@font-face {
+    font-family:'SeoulHangangCm-Black';
+    font-style:normal;
+    font-weight:900;
+    src:local('SeoulHangangCmBL'), local('SeoulHangangCmBL'),
+    url(../../resources/ict/fonts/SeoulHangangCm/SeoulHangangEB.ttf) format('truetype');
+}
+
+/* -------- Fjalla_One -------- */
+@font-face {
+    font-family:'FjallaOne-Regular';
+    font-style:normal;
+    font-weight:500;
+    src: local('FjallaOne-Regular'), local('FjallaOne-Regular'),
+    url(../fonts/Fjalla_One/FjallaOne-Regular.ttf) format('truetype');
+}
+
+/* -------- 서울남산체 -------- */
+@font-face {
+    font-family:'SeoulNamsanM';
+    font-style:normal;
+    font-weight:500;
+    src: local('SeoulNamsanM'), local('SeoulNamsanM'),
+    url(../fonts/seoulnamsan/SeoulNamsanM.ttf) format('truetype');
+}
+
+@font-face {
+    font-family:'SeoulNamsanL';
+    font-style:normal;
+    font-weight:500;
+    src: local('SeoulNamsanL'), local('SeoulNamsanL'),
+    url(../fonts/seoulnamsan/SeoulNamsanL.ttf) format('truetype');
+}
+
+@font-face {
+    font-family:'SeoulNamsanB';
+    font-style:normal;
+    font-weight:500;
+    src: local('SeoulNamsanB'), local('SeoulNamsanB'),
+    url(../fonts/seoulnamsan/SeoulNamsanB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family:'SeoulNamsanEB';
+    font-style:normal;
+    font-weight:500;
+    src: local('SeoulNamsanEB'), local('SeoulNamsanEB'),
+    url(../fonts/seoulnamsan/SeoulNamsanEB.ttf) format('truetype');
+}
+
+@font-face {
+    font-family:'SeoulNamsanCEB';
+    font-style:normal;
+    font-weight:500;
+    src: local('SeoulNamsanCEB'), local('SeoulNamsanCEB'),
+    url(../fonts/seoulnamsan/SeoulNamsanCEB.ttf) format('truetype');
+}
+
+
+

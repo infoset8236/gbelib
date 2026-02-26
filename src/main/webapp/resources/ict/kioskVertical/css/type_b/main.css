@@ -1,0 +1,256 @@
+.container {
+	position: relative;
+	height: 100vh;
+	background: url('../../img/type_b/info/main/sky.svg') center center no-repeat;
+	background-size: cover;
+}
+
+.time_and_date {
+	position: relative;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 500px;
+	gap: 24px;
+}
+
+.time {
+	display: flex;
+	height: 294px;
+}
+
+.time div {
+	font-family: 'Century Gothic', sans-serif;
+	font-size: 240px;
+	font-weight: 400;
+	font-style: normal;
+	color: #ffffff;
+}
+
+#date {
+	font-family: 'Pretendard-Regular', sans-serif;
+	font-size: 72px;
+	font-weight: 400;
+	font-style: normal;
+	color: #ffffff;
+}
+
+.small_cloud {
+	position: absolute;
+	top: 1000px;
+	left: 0;
+	animation: float-small 3s ease-in-out infinite;
+}
+
+.cloud {
+	position: absolute;
+	top: 1000px;
+	right: 0;
+	animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float-small {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-20px);
+	}
+}
+
+.lib {
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.wrapper {
+	position: absolute;
+	bottom: 300px;
+	left: 0;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	height: 980px;
+	background-color: #f5f0ee;
+	gap: 60px;
+}
+
+.welcome_message {
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 120px;
+	font-weight: 600;
+	font-style: normal;
+	line-height: 140%;
+	margin-top: 253px;
+	text-align: center;
+	letter-spacing: -2.4px;
+	color: #191f28;
+	animation: fadein 6s;
+	-moz-animation: fadein 6s; /* Firefox */
+	-webkit-animation: fadein 6s infinite; /* Safari and Chrome */
+	-o-animation: fadein 6s;
+}
+
+@keyframes fadein {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes fadein {
+	/* Safari and Chrome */
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.caption {
+	font-family: 'Pretendard-Regular', sans-serif;
+	font-size: 44px;
+font-style: normal;
+font-weight: 400;
+line-height: 150%; 
+letter-spacing: 2.2px;
+	text-align: center;
+	color: #8b95a1;
+}
+
+.arrow {
+	margin-top: 20px;
+}
+
+@media (max-width: 1080px) {
+	.container {
+		position: relative;
+		height: 100vh;
+		background: url('../../img/type_b/info/main/sky.svg') center center no-repeat;
+		background-size: cover;
+	}
+
+	.time_and_date {
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		padding-top: 250px;
+		gap: 12px;
+	}
+
+	.time {
+		display: flex;
+		height: 147px;
+	}
+
+	.time div {
+		font-family: 'Century Gothic', sans-serif;
+		font-size: 120px;
+		font-weight: 400;
+		font-style: normal;
+		color: #ffffff;
+	}
+
+	#date {
+		font-family: 'Pretendard-Regular', sans-serif;
+		font-size: 36px;
+		font-weight: 400;
+		font-style: normal;
+		color: #ffffff;
+	}
+
+	.small_cloud {
+		position: absolute;
+		top: 500px;
+		left: 0;
+		animation: float-small 3s ease-in-out infinite;
+	}
+
+	.cloud {
+		position: absolute;
+		top: 500px;
+		right: 0;
+		animation: float 5s ease-in-out infinite;
+	}
+
+	@keyframes float-small {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-5px);
+		}
+	}
+
+	@keyframes float {
+		0%,
+		100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-10px);
+		}
+	}
+
+	.lib {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.wrapper {
+		position: absolute;
+		bottom: 150px;
+		left: 0;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		height: 490px;
+		background-color: #f5f0ee;
+		gap: 30px;
+	}
+
+	.welcome_message {
+		font-size: 60px;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 140%;
+		margin-top: 126.5px;
+		text-align: center;
+		letter-spacing: -1.2px;
+		color: #191f28;
+	}
+
+	.caption {
+		font-size: 22px;
+		font-weight: 400;
+		font-style: normal;
+		line-height: 150%;
+		text-align: center;
+		letter-spacing: 4.16px;
+		color: #8b95a1;
+	}
+
+	.arrow {
+		margin-top: 10px;
+	}
+}

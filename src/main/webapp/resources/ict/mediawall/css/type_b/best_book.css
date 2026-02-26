@@ -1,0 +1,358 @@
+.bookinfo-wrap .bg_point_01 {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 3840px;
+	height: 100%;
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
+}
+
+.black {
+	color: #191f28 !important;
+}
+
+.gray {
+	color: #8b95a1 !important;
+}
+
+.top_content {
+	position: relative;
+	display: flex;
+	margin-top: 134px;
+	margin-bottom: 185px;
+	padding-right: 260px;
+	padding-left: 260px;
+	gap: 150px;
+}
+
+.content_wrapper {
+	display: flex;
+	align-items: center;
+	gap: 100px;
+	width: 1610px;
+}
+
+.left {
+	position: relative;
+}
+
+.number {
+	font-family: 'Century Gothic', sans-serif;
+	font-size: 40px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 140%;
+	position: absolute;
+	top: 50px;
+	left: -40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100px;
+	height: 100px;
+	text-align: center;
+	letter-spacing: 0.8px;
+	text-transform: uppercase;
+	color: #ffffff;
+	border-radius: 50%;
+	background-color: #000000;
+}
+
+.left img {
+	flex-shrink: 0;
+	width: 460px;
+	height: 650px;
+	border-radius: 40px;
+	box-shadow: 30px 30px 25px 0 rgba(0, 0, 0, 0.1);
+}
+.book_title {
+	font-family: 'Pretendard', sans-serif;
+	font-size: 80px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: 140%;
+	overflow: hidden;
+	width: 100%;
+	max-width: 1000px;
+	margin-bottom: 20px;
+	white-space: nowrap;
+	letter-spacing: -1.6px;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	color: #191f28;
+	height: 112px;
+}
+
+.writer {
+	font-family: 'Pretendard', sans-serif;
+	font-size: 48px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: 140%;
+	overflow: hidden;
+	width: 100%;
+	max-width: 1000px;
+	margin-bottom: 40px;
+	white-space: nowrap;
+	letter-spacing: -0.96px;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	color: #6b7684;
+}
+
+.description {
+	font-family: 'Pretendard', sans-serif;
+	font-size: 44px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 140%;
+	display: -webkit-box;
+	overflow: hidden;
+	width: 100%;
+	max-width: 1000px;
+	letter-spacing: -0.88px;
+	text-overflow: ellipsis;
+	color: #191f28;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 5;
+	line-clamp: 5;
+	height:300px;
+}
+
+.bottom_content {
+	display: flex;
+	padding-right: 262px;
+	padding-left: 262px;
+	gap: 131px;
+}
+
+.wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.small_number {
+	font-family: 'Century Gothic', sans-serif;
+	font-size: 28px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 140%;
+	position: absolute;
+	top: 34px;
+	left: -30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 72px;
+	height: 72px;
+	text-align: center;
+	letter-spacing: 0.56px;
+	text-transform: uppercase;
+	color: #fff;
+	border-radius: 50%;
+	background-color: #000000;
+}
+
+.wrapper img {
+	width: 300px;
+	height: 424px;
+	margin-bottom: 40px;
+	border-radius: 20px;
+	box-shadow: 30px 30px 25px 0 rgba(0, 0, 0, 0.1);
+}
+
+.small_book_title {
+	font-family: 'Pretendard', sans-serif;
+	font-size: 40px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: 140%;
+	display: -webkit-box;
+	overflow: hidden;
+	letter-spacing: -0.8px;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	color: #191f28;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-clamp: 2;
+	width: 290px;
+	height: 112px;
+}
+
+@media (width: 1920px) {
+	.bookinfo-wrap .bg_point_01 {
+		width: 1920px;
+		height: 100%;
+	}
+
+	.top_content {
+		display: flex;
+		margin-top: 67px;
+		margin-bottom: 92.5px;
+		padding-right: 130px;
+		padding-left: 130px;
+		gap: 75px;
+	}
+
+	.content_wrapper {
+		display: flex;
+		align-items: center;
+		gap: 50px;
+		width:805px;
+	}
+
+	.left {
+		position: relative;
+	}
+
+	.number {
+		font-family: 'Century Gothic', sans-serif;
+		font-size: 20px;
+		font-weight: 400;
+		font-style: normal;
+		line-height: 140%;
+		position: absolute;
+		top: 25px;
+		left: -20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		text-align: center;
+		letter-spacing: 0.4px;
+		text-transform: uppercase;
+		color: #ffffff;
+		border-radius: 50%;
+		background-color: #000000;
+	}
+
+	.left img {
+		flex-shrink: 0;
+		width: 230px;
+		height: 325px;
+		border-radius: 20px;
+		box-shadow: 15px 15px 12.5px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.book_title {
+		font-family: 'Pretendard', sans-serif;
+		font-size: 40px;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 140%;
+		overflow: hidden;
+		width: 100%;
+		max-width: 500px;
+		margin-bottom: 10px;
+		white-space: nowrap;
+		letter-spacing: -0.8px;
+		text-transform: uppercase;
+		text-overflow: ellipsis;
+		color: #191f28;
+		height: 56px;
+	}
+
+	.writer {
+		font-family: 'Pretendard', sans-serif;
+		font-size: 24px;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 140%;
+		overflow: hidden;
+		width: 100%;
+		max-width: 500px;
+		margin-bottom: 20px;
+		white-space: nowrap;
+		letter-spacing: -0.48px;
+		text-transform: uppercase;
+		text-overflow: ellipsis;
+		color: #6b7684;
+	}
+
+	.description {
+		font-family: 'Pretendard', sans-serif;
+		font-size: 22px;
+		font-weight: 400;
+		font-style: normal;
+		line-height: 140%;
+		display: -webkit-box;
+		overflow: hidden;
+		width: 100%;
+		max-width: 500px;
+		letter-spacing: -0.44px;
+		text-overflow: ellipsis;
+		color: #191f28;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 5;
+		line-clamp: 5;
+		height:150px;
+	}
+
+	.bottom_content {
+		display: flex;
+		padding-right: 131px;
+		padding-left: 131px;
+		gap: 65.5px;
+	}
+
+	.wrapper {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.small_number {
+		font-family: 'Century Gothic', sans-serif;
+		font-size: 14px;
+		font-weight: 400;
+		font-style: normal;
+		line-height: 140%;
+		position: absolute;
+		top: 17px;
+		left: -15px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		text-align: center;
+		letter-spacing: 0.28px;
+		text-transform: uppercase;
+		color: #fff;
+		border-radius: 50%;
+		background-color: #000000;
+	}
+
+	.wrapper img {
+		width: 150px;
+		height: 212px;
+		margin-bottom: 20px;
+		border-radius: 10px;
+		box-shadow: 15px 15px 12.5px 0 rgba(0, 0, 0, 0.1);
+	}
+
+	.small_book_title {
+		font-family: 'Pretendard', sans-serif;
+		font-size: 20px;
+		font-weight: 500;
+		font-style: normal;
+		line-height: 140%;
+		display: -webkit-box;
+		overflow: hidden;
+		letter-spacing: -0.4px;
+		text-transform: uppercase;
+		text-overflow: ellipsis;
+		color: #191f28;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-clamp: 2;
+		width: 150px;
+		height: 56px;
+	}
+}

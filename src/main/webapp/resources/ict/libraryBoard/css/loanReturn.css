@@ -1,0 +1,98 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/loanReturn/bg.png') no-repeat center center;
+}
+
+.content {
+  padding-top: 129px;
+  padding-left: 1067px;
+  display: flex;
+  flex-direction: column;
+  gap: 205px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 120px;
+}
+
+.num_wrapper {
+  display: flex;
+  gap: 20px;
+}
+
+.num_wrapper div {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  height: 500px;
+  font-size: 400px;
+  font-weight: 400;
+  line-height: 100%;
+  letter-spacing: 8px;
+  text-align: center;
+  color: #fff;
+  padding-top: 50px;
+  font-family: 'Fjalla One', sans-serif;
+  font-style: normal;
+}
+
+.num_wrapper div::after {
+  position: absolute;
+  top: 249px;
+  left: 0;
+  width: 310px;
+  height: 4px;
+  background: #000;
+  content: '';
+}
+
+.text_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 500px;
+  font-size: 360px;
+  font-weight: 400;
+  line-height: 100%;
+  text-align: center;
+  color: #fff;
+  padding-top: 50px;
+  font-family: SeoulNamsanEB, sans-serif;
+  font-style: normal;
+}
+
+.text_wrapper::after {
+  position: absolute;
+  top: 249px;
+  left: 0;
+  width: 399px;
+  height: 4px;
+  background: #000;
+  content: '';
+}
+
+/*******  2026-02-03 권기현 정보센터 스탠바이미 2560 대응 추가 *******/
+@media (width <= 2560px) {
+	.content {padding-top:10px;padding-left:730px;gap:199px;}
+	.wrapper {gap:120px;}
+	.num_wrapper {gap:40px;}
+	.num_wrapper div {width:180px;height:270px;font-size:280px;letter-spacing: 4px;padding-top: 25px;}
+	.num_wrapper div::after {top:135px;width:180px;height:2px;}
+	.text_wrapper {width:240px;height:250px;font-size:240px;padding-top:38px;}
+	.text_wrapper::after {top:135px;width:240px;height:2px;}
+}
+/************************************************************/
+
+@media (width <= 1920px) {
+	.content {padding-top: 65px;padding-left: 534px;gap: 103px;}
+	.wrapper {gap: 60px;}
+	.num_wrapper {gap: 10px;}
+	.num_wrapper div {width: 160px;height: 250px;font-size: 200px;letter-spacing: 4px;padding-top: 25px;}
+	.num_wrapper div::after {top: 124px;width: 155px;height: 2px;}
+	.text_wrapper {width: 200px;height: 250px;font-size: 180px;padding-top: 25px;}
+	.text_wrapper::after {top: 124px;width: 198px;height: 2px;}
+}

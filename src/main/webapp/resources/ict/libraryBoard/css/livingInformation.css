@@ -1,0 +1,367 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/livingInformation/bg.png') no-repeat center center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  padding-top: 94px;
+  gap: 597px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.today {
+  font-size: 60px;
+  font-weight: 500;
+  line-height: normal;
+  color: #dbe2e9;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+  margin-bottom: 60px;
+}
+
+.today span {
+  color: #191f28;
+  margin-left: 52px;
+}
+
+.weather {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.weather div {
+  font-size: 340px;
+  font-weight: 400;
+  line-height: 340px;
+  letter-spacing: -13.6px;
+  color: #191f28;
+  font-family: Roboto-Regular, sans-serif;
+  font-style: normal;
+}
+
+.weather img {
+  width: 240px;
+  height: 240px;
+}
+
+.temperature {
+  font-size: 60px;
+  font-weight: 500;
+  line-height: normal;
+  color: #dbe2e9;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+  margin-bottom: 120px;
+}
+
+.temperature span {
+  font-weight: 500;
+  color: #dbe2e9;
+  margin-left: 52px;
+  font-family: Roboto-Medium, sans-serif;
+}
+
+.dust {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 140px;
+  border-radius: 100px;
+  background: rgb(17 17 17 / 20%);
+  gap: 40px;
+}
+
+.dust img {
+  width: 60px;
+  height: 60px;
+  margin-right: 24px;
+}
+
+.dust div {
+  font-size: 60px;
+  font-weight: 400;
+  line-height: normal;
+  color: #333d4b;
+  font-family: Pretendard-Regular, sans-serif;
+  font-style: normal;
+}
+
+.dust div span {
+  color: #fff;
+  margin-left: 40px;
+}
+
+.weekly_weather {
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1600px;
+  height: 600px;
+  border-radius: 80px;
+  background: rgb(0 0 0 / 60%);
+  gap: 125px;
+}
+
+.weekly_weather_item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.weekly_weather_item div:first-child {
+  font-size: 48px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  color: #adb5bd;
+  font-family: Pretendard-Regular, sans-serif;
+  font-style: normal;
+  margin-bottom: 40px;
+}
+
+.weekly_weather_item img {
+  width: 180px;
+  height: 180px;
+  margin-bottom: 24px;
+}
+
+.weekly_weather_item div:last-child {
+  font-size: 60px;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
+  color: #fff;
+  font-family: Roboto-Regular, sans-serif;
+  font-style: normal;
+}
+
+.news_content {
+  display: flex;
+  flex-direction: column;
+  width: 1600px;
+  height: 825px;
+  padding: 100px;
+  gap: 40px;
+  border-radius: 80px;
+  background: rgb(0 0 0 / 40%);
+  backdrop-filter: blur(40px);
+}
+
+.news_content_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.news_content_header div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 231px;
+  height: 97px;
+  border-radius: 24px;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -1.2px;
+  color: #fff;
+  background: #333d4b;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.news_content_header img {
+  width: 232px;
+  height: 70px;
+}
+
+.slide {
+  width: 1400px;
+  height: 488px;
+}
+
+.slide_item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.slide_item div:first-child {
+  display: -webkit-box;
+  width: 1340px;
+  font-size: 60px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -1.5px;
+  color: #fff;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  align-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+}
+
+.slide_item div:last-child {
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -1px;
+  color: #adb5bd;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-Regular, sans-serif;
+  font-style: normal;
+}
+
+@media (width <= 1920px) {
+  .content {
+    padding-top: 47px;
+    gap: 299px;
+  }
+
+  .today {
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+
+  .today span {
+    margin-left: 26px;
+  }
+
+  .weather {
+    margin-bottom: 12px;
+  }
+
+  .weather div {
+    font-size: 170px;
+    line-height: 170px;
+    letter-spacing: -7px;
+  }
+
+  .weather img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .temperature {
+    font-size: 30px;
+    margin-bottom: 60px;
+  }
+
+  .temperature span {
+    margin-left: 26px;
+  }
+
+  .dust {
+    width: 350px;
+    height: 70px;
+    border-radius: 50px;
+    gap: 20px;
+  }
+
+  .dust img {
+    width: 30px;
+    height: 30px;
+    margin-right: 12px;
+  }
+
+  .dust div {
+    font-size: 30px;
+  }
+
+  .dust div span {
+    margin-left: 20px;
+  }
+
+  .weekly_weather {
+    margin-bottom: 10px;
+    width: 800px;
+    height: 300px;
+    border-radius: 40px;
+    gap: 63px;
+  }
+
+  .weekly_weather_item div:first-child {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+
+  .weekly_weather_item img {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 12px;
+  }
+
+  .weekly_weather_item div:last-child {
+    font-size: 30px;
+  }
+
+  .news_content {
+    width: 800px;
+    height: 413px;
+    padding: 50px;
+    gap: 20px;
+    border-radius: 40px;
+  }
+
+  .news_content_header div:first-child {
+    width: 116px;
+    height: 49px;
+    border-radius: 12px;
+    font-size: 24px;
+    letter-spacing: -1px;
+  }
+
+  .news_content_header img {
+    width: 116px;
+    height: 35px;
+  }
+
+  .slide {
+    width: 700px;
+    height: 244px;
+  }
+
+  .grid {
+    display: grid;
+    box-sizing: border-box;
+    width: 100%;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 20px;
+  }
+
+  .slide_item {
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+
+  .slide_item div:first-child {
+    width: 670px;
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+
+  .slide_item div:last-child {
+    font-size: 20px;
+    letter-spacing: -1px;
+  }
+
+  .slick-vertical .slick-slide {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+  }
+}

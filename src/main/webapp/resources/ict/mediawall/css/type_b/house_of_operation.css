@@ -1,0 +1,136 @@
+.notice_oper {
+	position: absolute;
+	top: 44%;
+	left: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.info-wrap .oper_tit {
+	font-family: 'Pretendard-Bold', sans-serif;
+	font-size: 120px;
+	font-weight: 700;
+	line-height: 120%;
+	text-align: center;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+	color: #191f28;
+}
+
+.table {
+	width: 3320px;
+	margin-top: 120px;
+	border-collapse: collapse;
+	text-align: center;
+	border-top: 0;
+	border-radius: 40px;
+	box-shadow: 20px 40px 50px 0px rgba(0, 0, 0, 0.1);
+}
+
+.table th {
+	font-family: 'Pretendard-Regular', sans-serif;
+	font-size: 66px;
+	font-weight: 400;
+	line-height: 140%;
+	overflow: hidden;
+	width: 100%;
+	height: 180px;
+	text-align: center;
+	white-space: nowrap;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	color: #fff;
+	/* padding: 40px; */
+	/* border: 1px solid #ac9a89; */
+	background: #ac9a89;
+}
+
+.table td {
+	font-family: 'Pretendard-Medium', sans-serif;
+	font-size: 72px;
+	font-weight: 500;
+	line-height: 140%;
+	overflow: hidden;
+	height: 210px;
+	text-align: center;
+	white-space: nowrap;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+	text-overflow: ellipsis;
+	/* padding: 70px; */
+	color: #191f28;
+	border: 1px solid #c8cdd2;
+	border-bottom: 0;
+	border-left: 0;
+	background: #fff;
+}
+
+.table .left-top {
+	width: 970px;
+	border-spacing: 0;
+	border-right: 0;
+	border-radius: 40px 0 0 0;
+}
+
+.table .middle {
+	width: 1170px;
+	border-right: 2px solid #ac9a89;
+	border-left: 5px solid #ac9a89;
+}
+.table .right-top {
+	width: 1170px;
+	border-radius: 0 40px 0 0;
+	border-spacing: 0;
+	border-left: 0;
+}
+
+.table .under {
+	border-radius: 0 0 0 40px;
+}
+.table .under_02 {
+	border-right: 0px solid transparent;
+	/* border-bottom: 0 solid transparent; */
+	border-radius: 0 0 40px 0;
+}
+@media (width: 1920px) {
+	.info-wrap .oper_tit {
+		font-size: 60px;
+	}
+
+	.table {
+		width: 1660px;
+		margin-top: 60px;
+		border-radius: 20px;
+		box-shadow: 10px 20px 25px 0px rgba(0, 0, 0, 0.1);
+	}
+
+	.table th {
+		font-size: 33px;
+		height: 90px;
+	}
+
+	.table td {
+		font-size: 36px;
+		height: 105px;
+	}
+
+	.table .left-top {
+		width: 485px;
+		border-radius: 20px 0 0 0;
+	}
+
+	.table .middle {
+		width: 585px;
+	}
+	.table .right-top {
+		width: 585px;
+		border-radius: 0 20px 0 0;
+	}
+
+	.table .under {
+		border-radius: 0 0 0 20px;
+	}
+	.table .under_02 {
+		border-radius: 0 0 20px 0;
+	}
+}

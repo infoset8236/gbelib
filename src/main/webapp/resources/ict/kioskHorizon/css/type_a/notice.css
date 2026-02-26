@@ -1,0 +1,115 @@
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: url('../../img/type_a/notice/background.png') center center no-repeat;
+  background-size: cover;
+}
+
+.content {
+  width: calc(100% - 320px);
+  height: calc(100vh - 345.33px);
+  margin-left: 320px;
+  padding-top: 55.44px;
+}
+
+.swiper-container {
+  position: relative;
+  width: 100%;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  gap: 140px;
+}
+
+.slide-item {
+  box-sizing: border-box;
+  width: 960px;
+  height: 1358px;
+  text-align: center;
+  box-shadow: 40px 10px 40px 0 rgba(0, 0, 0, 0.10)
+}
+
+.slide-item img {
+  object-fit: cover;
+}
+
+.swiper-pagination {
+  position: absolute !important;
+  top: 1490px !important;
+  display: flex !important;
+  justify-content: center;
+  gap: 40px !important;
+}
+
+.swiper-pagination-bullet {
+  width: 24px;
+  height: 24px;
+  opacity: 1;
+  border-radius: 50%;
+  background-color: #8B95A1;
+}
+
+
+.swiper-pagination-bullet-active {
+  width: 24px;
+  height: 24px;
+  background-color: #FFFFFF;
+}
+
+@media (width: 1920px) {
+  .content {
+    width: calc(100% - 160px);
+    height: calc(100vh - 172.665px);
+    margin-left: 160px;
+    padding-top: 27.72px;
+  }
+
+  .swiper-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+  }
+
+  .slide-item {
+    box-sizing: border-box;
+    width: 480px;
+    height: 679px;
+    text-align: center;
+    box-shadow: 20px 5px 20px 0 rgba(0, 0, 0, 0.20);
+  }
+
+  .slide-item img {
+    object-fit: cover;
+  }
+
+  .swiper-pagination {
+    position: absolute !important;
+    top: 745px !important;
+    display: flex !important;
+    justify-content: center;
+    gap: 20px !important;
+  }
+
+  .swiper-pagination-bullet {
+    width: 12px;
+    height: 12px;
+    opacity: 1;
+    border-radius: 50%;
+    background-color: #8B95A1;
+  }
+
+  .swiper-pagination-bullet-active {
+    width: 12px;
+    height: 12px;
+    background-color: #FFFFFF;
+  }
+}

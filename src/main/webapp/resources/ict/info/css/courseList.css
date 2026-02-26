@@ -1,0 +1,279 @@
+.container {
+  background: url('/resources/ict/libraryBoard/img/courseList/bg.png') no-repeat center center;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.slide {
+  margin-top: 54px;
+  width: 3160px;
+}
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.slide_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 320px;
+  border-radius: 60px;
+  background: #fff;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.status0,
+.status1,
+.status2,
+.status3,
+.status4,
+.status5,
+.status6,
+.status7 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  height: 200px;
+  margin: 0 48px 0 70px;
+  border-radius: 50%;
+  font-size: 44px;
+  font-weight: 600;
+  line-height: normal;
+  text-align: center;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.status0,
+.status1,
+.status2 {
+  color: #029951;
+  background: #e6f5ee;
+}
+
+.status3,
+.status4 {
+  color: #0969da;
+  background: #ddf4ff;
+}
+
+.status5 {
+  color: #f1b55c;
+  background: #fef8ef;
+}
+
+.status6,
+.status7 {
+  color: #6b7684;
+  background: #eff1f3;
+}
+
+.course_info {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.course_title {
+  width: 1080px;
+  font-size: 60px;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -1.5px;
+  white-space: nowrap;
+  color: #191f28;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.course_detail {
+  display: flex;
+  gap: 60px;
+}
+
+.course_detail_item {
+  font-size: 44px;
+  font-weight: 500;
+  line-height: normal;
+  color: #6b7684;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.course_detail_item span {
+  color: #191f28;
+}
+
+.count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 333px;
+  height: 100%;
+  gap: 5px;
+}
+
+.wrapper .count:first-child {
+  background: #1c1c1c;
+}
+
+.wrapper .count:last-child {
+  border-radius: 0 60px 60px 0;
+  background: #888;
+}
+
+.count_label {
+  font-size: 32px;
+  font-weight: 500;
+  line-height: normal;
+  text-align: center;
+  color: #fff;
+  font-family: Pretendard-SemiBold, sans-serif;
+  font-style: normal;
+}
+
+.count_value {
+  font-size: 66px;
+  font-weight: 700;
+  line-height: normal;
+  color: #fff;
+  font-family: 'Century Gothic', sans-serif;
+  font-style: normal;
+}
+
+.count_value span:first-child {
+  color: #00f6ff;
+}
+
+.count_value span:last-child {
+  color: #adb5bd;
+}
+
+.slick-dots {
+  bottom: -144px;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+.slick-dots li,
+.slick-dots li button,
+.slick-dots li button::before {
+  width: 24px;
+  height: 24px;
+}
+
+.slick-dots li button::before {
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 24px;
+  background: #adb5bd;
+  content: '';
+}
+
+.slick-dots li.slick-active button::before {
+  background: #191f28;
+}
+
+@media (width <= 1920px) {
+	.slide {
+	margin-top: 27px;
+	width: 1580px;
+	}
+
+	.grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	grid-template-rows: repeat(2, auto);
+	gap: 20px;
+	}
+
+	.slide_item {
+	box-sizing: border-box;
+	height: 160px;
+	border-radius: 30px;
+	text-align: left;
+	}
+	.status0,
+	.status1,
+	.status2,
+	.status3,
+	.status4,
+	.status5,
+	.status6,
+	.status7 {
+	width: 100px;
+	height: 100px;
+	margin: 0 24px 0 35px;
+	font-size: 22px;
+	}
+
+	.course_info {
+	gap: 12px;
+	}
+
+	.course_title {
+	width: 540px;
+	font-size: 30px;
+	letter-spacing: -1px;
+	}
+
+	.course_detail {
+	gap: 30px;
+	}
+
+	.course_detail_item {
+	font-size: 22px;
+	}
+
+	.count {
+	width: 167px;
+	gap: 3px;
+	}
+
+	.wrapper .count:last-child {
+	border-radius: 0 30px 30px 0;
+	}
+
+	.count_label {
+	font-size: 16px;
+	}
+
+	.count_value {
+	font-size: 33px;
+	}
+
+	.slick-dots {
+	bottom: -72px;
+	gap: 16px;
+	}
+
+	.slick-dots li,
+	.slick-dots li button,
+	.slick-dots li button::before {
+	width: 12px;
+	height: 12px;
+	}
+
+	.slick-dots li button::before {
+	font-size: 12px;
+	line-height: 12px;
+	}
+}

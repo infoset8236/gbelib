@@ -1,0 +1,90 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: url('/resources/ict/libraryBoard/img/main/bg.png') no-repeat center center;
+}
+
+.time {
+  margin: 260px 0 24px;
+  font-size: 180px;
+  font-weight: 400;
+  line-height: normal;
+  color: #fff;
+  font-family: 'Century Gothic', sans-serif;
+  font-style: normal;
+}
+
+.date {
+  font-family: Pretendard-Medium, sans-serif;
+  font-size: 60px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: normal;
+  color: #fff;
+}
+
+.title {
+  margin: 1170px 0 20px;
+  font-size: 120px;
+  font-weight: 500;
+  line-height: 140%;
+  letter-spacing: -2.4px;
+  text-align: center;
+  color: #191f28;
+  font-family: Pretendard-Medium, sans-serif;
+  font-style: normal;
+}
+
+.caption {
+  font-size: 44px;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 7.04px;
+  text-align: center;
+  color: #8b95a1;
+  font-family: Pretendard-Regural, sans-serif;
+  font-style: normal;
+  animation-delay: 0.3s;
+}
+
+.title,
+.caption {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fade 1s ease forwards;
+}
+
+@keyframes fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (width <= 1920px) {
+  .time {
+    margin: 130px 0 12px;
+    font-size: 90px;
+  }
+
+  .date {
+    font-size: 30px;
+  }
+
+  .title {
+    margin: 585px 0 10px;
+    font-size: 60px;
+    letter-spacing: -1.2px;
+  }
+
+  .caption {
+    font-size: 22px;
+    letter-spacing: 3.52px;
+  }
+
+  .title,
+  .caption {
+    transform: translateY(10px);
+  }
+}
