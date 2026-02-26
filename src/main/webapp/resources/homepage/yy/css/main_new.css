@@ -1,0 +1,81 @@
+@charset "utf-8";
+/*메인타입 - 02 import*/
+@import url("/resources/common/css/layout/main_type02.css");
+
+/*퀵+공지타입 - 01 import*/
+@import url("/resources/common/css/layout/quick_type01.css");
+
+
+/*일정+행사타입 - 02 import*/
+@import url("/resources/common/css/layout/culture_type02.css");
+
+/*도서타입 - 04 import*/
+@import url("/resources/common/css/layout/book_type04.css");
+
+/*큐레이션타입 - 01 import*/
+@import url("/resources/common/css/layout/curation_type01.css");
+
+#header h1{padding-top:25px;}
+
+#main0 .main0-top .search-box .main-box button{background:#f76d6d url('/resources/homepage/yy/img/main/srch-icon.png') no-repeat center center;}
+
+#main0 .main0-bottom .qmenu li a{background:rgba(255,255,255,0.9);}
+#main0 .main0-bottom .qmenu li a:hover,
+#main0 .main0-bottom .qmenu li a:focus {background:#d93168;}
+
+#main0 .main0-bottom .qmenu .bx-prev,
+#main0 .main0-bottom .qmenu .bx-next{display:none;}
+
+
+#main2 .main2-top .main2-top-wrap:before{background:#c83263 url('/resources/common/img/quick_type01/notice-bg.png') no-repeat 100% center}
+
+.calendar-wrap{background:#f5faff;}
+
+#main2 .event-box .list ul li div p b{color:#d93168;}
+#main2 .event-box .list ul li:first-child div{background:rgba(255,255,255,0.9) url('/resources/common/img/culture_type02/event-icon01.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:nth-child(2) div{background:rgba(255,255,255,0.9) url('/resources/common/img/culture_type02/event-icon02.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:last-child div{background:rgba(255,255,255,0.9) url('/resources/common/img/culture_type02/event-icon03.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:first-child:hover div{background:#d93168 url('/resources/common/img/culture_type02/event-icon01-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:nth-child(2):hover div{background:#d93168 url('/resources/common/img/culture_type02/event-icon02-hover.png')no-repeat center 80px;}
+#main2 .event-box .list ul li:last-child:hover div{background:#d93168 url('/resources/common/img/culture_type02/event-icon03-hover.png')no-repeat center 80px;}
+#main2 .main2-top .main2-top-wrap .main2-top-right-box {position: absolute;float: right;-webkit-box-sizing: border-box;box-sizing: border-box;/* width: 890px; */height: auto;padding-top: 0;right: 0;bottom: 10%;}
+
+
+
+#main3 .main3-wrap .title ul li.on{background:#d93168;}
+#main3 .main3-wrap .title .more-btn a{background:url('/resources/homepage/yy/img/main/view-btn.png')no-repeat right}
+
+#main6{background:url('/resources/homepage/yy/img/main/main-bg.jpg') no-repeat center top;}
+#main6 .bx-controls-direction a.bx-prev{background:url('/resources/homepage/yy/img/main/curation-prev-btn.png') no-repeat center;}
+#main6 .bx-controls-direction a.bx-next{background:url('/resources/homepage/yy/img/main/curation-next-btn.png') no-repeat center;}
+
+@media all and (max-width:1400px){
+	#main2 .main2-top .main2-top-wrap .main2-top-right-box .news{width:90%;}
+	
+#main2 .main2-top .main2-top-wrap .main2-top-right-box .news ul li a em {padding: 25px 0 26px 25px;}
+
+#main2 .main2-top .main2-top-wrap .main2-top-right-box .news ul li a span {padding: 25px 15px 25px 0;}
+}
+
+
+@media all and (max-width:1260px){
+	#main0 .main0-bottom .qmenu .bx-prev,
+	#main0 .main0-bottom .qmenu .bx-next{display:block;}
+}
+
+@media all and (max-width:1200px){
+	#main2 .event-box .list ul li:first-child div{background:#fff5f6 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:nth-child(2) div{background:#fff5f6 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:last-child div{background:#fff5f6 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:first-child:hover div{background:#d93168 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:nth-child(2):hover div{background:#d93168 url('/resources/common/img/transparent.png')no-repeat !important;}
+	#main2 .event-box .list ul li:last-child:hover div{background:#d93168 url('/resources/common/img/transparent.png')no-repeat !important;}
+}
+
+@media all and (max-width:1024px){
+	#header h1{padding-top:10px;width:180px;}
+
+	#main2 .main2-top .main2-top-wrap .main2-top-left-box{background-color:#c83263;}
+	#main2 .main2-top .main2-top-wrap .main2-top-right-box{position:relative;padding-top:30px;}
+   #main2 .main2-top .main2-top-wrap .main2-top-right-box .news{width:98%;margin:0 auto;}
+}

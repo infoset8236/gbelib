@@ -1,0 +1,45 @@
+@charset "utf-8";
+/*메인타입 - 01 import*/
+@import url("/resources/common/css/layout/main_type07.css");
+
+/*공지+퀵메뉴타입 - 01 import*/
+@import url("/resources/common/css/layout/quick_type01.css");
+
+/*행사+일정타입 - 01 import*/
+@import url("/resources/common/css/layout/culture_type01.css");
+
+/*주요서비스타입 - 02 import*/
+@import url("/resources/common/css/layout/service_type02.css");
+
+/*도서타입 - 02 import*/
+@import url("/resources/common/css/layout/book_type02.css");
+
+/*큐레이션타입 - 01 import*/
+@import url("/resources/common/css/layout/curation_type04.css");
+
+#main0 {background:url('/resources/homepage/yj/img/main0-bg.jpg') no-repeat center top;background-size:cover;}
+
+#main0 .main0-inner-right .main-txt p.txt01{font-family:'S-Core Dream 6';letter-spacing:-3px;}
+
+#main3{background:#d0e4fd;}
+#main3 .qservice ul li{border:2px solid #5aa6a2;box-sizing:border-box;}
+#main3 .qservice ul li div ul li{border:none;}
+
+#main4 .main4-bottom{background:#bee7fb;}
+
+#main5 div .book-box .list ul li img{width:210px;height:280px;}
+
+#main6{background:#cdeafc;}
+
+@media all and (max-width:1024px){
+	#main5 div .book-box .list ul li img{width:200px;height:270px;}
+}
+
+@media all and (max-width:768px){
+	#main0 {background:none;}
+	#main0 .main0-inner-right {background:url('/resources/homepage/yj/img/main-bg.jpg') no-repeat center center;background-size:cover;}
+}
+
+@media all and (max-width:550px){
+	#main5 div .book-box .list ul li img{width:120px;height:166px;}
+}
