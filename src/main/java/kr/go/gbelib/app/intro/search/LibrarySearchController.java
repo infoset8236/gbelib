@@ -513,9 +513,24 @@ public class LibrarySearchController extends BaseController {
 						Map<String, Object> sameBook = (Map<String, Object>) LibSearchAPI.getSameBookList("WEB", isbn, homepage.getHomepage_codeList()[0]);
 						if (sameBook != null) {
 							List<Map<String, Object>> sameBookList = (List<Map<String, Object>>)sameBook.get("dsSameBookList");
-							if (sameBookList != null && sameBookList.size() > 0) {
-								sMap.put("already", true);
-								sMap.put("ctrlno", sameBookList.get(0).get("CTRLNO"));
+							if (sameBookList != null && !sameBookList.isEmpty()) {
+								Map<String, Object> firstBook = sameBookList.get(0);
+
+								String statusName = (String) firstBook.get("STATUS_NAME");
+								String ctrlNo = (String) firstBook.get("CTRLNO");
+
+								String[] homepageCodes = homepage.getHomepage_codeList();
+								String homepageCode = (homepageCodes != null && homepageCodes.length > 0) ? homepageCodes[0] : null;
+
+								boolean isSpecialHomepage = "00147016".equals(homepageCode);//외동도서관
+								boolean isDiscarded = "폐기제적".equals(statusName);
+
+								if (isSpecialHomepage && isDiscarded) {
+								} else {
+									sMap.put("already", true);
+									sMap.put("ctrlno", ctrlNo);
+									sMap.put("status_name", statusName);
+								}
 							}
 						}
 					}
