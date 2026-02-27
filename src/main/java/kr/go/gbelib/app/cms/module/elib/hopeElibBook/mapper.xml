@@ -110,7 +110,10 @@
 		WHERE
 			a.use_yn != 'N'
 			AND a.type = #{type}
-			AND a.application_status IS NULL
+			AND (
+				a.application_status IS NULL
+				OR a.application_status IN (4, 5)
+			)
 			<include refid="search"/>
 			<include refid="sort"/>
 		${pagingBottom}
@@ -123,7 +126,10 @@
 			ELIB_HOPE_BOOK a
 		WHERE
 		a.use_yn != 'N'
-		AND a.application_status IS NULL
+		AND (
+			a.application_status IS NULL
+			OR a.application_status IN (4, 5)
+		)
 		<if test="type != null and type != ''">
 			AND a.type = #{type}
 		</if>
