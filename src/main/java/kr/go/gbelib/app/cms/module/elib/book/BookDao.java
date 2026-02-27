@@ -109,5 +109,6 @@ public interface BookDao {
 	public int disapproveBook(Book book);
 	
 	public int approveBookAll(Book book);
-	
+
+	public String getBookImage(String isbn);
 }

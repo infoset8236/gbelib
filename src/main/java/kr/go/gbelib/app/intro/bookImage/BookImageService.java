@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import kr.go.gbelib.app.cms.module.elib.book.BookDao;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,13 @@ public class BookImageService {
 	
 	@Autowired
 	private BookImageDao dao;
+
+	@Autowired
+	private BookDao elibDao;
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, Object> resultImageMap(Map<String,Object> result, LibrarySearch librarySearch, String resultListKey, String imageMapKey) {
-		
+
 		try {
 			List<Object> list = (List<Object>) result.get(resultListKey);
 			ObjectMapper objectMapper = new ObjectMapper();
@@ -35,6 +39,7 @@ public class BookImageService {
 			if (list != null && list.size() > 0) {
 				for (Object one : list) {
 					Map<String, Object> map = objectMapper.convertValue(one, Map.class);
+
 					if ("dsResult".equals(resultListKey)) {
 						if (StringUtils.isNotEmpty((String) map.get("DISP08"))) {
 							String imgUrl = dao.getImage((String) map.get("DISP08"));
@@ -60,6 +65,10 @@ public class BookImageService {
 										dao.addImage(isbn, image);
 										map.put(imageMapKey, image);
 									}
+								} else if ("00000001".equals((String) map.get("LIMT06"))) {
+									String elibImgUrl = elibDao.getBookImage(isbn);
+
+									map.put(imageMapKey, elibImgUrl);
 								} else {
 									map.put(imageMapKey, "");
 								}

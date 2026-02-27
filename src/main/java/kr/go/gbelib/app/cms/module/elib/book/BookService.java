@@ -840,5 +840,9 @@ public class BookService extends BaseService {
 	public int approveBookAll(Book book) {
 		return dao.approveBookAll(book);
 	}
+
+	public String getBookImage(String isbn) {
+		return dao.getBookImage(isbn);
+	}
 	
 }
