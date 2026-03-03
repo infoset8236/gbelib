@@ -90,6 +90,7 @@
 			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
 			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
 			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+			(SELECT b.book_info FROM ELIB_HOPE_BOOKINFO b WHERE b.book_code = a.book_code AND ROWNUM = 1) AS book_info,
 			CASE
 				WHEN a.library_code = '9999999' THEN '통합'
 				ELSE e.homepage_name
