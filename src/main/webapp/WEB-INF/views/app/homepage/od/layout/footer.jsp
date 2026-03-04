@@ -32,7 +32,7 @@
 				<div class="">
 					<div class="overflow-x">
 					<div class="info">
-						<a href="/${homepage.context_path}/html.do?menu_idx=164">도서관이용규정</a>
+						<a href="/${homepage.context_path}/html.do?menu_idx=164">도서관사용등에관한규정</a>
 						<span class="txt-menu-bar"></span>
 						<a href="/${homepage.context_path}/html.do?menu_idx=152" style="color: yellow;">개인정보처리방침</a>
 						<span class="txt-menu-bar"></span>
