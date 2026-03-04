@@ -433,6 +433,9 @@ margin-left:-1px}
 .btn.btn7.disabled:hover,
 .btn.btn7{background-color:#fff;border-color:#ccc;color:#424242}
 .btn.btn7:hover{background-color:#f9f9f9;border-color:#ccc}
+.btn.btn8.disabled:hover,
+.btn.btn8{background-color:#ca1515;border-color:#ae0808;color:#fff}
+.btn.btn8:hover{background-color:#ae0808;border-color:#880202}
 .btn i.fa-file-excel-o{font-size:110%}
 .button .btn i{font-size:80%}
 .seosik strong{display:block;padding:0 0 10px}

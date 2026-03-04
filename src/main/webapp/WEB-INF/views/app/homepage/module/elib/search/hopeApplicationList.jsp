@@ -86,26 +86,26 @@
                             <span>
                             <c:choose>
                                 <c:when test="${i.application_status eq '1'}">
-                                    <a href="#" class="btn btn4 book_cancel"
+                                    <a href="#" class="btn btn1 book_cancel"
                                        data-application='{
                                            "book_code": "${i.book_code}",
                                            "book_idx": "${i.book_idx}",
                                            "application_user_name": "${i.application_user_name}",
                                            "application_user_id": "${i.application_user_id}",
                                            "application_user_no": "${i.application_user_no}"
-                                       }'> 예약취소</a>
+                                       }'> 신청취소</a>
                                 </c:when>
                                 <c:when test="${i.application_status eq '2'}">
-                                    처리중
+                                    <a href="#" class="btn btn2">처리중</a>
                                 </c:when>
                                 <c:when test="${i.application_status eq '3'}">
-                                    구입완료
+                                    <a href="#" class="btn btn8">구입완료</a>
                                 </c:when>
                                 <c:when test="${i.application_status eq '4'}">
-                                    이용자취소
+                                    <a href="#" class="btn btn4">이용자취소완료</a>
                                 </c:when>
                                 <c:when test="${i.application_status eq '5'}">
-                                    기관취소
+                                    <a href="#"  class="btn btn5">기관취소완료</a>
                                 </c:when>
                             </c:choose>
 							</span>

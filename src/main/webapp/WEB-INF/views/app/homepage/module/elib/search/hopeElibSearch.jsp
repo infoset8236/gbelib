@@ -5,6 +5,8 @@
 <%@ taglib prefix="homepageTag" uri="/WEB-INF/config/tld/homepageTag.tld" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<% pageContext.setAttribute("crlf", "\n"); %>
+
 <link rel="stylesheet" type="text/css" href="/resources/common/elib/css/default.css"/>
 
 <script type="text/javascript">
@@ -56,7 +58,9 @@
     $('.publisher-txt').text(bookData.book_pubname);
     $('.pubdate-txt').text(bookData.book_pubdt);
     $('.isbn-txt').text(bookData.isbn13);
-
+	$('.book-info-txt').text(bookData.book_info);
+	$('.select-img-box').attr("src",bookData.book_image);
+	
     var $form = $('form#bookSaveForm');
     $form.find('#book_name').val(bookData.book_name);
     $form.find('#author_name').val(bookData.author_name);
@@ -134,6 +138,16 @@
                 <ul>
                     <c:forEach items="${hopeBookList}" var="i" varStatus="status">
                         <li class="thumb">
+							<c:set var="book_info" value="${i.book_info}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '‘', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '’', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '“', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '”', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '…', '...')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '…', '...')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '《', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, '》', '')}" />
+							<c:set var="book_info" value="${fn:replace(book_info, crlf, '&nbsp;')}"></c:set>
                             <a href="#" class="img-select"
                                data-book='{
                                            "book_name": "${i.book_name}",
@@ -144,7 +158,9 @@
                                            "book_code": "${i.book_code}",
                                            "book_idx": "${i.book_idx}",
                                            "cate_name": "${i.cate_name}",
-                                           "comp_name": "${i.comp_name}"
+                                           "comp_name": "${i.comp_name}",
+                                           "book_image": "${i.book_image}",
+                                           "book_info":"${book_info}"
                                        }'>
                                 <img src="${i.book_image}" alt="${i.book_name}" title="${i.book_name}" class="refImg" onError="this.src='/resources/homepage/elib/img/noImg.gif'">
                             </a>
@@ -160,11 +176,11 @@
             </jsp:include>
 
         </div>
-
+		<br/>
         <div class="req-hopebook-info">
             <div class="req-hopebook-box">
                 <div class="inline icon-box">
-                    <img class="" src="resources/common/elib/img/layer-350.svg"/>
+                    <img class="select-img-box" src="/resources/homepage/elib/img/noImg.gif" onError="this.src='/resources/homepage/elib/img/noImg.gif'"/>
                 </div>
 
                 <div class="inline req-info-box">
@@ -178,6 +194,9 @@
                         <span class="pubdate-txt"></span> · <span class="req-etc-info-title">ISBN</span>
                         <span class="isbn-txt"></span>
                     </div>
+					<div>
+						<span class="book-info-txt"></span>
+					</div>
                 </div>
 
                 <div class="inline btn-box">
