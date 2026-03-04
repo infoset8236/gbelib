@@ -1407,8 +1407,18 @@
 			delete_id = #{delete_id},
 			delete_date = SYSDATE
 		WHERE
-			manage_idx = #{manage_idx} AND
-			board_idx = #{board_idx}
+			manage_idx = #{manage_idx}
+		<choose>
+			<when test="boardIdxArray != null and boardIdxArray.length > 0">
+				AND board_idx IN
+				<foreach collection="boardIdxArray" item="i" open="(" close=")" separator=",">
+					#{i}
+				</foreach>
+			</when>
+			<otherwise>
+				AND board_idx = #{board_idx}
+			</otherwise>
+		</choose>
 	</update>
 
 	<update id="recoveryBoard">

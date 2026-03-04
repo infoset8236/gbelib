@@ -42,8 +42,8 @@ table.bbs tr.notice{background:#f5f6f7}
 			<caption>일반게시판</caption>
 			<thead>
 				<tr>
-					<c:if test="${board.delete_yn eq 'Y'}">
-					<th><input type="checkbox" id="checkAll"> </th>
+					<c:if test="${member.admin or authMBA}">
+						<th><input type="checkbox" id="checkAll"> </th>
 					</c:if>
 					<th>번호</th>
 					<th class="">제목</th>
@@ -59,7 +59,7 @@ table.bbs tr.notice{background:#f5f6f7}
 			<tbody id="board_tbody">
 			<c:forEach var="i" varStatus="status" items="${boardNoticeList}">
 				<tr class="notice">
-					<c:if test="${board.delete_yn eq 'Y'}">
+					<c:if test="${board.delete_yn eq 'Y' or member.admin or authMBA}">
 					<td></td>
 					</c:if>
 					<td class="num notice"><span>공지</span></td>
@@ -86,8 +86,8 @@ table.bbs tr.notice{background:#f5f6f7}
 			</c:forEach>
 			<c:forEach var="i" varStatus="status" items="${boardList}">
 				<tr${i.group_depth > 0?' class="reply"':''}>
-					<c:if test="${board.delete_yn eq 'Y'}">
-					<td><form:checkbox path="boardIdxArray" value="${i.board_idx}"/></td>
+					<c:if test="${member.admin or authMBA}">
+						<td><form:checkbox path="boardIdxArray" value="${i.board_idx}"/></td>
 					</c:if>
 					<td class="num">${paging.listRowNum - status.index}</td>
 					<td class="important left title" style="padding-left:${(i.group_depth > 0 ? (i.group_depth-1)*15 : 0)+10}px;">

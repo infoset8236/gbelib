@@ -37,6 +37,9 @@
 				<c:if test="${authC}">
 					<a href="" class="btn btn1 write" id="board_edit_btn"><i class="fa fa-pencil"></i><span>글쓰기</span></a>
 				</c:if>
+				<c:if test="${authMBA or authD}">
+					<a href="" class="btn delete" id="board_soft_delete_btn"><i class="fa fa-trash-o"></i><span>삭제</span></a>
+				</c:if>
 			</c:otherwise>
 		</c:choose>
 	</c:when>

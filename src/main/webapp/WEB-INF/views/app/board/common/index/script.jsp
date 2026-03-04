@@ -149,6 +149,19 @@ $(document).ready(function() {
     		doAjaxPost($('#board'));
     	}
 	});
+
+    $('a#board_soft_delete_btn').on('click', function(e) {
+		e.preventDefault();
+		var checkList = $('input[name=boardIdxArray]:checked').length;
+		if (checkList < 1) {
+			alert('선택된 게시물이 없습니다.');
+			return false;
+		}
+		if(confirm('선택된 게시물을 삭제 하시겠습니까?')) {
+    		$('#board').attr('action', 'delete.do');
+    		doAjaxPost($('#board'));
+    	}
+	});
 	
 	<%-- 삭제하기 --%>
     $('a#one_board_delete_btn').on('click', function(e) {
