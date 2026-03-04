@@ -27,7 +27,7 @@
         WHERE
             homepage_id = #{homepage_id}
         AND training_idx = #{training_idx}
-        AND apply_status in ('1', '5')
+        AND apply_status in ('1', '2', '5')
         AND NOT EXISTS (
             SELECT
                 tbm.web_id
@@ -181,7 +181,7 @@
         WHERE
             training_idx = #{training_idx}
         ORDER BY
-            qr_count, add_date desc, training_date desc
+            student_name, qr_count, training_date desc
     </select>
 
 </mapper>
