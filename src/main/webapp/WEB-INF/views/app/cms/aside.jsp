@@ -39,93 +39,108 @@ $(function(){
 		<div id="header">
 			<h1><b>W</b>Builder</h1>
 			<div>
-				<p><b>(${member.member_name})</b>님 로그인 중입니다.</p>
-				<p>
+				<p class="user-name"><b>(${member.member_name})</b>님 로그인 중입니다.</p>
+				<p class="aside-btn">
 					<a href="/cms/login/logout.do" target="_parent">
 						<i class="fa fa-sign-out"></i>
 						<em>로그아웃</em>
 					</a>
-					<span>|</span>
 					<a class="pass-change-btn" href="">
 						<i class="fa fa-gear"></i>
 						<em>비밀번호 변경</em>
 					</a>
 				</p>
-				<p>
-					<select id="siteList" class="selectmenu" style="width:200px;">
+				<div>
+					<select id="siteList" class="selectmenu">
 						<c:forEach items="${sessionScope.member.authorityHomepageList}" var="i" varStatus="status">
 						<c:if test="${i.homepage_id ne 'c0' and i.homepage_id ne 'c1' and i.homepage_id ne 'h27'}">
 						<option value="${i.homepage_id}" label="${i.homepage_name}"<c:if test="${i.homepage_id eq adminMenu.homepage_id}"> selected="selected"</c:if>></option>
 						</c:if>
 						</c:forEach>
 					</select>
-				</p>
-				<c:if test="${member.admin}">
-					<p>
-						<a href="" onclick="javascript:parent.location.href='/wbuilder/adminMenu/index.do'; return false;">[WBuilder관리 이동]</a>
-					</p>
-				</c:if>	
-<%-- 				<c:if test="${issue ne null and issue ne '' }"> --%>
-					<p>
-						<a href="" onclick="window.open('https://las.gbelib.kr/FN/app/index.html')">[자료관리시스템 이동]</a>
-					</p>
-<%-- 				</c:if>							 --%>
+				</div>
+                <div class="caption">
+                    <c:if test="${member.admin}">
+                        <a href=""
+                           onclick="javascript:parent.location.href='/wbuilder/adminMenu/index.do'; return false;">[WBuilder관리
+                            이동]</a>
+                    </c:if>
+                    <%--
+                    <c:if test="${issue ne null and issue ne '' }"> --%>
+                        <a href="" onclick="window.open('https://las.gbelib.kr/FN/app/index.html')">[자료관리시스템 이동]</a>
+                        <%--
+                    </c:if>
+                    --%></div>
 			</div>
 		</div>
-		<cmsTag:asideMenu adminMenuList="${adminMenuList}"/>
+        <div class="menu-list">
+            <cmsTag:asideMenu adminMenuList="${adminMenuList}"/>
+        </div>
 	</div>
 </div>
 <script type="text/javascript">
 $(document).ready(function(){
 	//왼쪽메뉴
-	$('.aside > ul > li').each(function(){
-		if($(this).find('ul').length > 0){
-			$(this).children('a').on('click',function(){
-				if($(this).parent().hasClass('active')){
-					$('.aside > ul > li > ul').slideUp(80);
-					$('.aside > ul > li').removeClass('active');
-					$(this).parent().removeClass('active');
-				}else{
-					$('.aside > ul > li > ul').slideUp(80);
-					$('.aside > ul > li').removeClass('active');
-					$(this).parent().children('ul').slideDown(80);
-					$(this).parent().addClass('active');
-				}
-				return false;
-			});
-			if($(this).find('li').hasClass('active')){
-				$(this).addClass('active');
-			}
-		}else{
-			$(this).addClass('s');
-		}
-	});
-	$('.aside > ul > li > ul > li').each(function(){
-		if($(this).find('ul').length > 0){
-			$(this).children('a').on('click',function(){
-				if($(this).parent().hasClass('active')){
-					$('.aside > ul > li > ul > li > ul').slideUp(80);
-					$('.aside > ul > li > ul > li').removeClass('active');
-					$(this).parent().removeClass('active');
-				}else{
-					$('.aside > ul > li > ul > li > ul').slideUp(80);
-					$('.aside > ul > li > ul > li').removeClass('active');
-					$(this).parent().children('ul').slideDown(80);
-					$(this).parent().addClass('active');
-				}
-				return false;
-			});
-		}else{
-			$(this).addClass('s');
-			
-			if( $(this).children('a').text() == 'ICT')
-			{
-				<c:if test="${adminMenu.homepage_id ne 'h28'}">
-				$(this).css('display','none');
-				</c:if>
-			}
-		}
-	});
+    $('.aside .menu-list > ul > li').each(function(){
+        if($(this).find('ul').length > 0){
+            $(this).children('a').on('click',function(){
+                if($(this).parent().hasClass('active')){
+                    $('.aside .menu-list > ul > li > ul').slideUp(80);
+                    $('.aside .menu-list > ul > li').removeClass('active');
+                    $(this).parent().removeClass('active');
+                }else{
+                    $('.aside .menu-list > ul > li > ul').slideUp(80);
+                    $('.aside .menu-list > ul > li').removeClass('active');
+                    $(this).parent().children('ul').slideDown(80);
+                    $(this).parent().addClass('active');
+                }
+                return false;
+            });
+
+            if($(this).find('li').hasClass('active')){
+                $(this).addClass('active');
+                $(this).children('ul').show();
+            }
+        }else{
+            $(this).addClass('s');
+        }
+    });
+
+    $('.aside .menu-list > ul > li > ul > li').each(function(){
+        if($(this).find('ul').length > 0){
+            $(this).children('a').on('click',function(){
+                var parent = $(this).parent();
+
+                if(parent.hasClass('active')){
+                    parent.children('ul').slideUp(80);
+                    parent.removeClass('active');
+                }else{
+                    parent.siblings().removeClass('active').children('ul').slideUp(80);
+                    parent.children('ul').slideDown(80);
+                    parent.addClass('active');
+                }
+                return false;
+            });
+        }else{
+            $(this).addClass('s');
+
+            if($(this).children('a').text() == 'ICT'){
+                <c:if test="${adminMenu.homepage_id ne 'h28'}">
+                    $(this).css('display','none');
+                </c:if>
+            }
+        }
+    });
+
+    $('.aside .menu-list > ul > li > ul > li > a').on('click', function(){
+        $('.aside .menu-list > ul > li > ul > li').removeClass('active');
+        $(this).parent('li').addClass('active');
+    });
+
+    $('.aside .menu-list > ul > li > ul > li > ul > li > a').on('click', function(){
+        $('.aside .menu-list > ul > li > ul > li > ul > li').removeClass('active');
+        $(this).parent('li').addClass('active');
+    });
 
 	$('a.pass-change-btn').on('click', function(e) {
 		e.preventDefault();

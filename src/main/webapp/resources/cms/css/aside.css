@@ -1,18 +1,17 @@
 @charset "utf-8";
 
 /* 레이아웃 */
-body{background:#293649;font-size:14px}
-#header{text-align:center;background:#304056;color:#a1b1be;border-bottom:1px solid #253143}
-#header h1{color:#fff;font-size:26px;line-height:76px;height:76px;background:#0059ac;
--webkit-box-shadow:0px 3px 10px 0px rgba(0,0,0,0.35);
--moz-box-shadow:0px 3px 10px 0px rgba(0,0,0,0.35);
-box-shadow:0px 3px 10px 0px rgba(0,0,0,0.35);
+body{
+    font-size:14px;
+    overflow: hidden;
 }
+#header{
+    background: #EFF0F4;
+}
+#header h1{color:#222;font-size:26px;line-height:76px;}
 #header h1,
-#header h1 b{font-weight:800}
-#header div{padding:18px 0;border-top:1px solid #2d3b50}
+#header h1 b{font-weight:800;text-align: center;}
 #header div p{padding:2px 0}
-#header div b{font-weight:normal;color:#fff}
 #header div a{font-size:12px}
 #header div a,
 #header div span{vertical-align:middle;display:inline-block;zoom:1;*display:inline;line-height:14px;color:#9ba2b1}
@@ -20,12 +19,78 @@ box-shadow:0px 3px 10px 0px rgba(0,0,0,0.35);
 #header div em{font-style:normal}
 #header div a:hover,
 #header div a:focus{color:#b9bec8}
-.aside{padding-bottom:50px}
-.aside a{color:#dadcde;text-decoration:none}
-.aside ul ul{display:none;background:#253143}
+
+#header .user-name{
+    font-family: Pretendard-Regular, serif;
+    font-size: 15px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.3px;
+    color: #222;
+    text-align: center;
+}
+#header .user-name b{
+    font-family: Pretendard-Bold, serif;
+}
+#header .aside-btn{
+    display: flex;
+    width: 100%;
+    margin: 10px 0 24px;
+    gap: 4px;
+}
+#header .aside-btn a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 32px;
+    border-radius: 4px;
+    gap: 4px;
+    background: #FAFAFA;
+}
+#header .aside-btn a > em{
+    font-family: Pretendard-Medium, serif;
+    font-size: 13px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.26px;
+    color: #555;
+}
+
+#header .selectmenu{
+    font-family: Pretendard-Medium, serif;
+    font-size: 14px;
+    width: 100%;
+    padding: 16px 28px 16px 16px;
+    cursor: pointer;
+    color: #222;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    outline: none;
+    background: #FFF url(../img/main/select-arrow.svg) no-repeat right 12px center;
+    background-size: 16px;
+    appearance: none;
+}
+#header .caption{
+    text-align: center;
+}
+#header .caption a{
+    font-family: Pretendard-Regular, serif;
+    font-size: 14px;
+    font-style: normal;
+    line-height: normal;
+    margin-top: 6px;
+    text-align: left;
+    letter-spacing: -0.28px;
+    color: #777;
+}
+
+.aside{
+    padding: 20px 20px 50px 20px;
+    background: #EFF0F4;
+}
 .aside > ul > li > ul > li.active > ul,
 .aside > ul > li.active > ul{display:block}
-.aside ul a{display:block;padding:0 20px}
 .aside > ul > li > a,
 .aside > ul > li > ul > li > a,
 .aside > ul > li > ul > li > ul > li > a{
@@ -35,7 +100,7 @@ box-shadow:0px 3px 10px 0px rgba(0,0,0,0.35);
 -o-transition: all 100ms ease;
 transition: all 100ms ease}
 .aside ul a,
-.aside > ul > li > a > i{line-height:45px}
+.aside > ul > li > a > i{line-height:24px}
 .aside > ul > li{border-bottom:1px solid #3f4b5c;background:#253143}
 .aside > ul > li:hover{border-color:#384456}
 .aside > ul > li > a{padding-left:0;border-bottom:1px solid #202b3c;background:#2d3b50;background:#2d3b50 url('../img/lnb_folder_down.gif') no-repeat right center}
@@ -64,3 +129,121 @@ transition: all 100ms ease}
 .aside > ul > li > ul > li.active > ul > li.active > a,
 .aside > ul > li > ul > li.active > ul > li > a:hover{padding-left:38px}
 .aside > ul > li > ul > li.active > ul{margin-left:2px;border-left:1px solid #454f5d;padding:0 0 5px}
+
+
+.aside .menu-list{
+    margin-top: 20px;
+}
+.menu-list > ul::-webkit-scrollbar {
+    width: 3px;
+}
+
+.menu-list > ul::-webkit-scrollbar-track {
+    border-radius: 4px;
+    background: #DADBE0;
+}
+
+.menu-list > ul::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: #878B96;
+}
+
+.menu-list > ul::-webkit-scrollbar-thumb:hover {
+    background: #878B96;
+}
+
+.aside .menu-list > ul{
+    display: flex;
+    overflow-y: auto;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: calc(100vh - 350px);
+    padding-top: 24px;
+    border-top: 1px solid #DDD;
+    gap: 6px;
+    box-sizing: border-box;
+}
+.aside .menu-list > ul > li{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.aside .menu-list > ul > li > a{
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 0 16px;
+    cursor: pointer;
+    border-radius: 24px;
+    background: #fff url('/resources/cms/img/main/expansion.svg') no-repeat right 10px center;
+    font-family: Pretendard-Medium, serif;
+    font-size: 15px;
+    font-style: normal;
+    line-height: normal;
+    text-align: center;
+    letter-spacing: -0.3px;
+    color: #555;
+    gap: 8px;
+}
+.aside .menu-list > ul > li.active > a{
+    background: #222 url('/resources/cms/img/main/reduction.svg') no-repeat right 10px center;
+    color: #FFF !important;
+}
+.aside .menu-list li.active > a {
+    color: #222;
+}
+
+.aside .menu-list > ul > li >ul{
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px 0 16px 34px;
+}
+.aside .menu-list > ul > li.active  > ul{
+    display: flex;
+}
+.aside .menu-list > ul > li >ul > li{
+    font-family: Pretendard-Medium, serif;
+    font-size: 13px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.26px;
+    color: #777;
+}
+.aside .menu-list > ul > li >ul > li > a{
+    display: flex;
+    color: #777;
+    transition: 0.3s;
+    justify-content: space-between;
+    align-items: center;
+}
+.aside .menu-list > ul > li > ul > li.active > a{
+    color:#222;
+}
+
+.aside .menu-list > ul > li > ul > li > ul{
+    padding: 16px 0 16px 34px;
+    display: none;
+}
+.aside .menu-list > ul > li > ul > li:has(ul) > a::after {
+    content: "";
+    background: url(/resources/cms/img/main/select-arrow.svg) no-repeat right center;
+    width: 16px;
+    height: 16px;
+    margin-right: 15px;
+    transition: 0.3s;
+}
+.aside .menu-list li.active > a::after {
+    transform: rotate(180deg);
+}
+
+.aside .menu-list > ul > li > ul > li > ul > li > a{
+    font-family: Pretendard-Medium, serif;
+    font-size: 13px;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.26px;
+    color: #777;
+
+}
