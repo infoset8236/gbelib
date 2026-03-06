@@ -38,8 +38,8 @@ $(function() {
 	});
 	
 	$("#dialog-2").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 350,
-		height: 330
+		width: 400,
+		height: 380
 	});
 	
 	$(document).on('keyup', 'input.only_num', function() {
@@ -91,7 +91,7 @@ $(function() {
 			<tr>
 				<th>출력순서</th>
 				<td>
-					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text spinner"/>
+					<form:input path="print_seq" cssStyle="width:60px;" cssClass="text spinner"/>
 				</td>
 			</tr>
 		</tbody>

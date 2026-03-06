@@ -242,13 +242,10 @@ int leftSizeInput = leftSize-125; //왼쪽 컨텐츠 검색 input 사이즈
 			</div>
 		</div>
 		<div class="table-wrap">
-			<table class="border-all">
+			<table class="border-all type2">
 				<colgroup>
 					<col width="130"/>
 					<col/>
-					<col width="130"/>
-					<col/>
-					<col width="130"/>
 					<col/>
 				</colgroup>
 				<thead>

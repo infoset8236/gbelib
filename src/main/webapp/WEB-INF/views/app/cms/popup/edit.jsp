@@ -446,7 +446,7 @@ function pasteHTML(filepath){
 		<tr>
 			<th>출력 순서</th>
 			<td>
-				<form:input path="print_seq" cssStyle="width:30px;" cssClass="text spinner"/>
+				<form:input path="print_seq" cssStyle="width:60px;" cssClass="text spinner"/>
 				<div class="ui-state-highlight">
 					<i class="fa fa-question-circle"></i>
 					<em>

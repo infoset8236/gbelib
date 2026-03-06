@@ -53,7 +53,7 @@ $(function() {
 <div style="width:100%;">
 	<table class="type2 menuType-data">
 		<colgroup>
-			<col width="50"/>
+			<col width="60"/>
 			<col width="150"/>
 			<col width="*"/>
 			<col width="80"/>

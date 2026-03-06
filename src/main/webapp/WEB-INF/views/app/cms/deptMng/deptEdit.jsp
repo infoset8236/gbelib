@@ -141,7 +141,7 @@ em {font-style: normal;}
 			<tr>
 				<th>부 서</th>
 				<td>
-					<form:input path="dept_name" cssClass="text" size="26"/>
+					<form:input path="dept_name" cssClass="text" size="26" cssStyle="margin-bottom: 6px;"/>
 					<form:select path="above_idx" cssClass="select2-selection__rendered">
 						<form:option label="상위부서를 선택하세요." value="-1" disabled="true"/>
 						<form:options items="${deptList}" itemLabel="dept_name" itemValue="dept_idx"/>
@@ -163,7 +163,7 @@ em {font-style: normal;}
 	</table>
 </form:form>
 <br>
-<table class="center">
+<table class="type2 center">
 	<colgroup>
 		<col>
 		<col width="120">
@@ -199,7 +199,7 @@ em {font-style: normal;}
 				</select>
 			</td>
 			<td>
-				<input type="text" id="print_${i.dept_idx}" value="${i.dept_print_seq}" style="width:30px; text-align:center;" class="text spinner"/>
+				<input type="text" id="print_${i.dept_idx}" value="${i.dept_print_seq}" style="width:60px; text-align:center;" class="text spinner"/>
 			</td>
 			<td>
 				<a href="#" class="btn dept-mod" keyValue="${i.dept_idx}" keyValue2="dept_${i.dept_idx}" keyValue3="print_${i.dept_idx}">수정</a>

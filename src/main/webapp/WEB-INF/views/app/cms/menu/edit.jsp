@@ -382,7 +382,7 @@ function delete_manager(a) {
 			<tr>
 				<th>출력 순서</th>
 				<td colspan="3">
-					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text spinner"/>
+					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text"/>
 				</td>
 			</tr>
 			<tr>
@@ -431,9 +431,11 @@ function delete_manager(a) {
 						</div>
 						<div class="menuType bbs">
 							<a href="" class="btn btn1" id="modal_BOARD">게시판 종류 선택</a>
-							<div id="dialog_BOARD" class="dialog-common" title="게시판 선택">
+                            <div style="margin-bottom: 12px;">
+                                <div id="dialog_BOARD" class="dialog-common" title="게시판 선택">
+                            </div>
 							</div>
-							<table>
+							<table class="type2">
 								<tr>
 									<th>게시판번호</th>
 									<td id="edit_manageIdx">${boardManage.manage_idx}</td>
@@ -448,10 +450,13 @@ function delete_manager(a) {
 								</tr>
 							</table>
 						</div>
+
 						<div class="menuType module">
-							<a href="" class="btn btn1" id="modal_MODULE">모듈 선택</a>
 							<div id="dialog_MODULE" class="dialog-common" title="게시판 선택"></div>
-							<table>
+                            <div style="margin-bottom: 12px;">
+                                <a href="" class="btn btn1" id="modal_MODULE">모듈 선택</a>
+                            </div>
+							<table class="type2">
 								<tr>
 									<th>모듈번호</th>
 									<td id="edit_moduleIdx">${moduleMngt.module_idx}</td>
@@ -478,7 +483,7 @@ function delete_manager(a) {
 						</div>
 						<div class="menuType link1">
 							<!-- <a href="" class="btn btn1">내부 링크 선택</a> -->
-							<table>
+							<table class="type2">
 								<tr>
 									<th>URL</th>
 									<td><input id="input_link" type="text" class="text" value="${menu.menu_type eq 'LINK'? menu.link_url : ''}"/></td>
@@ -500,7 +505,7 @@ function delete_manager(a) {
 						</div>
 						<div class="menuType link2">
 							<p class="info">링크 URL주소를 입력합니다. 외부 링크는 새창으로 열립니다.</p>
-							<table>
+							<table class="type2">
 								<tr>
 									<th>URL</th>
 									<td><input id="input_link_outer" type="text" class="text" value="${menu.menu_type eq 'LINK_OUTER'? menu.link_url : ''}"/></td>
@@ -535,14 +540,25 @@ function delete_manager(a) {
 					<tr id="group${status.count }" class="group last">
 						<th>담당자 정보</th>
 						<td colspan="3">
-						<label>부서 : <form:input path="manager_dept${status.count}" maxlength="20" size="20" cssclass="text" readonly="true"/></label>
-						<label>이름 : <form:input path="manager_name${status.count}" maxlength="10" size="10" cssclass="text" readonly="true"/></label>
-						<label>전화번호 : <form:input path="manager_phone${status.count}" maxlength="13" size="13" cssclass="text" readonly="true"/></label>
-						<form:hidden path="manager_idx"/>
-						<a class="btn btn4 select-manager-btn${status.count}">담당자선택</a>
-						<div id="dialog_manager${status.count}" class="dialog-common" title="담당자 선택"></div>
-						<a href="javascript:void(0)" class="btn btn1" id="manager_delete${status.count}" onclick="delete_manager('${status.count}');"><span>삭제</span></a>
-						<a href="javascript:void(0)" class="btn btn5" id="manager_add${status.count}" onclick="managerAdd('${status.count}');"><span>담당자추가</span></a>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                <label>부서 :
+                                    <form:input path="manager_dept${status.count}" maxlength="20" size="20" cssclass="text"
+                                                readonly="true"/>
+                                </label>
+                                <label>이름 :
+                                    <form:input path="manager_name${status.count}" maxlength="10" size="10"
+                                                cssclass="text" readonly="true"/>
+                                </label>
+                                <label>전화번호 :
+                                    <form:input path="manager_phone${status.count}" maxlength="13" size="13"
+                                                cssclass="text" readonly="true"/>
+                                </label>
+                                <form:hidden path="manager_idx"/>
+                                <a class="btn btn4 select-manager-btn${status.count}">담당자선택</a>
+                                <div id="dialog_manager${status.count}" class="dialog-common" title="담당자 선택"></div>
+                                <a href="javascript:void(0)" class="btn btn5" id="manager_add${status.count}" onclick="managerAdd('${status.count}');"><span>담당자추가</span></a>
+                                <a href="javascript:void(0)" class="btn btn1" id="manager_delete${status.count}" onclick="delete_manager('${status.count}');"><span>삭제</span></a>
+                            </div>
 					</tr>	
 			</c:forEach>	
 		</tbody>

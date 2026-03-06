@@ -11,7 +11,11 @@ h5{font-size:16px}
 
 label,
 input{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
-input[type="file"]{line-height:18px;height:22px;width:70%;padding:1px 5px}
+input[type="file"]{
+	height: 38px;
+	width: 70%;
+	padding: 5px;
+}
 
 select{padding:2px}
 .search .select2-container{margin-right:5px}
@@ -44,12 +48,50 @@ select.selectmenu.select2-hidden-accessible{padding:5px 15px 5px 5px;!important}
 
 
 /* 검색 */
-.search{border:1px solid #dee1e7;background:#fafbfc;padding:10px;margin-bottom:10px}
+.search{
+	padding:10px 0;
+	margin-bottom:10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	gap: 6px;
+	background: #F6F7FA;
+}
 .search form{display:block!important}
-.search input{border-color:#ccc;margin-right:2px;vertical-align:middle;width:200px}
+.search input{
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	height: 34px;
+	padding: 0 12px;
+	letter-spacing: -0.28px;
+	color: #222;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	background: #FFF;
+}
 .search input.text{background-color:#fff}
 .search input.text.ui-calendar{width:100px}
-.search button{background:#959ca4;border-color:#959ca4;color:#fff;padding:5px 10px;-webkit-padding:4px 10px 5px;line-height:18px;display:inline-block;zoom:1;*display:inline;position:relative;margin-right:0.1em;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer;vertical-align:middle;text-align:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;overflow:visible}
+.search button{
+	font-family: Pretendard-Medium, serif !important;
+	font-size: 13px;
+	font-style: normal;
+	line-height: normal;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	height: 36px;
+	padding: 0 12px;
+	cursor: pointer;
+	white-space: nowrap;
+	letter-spacing: -0.26px;
+	border-radius: 4px;
+	color: #FFF !important;
+	background: #222;
+}
 .search button i{margin-right:5px}
 .search button i,
 .search button span{display:inline-block;vertical-align:middle}
@@ -63,7 +105,9 @@ select.selectmenu.select2-hidden-accessible{padding:5px 15px 5px 5px;!important}
 }
 .search button span{margin-top:1px}
 .search button:hover,
-.search button:focus{border-color:#6382a9;background:#8da3b6}
+.search button:focus{
+	opacity: 0.8;
+}
 
 .page-subtitle{position:relative;padding:0 0 10px}
 .page-subtitle h3{position:relative}
@@ -162,7 +206,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60ffffff,endCol
 .ui-dialog-content table.type2 td .ui-state-highlight em,
 .ui-dialog-content table.type2 td .ui-state-error em{margin-left:-17px;padding-left:17px}
 .ui-dialog-content table.type2 td .ui-state-highlight,
-.ui-dialog-content table.type2 td .ui-state-highlight em{color:#3c763d}
+.ui-dialog-content table.type2 td .ui-state-highlight em{color:#888;font-weight: 500;}
 .ui-dialog-content table.type2 td .ui-state-error,
 .ui-dialog-content table.type2 td .ui-state-error em{color:#a94442}
 .ui-dialog-content table.type2 td .ui-state-error i{color:#c00}
@@ -175,10 +219,8 @@ margin:0 100px;position:fixed;width:300px;margin:-58px 0 0 -150px;left:50%;top:5
 height:46px;padding:70px 0 0;text-align:center;border-radius:7px}
 
 /* 모달창 - 닫기버튼 */
-.ui-dialog .ui-dialog-titlebar-close{outline:none;top:-31px;width:31px;height:31px;right:-10px;border-radius:50%;border:3px solid rgba(255,255,255,.5);
-background:url('/resources/common/img/ui-icon-fff-close.png') no-repeat center center}
+.ui-dialog .ui-dialog-titlebar-close{outline:none;top:-31px;width:31px;height:31px;right:-10px;border-radius:50%;border:3px solid rgba(255,255,255,.5); no-repeat center center}
 .ui-dialog .ui-dialog-titlebar-close:hover{border-color:#fff}
-.ui-dialog .ui-button.ui-dialog-titlebar-close .ui-icon{display:none}
 
 @media all and (-ms-high-contrast: none), (-ms-high-contrast: active){
 	/* IE10+ CSS styles */
@@ -288,7 +330,14 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .group-menu-header{overflow:hidden;height:35px}
 .group-menu-header,
 .group-menu .tree-box{margin-right:20px}
-.group-menu .tree-box{border:1px solid #d9d9d9;height:650px;overflow:auto;position:relative}
+.group-menu .tree-box{
+	overflow-y: auto;
+	height: calc(100vh - 290px);
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+}
 
 .group-menu-header .title{float:left;line-height:29px}
 .group-menu-header .title i{width:20px;text-align:center;font-size:14px}
@@ -302,7 +351,7 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .group-menu .set-area input.menuName{width:90%}
 .group-menu .set-area .subImgView img{width:100%}
 .permissionBox,
-.group-menu .set-area .menuType{display:none;margin-top:10px;border:1px dashed #e8e4d9;background:#f9f7f2;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;padding:5px 10px 10px}
+.group-menu .set-area .menuType{display:none;margin-top:10px;border:1px dashed #e8e4d9;background:#f9f7f2;-webkit-border-radius:6px;-moz-border-radius:6px;border-radius:6px;padding:10px}
 .group-menu .set-area .menuType.none{padding:0;margin:0;border:0;height:0;overflow:hidden}
 .permissionBox table,
 .permissionBox th,
@@ -313,7 +362,6 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .group-menu .set-area table table th,
 .group-menu .set-area table table td,
 .group-menu .set-area .menuType th,
-.group-menu .set-area .menuType td{padding:5px 5px 2px}
 .group-menu .set-area table table tr.first th,
 .group-menu .set-area table table tr.first td,
 .group-menu .set-area .menuType tr.first th,
@@ -327,7 +375,7 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .group-menu .set-area .menuType .select2,
 .group-menu .set-area .menuType a.btn{margin-top:5px}
 .group-menu .set-area tr.group th,
-.group-menu .set-area tr.group td{padding:3px 10px;border-bottom-width:0px}
+.group-menu .set-area tr.group td{border-bottom-width:0px}
 .group-menu .set-area tr.group.first th,
 .group-menu .set-area tr.group.first td{padding-top:10px}
 .group-menu .set-area tr.group.last th,
@@ -360,15 +408,27 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .group-menu.code-config > .set-area{width:100%;margin-right:-280px}
 .group-menu.code-config > .set-area > div{margin-right:280px}
 .group-menu.code-config .tree-area input.text{width:130px}
-.group-menu.code-config .tree-area .search input.text{width:155px}
+.group-menu.code-config .tree-area .search input.text{
+	width:155px;
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	height: 34px;
+	padding: 0 12px;
+	letter-spacing: -0.28px;
+	color: #222;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	background: #FFF;
+	box-sizing: border-box;
+}
 .group-menu.code-config .search,
 .group-menu.code-config .tree-area .table-wrap{margin-right:20px}
 .group-menu.code-config .tree-area .table-wrap{margin-top:10px}
 .group-menu.code-config .tree-area .button{text-align:right;padding-top:10px}
 .group-menu.code-config .set-area .infodesk{padding:24px 0 10px}
 .group-menu.code-config .set-area .infodesk .button{padding:0}
-.group-menu.code-config table{border-bottom:1px solid #dee1e7}
-.group-menu.code-config table thead th{font-size:90%;font-weight:normal;border-color:#adb5c0}
 .group-menu.code-config table tbody th{background:#f0f5f9;font-weight:normal}
 
 /* 테이블 */
@@ -398,8 +458,7 @@ table thead th{background:#adb5c0;color:#fff;border-color:#ced8da;border-bottom-
 .table-scroll thead,
 .table-scroll tbody tr{display:table;width:100%;table-layout:fixed}
 .table-scroll tbody tr{margin-top:-1px}
-.table-scroll thead{width:calc( 100% - 18px )}
-.table-scroll table{width:100%;background:#adb5c0;border-top:none}
+.table-scroll table{width:100%;border-top:none}
 .table-scroll table td{background:#fff}
 
 table.border-all thead th,
@@ -436,6 +495,8 @@ table.border-all tbody td{border-left-width:1px;border-right-width:1px}
 box-shadow:0px 0px 3px 0px rgba(0,0,0,0.3);max-height:300px;overflow-y:auto;overflow-x:hidden}
 .ui-selectmenu-menu ul{height:100%}
 .ui-selectmenu-button{border-radius:2px;border-color:#ddd!important}
+
+
 
 /* 셀렉트 메뉴타입 선택 시 menuType */
 .form-group .select2-container .select2-selection--single{height:24px}
@@ -692,8 +753,6 @@ table.type1 thead tr th {
 	vertical-align: middle;
 	letter-spacing: -0.28px;
 	color: #FFF;
-	border-top: 1px solid rgb(195 198 211 / 50%);
-	border-right: 1px solid rgb(195 198 211 / 50%);
 	background: linear-gradient(0deg, #878B96 0%, #878B96 100%), #EFF1F4;
 }
 
@@ -897,7 +956,8 @@ table.type2 tbody tr th:last-child {
 	border-right: none;
 }
 
-
+input.text,
+table input,
 table.type2 input.text{
 	font-family: Pretendard-Regular, serif;
 	font-size: 14px;
@@ -911,4 +971,370 @@ table.type2 input.text{
 	border: 1px solid #E0E3E8;
 	border-radius: 4px;
 	background: #fff;
+}
+
+table.type2 textarea{
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	box-sizing: border-box;
+	height: 100px;
+	padding: 12px;
+	letter-spacing: -0.28px;
+	color: #222;
+	border: 1px solid #E0E3E8;
+	border-radius: 4px;
+}
+
+table.type2 select,
+table.type2 select.selectmenu{
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	padding: 10px 30px 10px 12px;
+	cursor: pointer;
+	color: #222;
+	border: 1px solid #DDD;
+	border-radius: 4px;
+	outline: none;
+	background: #FFF url(/resources/cms/img/main/select-arrow.svg) no-repeat right 12px center;
+	background-size: 16px;
+	appearance: none;
+}
+
+
+.menuType table.type2{
+	border-top: 1px solid #E0E3E8 !important;
+}
+
+
+.ui-widget-overlay {
+	opacity: 1 !important;
+	background: rgb(0 0 0 / 40%) !important;
+}
+
+.ui-widget.ui-widget-content {
+	border: none !important;
+}
+
+.ui-corner-all {
+	z-index: 9999;
+	background: #FFF;
+	box-shadow: 0 4px 30px 0 rgb(24 33 109 / 10%);
+	backdrop-filter: blur(100px);
+}
+
+.ui-widget-header {
+	font-family: Pretendard-SemiBold, serif;
+	font-size: 16px;
+	font-style: normal;
+	line-height: normal;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 44px !important;
+	letter-spacing: -0.32px;
+	color: #222 !important;
+	border-radius: 16px 16px 0 0 !important;
+	background: #E0E2E8 !important;
+}
+
+.ui-dialog .ui-dialog-title {
+	font-family: Pretendard-Medium, serif !important;
+	font-size: 16px !important;
+	font-style: normal;
+	line-height: normal;
+	overflow: hidden;
+	width: 90%;
+	margin: 0 !important;
+	text-align: center;
+	white-space: nowrap;
+	letter-spacing: -0.32px;
+	text-overflow: ellipsis;
+	color: #222 !important;
+}
+
+.ui-dialog .ui-dialog-titlebar-close {
+	position: absolute;
+	top: 50%;
+	right: 12px !important;
+	width: 24px !important;
+	height: 24px !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	transform: translateY(-50%);
+	border: 1px solid #222 !important;
+	border-radius: 50%;
+}
+
+.ui-button .ui-icon {
+	background-image: url("/resources/cms/img/main/close.svg") !important;
+}
+
+.ui-icon-closethick {
+	background-position: center !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+	font-weight: normal;
+	color: #454545;
+	border: 1px solid #222;
+	background: #E0E2E8;
+}
+
+.ui-datepicker-buttonpane {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	gap: 8px;
+}
+
+.ui-datepicker-current, .ui-datepicker-close {
+	font-size: 12px;
+	margin: 20px 0 10px;
+	padding: 10px 15px;
+	transition: 0.3s;
+	border: 0 !important;
+	border-radius: 4px;
+	background: #E9EAEE !important;
+}
+
+.ui-datepicker-current:hover, .ui-datepicker-close:hover{
+	background: #E0E2E8 !important;
+}
+
+.ui-dialog .ui-dialog-content {
+	position: relative;
+	overflow: auto;
+	padding: 32px 32px 20px !important;
+	border: 0;
+	background: none;
+}
+
+.ui-dialog .ui-dialog-buttonpane {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0 !important;
+	padding: 0 0 32px!important;
+	text-align: center;
+	border-radius: 0 0 16px 16px;
+	background-image: none;
+}
+
+
+
+.ui-widget-content {
+	border: none !important;
+}
+
+.ui-dialog {
+	padding: 0 !important;
+	border-radius: 16px !important;
+}
+
+
+
+table.type3 {
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border-top: 2px solid #E0E3E8;
+	border-bottom: 2px solid #E0E3E8;
+}
+
+table.type3 tr th {
+	font-family: Pretendard-Medium, serif;
+	font-size: 14px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: normal;
+	padding: 12px 16px;
+	text-align: center;
+	vertical-align: middle;
+	letter-spacing: -0.28px;
+	color: #222;
+	background: #F6F7F9;
+}
+
+table.type3 tr td {
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	padding: 12px 16px;
+	vertical-align: middle;
+	letter-spacing: -0.28px;
+	color: #222;
+}
+
+table.type3 tr {
+	border-bottom: 1px solid #E0E3E8;
+}
+
+
+input#start_date,
+input#end_date{
+	background: url(/resources/cms/img/main/calendar.svg) no-repeat right 6px center;
+	padding-right: 10px;
+	box-sizing: content-box;
+}
+
+
+/* 팝업 달력 css */
+.ui-datepicker-header{
+	display: flex;
+	align-items: center;
+	align-self: stretch;
+	justify-content: center;
+	height: 52px;
+	padding: 8px 24px;
+	background: #222 !important;
+	gap: 3px;
+}
+
+.ui-datepicker-title{
+	display: flex;
+	align-items: center;
+	flex: 1 0 0;
+	gap: 4px;
+}
+
+.ui-datepicker select.ui-datepicker-month,
+.ui-datepicker select.ui-datepicker-year {
+	font-family: Pretendard-Medium, serif;
+	width: 99px;
+	text-align: left;
+
+	/* padding-right: 21px; */
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	background: url("../img/main/select-arrow.svg") no-repeat 75px center;
+	background-size: 12px;
+	appearance: none;
+}
+
+.ui-datepicker-title select{
+	height: 32px;
+	padding: 0 12px;
+	border-radius: 4px;
+	background-color: #FFF !important;
+}
+
+.ui-datepicker-calendar{
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	padding-bottom: 8px;
+	border-radius: 8px;
+	background-color: #fff;
+	gap: 8px;
+}
+
+.ui-datepicker-calendar .ui-datepicker-week-end{
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	justify-content: center;
+	aspect-ratio: 1/1;
+}
+
+.ui-datepicker-calendar thead tr th span{
+	font-family: Pretendard-Medium, serif;
+	font-size: 14px;
+	font-weight: 500;
+	font-style: normal;
+	line-height: normal;
+	text-align: center;
+	letter-spacing: -0.28px;
+	color: #666;
+}
+
+.ui-datepicker-calendar thead .ui-datepicker-week-end:first-child span{
+	color: #E4302A;
+}
+
+.ui-datepicker-calendar tbody .ui-state-default{
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: normal;
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 0;
+	justify-content: center;
+	text-align: center;
+	letter-spacing: -0.28px;
+	color: #222;
+	border: none  !important;
+	background-color: #fff !important;
+	aspect-ratio: 1/1;
+}
+
+.ui-datepicker-calendar tbody .ui-state-highlight,
+.ui-datepicker-calendar tbody .ui-state-active{
+	flex-shrink: 0;
+	border-radius: 100%;
+	background: #EFF0F4 !important;
+}
+
+.ui-datepicker .ui-datepicker-header > .ui-corner-all{
+	background-color: transparent !important;
+}
+
+.ui-datepicker.ui-corner-all{
+	border-radius: 8px !important;
+}
+
+.ui-datepicker .ui-datepicker-prev span,
+.ui-datepicker .ui-datepicker-next span {
+	display: block;
+	overflow: hidden;
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+	text-indent: -9999px; /* 텍스트 숨기기 */
+}
+
+.ui-datepicker-prev {
+	order: 1;
+}
+
+.ui-datepicker-title {
+	flex-grow: 1;
+	order: 2;
+	text-align: center;
+}
+
+.ui-datepicker-next {
+	order: 3;
+}
+
+.ui-datepicker-next >  span{
+	transform: rotate(180deg);
+}
+
+/* 왼쪽 아이콘 변경 */
+.ui-datepicker .ui-datepicker-prev span {
+	width: 28px;
+	height: 28px;
+	background: url('/resources/cms/img/main/popup-arrow.svg') no-repeat center center;
+	background-size: contain;
+	aspect-ratio: 1/1;
+}
+
+/* 오른쪽 아이콘 변경 */
+.ui-datepicker .ui-datepicker-next span {
+	width: 28px;
+	height: 28px;
+	background: url('/resources/cms/img/main/popup-arrow.svg') no-repeat center center;
+	background-size: contain;
+	aspect-ratio: 1/1;
+}
+
+.ui-datepicker td.past-date a {
+	pointer-events: none; /* 클릭 비활성화 */
+	color: #999 !important;
+	background-color: #f5f5f5 !important;
 }

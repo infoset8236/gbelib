@@ -98,7 +98,7 @@ $.fn.rowspan = function(colIdx, isStats) {
 	
 	<c:forEach items="${deptList}" var="i">
 		<h3>${i.dept_name}</h3>
-		<table class="center tspan" summary="${i.dept_name}의 직원현황입니다.">
+		<table class="type1 center tspan" summary="${i.dept_name}의 직원현황입니다.">
 			<colgroup>
 				<col width="180">
 				<col width="120">

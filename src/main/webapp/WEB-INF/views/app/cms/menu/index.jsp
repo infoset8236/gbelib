@@ -211,7 +211,7 @@ $(document).ready(function() {
 		<div class="search" style="margin-right:20px;">
 			<fieldset>
 				<label class="blind">검색</label>
-				<input id="search_text" type="text" class="text" />
+				<input id="search_text" type="text" class="text" style="width: 280px;"/>
 				<button id="search-btn"><i class="fa fa-search"></i><span>검색</span></button>
 			</fieldset>
 		</div>
