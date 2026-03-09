@@ -353,7 +353,7 @@ function doAjaxPostResponse(form, ajaxBody) {
 }
 </script>
 
-<div style="margin-left: 100px; height: 600px; text-align: center;">
+<div style=" height: 600px; text-align: center;">
 <form name="fm" method="post" action="#">
 <input type="hidden" name="_csrf" value="${_csrf.token}">
 <input type="hidden" name="data_list">
@@ -371,11 +371,11 @@ function doAjaxPostResponse(form, ajaxBody) {
 		</div>
 		<div class="arrayArea" style="margin-top: 10px;">
 		<c:if test="${authC or authU}">
-			<a class="btn i01" id="up_cate"><span>위로</span></a>
-			<a class="btn i02" id="down_cate"><span>아래</span></a>
-			<a class="btn" id="save_list"><span>저장</span></a>
-			<a class="btn" id="add_cate"><span>추가</span></a>
-			<a class="btn" id="modify_cate"><span>수정</span></a>
+			<a class="btn i01" id="up_cate"><span><i class="fa fa-arrow-up" aria-hidden="true"></i>위로</span></a>
+			<a class="btn i02" id="down_cate"><span><i class="fa fa-arrow-down" aria-hidden="true"></i>아래</span></a>
+			<a class="btn" id="save_list"><span><i class="fa fa-floppy-o" aria-hidden="true"></i>저장</span></a>
+			<a class="btn" id="add_cate"><span><i class="fa fa-plus" aria-hidden="true"></i>추가</span></a>
+			<a class="btn" id="modify_cate"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i>수정</span></a>
 		</c:if>
 		</div>
 	</div>
@@ -387,11 +387,11 @@ function doAjaxPostResponse(form, ajaxBody) {
 		</div>
 		<div class="arrayArea" style="margin-top: 10px;">
 		<c:if test="${authC or authU}">
-			<a class="btn i01" id="up_cate2"><span>위로</span></a>
-			<a class="btn i02" id="down_cate2"><span>아래</span></a>
-			<a class="btn" id="save_list2"><span>저장</span></a>
-			<a class="btn" id="add_cate2"><span>추가</span></a>
-			<a class="btn" id="modify_cate2"><span>수정</span></a>
+			<a class="btn i01" id="up_cate2"><span><i class="fa fa-arrow-up" aria-hidden="true"></i>위로</span></a>
+			<a class="btn i02" id="down_cate2"><span><i class="fa fa-arrow-down" aria-hidden="true"></i>아래</span></a>
+			<a class="btn" id="save_list2"><span><i class="fa fa-floppy-o" aria-hidden="true"></i>저장</span></a>
+			<a class="btn" id="add_cate2"><span><i class="fa fa-plus" aria-hidden="true"></i>추가</span></a>
+			<a class="btn" id="modify_cate2"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i>수정</span></a>
 		</c:if>
 		</div>
 	</div>
@@ -406,7 +406,7 @@ function doAjaxPostResponse(form, ajaxBody) {
 <form:hidden path="code_type"/>
 <form:hidden path="depth"/>
 
-<table class="tableTy02">
+<table class="tableTy02 type2">
 	<colgroup>
 		<col width="30%">
 		<col width="70%">

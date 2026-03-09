@@ -85,20 +85,10 @@ $(document).ready(function() {
 	<div class="table-wrap">
 		<div class="table-scroll">
 			<table class="type1">
-				<colgroup>
-					<col width="200"/>
-					<col width="200"/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-				</colgroup>
 				<thead>
 					<tr>
-						<th class="width200">메뉴명</th>
-						<th class="width200">모듈명</th>
+						<th>메뉴명</th>
+						<th>모듈명</th>
 						<th><input type="checkbox" id="masterCheck"/>전체</th>
 						<th><input type="checkbox" id="masterCheckR"/><label for="masterCheckR">조회</label></th>
 						<th><input type="checkbox" id="masterCheckC"/><label for="masterCheckC">등록</label></th>
@@ -115,8 +105,8 @@ $(document).ready(function() {
 					</c:if>
 					<c:forEach var="i" varStatus="status" items="${menuList}" begin="1">
 					<tr>
-						<th class="width200"><span style="padding-left: ${(i.menu_level-2)*16}px;">${i.menu_name}</span></th>
-						<th class="width200"><span>${i.moduleName}</span></th>
+						<th><span style="padding-left: ${(i.menu_level-2)*16}px;">${i.menu_name}</span></th>
+						<th><span>${i.moduleName}</span></th>
 						<c:choose>
 							<c:when test="${not empty i.moduleName}">
 						<td>

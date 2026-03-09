@@ -113,7 +113,7 @@ $(function(){
 	</div>
 	<div class="table-wrap">
 		<div class="msg">&nbsp;</div>
-		<table class="bbs center">
+		<table class="bbs center type1">
 			<thead>
 				<tr>
 					<th>순번</th>

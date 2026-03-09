@@ -157,40 +157,50 @@ $(function(){
 	<form:hidden id="homepage_id_1" path="homepage_id"/>
 	
 	<div class="wrapper wrapper-white">
-		<div class="infodesk" style="width:98%;">
+        <div style="display: flex;">
+            <div class="infodesk" style="display: flex; flex-wrap: wrap; gap: 4px;">
 			<span>대분류 : 
 				<form:select path="large_category_idx" style="width:200px;margin-right:10px;">
-					<form:option class="all" value="0" label="선택" />
+					<form:option class="all" value="0" label="선택"/>
 					<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 				</form:select>
 			</span>
-			<span>중분류 : 
+                <span>중분류 : 
 				<form:select path="group_idx" style="width:200px;margin-right:10px;">
-					<form:option class="all" value="0" label="선택" />
+					<form:option class="all" value="0" label="선택"/>
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
-			<span>소분류 : 
+                <span>소분류 : 
 				<form:select path="category_idx" style="width:200px;margin-right:10px;">
-					<form:option value="0" label="중분류를 선택해주세요" />
+					<form:option value="0" label="중분류를 선택해주세요"/>
 				</form:select>
 			</span>
-			<span>강좌 : 
+                <span>강좌 : 
 				<form:select path="teach_idx" style="width:300px;">
-					<form:option keyValue1="0" keyValue2="0" keyValue3="0" value="0" label="소분류를  선택해주세요" />
+					<form:option keyValue1="0" keyValue2="0" keyValue3="0" value="0" label="소분류를  선택해주세요"/>
 				</form:select>
 			</span>
-			
-			<a class="btn btn2 print-btn" style="float:right;">인쇄</a>
-			<a class="btn btn2 csv-btn" style="float: right;"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
-			<a class="btn btn2 excel-btn" style="float:right;"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
-		</div>
+            </div>
+            <div style="display: flex; gap: 4px;">
+                <a class="btn btn1 print-btn" style="float:right;">인쇄</a>
+                <a class="btn btn2 csv-btn" style="float: right;"><i
+                        class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
+                <a class="btn btn2 excel-btn" style="float:right;"><i
+                        class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
+            </div>
+        </div>
 		<div id="teachBookLayer" class="auto-scroll" style="height:600px;"></div>
 		<div class="ui-state-highlight" style="width:98%">
-			( ● : 출석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;△ : 지각&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;× : 결석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- : 데이터없음 ) 기호는 버튼 입니다. 상단 종류를 선택후 클릭하면 즉시 반영 됩니다.<br/>
-			* 날짜 클릭시 해당 날짜에 대해 모든 수강생들을 '출석(●)' 처리 가능 합니다.<br/>
-			* 수강생 이름 클릭시 해당 수강생에 대해 모든 날짜를 '출석(●)' 처리 가능 합니다.<br/>
-			* 일괄 처리 시 다소 시간이 걸릴수 있습니다.
+            <em>
+                ( ● : 출석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                △ : 지각&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                × : 결석&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                - : 데이터없음 ) 기호는 버튼 입니다. 상단 종류를 선택후 클릭하면
+                즉시 반영 됩니다.<br/>
+                * 날짜 클릭시 해당 날짜에 대해 모든 수강생들을 '출석(●)' 처리 가능 합니다.<br/>
+                * 수강생 이름 클릭시 해당 수강생에 대해 모든 날짜를 '출석(●)' 처리 가능 합니다.<br/>
+                * 일괄 처리 시 다소 시간이 걸릴수 있습니다.</em>
 			
 		</div>	
 	</div>

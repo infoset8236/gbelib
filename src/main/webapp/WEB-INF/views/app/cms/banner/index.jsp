@@ -141,6 +141,6 @@ $(function(){
 </div>
 </form:form>
 
-<div id="dialog-1" class="dialog-common" title="베너 정보">
+<div id="dialog-1" class="dialog-common" title="배너 정보">
 </div>	
 	

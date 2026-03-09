@@ -4,7 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<script type="text/javascript">
+
+<script type="text/javascript" xmlns:form="http://www.w3.org/1999/xhtml">
 $(function(){
 	$('#dialog-3').dialog({ //모달창 기본 스크립트 선언
 		autoOpen: false,
@@ -53,8 +54,8 @@ $(function(){
 	});
 	
 	$('button.sort').on('click', function() {
-		$('button.sort').removeClass('btn1');
-		$(this).addClass('btn1');
+		$('button.sort').removeClass('black');
+		$(this).addClass('black');
 		var key = $(this).attr('keyValue');
 		if ( key == 0 ) {
 			$('table#certificateTable tr.sort').show();
@@ -71,9 +72,11 @@ $(function(){
 	<form:hidden path="editMode" value="SEARCH"/>
 	<form:hidden path="homepage_id"/>
 	<div class="infodesk">
-		<div><button class="btn btn1 sort" keyValue="0">전체</button>
-		<button class="btn sort" keyValue="1">수료</button>
-		<button class="btn sort" keyValue="2">미수료</button></div>
+		<div style="margin-bottom: 4px;">
+            <button class="btn gray black sort" keyValue="0">전체</button>
+		    <button class="btn gray sort" keyValue="1">수료</button>
+		    <button class="btn gray sort" keyValue="2">미수료</button>
+        </div>
 		조회 기간 : <form:input path="search_start_date" class="text ui-calendar"/> ~ <form:input path="search_end_date" class="text ui-calendar"/> <a class="btn btn1 search-btn">조회</a>
 	</div>
 	<table id="certificateTable" class="type1 center">

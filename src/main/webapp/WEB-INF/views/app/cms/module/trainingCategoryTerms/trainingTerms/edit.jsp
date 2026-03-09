@@ -123,7 +123,7 @@ $(function() {
 		<tr>
 			<th>약관구분</th>
 			<td>
-				<form:select path="terms_type" cssStyle="height:24px;">									
+				<form:select path="terms_type">
 					<c:forEach var="i" varStatus="status" items="${trainingtermsTypeList}">
 						<option value="${i.code_id}" <c:if test="${i.code_id eq trainingTerms.terms_type}">selected="selected"</c:if>>${i.code_name}</option>
 					</c:forEach>

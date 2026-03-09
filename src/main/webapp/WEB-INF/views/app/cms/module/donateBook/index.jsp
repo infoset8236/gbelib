@@ -86,65 +86,67 @@ $(function() {
 		</div>
 	</div>
 	<!-- 교육소식 관리 table -->
-	<table class="type1 center">
-		<colgroup>
-			<col width="100"/>
-			<col width="100"/>
-			<col width="150"/>
-			<col width="150"/>
-			<col width=""/>
-			<col width="100"/>
-			<col width="200"/>
-			<col width="100"/>
-			<col width="100"/>
-			
-		</colgroup>
-		<thead>
-			<tr>
-				<th>기증일자</th>
-				<th>기증자명</th>	
-				<th>전화번호</th>
-				<th>휴대전화번호</th>	
-				<th>기증도서정보</th>
-				<th>기증권수</th>	
-				<th>기증방법</th>
-				<th>기증처리동의</th>
-				<th>기능</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${fn:length(donateBookList) < 1}">
-				<tr style="height:100%">
-					<td colspan="9" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
-				</tr>
-			</c:if>
-			<c:forEach var="i" varStatus="status" items="${donateBookList}">
-				<tr>
-					<td>${i.donate_year}-${i.donate_month}-${i.donate_day}</td>
-					<td>${i.name}</td>
-					<td>${i.phone}</td>
-					<td>${i.cell_phone}</td>
-					<td>${i.donate_book}</td>
-					<td>${i.donate_count}</td>
-					<td>${i.donate_method}</td>
-					<td>${i.donate_yn}</td>
-					<td>
-						<c:if test="${authU}">
-							<a href="" class="btn" id="dialog-modify" keyValue="${i.donate_idx}">수정</a>
-						</c:if>
-						<c:if test="${authD}">
-							<a href="" class="btn" id="delete-btn" keyValue="${i.donate_idx}">삭제</a>
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
-			<c:if test="${teachListCount eq 0}">
-				<tr>
-					<td colspan="8">조회된 자료가 없습니다.</td>
-				</tr>
-			</c:if>
-		</tbody>
-	</table>
+    <div style="overflow-x: auto">
+        <table class="type1 center">
+            <colgroup>
+                <col width="100"/>
+                <col width="100"/>
+                <col width="150"/>
+                <col width="150"/>
+                <col width=""/>
+                <col width="100"/>
+                <col width="200"/>
+                <col width="100"/>
+                <col width="100"/>
+
+            </colgroup>
+            <thead>
+            <tr>
+                <th>기증일자</th>
+                <th>기증자명</th>
+                <th>전화번호</th>
+                <th>휴대전화번호</th>
+                <th>기증도서정보</th>
+                <th>기증권수</th>
+                <th>기증방법</th>
+                <th>기증처리동의</th>
+                <th>기능</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${fn:length(donateBookList) < 1}">
+                <tr style="height:100%">
+                    <td colspan="9" style="background:#F8FAFB;">데이터가 존재하지 않습니다.</td>
+                </tr>
+            </c:if>
+            <c:forEach var="i" varStatus="status" items="${donateBookList}">
+                <tr>
+                    <td>${i.donate_year}-${i.donate_month}-${i.donate_day}</td>
+                    <td>${i.name}</td>
+                    <td>${i.phone}</td>
+                    <td>${i.cell_phone}</td>
+                    <td>${i.donate_book}</td>
+                    <td>${i.donate_count}</td>
+                    <td>${i.donate_method}</td>
+                    <td>${i.donate_yn}</td>
+                    <td>
+                        <c:if test="${authU}">
+                            <a href="" class="btn" id="dialog-modify" keyValue="${i.donate_idx}">수정</a>
+                        </c:if>
+                        <c:if test="${authD}">
+                            <a href="" class="btn" id="delete-btn" keyValue="${i.donate_idx}">삭제</a>
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:if test="${teachListCount eq 0}">
+                <tr>
+                    <td colspan="8">조회된 자료가 없습니다.</td>
+                </tr>
+            </c:if>
+            </tbody>
+        </table>
+    </div>
 	<jsp:include page="/WEB-INF/views/app/cms/common/paging.jsp" flush="false">
 		<jsp:param name="formId" value="#donateBookListForm"/>
 	</jsp:include>

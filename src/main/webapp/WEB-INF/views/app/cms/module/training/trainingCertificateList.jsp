@@ -47,7 +47,7 @@ $(function(){
 	});
 });	
 </script> 
-<div class="infodesk">
+<div class="infodesk"  style="margin-bottom: 4px;">
 	<button class="btn btn1 sort" keyValue="0">전체</button>
 	<button class="btn sort" keyValue="1">수료</button>
 	<button class="btn sort" keyValue="2">미수료</button>

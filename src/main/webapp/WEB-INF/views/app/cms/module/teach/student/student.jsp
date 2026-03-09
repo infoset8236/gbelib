@@ -369,7 +369,7 @@ $(function(){
 		<div class="button btn-group inline">
 			<c:if test="${authC}">
 				<a href="" class="btn btn5 left" id="dialog-add" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>수강생등록</span></a>
-				<a href="#" id="excelUpload" class="btn btn5" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>엑셀등록</span></a>
+				<a href="#" id="excelUpload" class="btn btn2" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>엑셀등록</span></a>
 				<a href="#" id="excelDownloadSample" class="btn btn2" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i><span>신청서</span></a>
 				<a href="#" class="btn btn1 formPrint-btn" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i><span>신청서 인쇄</span></a>
 				<a href="#" class="btn btn5 left" id="batch-delete-btn" style="margin-right: 5px;"><i class="fa fa-minus"></i><span>일괄삭제</span></a>

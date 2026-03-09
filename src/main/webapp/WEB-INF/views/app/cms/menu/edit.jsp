@@ -382,7 +382,7 @@ function delete_manager(a) {
 			<tr>
 				<th>출력 순서</th>
 				<td colspan="3">
-					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text"/>
+					<form:input path="print_seq" cssStyle="width:60px;" cssClass="text"/>
 				</td>
 			</tr>
 			<tr>

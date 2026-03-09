@@ -107,7 +107,7 @@ $(function(){
 <form:hidden path="manage_idx"/>
 <div class="container-tab">
 	<h3>게시판 설정</h3>
-	<div id="tabs">
+	<div id="tabs" class="cm-tab-menu">
 		<ul>
 			<li><a href="#tabs-1">기본 설정</a></li>
 <!-- 			<li><a href="#tabs-2">권한 설정</a></li> -->

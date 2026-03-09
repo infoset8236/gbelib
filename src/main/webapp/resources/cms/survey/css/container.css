@@ -12,9 +12,9 @@ h5{font-size:16px}
 label,
 input{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
 input[type="file"]{
-	height: 38px;
+	height: 38px !important;
 	width: 70%;
-	padding: 5px;
+	padding: 5px !important;
 }
 
 select{padding:2px}
@@ -731,7 +731,6 @@ table.type1 {
 	position: relative;
 	width: 100%;
 	margin-top: 10px;
-	margin-bottom: 10px;
 	border: 0px;
 }
 
@@ -1174,8 +1173,11 @@ table.type3 tr {
 
 
 input#start_date,
-input#end_date{
-	background: url(/resources/cms/img/main/calendar.svg) no-repeat right 6px center;
+input#end_date,
+input#tempHoliDay,
+input.calender_ico,
+input.ui-calendar{
+	background: url(/resources/cms/img/main/calendar.svg) no-repeat right 6px center !important;
 	padding-right: 10px;
 	box-sizing: content-box;
 }
@@ -1183,14 +1185,14 @@ input#end_date{
 
 /* 팝업 달력 css */
 .ui-datepicker-header{
+	width: 100%;
 	display: flex;
 	align-items: center;
-	align-self: stretch;
 	justify-content: center;
-	height: 52px;
-	padding: 8px 24px;
+	height: 56px !important;
 	background: #222 !important;
-	gap: 3px;
+	padding: 10px !important;
+	box-sizing: border-box;
 }
 
 .ui-datepicker-title{
@@ -1205,14 +1207,13 @@ input#end_date{
 	font-family: Pretendard-Medium, serif;
 	width: 99px;
 	text-align: left;
-
-	/* padding-right: 21px; */
 	border: 1px solid #ccc;
 	border-radius: 4px;
-	background: url("../img/main/select-arrow.svg") no-repeat 75px center;
+	background: url("/resources/cms/img/main/select-arrow.svg") no-repeat 75px center;
 	background-size: 12px;
 	appearance: none;
 }
+
 
 .ui-datepicker-title select{
 	height: 32px;
@@ -1281,10 +1282,15 @@ input#end_date{
 
 .ui-datepicker .ui-datepicker-header > .ui-corner-all{
 	background-color: transparent !important;
+	position: static !important;
+}
+.ui-datepicker .ui-datepicker-header > .ui-corner-all > span{
+	position: static !important;
 }
 
 .ui-datepicker.ui-corner-all{
 	border-radius: 8px !important;
+	width: auto;
 }
 
 .ui-datepicker .ui-datepicker-prev span,
@@ -1337,4 +1343,116 @@ input#end_date{
 	pointer-events: none; /* 클릭 비활성화 */
 	color: #999 !important;
 	background-color: #f5f5f5 !important;
+}
+
+
+.tabmenu ul{
+	display: flex;
+	border-bottom: 1px solid #E0E3E8;
+}
+
+.tabmenu li a{
+	font-family: Pretendard-Medium, serif;
+	font-size: 13px;
+	font-style: normal;
+	line-height: normal;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 36px;
+	padding: 0 16px;
+	cursor: pointer;
+	letter-spacing: -0.26px;
+	color: #222;
+	border-radius: 4px 4px 0 0;
+	background: #EFF0F4;
+	box-sizing: border-box;
+	font-weight: 500;
+}
+
+.tabmenu li.active a{
+	color: #FFF;
+	background: #222 !important;
+}
+
+.cm-tab-menu{}
+.cm-tab-menu ul{
+	display: flex;
+	align-items: flex-end;
+	justify-content: flex-start;
+	padding-left: 4px;
+}
+.cm-tab-menu ul li{
+	padding: 10px 20px;
+	transition: 0.3s;
+	border: 0 !important;
+	border-radius: 14px 14px 0 0;
+	background-color: #fff !important;
+}
+.cm-tab-menu ul li a{
+	color: #121212;
+}
+.cm-tab-menu ul li.ui-tabs-active{
+	background-color: #222 !important;
+	padding-bottom: 0 !important;
+}
+
+.cm-tab-menu ul li.active a{
+	color: #fff;
+}
+
+textarea#word{
+	width: 100%;
+	height: 200px;
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	box-sizing: border-box;
+	padding: 12px;
+	letter-spacing: -0.28px;
+	color: #222;
+	border: 1px solid #E0E3E8;
+	border-radius: 4px;
+	background: #F6F7F9;
+}
+
+button.gray {
+	color: #222 !important;
+	border: 1px solid #E0E2E8 !important;
+	border-radius: 4px !important;
+	background: #F6F7F9 !important;
+}
+
+
+button.black {
+	color: #FFF !important;
+	background: #222 !important;
+}
+
+.ui-state-highlight{
+	display: flex;
+	flex-direction: column;
+	padding: 16px;
+	border-radius: 4px;
+	gap: 4px;
+	background: #EEF1F8 !important;
+}
+.ui-state-highlight > em{
+	font-family: Pretendard-Regular, serif;
+	font-size: 14px;
+	font-style: normal;
+	line-height: normal;
+	padding-left: 16px;
+	letter-spacing: -0.28px;
+	color: #18216D;
+	font-weight: 500;
+}
+
+.categoryEdit select{
+	overflow-y: auto;
+	margin-top: 10px;
+	padding: 5px;
+	border: 1px solid #DDD;
+	border-radius: 4px;
 }
