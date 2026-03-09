@@ -123,6 +123,8 @@ public class Student extends PagingUtils {
 	private String neis_cd_yn;
 	//excel 다운로드 bean 끝
 
+	private String search_year;
+
 	public Student() {}
 	
 	public Student(String homepage_id, int group_idx, int category_idx, int teach_idx) {
@@ -855,5 +857,13 @@ public class Student extends PagingUtils {
 
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
+	}
+
+	public String getSearch_year() {
+		return search_year;
+	}
+
+	public void setSearch_year(String search_year) {
+		this.search_year = search_year;
 	}
 }

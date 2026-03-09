@@ -134,6 +134,9 @@
 						</when>
 					</choose>
 				</if>
+			  	<if test="search_year != null and search_year != ''">
+					AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
+				</if>
 				AND a.DELETE_YN = 'N'
 			ORDER BY
 				a.ADD_DATE desc
@@ -185,6 +188,9 @@
 						AND TO_DATE(TO_CHAR(SYSDATE, 'YYYYMMDDHH24MI'), 'YYYY-MM-DD HH24:MI') <![CDATA[ <= ]]> TO_DATE(END_DATE||' '||END_TIME, 'YYYY-MM-DD HH24:MI')	
 					</when>
 				</choose>				
+			</if>
+		  	<if test="search_year != null and search_year != ''">
+				AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
 			</if>
 			AND a.DELETE_YN = 'N'
 	</select>

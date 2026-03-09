@@ -177,6 +177,8 @@ public class Teach extends PagingUtils {
 	private String teach_day_txt; //강의요일텍스트
 	private String dataUse;
 
+	private String search_year;
+
 	public Teach() {}
 
 	public Teach(String homepage_id, int mainViewCount) {
@@ -1324,5 +1326,13 @@ public class Teach extends PagingUtils {
 
 	public void setDataUse(String dataUse) {
 		this.dataUse = dataUse;
+	}
+
+	public String getSearch_year() {
+		return search_year;
+	}
+
+	public void setSearch_year(String search_year) {
+		this.search_year = search_year;
 	}
 }
