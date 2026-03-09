@@ -105,7 +105,7 @@
 			getCodeIdToCodeName('CMS', 'C0022', student_location_code) AS student_location_code_str,
 			student_neis_cd,
 			student_training_num,
-			student_organization, student_rank, student_course_taken_yn
+			student_organization, student_rank, student_course_taken_yn, belong_name
 		FROM
 			TRAINING_STUDENT
 		WHERE DELETE_YN = 'N'
@@ -187,7 +187,8 @@
 			FAMILY_CONFIRM_YN		= #{family_confirm_yn},
 			FAMILY_DESC				= #{family_desc},
 			MOD_ID					= #{mod_id},
-			MOD_DATE				= SYSDATE
+			MOD_DATE				= SYSDATE,
+			belong_name = #{belong_name}
 		WHERE
 			HOMEPAGE_ID 		= #{homepage_id}
 			AND GROUP_IDX 		= #{group_idx}
