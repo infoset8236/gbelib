@@ -456,7 +456,7 @@ table thead th{background:#adb5c0;color:#fff;border-color:#ced8da;border-bottom-
 #container .bbs-notice .page_exp{padding:15px 20px;margin-bottom:15px;background:#fff;border:1px solid #d5d5d5}
 
 /* 테이블 스크롤 */
-.table-scroll tbody{background:#fff;display:block;height:622px;overflow-y:auto;overflow-x:hidden}
+.table-scroll tbody{background:#fff;display:block;height:575px;overflow-y:auto;overflow-x:hidden}
 .table-scroll thead,
 .table-scroll tbody tr{display:table;width:100%;table-layout:fixed}
 .table-scroll tbody tr{margin-top:-1px}
@@ -1436,7 +1436,6 @@ button.black {
 
 .ui-state-highlight{
 	display: flex;
-	flex-direction: column;
 	padding: 16px;
 	border-radius: 4px;
 	gap: 4px;

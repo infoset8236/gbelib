@@ -232,12 +232,8 @@ $(document).ready(function() {
 	<form:form modelAttribute="memberGroup" method="POST" action="saveRelation.do">
 	<form:hidden path="member_group_idx"/>
 	<div class="table-wrap" id="table1" title="기본정보">
-		<table class="border-all">
+		<table class="border-all type1">
 			<colgroup>
-				<col width="120"/>
-				<col/>
-				<col width="120"/>
-				<col/>
 				<col width="120"/>
 				<col/>
 			</colgroup>

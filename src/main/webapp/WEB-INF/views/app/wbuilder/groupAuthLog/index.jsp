@@ -73,46 +73,48 @@ $(function(){
 		<form:option value="${paging.totalDataCount}">전체 보기</form:option>
 	</form:select>
 </div>
-<table class="type1 center">
-	<colgroup>
-		<col width="45"/>
-		<col width="110"/>
-		<col width="160"/>
-		<col width="120"/>
-		<col width="110"/>
-		<col width=""/>
-		<col width=""/>
-	</colgroup>
-	<thead>
-		<tr>
-			<th>순번</th>
-			<th>권한 변경 대상</th>
-			<th>권한 수정 일시</th>
-			<th>권한 수정 IP</th>
-			<th>권한 수정자 ID</th>
-			<th>추가 권한</th>
-			<th>삭제 권한</th>
-		</tr>
-	</thead>
-	<tbody>
-		<c:if test="${fn:length(memberGroupAuthLogList) < 1}">
-			<tr>
-				<td colspan="11">데이터가 존재하지 않습니다.</td>
-			</tr>
-		</c:if>
-		<c:forEach var="i" varStatus="status" items="${memberGroupAuthLogList}">
-			<tr>
-				<td>${paging.listRowNum - status.index}</td>
-				<td>${i.member_id}</td>
-				<td>${i.add_date}</td>
-				<td>${i.add_ip}</td>
-				<td>${i.mod_id}</td>
-				<td>${i.added_auth}</td>
-				<td>${i.removed_auth}</td>
-			</tr>	
-		</c:forEach>
-	</tbody>
-</table>
+    <div style="overflow-x: auto">
+        <table class="type1 center">
+            <colgroup>
+                <col width="45"/>
+                <col width="110"/>
+                <col width="160"/>
+                <col width="120"/>
+                <col width="110"/>
+                <col width=""/>
+                <col width=""/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>순번</th>
+                <th>권한 변경 대상</th>
+                <th>권한 수정 일시</th>
+                <th>권한 수정 IP</th>
+                <th>권한 수정자 ID</th>
+                <th>추가 권한</th>
+                <th>삭제 권한</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${fn:length(memberGroupAuthLogList) < 1}">
+                <tr>
+                    <td colspan="11">데이터가 존재하지 않습니다.</td>
+                </tr>
+            </c:if>
+            <c:forEach var="i" varStatus="status" items="${memberGroupAuthLogList}">
+                <tr>
+                    <td>${paging.listRowNum - status.index}</td>
+                    <td>${i.member_id}</td>
+                    <td>${i.add_date}</td>
+                    <td>${i.add_ip}</td>
+                    <td>${i.mod_id}</td>
+                    <td>${i.added_auth}</td>
+                    <td>${i.removed_auth}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 <div style="padding-top: 10px;">
 <a href="#" id="excelDownload" class="btn btn2" style="float:right;"><i class="fa fa-file-excel-o"></i><span>엑셀 다운로드</span></a>
 </div>

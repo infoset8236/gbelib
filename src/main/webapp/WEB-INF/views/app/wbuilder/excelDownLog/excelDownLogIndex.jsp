@@ -86,7 +86,7 @@ function viewReason(idx, type) {
 
 			$("#dialog_layer").dialog({
 				width: 700,
-				height: 175
+				height: 250
 			});
 		},error: function(html) {
 		}

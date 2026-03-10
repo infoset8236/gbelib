@@ -105,6 +105,8 @@ $(document).ready(function(){
 			$(this).addClass('s');
 		}
 	});
+
+
 	
 	$('a.pass-change-btn').on('click', function(e) {
 		e.preventDefault();
@@ -128,6 +130,8 @@ $(document).ready(function(){
 	parent.container.location.href=$('div.aside ul a[href*=cms]:first').attr('href');
 	
 });
+
+
 </script>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

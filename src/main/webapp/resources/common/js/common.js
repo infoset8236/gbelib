@@ -692,3 +692,23 @@ function fileDownLogSave() {
 
 	return responseData;
 }
+
+$(document).ready(function(){
+
+	const currentPath = location.pathname;
+
+	$('.aside .menu-list > ul > li > ul > li > a').each(function(){
+
+		const linkPath = new URL($(this).prop('href')).pathname;
+
+		if(linkPath === currentPath){
+
+			$(this)
+					.parent('.aside .menu-list > ul > li > ul > li')
+					.addClass('active');
+
+		}
+
+	});
+
+});
