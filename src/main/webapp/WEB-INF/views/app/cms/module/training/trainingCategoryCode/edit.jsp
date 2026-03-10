@@ -84,7 +84,7 @@ $(document).ready(function() {
 		<label>
 			<span>상위 대분류 :</span>
 		</label>
-		<select class="i_text up_training_code_id">
+		<select class="i_text up_training_code_id" cssClass="selectmenu">
 			<c:forEach var="j" varStatus="Jstatus" items="${rootGroupList}">
 			<option value="${j.training_code_id}" <c:if test="${j.training_code_id eq code.training_code_id}">selected="selected"</c:if>>${j.training_code_name}</option>
 			</c:forEach>
@@ -134,7 +134,7 @@ $(document).ready(function() {
 		<label>
 			<span>상위 대분류 :</span>
 		</label>
-		<select class="i_text up_training_code_id">
+		<select class="i_text up_training_code_id" cssClass="selectmenu">
 			<c:forEach var="j" varStatus="Jstatus" items="${rootGroupList}">
 			<option value="${j.training_code_id}" <c:if test="${j.training_code_id eq code.up_training_code_id}">selected="selected"</c:if>>${j.training_code_name}</option>
 			</c:forEach>

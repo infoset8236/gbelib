@@ -173,8 +173,8 @@ $(function() {
 	        <tr>
 	         	<th>신청접수 기간</th>
 	         	<td>
-	         		<form:input path="apply_start_date" class="text ui-calendar"/> <form:input path="apply_start_time" class="text" style="width:50px;" maxlength="5"/> 
-	         		~ <form:input path="apply_end_date" class="text ui-calendar"/> <form:input path="apply_end_time" class="text" style="width:50px;" maxlength="5"/>
+	         		<form:input path="apply_start_date" class="text ui-calendar"/> <form:input path="apply_start_time" class="text" style="width:70px;" maxlength="5"/>
+	         		~ <form:input path="apply_end_date" class="text ui-calendar"/> <form:input path="apply_end_time" class="text" style="width:70px;" maxlength="5"/>
 	         		<div class="ui-state-highlight">
 						* 시간 입력 ex) 10:30
 					</div>
@@ -183,7 +183,7 @@ $(function() {
 	        <tr>
 	         	<th>신청대기인원</th>
 	         	<td>
-	         		<form:input path="apply_backup_count" class="text" cssStyle="width:30px" maxlength="5"/>
+	         		<form:input path="apply_backup_count" class="text" cssStyle="width:50px" maxlength="5"/>
 	         		<div class="ui-state-highlight">
 						* 신청인원수는 사물함 개수 + 신청대기인원 입니다.
 					</div>

@@ -155,33 +155,37 @@ $(function(){
 	<form:hidden id="homepage_id_1" path="homepage_id"/>
 	
 	<div class="wrapper wrapper-white">
-		<div class="infodesk" style="width:98%;">
+		<div class="infodesk table-action" style="width:98%;">
 			<span>대분류 : 
-				<form:select path="large_category_idx" style="width:200px;margin-right:10px;">
+				<form:select path="large_category_idx" cssClass="selectmenu" style="width:200px;margin-right:10px;">
 					<form:option class="all" value="0" label="선택" />
 					<form:options itemValue="training_code" itemLabel="code_name" items="${trainingLargeCategoryList}"/>
 				</form:select>
 			</span>
 			<span>중분류 : 
-				<form:select path="group_idx" style="width:200px;margin-right:10px;">
+				<form:select path="group_idx" cssClass="selectmenu" style="width:200px;margin-right:10px;">
 					<form:option class="all" value="0" label="선택" />
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
 			<span>소분류 : 
-				<form:select path="category_idx" style="width:200px;margin-right:10px;">
+				<form:select path="category_idx" cssClass="selectmenu" style="width:200px;margin-right:10px;">
 					<form:option value="0" label="중분류를 선택해주세요" />
 				</form:select>
 			</span>
 			<span>연수 : 
-				<form:select path="training_idx" style="width:300px;">
+				<form:select path="training_idx" style="width:300px;" class="selectmenu">
 					<form:option keyValue1="0" keyValue2="0" keyValue3="0" value="0" label="소분류를  선택해주세요" />
 				</form:select>
 			</span>
-			
-			<a class="btn btn2 print-btn" style="float:right;">인쇄</a>
-			<a class="btn btn2 csv-btn" style="float: right;"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
-			<a class="btn btn2 excel-btn" style="float:right;"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
+
+            <div class="table-action" style="margin-left: auto;">
+                <a class="btn btn2 print-btn" style="float:right;">인쇄</a>
+                <a class="btn btn2 csv-btn" style="float: right;"><i
+                        class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
+                <a class="btn btn2 excel-btn" style="float:right;"><i
+                        class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
+            </div>
 		</div>
 		<div id="trainingBookLayer" class="auto-scroll" style="height:600px;"></div>
 		<div class="ui-state-highlight" style="width:98%">

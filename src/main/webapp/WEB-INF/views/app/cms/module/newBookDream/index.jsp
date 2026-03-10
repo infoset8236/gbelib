@@ -99,7 +99,7 @@ $(function(){
 			<form:checkbox path="search_state" class="search_state" value="-90" label="관리취소"/>
 		</li>
 		<li><span>기간 :</span>
-			<form:select path="search_date">
+			<form:select path="search_date" cssClass="selectmenu" cssStyle="width: 80px">
 				<form:option value="r_created">신청일자</form:option>
 				<form:option value="r_payed">구매일자</form:option>
 				<form:option value="r_return">반환일자</form:option>
@@ -109,20 +109,20 @@ $(function(){
 			<form:input path="start_date" class="text ui-calendar" readonly="true"/>
 			<form:input path="end_date" class="text ui-calendar" readonly="true"/>
 			<span>정렬 :</span>
-			<form:select path="sortField">
+			<form:select path="sortField" cssClass="selectmenu" cssStyle="width: 80px">
 				<form:option value="r_created" label="신청일"></form:option>
 				<form:option value="r_return" label="반납일"></form:option>
 				<form:option value="r_return_close" label="마감일"></form:option>
 				<form:option value="r_payed" label="구매일"></form:option>
 			</form:select>
-			<form:select path="sortType">
+			<form:select path="sortType" cssClass="selectmenu" cssStyle="width: 80px">
 				<form:option value="ASC" label="오름차순"></form:option>
 				<form:option value="DESC" label="내림차순"></form:option>
 			</form:select>
 
 
 			<span>검색어 :</span>
-			<form:select path="search_type">
+			<form:select path="search_type" cssClass="selectmenu" cssStyle="width: 80px">
 				<form:option value="r_name" label="신청자"></form:option>
 				<form:option value="r_title" label="도서명"></form:option>
 				<form:option value="r_author" label="저자"></form:option>
@@ -141,7 +141,7 @@ $(function(){
 		</li>
 		<li>
 			<span>상태일괄수정  :</span>
-			<form:select path="batch">
+			<form:select path="batch" cssClass="selectmenu">
 				<form:option value="0" label="대기">대기</form:option>
 				<form:option value="10" label="신청">신청</form:option>
 				<form:option value="13" label="재고있음">재고있음</form:option>
@@ -164,7 +164,7 @@ $(function(){
 
 <br/>
 
-<table class="tstyle lbook" summary="서점명, 대표자, 전화번호, 등록일, 관리에 대해 서점관리 부분을 안내하는 표입니다.">
+<table class="tstyle lbook type1" summary="서점명, 대표자, 전화번호, 등록일, 관리에 대해 서점관리 부분을 안내하는 표입니다.">
 	<caption class="blind">서점관리</caption>
 	<colgroup>
 		<col/>

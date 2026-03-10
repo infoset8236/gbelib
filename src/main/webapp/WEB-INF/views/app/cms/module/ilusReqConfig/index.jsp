@@ -93,6 +93,7 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
+            <!-- TODO : 당일픽업예약 기능 제한 관련 테이블 내용이 없음 -->
 			<c:forEach items="${ilusReqConfigList}" var="i" varStatus="status">
 				<tr>
 					<td>${i.loca_name}</td>
@@ -149,7 +150,7 @@ $(document).ready(function() {
 	</table>
 	<br>
 	<div class="ui-state-highlight">
-		<em>* 현재 기능 제한을 적용중인 자료실에 대해서는 붉은색으로 표시가 됩니다.</em><br>
+		<em>* 현재 기능 제한을 적용중인 자료실에 대해서는 붉은색으로 표시가 됩니다.</em>
 		<em>* 현재 일자가 사용기간이지만 사용여부가 'N'으로 설정시, 기능제한이 적용되지 않습니다.(우선순위1: 사용여부, 우선순위2 : 기간)</em>
 	</div>
 </form:form>

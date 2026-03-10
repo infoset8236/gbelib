@@ -520,7 +520,7 @@ function doAjaxPostResponse(form, ajaxBody) {
 <form:hidden path="mid_code"/>
 <form:hidden path="small_code"/>
 
-<table class="tableTy02">
+<table class="tableTy02 type2">
 	<colgroup>
 		<col width="30%">
 		<col width="70%">

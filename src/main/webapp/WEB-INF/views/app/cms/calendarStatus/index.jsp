@@ -254,12 +254,12 @@ $(function(){
 <div style="clear:both;" id="mainDiv">&nbsp;</div>
 <div style="display:none;" id="calendar">
 	<h3>행사일정</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>
 				<th>건수</th>
-				<th>백분율</th>				
+				<th>백분율</th>
 			</tr>
 		</thead>
 		<c:forEach var="i" varStatus="status" items="${calendarList}">		
@@ -302,7 +302,7 @@ $(function(){
 <br />
 <div style="display:none;" id="teacher">
 	<h3>독서문화강좌</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>
@@ -324,7 +324,7 @@ $(function(){
 
 <div style="display:none;" id="excursions">
 	<h3>견학/체험</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>
@@ -415,7 +415,7 @@ $(function(){
 
 <div style="display:none;" id="support">
 	<h3>현장지원</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>
@@ -492,7 +492,7 @@ $(function(){
 
 <div style="display:none;" id="facility">
 	<h3>시설물신청현황</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>						
@@ -541,7 +541,7 @@ $(function(){
 
 <div style="display:none;" id="locker">
 	<h3>사물함신청현황</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>
@@ -620,7 +620,7 @@ $(function(){
 
 <div style="display:none;" id="board">
 	<h3>영화상영</h3>
-	<table id="accessTableData" class="chartData">
+	<table id="accessTableData" class="chartData type1">
 		<thead>
 			<tr>
 				<th width="50%;">기간</th>

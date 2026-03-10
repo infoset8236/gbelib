@@ -49,8 +49,8 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 400,
-		height: 330
+		width: 500,
+		height: 450
 	});
 	
 	$('.starRev span').on('click', function() {

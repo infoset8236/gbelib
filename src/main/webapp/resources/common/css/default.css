@@ -905,7 +905,7 @@ a.baro img{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
 .ym_btns select{vertical-align:middle}
 
 /* 사물함 신청 */
-.locker_wrap{border-bottom:2px solid #ccc;border-top:2px solid #5e6062}
+.locker_wrap{border-bottom:2px solid #ccc;}
 .locker_wrap .title{padding:10px;font-weight:800;text-align:center;background:#f6f6f6;font-size:110%;border-bottom:1px solid #ddd}
 .locker_wrap ul{padding:2% 0;overflow:hidden}
 .locker_wrap li{float:left;width:10%;text-align:center}
@@ -918,7 +918,7 @@ a.baro img{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
 .locker_wrap li .info strong{display:block}
 .locker_wrap li .info a.btn{padding:1px 3px;margin:0;font-size:12px;letter-spacing:-1px;margin-top:1px}
 .locker_wrap li .info a.btn.btn5{cursor:default}
-.wrapper .locker_wrap .title{background:#adb5c0;border-bottom:1px solid #ced8da;color:#fff}
+.wrapper .locker_wrap .title{background:#878B96 ;border-bottom:1px solid #ced8da;color:#fff;border-radius: 4px;}
 .wrapper .locker_wrap ul{padding:1% 0}
 .wrapper .locker_wrap li .box{margin:3% 8%}
 .wrapper .locker_wrap li .box2{padding:3px}

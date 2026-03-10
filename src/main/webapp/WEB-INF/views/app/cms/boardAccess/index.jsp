@@ -170,7 +170,7 @@ $(function(){
 
 <div style="clear:both">&nbsp;</div>
 <h3>게시물 현황</h3>
-<table id="accessTableData" class="chartData">
+<table id="accessTableData" class="chartData type1">
 	<thead>
 		<tr>
 			<th>홈페이지명</th>

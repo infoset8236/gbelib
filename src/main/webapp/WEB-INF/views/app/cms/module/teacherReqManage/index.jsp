@@ -121,7 +121,7 @@ $(function() {
 		<thead>
 			<tr>
 				<th>번호</th>
-				<th>강사명</th>	
+				<th>강사명</th>
 				<th>휴대전화번호</th>
 				<th>(구)강사신청서</th>
 				<th>비고</th>

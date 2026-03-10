@@ -76,7 +76,7 @@ $(function() {
 	<fieldset>
 		<label class="blind">검색</label>
 		대분류 선택 :
-		<form:select path="large_category_idx" items="${teachLargeCategoryList}" itemLabel="code_name" itemValue="teach_code">
+		<form:select cssClass="selectmenu" path="large_category_idx" items="${teachLargeCategoryList}" itemLabel="code_name" itemValue="teach_code">
 		</form:select>
 	</fieldset>
 </div>

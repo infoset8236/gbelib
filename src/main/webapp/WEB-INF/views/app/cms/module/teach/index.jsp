@@ -157,7 +157,7 @@ $(function() {
 				</form:select>
 			</span>
 			<span>대분류 : 
-				<form:select path="large_category_idx">
+				<form:select path="large_category_idx" cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 				</form:select>

@@ -100,7 +100,7 @@ $(function() {
 	});
 	
 	$("#dialog-3").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 1300,
+		width: 1000,
 		height: 700
 	});
 	
@@ -177,15 +177,15 @@ $(function() {
 	<table class="type1 center">
 		<colgroup>
 			<col width="50" />
-			<col width="135" />
+			<col width="130" />
 			<col width="80" />
-			<col width="" />
+			<col width="*" />
 			<col width="100" />
 			<col width="50" />
 			<col width="50" />
 			<col width="100" />
 			<col width="200" />
-			<col width="130" />
+			<col width="120" />
 			<c:if test="${quiz.select_cnt > 0}">
 			<col width="100" />
 			<col width="100" />

@@ -223,9 +223,9 @@ $(function() {
 			</c:if>
 			<a href="#" id="totalExcelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>전체 엑셀저장</span></a>&nbsp;&nbsp;
 			<a href="#" id="dialog-month-choice" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>X월 엑셀저장</span></a>&nbsp;&nbsp;
-			<a href="#" id="excelDownload" class="btn btn3"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>&nbsp;&nbsp;
+			<a href="#" id="excelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>&nbsp;&nbsp;
 			<a href="#" id="totalCsvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>전체 CSV저장</span></a>&nbsp;&nbsp;
-			<a href="#" id="csvDownload" class="btn btn3"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>&nbsp;&nbsp;
+			<a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>&nbsp;&nbsp;
 			<a href="" class="btn btn5 left" id="dialog-add"><i class="fa fa-plus"></i><span>신청가능일 관리</span></a>
 		</div>
 	</div>

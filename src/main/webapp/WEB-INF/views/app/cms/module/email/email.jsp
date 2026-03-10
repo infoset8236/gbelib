@@ -120,7 +120,7 @@ $(function() {
 		
 		<!-- 문자 전송 -->
 		<div class="sms_area">
-			<div class="MD_sms" style="width: 700px; float: left; background: none;">
+			<div class="MD_sms" style="width: 700px; float: left; background: none; margin-right: 10px;">
 				<h4>EMAIL 작성</h4>
 				<table class="bbs-edit">
 					<tbody>

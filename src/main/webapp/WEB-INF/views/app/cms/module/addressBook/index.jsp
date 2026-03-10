@@ -217,7 +217,7 @@ int leftSizeInput = leftSize-125; //왼쪽 컨텐츠 검색 input 사이즈
 					<form:hidden path="homepage_id"/>
 					<form:hidden path="address_book_idx" class="text"/>
 					<form:hidden path="parent_address_book_idx" class="text"/>
-					<table class="border-all">
+					<table class="border-all type1">
 						<colgroup>
 							<col width="100"/>
 							<col width=""/>

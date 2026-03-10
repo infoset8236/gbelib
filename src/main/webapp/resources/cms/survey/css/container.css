@@ -1,6 +1,8 @@
 @charset "utf-8";
 
-
+body{
+	background: #fff;
+}
 
 h1,h2,h3,h4,h5{line-height:180%}
 h1{font-size:24px}
@@ -72,7 +74,7 @@ select.selectmenu.select2-hidden-accessible{padding:5px 15px 5px 5px;!important}
 	border-radius: 4px;
 	background: #FFF;
 }
-.search input.text{background-color:#fff}
+.search input.text{background-color: #fff !important;}
 .search input.text.ui-calendar{width:100px}
 .search button{
 	font-family: Pretendard-Medium, serif !important;
@@ -963,7 +965,7 @@ table.type2 input.text{
 	font-style: normal;
 	line-height: normal;
 	box-sizing: border-box;
-	height: 34px;
+	height: 34px !important;
 	padding: 0 12px;
 	letter-spacing: -0.28px;
 	color: #222;
@@ -987,7 +989,8 @@ table.type2 textarea{
 }
 
 table.type2 select,
-table.type2 select.selectmenu{
+table.type2 select.selectmenu,
+select.selectmenu{
 	font-family: Pretendard-Regular, serif;
 	font-size: 14px;
 	padding: 10px 30px 10px 12px;
@@ -1177,9 +1180,10 @@ input#end_date,
 input#tempHoliDay,
 input.calender_ico,
 input.ui-calendar{
-	background: url(/resources/cms/img/main/calendar.svg) no-repeat right 6px center !important;
+	background: #fff url(/resources/cms/img/main/calendar.svg) no-repeat right 6px center !important;
 	padding-right: 10px;
 	box-sizing: content-box;
+	width: 120px;
 }
 
 
@@ -1262,20 +1266,20 @@ input.ui-calendar{
 	font-style: normal;
 	line-height: normal;
 	display: flex;
-	flex-direction: column;
-	flex-shrink: 0;
 	justify-content: center;
+	align-items: center;
 	text-align: center;
 	letter-spacing: -0.28px;
 	color: #222;
 	border: none  !important;
 	background-color: #fff !important;
 	aspect-ratio: 1/1;
+	box-sizing: border-box;
+	padding: 0;
 }
 
 .ui-datepicker-calendar tbody .ui-state-highlight,
 .ui-datepicker-calendar tbody .ui-state-active{
-	flex-shrink: 0;
 	border-radius: 100%;
 	background: #EFF0F4 !important;
 }
@@ -1443,7 +1447,6 @@ button.black {
 	font-size: 14px;
 	font-style: normal;
 	line-height: normal;
-	padding-left: 16px;
 	letter-spacing: -0.28px;
 	color: #18216D;
 	font-weight: 500;
@@ -1455,4 +1458,10 @@ button.black {
 	padding: 5px;
 	border: 1px solid #DDD;
 	border-radius: 4px;
+}
+
+.table-action{
+	display: flex;
+	gap: 4px;
+	align-items: center;
 }

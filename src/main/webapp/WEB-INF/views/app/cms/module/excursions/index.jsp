@@ -244,12 +244,12 @@ $(function(){
         <a id="next-btn" href="#next" class="btn next"><i class="fa fa-angle-right"></i><span class="blind">다음달</span></a>
     </div>
 	<div class="button">
-				<a href="#" id="allChecked" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>전체선택/취소</span></a>&nbsp;&nbsp;
-		<a href="#" id="checkedDelete" class="btn btn3"><i class="fa fa-file-excel-o"></i><span>선택삭제</span></a>&nbsp;&nbsp;
+				<a href="#" id="allChecked" class="btn btn1"><i class="fa fa-minus" aria-hidden="true"></i><span>전체선택/취소</span></a>&nbsp;&nbsp;
+		<a href="#" id="checkedDelete" class="btn btn3"><i class="fa fa-minus" aria-hidden="true"></i><span>선택삭제</span></a>&nbsp;&nbsp;
 		<a href="#" id="totalExcelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>전체 엑셀저장</span></a>&nbsp;&nbsp;
-		<a href="#" id="excelDownload" class="btn btn3"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>&nbsp;&nbsp;
+		<a href="#" id="excelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>&nbsp;&nbsp;
 		<a href="#" id="totalCsvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>전체 CSV저장</span></a>&nbsp;&nbsp;
-		<a href="#" id="csvDownload" class="btn btn3"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>&nbsp;&nbsp;
+		<a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>&nbsp;&nbsp;
 		<c:if test="${authC}">
 		<a href="" class="btn btn5 left" id="dialog-add"><i class="fa fa-plus"></i><span>신청가능일 관리</span></a>
 		</c:if>

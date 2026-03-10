@@ -173,7 +173,7 @@ $(function(){
                 <a class="btn btn2" id="uncheckBtn">미출석처리</a>
             </div>
 			회차 선택:
-			<form:select path="qr_count">
+			<form:select path="qr_count" cssClass="selectmenu">
 				<form:option value="">전체</form:option>
 				<c:forEach var="i" begin="1" end="${training.qr_check_count}">
 					<form:option value="${i}">${i}회차</form:option>

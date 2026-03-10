@@ -150,7 +150,6 @@ $(document).on("keyup", "input:text[numberOnly]", function() {
 					<col>
 					<col>
 					<col>
-					<col width="15%">
 				</colgroup>
 				<thead>
 					<tr>
@@ -158,13 +157,12 @@ $(document).on("keyup", "input:text[numberOnly]", function() {
 						<th>이름</th>
 						<th>휴대전화</th>
 						<th>이메일</th>
-						<td></td>
 					</tr>
 				</thead>
 				<tbody>
 					<c:if test="${fn:length(myAddressList) < 1}">
 						<tr >
-							<td colspan="5" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+							<td colspan="4" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
 						</tr>
 					</c:if>
 					<c:forEach var="i" varStatus="status" items="${myAddressList}">
@@ -185,7 +183,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {
 	</div>
 </div>
 <div class="table-wrap">
-	<table class="border-all">
+	<table class="border-all type1">
 		<thead>
 			<tr>
 				<th>이름</th>

@@ -95,7 +95,11 @@ $(function() {
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${lockerReq.editMode eq 'ADD' }">
-	         				<form:input path="apply_id" class="text" /> <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/> <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/> <a class="btn btn1 idCheck">ID 확인</a>	
+	         				<form:input path="apply_id" class="text" />
+                            <br>
+                            <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/>
+                            <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/>
+                            <a class="btn btn1 idCheck">ID 확인</a>
 	         			</c:when>
 	         			<c:otherwise>
 	         				<form:hidden path="apply_id" class="text" />	         				

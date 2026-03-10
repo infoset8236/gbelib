@@ -70,7 +70,7 @@ $(function(){
 	</form:form>
 </div>
 
-<table id="resultTableData" class="chartData center">
+<table id="resultTableData" class="chartData center type1">
 	<thead>
 		<tr>
 			<th width="400">메뉴명</th>

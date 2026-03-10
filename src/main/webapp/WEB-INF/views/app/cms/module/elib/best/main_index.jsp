@@ -166,16 +166,15 @@ function submit(e) {
          	<td>
          		최근 <form:input path="date_range" class="text" cssStyle="width: 50px;"/>일 간의 통계<br/>
          		인기 지수 = <br/>
-         			&nbsp;&nbsp;&nbsp;(대출수 × <form:input path="lend_weight" class="text" cssStyle="width: 50px;"/>) <br/>
-         			+ (예약수 × <form:input path="reserve_weight" class="text" cssStyle="width: 50px;"/>) <br/>
-         			+ (서평수 × <form:input path="comment_weight" class="text" cssStyle="width: 50px;"/>) <br/>
-         			+ (추천수 × <form:input path="recommend_weight" class="text" cssStyle="width: 50px;"/>) <br/>
-         			+ (오디오북 조회수 × <form:input path="audiobook_weight" class="text" cssStyle="width: 50px;"/>) <br/>
-         			+ (온라인강좌 조회수 × <form:input path="elearning_weight" class="text" cssStyle="width: 50px;"/>) <br/>
+         			&nbsp;&nbsp;&nbsp;(대출수 × <form:input path="lend_weight" class="text" cssStyle="width: 70px;"/>) <br/>
+         			+ (예약수 × <form:input path="reserve_weight" class="text" cssStyle="width: 70px;"/>) <br/>
+         			+ (서평수 × <form:input path="comment_weight" class="text" cssStyle="width: 70px;"/>) <br/>
+         			+ (추천수 × <form:input path="recommend_weight" class="text" cssStyle="width: 70px;"/>) <br/>
+         			+ (오디오북 조회수 × <form:input path="audiobook_weight" class="text" cssStyle="width: 70px;"/>) <br/>
+         			+ (온라인강좌 조회수 × <form:input path="elearning_weight" class="text" cssStyle="width: 70px;"/>) <br/>
          		<div class="ui-state-highlight">
 					<em>ex) 인기 지수 = (대출수 × 0.25) + (예약수 × 0.05) + (서평수 × 0.20) + (추천수 × 0.10) + (오디오북 조회수 × 0.20) + (온라인강좌 조회수 × 0.20)</em>
-					<br/>
-					<em>* 모든 가중치의 합은 1이 되어야 함</em><br/>
+					<em>* 모든 가중치의 합은 1이 되어야 함</em>
 					<em>*'대출수', '예약수'는 전자책과 일부 오디오북에만 존재하며 '오디오북 조회수'는 일부 오디오북, '온라인강의 조회수'는 온라인강의에만 존재함</em>
 				</div>
          	</td>
