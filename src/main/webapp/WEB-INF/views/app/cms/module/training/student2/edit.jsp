@@ -296,6 +296,12 @@ $(function() {
 					</div>
 				</td>
 			</tr>
+			<tr>
+				<th>신청자 - 기관(<span style="color: red; font-weight: bold;">*</span>)</th>
+				<td>
+					<form:input path="belong_name" cssClass="text"/>
+				</td>
+			</tr>
 		</table>
 		<br/>
 		<div style="text-align: right; margin-bottom: 5px;">

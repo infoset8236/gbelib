@@ -74,6 +74,7 @@ public class StudentController extends BaseController {
 		Teach teach = new Teach(student.getHomepage_id(), student.getGroup_idx(),student.getCategory_idx());
 		teach.setLarge_category_idx(student.getLarge_category_idx());
 		teach.setSearch_text(student.getSearch_text());
+		teach.setSearch_year(student.getSearch_year());
 		model.addAttribute("teachList", teachService.getTeachListAll(teach));
 		model.addAttribute("student", student);
 		

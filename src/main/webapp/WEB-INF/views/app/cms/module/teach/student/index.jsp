@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 $(function(){
@@ -77,6 +79,10 @@ function regExp(str){
 	}
 }
 </script>
+
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy" var="currentYear"/>
+
 <form:form id="adminStudentForm" modelAttribute="student">
 	<form:hidden path="totalTeachIdxArray"/>
 	<form:hidden path="homepage_id"/>
@@ -85,6 +91,16 @@ function regExp(str){
 			<div class="areaL auto-scroll" style="width:33%;height:500px">
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
 				<div class="infodesk" style="overflow:hidden;">
+					<span style="float:left;">강좌연도 :
+						<form:select path="search_year">
+							<form:option value="">전체</form:option>
+
+							<c:forEach var="y" begin="${currentYear - 5}" end="${currentYear + 5}">
+								<form:option value="${y}">${y}</form:option>
+							</c:forEach>
+
+						</form:select>
+					</span>
 					<span style="float:left;">대분류 :
 					<form:select path="large_category_idx">
 						<form:option class="all" value="0" label="전체" />
