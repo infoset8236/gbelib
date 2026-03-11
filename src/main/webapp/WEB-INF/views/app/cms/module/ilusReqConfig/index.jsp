@@ -93,7 +93,6 @@ $(document).ready(function() {
 			</tr>
 		</thead>
 		<tbody>
-            <!-- TODO : 당일픽업예약 기능 제한 관련 테이블 내용이 없음 -->
 			<c:forEach items="${ilusReqConfigList}" var="i" varStatus="status">
 				<tr>
 					<td>${i.loca_name}</td>

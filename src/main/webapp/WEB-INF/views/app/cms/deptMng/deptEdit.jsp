@@ -30,7 +30,8 @@ $(function() {
 	});
 
 	$("#dialog-2").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 600
+		width: 700,
+        height: 400
 	});
 
 	$('a#dept-add').on('click', function(e) {
@@ -104,20 +105,7 @@ $(function() {
 
 });
 </script>
-<style>
-select {
-    border: 1px solid #ccd2dc;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background: #fafafa;
-    line-height: 27px;
-    height: 27px;
-    padding: 0 5px;
-    vertical-align: middle;
-}
-em {font-style: normal;}
-</style>
+
 <form:form modelAttribute="deptMng" id="deptDel" action="deptDelete.do" method="POST">
 	<form:hidden path="homepage_id" id="homepage_id_dept_d"/>
 	<form:hidden path="dept_idx" id="div_idx_dept_d"/>
@@ -142,7 +130,7 @@ em {font-style: normal;}
 				<th>부 서</th>
 				<td>
 					<form:input path="dept_name" cssClass="text" size="26" cssStyle="margin-bottom: 6px;"/>
-					<form:select path="above_idx" cssClass="select2-selection__rendered">
+					<form:select path="above_idx" cssClass="select2-selection__rendered selectmenu">
 						<form:option label="상위부서를 선택하세요." value="-1" disabled="true"/>
 						<form:options items="${deptList}" itemLabel="dept_name" itemValue="dept_idx"/>
 					</form:select>

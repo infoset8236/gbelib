@@ -186,7 +186,7 @@ function submit(e) {
 			</c:if>
 			<form:input path="search_sdt" cssClass="text ui-calendar" placeholder="조회일 선택"/>
 			<form:input path="search_edt" cssClass="text ui-calendar" placeholder="조회종료일 선택"/>
-			<a href="#" id="search" class="btn"><span>조회</span></a>
+			<a href="#" id="search" class="btn" style="background-color: #fff"><span>조회</span></a>
 		</fieldset>
 	</div>
 

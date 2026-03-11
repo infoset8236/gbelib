@@ -135,7 +135,8 @@ function untactBookMemberDetail(member_id, member_name, request_number) {
 	<tbody>
 	<c:if test="${fn:length(untactBookReservationList) < 1}">
 		<tr style="height:100%">
-			<td colspan="10" style="background:#f8fafb;">비대면 사물함 신청내역이 없습니다.</td>
+			<td colspan="10"
+>비대면 사물함 신청내역이 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="i" varStatus="status" items="${untactBookReservationList}">

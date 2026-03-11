@@ -123,7 +123,8 @@ function bookSettingEdit() {
 		<tbody>
 		<c:if test="${fn:length(untactLockerSettingList) < 1}">
 			<tr style="height:100%">
-				<td colspan="10" style="background:#f8fafb;">기본설정에서 총 사물함 갯수를 설정해주세요.</td>
+				<td colspan="10"
+>기본설정에서 총 사물함 갯수를 설정해주세요.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${untactLockerSettingList}">

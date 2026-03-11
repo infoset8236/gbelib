@@ -80,7 +80,8 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(dlscMemberList) < 1}">
 			<tr style="height:100%">
-				<td colspan="6" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="6"
+>데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${dlscMemberList}">

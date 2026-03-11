@@ -225,7 +225,8 @@ function submit(e) {
 <tbody>
 	<c:if test="${fn:length(bestBookList) < 1}">
 		<tr style="height:100%">
-			<td colspan="19" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+			<td colspan="19"
+>조회된 자료가 없습니다.</td>
 		</tr>
 	</c:if>
 	<c:forEach var="i" varStatus="status" items="${bestBookList}">
@@ -343,7 +344,8 @@ function submit(e) {
 		<tbody>
 			<c:if test="${fn:length(bookList) < 1}">
 				<tr style="height:100%">
-					<td colspan="16" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+					<td colspan="16"
+>조회된 자료가 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="i" varStatus="status" items="${bookList}">

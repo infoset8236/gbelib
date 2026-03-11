@@ -76,7 +76,7 @@ $(function(){
 <form:hidden id="editMode_index" path="editMode"/>
 <form:hidden path="search_auth"/>
 <form:hidden path="search_auth_name"/>
-    <div class="overflow-x: auto;">
+    <div style="overflow-x: auto;">
         <table class="type1">
             <thead>
             <tr>

@@ -207,7 +207,8 @@ function deleteOne(board_idx) {
 		<c:if test="${fn:length(boardList) < 1}">
 		<table class="bbs type1 center">
 			<tr>
-				<td width="100%" style="background:#f8fafb;">검색된 게시물이 없습니다.</td>
+				<td width="100%"
+>검색된 게시물이 없습니다.</td>
 			</tr>
 		</table>
 		</c:if>

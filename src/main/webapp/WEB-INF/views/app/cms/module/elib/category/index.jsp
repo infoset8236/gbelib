@@ -353,7 +353,7 @@ function doAjaxPostResponse(form, ajaxBody) {
 }
 </script>
 
-<div style="margin-left: 100px; height: 600px; text-align: center;">
+<div style="height: 600px; text-align: center;">
 <form name="fm" method="post" action="#">
 <input type="hidden" name="_csrf" value="${_csrf.token}">
 <input type="hidden" name="data_list">

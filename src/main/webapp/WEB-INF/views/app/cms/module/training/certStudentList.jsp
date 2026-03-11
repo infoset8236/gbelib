@@ -92,7 +92,7 @@ $(function(){
 	    	<tr>
 	    		<th>순번</th>
 	    		<th>수료여부</th>
-				<th>수강생명</th>
+				<th>s수강생명</th>
 				<th>생년월일</th>
 				<th>나이</th>
 				<th>주소</th>       		

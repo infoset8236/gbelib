@@ -152,8 +152,8 @@ $(function() {
 				<form:select path="phone1" cssClass="selectmenu">
 					<form:options items="${phoneCode}" itemLabel="code_name" itemValue="code_id"/>
 				</form:select> -
-				<form:input path="phone2" cssStyle="width:40px;" cssClass="text" maxlength="4"/> -
-				<form:input path="phone3" cssStyle="width:40px;" cssClass="text" maxlength="4"/>
+				<form:input path="phone2" cssStyle="width:60px;" cssClass="text" maxlength="4"/> -
+				<form:input path="phone3" cssStyle="width:60px;" cssClass="text" maxlength="4"/>
 			</td>
 		</tr>
 		<tr> 
@@ -162,8 +162,8 @@ $(function() {
 				<form:select path="cell_phone1" cssClass="selectmenu">
 					<form:options items="${cellPhoneCode}" itemLabel="code_name" itemValue="code_id"/>
 				</form:select> -
-				<form:input path="cell_phone2" cssStyle="width:40px;" cssClass="text" maxlength="4"/> -
-				<form:input path="cell_phone3" cssStyle="width:40px;" cssClass="text" maxlength="4"/>	
+				<form:input path="cell_phone2" cssStyle="width:60px;" cssClass="text" maxlength="4"/> -
+				<form:input path="cell_phone3" cssStyle="width:60px;" cssClass="text" maxlength="4"/>
 			</td>
 		</tr>
 		<tr>
@@ -175,6 +175,7 @@ $(function() {
 		</tr>
 	</tbody>
 </table>
+    <br>
 <c:if test="${member.editMode eq 'ADD'}">
 <table class="type2">
 	<colgroup>

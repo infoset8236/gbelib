@@ -82,18 +82,26 @@ $(function(){
 $(document).ready(function(){
 	//왼쪽메뉴
     $('.aside .menu-list > ul > li').each(function(){
+
         if($(this).find('ul').length > 0){
-            $(this).children('a').on('click',function(){
-                if($(this).parent().hasClass('active')){
-                    $('.aside .menu-list > ul > li > ul').slideUp(80);
-                    $('.aside .menu-list > ul > li').removeClass('active');
-                    $(this).parent().removeClass('active');
+
+            $(this).children('a').on('click', function(){
+
+                const parent = $(this).parent();
+
+                if(parent.hasClass('active')){
+                    parent.removeClass('active');
+                    parent.children('ul').slideUp(80);
+                    parent.find('ul li').removeClass('active');
                 }else{
-                    $('.aside .menu-list > ul > li > ul').slideUp(80);
                     $('.aside .menu-list > ul > li').removeClass('active');
-                    $(this).parent().children('ul').slideDown(80);
-                    $(this).parent().addClass('active');
+                    $('.aside .menu-list > ul > li > ul').slideUp(80);
+                    $('.aside .menu-list > ul > li > ul li').removeClass('active');
+
+                    parent.addClass('active');
+                    parent.children('ul').slideDown(80);
                 }
+
                 return false;
             });
 
@@ -101,27 +109,44 @@ $(document).ready(function(){
                 $(this).addClass('active');
                 $(this).children('ul').show();
             }
+
         }else{
             $(this).addClass('s');
         }
+
     });
 
+
     $('.aside .menu-list > ul > li > ul > li').each(function(){
+
         if($(this).find('ul').length > 0){
-            $(this).children('a').on('click',function(){
-                var parent = $(this).parent();
+
+            $(this).children('a').on('click', function(){
+
+                const parent = $(this).parent();
 
                 if(parent.hasClass('active')){
-                    parent.children('ul').slideUp(80);
                     parent.removeClass('active');
+                    parent.children('ul').slideUp(80);
+                    parent.find('ul li').removeClass('active');
                 }else{
-                    parent.siblings().removeClass('active').children('ul').slideUp(80);
-                    parent.children('ul').slideDown(80);
+                    parent.siblings().removeClass('active')
+                            .children('ul').slideUp(80);
+
+                    parent.siblings()
+                            .find('ul li')
+                            .removeClass('active');
+
                     parent.addClass('active');
+                    parent.children('ul').slideDown(80);
                 }
+
                 return false;
+
             });
+
         }else{
+
             $(this).addClass('s');
 
             if($(this).children('a').text() == 'ICT'){
@@ -129,17 +154,38 @@ $(document).ready(function(){
                     $(this).css('display','none');
                 </c:if>
             }
+
         }
+
     });
+
 
     $('.aside .menu-list > ul > li > ul > li > a').on('click', function(){
-        $('.aside .menu-list > ul > li > ul > li').removeClass('active');
-        $(this).parent('li').addClass('active');
+
+        const parent = $(this).parent();
+
+        parent.siblings().removeClass('active')
+                .find('ul li').removeClass('active');
+
+        parent.addClass('active');
+
     });
 
+
     $('.aside .menu-list > ul > li > ul > li > ul > li > a').on('click', function(){
-        $('.aside .menu-list > ul > li > ul > li > ul > li').removeClass('active');
-        $(this).parent('li').addClass('active');
+
+        const parent = $(this).parent();
+        const depth2 = parent.closest('.aside .menu-list > ul > li > ul > li');
+
+        $('.aside .menu-list > ul > li > ul > li').not(depth2)
+                .removeClass('active')
+                .find('ul li').removeClass('active');
+
+        depth2.addClass('active');
+
+        parent.siblings().removeClass('active');
+        parent.addClass('active');
+
     });
 
 	$('a.pass-change-btn').on('click', function(e) {

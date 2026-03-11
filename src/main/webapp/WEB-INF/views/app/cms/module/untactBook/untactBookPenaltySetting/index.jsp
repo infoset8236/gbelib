@@ -165,7 +165,8 @@ $(function(){
 			</c:forEach>
 			<c:if test="${fn:length(untactBookPenaltySettingList) < 1}">
 				<tr style="height:100%">
-					<td colspan="9" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+					<td colspan="9"
+>데이터가 존재하지 않습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>

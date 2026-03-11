@@ -11,10 +11,33 @@ h3{font-size:20px}
 h4{font-size:18px}
 h5{font-size:16px}
 
+h3{
+	font-family: Pretendard-Medium, serif;
+	font-size: 18px;
+	font-style: normal;
+	line-height: normal;
+	letter-spacing: -0.36px;
+	color: #222;
+	display: flex;
+	align-items: center;
+	gap: 2px;
+}
+h3::before{
+	content: "";
+	background: url("/resources/cms/img/main/tag.png") top left / cover no-repeat;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+}
+
+.page-subtitle > h3::before{
+	display: none;
+}
+
 label,
 input{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
 input[type="file"]{
-	height: 38px !important;
+	height: autos !important;
 	width: 70%;
 	padding: 5px !important;
 }
@@ -208,7 +231,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#60ffffff,endCol
 .ui-dialog-content table.type2 td .ui-state-highlight em,
 .ui-dialog-content table.type2 td .ui-state-error em{margin-left:-17px;padding-left:17px}
 .ui-dialog-content table.type2 td .ui-state-highlight,
-.ui-dialog-content table.type2 td .ui-state-highlight em{color:#888;font-weight: 500;}
+.ui-dialog-content table.type2 td .ui-state-highlight em{color:#888;font-weight: 500;display: block;}
 .ui-dialog-content table.type2 td .ui-state-error,
 .ui-dialog-content table.type2 td .ui-state-error em{color:#a94442}
 .ui-dialog-content table.type2 td .ui-state-error i{color:#c00}
@@ -732,8 +755,8 @@ table.chartData td.ratioBar p{height:8px;background:#647080}
 table.type1 {
 	position: relative;
 	width: 100%;
-	margin-top: 10px;
 	border: 0px;
+	margin-top: 10px;
 }
 
 table.type1::after {
@@ -965,7 +988,8 @@ table.type2 input.text{
 	font-style: normal;
 	line-height: normal;
 	box-sizing: border-box;
-	height: 34px !important;
+	min-height: 34px;
+	height: auto !important;
 	padding: 0 12px;
 	letter-spacing: -0.28px;
 	color: #222;
@@ -998,6 +1022,8 @@ select.selectmenu{
 	color: #222;
 	border: 1px solid #DDD;
 	border-radius: 4px;
+	min-height: 36px;
+	height: auto;
 	outline: none;
 	background: #FFF url(/resources/cms/img/main/select-arrow.svg) no-repeat right 12px center;
 	background-size: 16px;
@@ -1360,7 +1386,7 @@ input.ui-calendar{
 	font-size: 13px;
 	font-style: normal;
 	line-height: normal;
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 	height: 36px;

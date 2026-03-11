@@ -8,7 +8,7 @@ $(function(){
 });
 </script>
 
-<table id="statisticsResult" class="chartData center">
+<table id="statisticsResult" class="chartData center type1">
 	<thead>
 		<tr>
 			<th width="100">대분류</th>	

@@ -114,7 +114,7 @@ $(function(){
 		$('#dialog-3').load('/cms/module/blackList/edit.do?editMode=ADD&black_type=10&after_click_btn=button.training_btn_${student.group_idx}${student.category_idx}${student.training_idx}&homepage_id=' + $(this).attr('homepage_id') + '&member_id=' + $(this).attr('keyValue')+ '&member_key=' + $(this).attr('keyValue1'), function( response, status, xhr ) {
 			$('#dialog-3').dialog({
 				width: 600,
-				height: 300
+				height: 400
 			});
 			$('#dialog-3').dialog('open');
 		});
@@ -433,9 +433,9 @@ $(function(){
 		<div class="button btn-group inline">
 			<c:if test="${authC}">
 				<a href="" class="btn btn5 left" id="dialog-add" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>수강생등록</span></a>
-				<a href="#" id="excelUpload" class="btn btn5" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>엑셀등록</span></a>
+				<a href="#" id="excelUpload" class="btn btn2" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i><span>엑셀등록</span></a>
 				<a href="#" id="excelDownloadSample" class="btn btn2" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i><span>신청서</span></a>
-				<a href="#" class="btn btn1 formPrint-btn" style="margin-right: 5px;"><i class="fa fa-file-excel-o"></i><span>신청서 인쇄</span></a>
+				<a href="#" class="btn btn1 formPrint-btn" style="margin-right: 5px;"><i class="fa fa-print"></i><span>신청서 인쇄</span></a>
 				<a href="#" class="btn btn5 left" id="batch-delete-btn" style="margin-right: 5px;"><i class="fa fa-minus"></i><span>일괄삭제</span></a>
 				<a href="#" class="btn btn5 left" id="batch-cancel-btn" style="margin-right: 5px;"><i class="fa fa-minus"></i><span>일괄취소</span></a>
 				<a href="#" class="btn btn6 left" id="batch-black-add" style="margin-right: 5px;"><i class="fa fa-plus"></i><span>일괄 블랙리스트 등록</span></a>
@@ -483,7 +483,8 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(studentList) < 1}">
 			<tr style="height:100%">
-				<td colspan="11" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="11"
+>데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${studentList}">

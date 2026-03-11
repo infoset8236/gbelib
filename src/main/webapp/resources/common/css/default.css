@@ -539,6 +539,7 @@ table.type1 .btn{font-size:90%}
 	white-space: nowrap;
 	letter-spacing: -0.26px;
 	color: #222;
+	background-color: #fff;
 	border-radius: 4px;
 	border: 1px solid #ddd;
 }
@@ -922,7 +923,7 @@ a.baro img{display:inline-block;zoom:1;*display:inline;vertical-align:middle}
 .wrapper .locker_wrap ul{padding:1% 0}
 .wrapper .locker_wrap li .box{margin:3% 8%}
 .wrapper .locker_wrap li .box2{padding:3px}
-.wrapper .locker_wrap li .info{height:60px}
+.wrapper .locker_wrap li .info{height:70px}
 .wrapper .locker_wrap li .info strong{letter-spacing:0}
 .wrapper .locker_wrap li .info a.btn{padding:1px 6px;letter-spacing:0}
 @media all and (max-width:1140px){

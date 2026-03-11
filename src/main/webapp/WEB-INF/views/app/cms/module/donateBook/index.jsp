@@ -116,7 +116,8 @@ $(function() {
             <tbody>
             <c:if test="${fn:length(donateBookList) < 1}">
                 <tr style="height:100%">
-                    <td colspan="9" style="background:#F8FAFB;">데이터가 존재하지 않습니다.</td>
+                    <td colspan="9"
+>데이터가 존재하지 않습니다.</td>
                 </tr>
             </c:if>
             <c:forEach var="i" varStatus="status" items="${donateBookList}">

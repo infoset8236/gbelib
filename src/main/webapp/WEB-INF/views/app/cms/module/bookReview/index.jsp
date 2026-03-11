@@ -144,7 +144,7 @@ $(function() {
 			</c:forEach>
 			<c:if test="${fn:length(bookReviewLocaList) < 1}">
 				<tr>
-					<td colspan="6">조회된 자료가 없습니다.</td>
+					<td colspan="7">조회된 자료가 없습니다.</td>
 				</tr>
 			</c:if>
 		</tbody>

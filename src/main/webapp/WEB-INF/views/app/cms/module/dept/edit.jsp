@@ -101,7 +101,8 @@ $(function() {
 			<td>
 				<c:choose>
          			<c:when test="${dept.editMode eq 'ADD' }">
-         				<form:input path="code_id" class="text" /> <a class="btn btn1 idCheck">조직코드 중복확인</a>	
+         				<form:input path="code_id" class="text" />
+                        <a class="btn btn1 idCheck" style="margin-top: 5px;">조직코드 중복확인</a>
          			</c:when>
          			<c:otherwise>
          				<form:hidden path="code_id"/>

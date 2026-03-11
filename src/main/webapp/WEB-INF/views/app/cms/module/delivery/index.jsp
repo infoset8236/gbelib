@@ -65,7 +65,8 @@
         <tbody>
         <c:if test="${fn:length(deliveryList) < 1}">
             <tr style="height:100%">
-                <td colspan="11" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+                <td colspan="11"
+>데이터가 존재하지 않습니다.</td>
             </tr>
         </c:if>
         <c:forEach var="i" varStatus="status" items="${deliveryList}">

@@ -37,7 +37,8 @@
 	<tbody>
 	<c:if test="${fn:length(elibStatisticsList) < 1}">
 		<tr style="height:100%">
-			<td colspan="12" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+			<td colspan="12"
+>조회된 자료가 없습니다.</td>
 		</tr>
 	</c:if>
 

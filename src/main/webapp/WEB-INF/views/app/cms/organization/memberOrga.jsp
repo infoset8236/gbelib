@@ -76,7 +76,8 @@ $(function(){
 					<form:form id="authIndex" modelAttribute="auth" method="POST">
 						<c:if test="${fn:length(memberList) < 1}">
 							<tr style="height:100%">
-								<td style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+								<td
+>데이터가 존재하지 않습니다.</td>
 							</tr>
 						</c:if>
 						<c:forEach var="i" varStatus="status" items="${memberList}">

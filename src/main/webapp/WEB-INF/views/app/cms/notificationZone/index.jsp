@@ -89,7 +89,8 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(notificationZoneList) < 1}">
 			<tr>
-				<td colspan="8" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="8"
+>데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${notificationZoneList}">

@@ -147,7 +147,7 @@ $(function() {
 		검색 결과 : 총 ${teachListCount}건
 		<div class="button">			
 			<span>상태 : 
-				<form:select path="search_join_status">
+				<form:select path="search_join_status"  cssClass="selectmenu">
 					<form:option class="all" value="" label="전체" />
 					<form:option class="all" value="접수중" label="접수중" />
 					<form:option class="all" value="접수대기" label="접수대기" />
@@ -163,13 +163,13 @@ $(function() {
 				</form:select>
 			</span>
 			<span>중분류 : 
-				<form:select path="group_idx">
+				<form:select path="group_idx"  cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
 			<span>소분류 : 
-				<form:select path="category_idx" >
+				<form:select path="category_idx"  cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<c:forEach items="${categoryList}" var="i">
 		       				<form:option class="group_${i.group_idx}" value="${i.category_idx}" hidden="hidden">${i.category_name}</form:option>

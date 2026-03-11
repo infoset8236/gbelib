@@ -136,13 +136,15 @@ function PageReload(){
 	<div class="infodesk">
 		검색 결과 : 총 ${trainingBelongListCount}건
 	</div>
-    <div class="button">
+    <div class="button table-action">
         <c:if test="${authC}">
             <a href="" class="btn btn5 left" id="dialog-add"><i class="fa fa-plus"></i><span>등록</span></a>
             <a href="javascript:void(0)" id="excelDownload" class="btn btn1 left"><span>양식다운로드</span></a>
             <form:input path="mfile" name="mfile" type="file"/>
-            <a href="javascript:void(0)" id="excelUpload" class="btn btn1 left"><span>일괄등록</span></a>
-            <a href="javascript:void(0)" id="deleteAll" class="btn btn1 left" onclick="deleteAll()"><span>일괄삭제</span></a>
+
+            <div style="margin-left: auto"><a href="javascript:void(0)" id="excelUpload" class="btn btn1 left"><span>일괄등록</span></a>
+                <a href="javascript:void(0)" id="deleteAll" class="btn btn1 left"
+                   onclick="deleteAll()"><span>일괄삭제</span></a></div>
         </c:if>
     </div>
 	<!-- 교육소식 관리 table -->

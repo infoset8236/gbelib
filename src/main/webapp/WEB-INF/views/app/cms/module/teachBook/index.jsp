@@ -166,23 +166,23 @@ $(function(){
 				</form:select>
 			</span>
                 <span>중분류 : 
-				<form:select path="group_idx" style="width:200px;margin-right:10px;">
+				<form:select path="group_idx" style="width:200px;margin-right:10px;"  cssClass="selectmenu">
 					<form:option class="all" value="0" label="선택"/>
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
                 <span>소분류 : 
-				<form:select path="category_idx" style="width:200px;margin-right:10px;">
+				<form:select path="category_idx" style="width:200px;margin-right:10px;"  cssClass="selectmenu">
 					<form:option value="0" label="중분류를 선택해주세요"/>
 				</form:select>
 			</span>
                 <span>강좌 : 
-				<form:select path="teach_idx" style="width:300px;">
+				<form:select path="teach_idx" style="width:300px;"  cssClass="selectmenu">
 					<form:option keyValue1="0" keyValue2="0" keyValue3="0" value="0" label="소분류를  선택해주세요"/>
 				</form:select>
 			</span>
             </div>
-            <div style="display: flex; gap: 4px;">
+            <div style="display: flex; gap: 4px; margin-left: auto;">
                 <a class="btn btn1 print-btn" style="float:right;">인쇄</a>
                 <a class="btn btn2 csv-btn" style="float: right;"><i
                         class="fa fa-file-excel-o"></i><span>CSV저장</span></a>

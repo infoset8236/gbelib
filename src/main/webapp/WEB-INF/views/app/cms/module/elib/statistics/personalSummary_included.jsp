@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <div style="width: 100%;">
-	<div style="width: 45%; float: left; text-align: center;">
+	<div style="width: 49%; float: left; text-align: center;">
 		<h1>
 			자료수
 			<if test="${not empty param.search_sdt}">
@@ -247,7 +247,7 @@
 		</table>
 	</div>
 
-	<div style="width: 45%; float: right; text-align: center;">
+	<div style="width: 49%; float: right; text-align: center;">
 		<h1>
 			이용자수
 			<if test="${not empty param.search_sdt}">

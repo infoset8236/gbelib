@@ -122,7 +122,7 @@ $(function() {
 			<tr>
 				<th>번호</th>
 				<th>강사명</th>	
-				<th>성별</th>	
+				<th>성별</th>
 				<th>전화번호</th>
 				<th>휴대전화번호</th>
 				<th>첨부파일</th>

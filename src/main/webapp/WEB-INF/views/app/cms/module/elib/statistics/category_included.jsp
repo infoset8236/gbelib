@@ -34,7 +34,8 @@
 		<tbody>
 			<c:if test="${fn:length(elibStatisticsMapList) < 1}">
 				<tr style="height:100%">
-					<td colspan="9" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+					<td colspan="9"
+>조회된 자료가 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:set var="prevType" value="EBK"/>

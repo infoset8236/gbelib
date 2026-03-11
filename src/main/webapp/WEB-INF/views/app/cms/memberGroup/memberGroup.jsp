@@ -289,7 +289,8 @@ $(document).ready(function() {
 				<tbody id="authGroupList">
 					<c:if test="${fn:length(memberGroupList) < 1}">
 					<tr style="height:100%">
-						<td style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+						<td
+>데이터가 존재하지 않습니다.</td>
 					</tr>
 					</c:if>
 					<c:forEach var="i" varStatus="status" items="${memberGroupList}">

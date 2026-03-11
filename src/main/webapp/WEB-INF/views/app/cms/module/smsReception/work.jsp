@@ -41,7 +41,7 @@ $(function() {
 	});	
 
 	$("#dialog-2").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 180
+		width: 300
 	});
 	
 });
@@ -54,7 +54,6 @@ $(function() {
 	<table class="type2">
 		<colgroup>
 			<col width="100" />
-			<col width="100"/>
 		</colgroup>
 		<thead>
 			<tr>
