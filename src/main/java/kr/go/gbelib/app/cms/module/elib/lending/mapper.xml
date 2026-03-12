@@ -209,62 +209,47 @@
 		AND TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') &lt;= #{search_edt}
 		</if>
 	</select>
-	
+
 	<sql id="reserveMemberList">
 		SELECT
-			a.user_idx, b.reserve_idx, b.book_idx, TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') AS reserve_dt, TO_CHAR(b.lendable_dt, 'YYYY-MM-DD') AS lendable_dt, TO_CHAR(b.lend_dt, 'YYYY-MM-DD') AS lend_dt,
-			c.book_name, c.author_name, c.book_pubname, TO_CHAR(c.book_regdt, 'YYYY-MM-DD') AS book_regdt,
-			c.com_code, z1.cate_name, z2.parent_name,
-			DECODE(b.device, 'P', 'PC', 'S', '(구)스마트폰', 'A', 'Android', 'I', 'iOS', 'E', '불명') AS device, c.book_image, CASE WHEN c.library_code = '9999999' THEN '통합' ELSE e.homepage_name END AS library_name,
-			a.member_id, f.comp_name,
-			c.library_code, c.format, c.type, DECODE(c.type, 'EBK', '전자책', 'ADO', '오디오북', 'WEB', '온라인강좌') AS type_name,
-			c.book_reserve,
-			e.member_library_name,
-			FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) AS age,
-			-- 연령대 분류 추가
-			CASE
-			WHEN a.birth_day IS NULL OR a.birth_day = '' THEN '불명'
-			WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) <![CDATA[<=]]> 13 THEN '어린이'
-			WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) <![CDATA[<=]]> 19 THEN '청소년'
-			WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) >= 20 THEN '성인'
-			ELSE '불명'
-			END AS age_group
+		a.user_idx, b.reserve_idx, b.book_idx, TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') AS reserve_dt, TO_CHAR(b.lendable_dt, 'YYYY-MM-DD') AS lendable_dt, TO_CHAR(b.lend_dt, 'YYYY-MM-DD') AS lend_dt,
+		c.book_name, c.author_name, c.book_pubname, TO_CHAR(c.book_regdt, 'YYYY-MM-DD') AS book_regdt,
+		c.com_code,
+		(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = c.cate_id) AS cate_name,
+		(SELECT z.cate_name FROM ELIB_CATEGORY z WHERE z.cate_id = c.parent_id) AS parent_name,
+		DECODE(b.device, 'P', 'PC', 'S', '(구)스마트폰', 'A', 'Android', 'I', 'iOS', 'E', '불명') AS device, c.book_image, CASE WHEN c.library_code = '9999999' THEN '통합' ELSE e.homepage_name END AS library_name,
+		a.member_id, (SELECT comp_name FROM ELIB_COMPANY f where INSTR(f.com_code, c.com_code) > 0) as comp_name,
+		c.library_code, c.format, c.type, DECODE(c.type, 'EBK', '전자책', 'ADO', '오디오북', 'WEB', '온라인강좌') AS type_name,
+		c.book_reserve,
+		(SELECT MAX(q.homepage_name) from CMS_HOMEPAGE q WHERE q.homepage_code = a.library_code) AS member_library_name,
+		FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) AS age,
+		-- 연령대 분류 추가
+		CASE
+		WHEN a.birth_day IS NULL OR a.birth_day = '' THEN '불명'
+		WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) <![CDATA[<=]]> 13 THEN '어린이'
+		WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) <![CDATA[<=]]> 19 THEN '청소년'
+		WHEN FLOOR(MONTHS_BETWEEN(TRUNC(SYSDATE), TO_DATE(a.birth_day, 'YYYYMMDD')) / 12) >= 20 THEN '성인'
+		ELSE '불명'
+		END AS age_group
 		FROM
-		ELIB_MEMBER a
-		JOIN ELIB_LEND b
-		ON b.user_idx = a.user_idx              -- ※ 실제 FK에 맞게 수정
-		JOIN ELIB_BOOK c
-		ON c.book_idx = b.book_idx              -- ※ 실제 FK에 맞게 수정
-		LEFT JOIN ELIB_CATEGORY z1
-		ON z1.cate_id = c.cate_id
-		LEFT JOIN ELIB_CATEGORY z2
-		ON z2.cate_id = c.parent_id
-		LEFT JOIN CMS_HOMEPAGE e
-		ON e.homepage_code = c.library_code     -- ※ 실제 컬럼에 맞게 수정
-		LEFT JOIN ELIB_COMPANY f
-		ON INSTR(f.com_code, c.com_code) > 0
-		LEFT JOIN (
-			SELECT
-			homepage_code,
-			MAX(homepage_name) AS member_library_name
-			FROM CMS_HOMEPAGE
-			GROUP BY homepage_code
-		) q
-		ON q.homepage_code = a.library_code
+		ELIB_MEMBER a,
+		ELIB_RESERVE b,
+		ELIB_BOOK c,
+		CMS_HOMEPAGE e
 		WHERE
-			a.member_id = b.member_id
+		a.member_id = b.member_id
 		AND b.book_idx = c.book_idx
 		AND b.section != '2'
 		AND c.library_code = SUBSTR(e.homepage_code, 1, 8)
 		<if test="type != null and type != ''">
-		AND c.type = #{type}
+			AND c.type = #{type}
 		</if>
 		<include refid="search"/>
 		<if test="search_sdt != null and search_sdt != ''">
-		AND #{search_sdt} &lt;= TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') 
+			AND #{search_sdt} &lt;= TO_CHAR(b.reserve_dt, 'YYYY-MM-DD')
 		</if>
 		<if test="search_edt != null and search_edt != ''">
-		AND TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') &lt;= #{search_edt}
+			AND TO_CHAR(b.reserve_dt, 'YYYY-MM-DD') &lt;= #{search_edt}
 		</if>
 		<include refid="sort2"/>
 	</sql>
