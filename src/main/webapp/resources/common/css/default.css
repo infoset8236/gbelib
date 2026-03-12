@@ -543,6 +543,29 @@ table.type1 .btn{font-size:90%}
 	border-radius: 4px;
 	border: 1px solid #ddd;
 }
+a.a-button{
+	font-family: Pretendard-Medium, serif !important;
+	font-size: 11px;
+	font-style: normal;
+	line-height: normal;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	box-sizing: border-box;
+	height: 30px;
+	padding: 0 12px;
+	cursor: pointer;
+	white-space: nowrap;
+	letter-spacing: -0.26px;
+	border-radius: 4px;
+	border: 1px solid #e74e40;
+	background-color: #e74e40;
+	color: #fff !important;
+	margin-top: 4px;
+}
+a.a-button:hover{background-color:#ea6357;border-color:#ea6357}
+
 .txt-box .btn{background:#fcfcfc}
 .txt-box .btn:hover,
 .txt-box .btn:focus{background:#fff}

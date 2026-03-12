@@ -120,7 +120,7 @@ $(function() {
 				<c:choose>
 					<c:when test="${member.editMode eq 'ADD'}">
 						<form:input path="member_id" cssStyle="width:178px;" cssClass="text" maxlength="20"/>
-						<a href="" class="btn btn5" id="linkMemberSearch" ><i class="fa fa-plus"></i><span>일반사용자검색</span></a>
+						<a href="" class="a-button" id="linkMemberSearch" ><i class="fa fa-plus"></i><span>일반사용자검색</span></a>
 					</c:when>
 					<c:otherwise>
 						${member.member_id}
