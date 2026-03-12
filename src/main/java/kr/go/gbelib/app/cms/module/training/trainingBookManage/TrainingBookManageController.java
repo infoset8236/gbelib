@@ -9,6 +9,8 @@ import kr.co.whalesoft.framework.utils.JsonResponse;
 import kr.go.gbelib.app.cms.module.training.Training;
 import kr.go.gbelib.app.cms.module.training.TrainingService;
 import kr.go.gbelib.app.cms.module.training.student2.Student2;
+import kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManage;
+import kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManageService;
 import kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2;
 import kr.go.gbelib.app.cms.module.training.trainingCode2.TrainingCode2Service;
 import kr.go.gbelib.app.cms.module.trainingCategory.TrainingCategory;
@@ -51,6 +53,9 @@ public class TrainingBookManageController extends BaseController {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private TrainingBookQrManageService trainingBookQrManageService;
 
     @RequestMapping(value = {"/index.*"})
     public String index(Model model, Student2 student, HttpServletRequest request) throws AuthException {
@@ -123,6 +128,17 @@ public class TrainingBookManageController extends BaseController {
                 res.setValid(true);
                 res.setMessage("qr생성이 진행됩니다.");
 
+                TrainingBookQrManage trainingBookQrManage = new TrainingBookQrManage();
+                trainingBookQrManage.setHomepage_id(trainingBookManage.getHomepage_id());
+                trainingBookQrManage.setTraining_idx(trainingBookManage.getTraining_idx());
+                trainingBookQrManage.setToken(String.valueOf(System.currentTimeMillis()));
+                trainingBookQrManage.setQr_count(trainingBookManage.getQr_count());
+                trainingBookQrManage.setAdd_id(getSessionMemberId(request));
+
+                if (trainingBookQrManageService.modifyTrainingBookQrManage(trainingBookQrManage) == 0) {
+                    trainingBookQrManageService.addTrainingBookQrManage(trainingBookQrManage);
+                }
+
                 trainingBookManage.setAdd_id(getSessionMemberId(request));
                 try {
                     trainingBookManageService.addTrainingBookManage(trainingBookManage);
@@ -147,12 +163,6 @@ public class TrainingBookManageController extends BaseController {
                     return res;
                 }
             }
-
-            Training training = new Training();
-            training.setHomepage_id(trainingBookManage.getHomepage_id());
-            training.setTraining_idx(trainingBookManage.getTraining_idx());
-            training.setToken(String.valueOf(System.currentTimeMillis()));
-            trainingService.modifyToken(training);
         } else {
             res.setValid(false);
             res.setResult(result.getAllErrors());
@@ -162,12 +172,13 @@ public class TrainingBookManageController extends BaseController {
     }
 
     @RequestMapping(value = {"/qr.*"})
-    public String qr(Model model, TrainingBookManage trainingBookManage, Training training, Menu menu, HttpServletRequest request) {
+    public String qr(Model model, TrainingBookManage trainingBookManage, TrainingBookQrManage trainingBookQrManage, Menu menu, HttpServletRequest request) {
         Homepage homepage = getSessionHomepageInfo(request);
 
-        training.setHomepage_id(homepage.getHomepage_id());
-        training.setTraining_idx(trainingBookManage.getTraining_idx());
-        Training oneTraining = trainingService.getTrainingByQr(training);
+        trainingBookQrManage.setHomepage_id(homepage.getHomepage_id());
+        trainingBookQrManage.setTraining_idx(trainingBookManage.getTraining_idx());
+        trainingBookQrManage.setQr_count(trainingBookManage.getQr_count());
+        TrainingBookQrManage oneTraining = trainingBookQrManageService.getTrainingBookQrManage(trainingBookQrManage);
 
         menu.setHomepage_id(homepage.getHomepage_id());
         menu.setLink_url("/intro/login/index.do");
@@ -181,6 +192,10 @@ public class TrainingBookManageController extends BaseController {
 
     @RequestMapping(value = { "/excelDownload.*" }, method = RequestMethod.POST)
     public TrainingBookManageSearchView excel(Model model, TrainingBookManage trainingBookManage, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Training training = new Training();
+        training.setHomepage_id(trainingBookManage.getHomepage_id());
+        training.setTraining_idx(trainingBookManage.getTraining_idx());
+        model.addAttribute("training", trainingService.getTrainingByQr(training));
         model.addAttribute("trainingBookManageList", trainingBookManageService.getExcelTrainingBookManage(trainingBookManage));
 
         return new TrainingBookManageSearchView();

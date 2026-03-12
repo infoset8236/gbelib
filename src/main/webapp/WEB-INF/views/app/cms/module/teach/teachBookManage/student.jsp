@@ -69,10 +69,12 @@ $(function(){
 	$('a#excelDownload').on('click', function(e) {
 		e.preventDefault();
 
-		if ( '${trainingBookManage.training_idx}' == 0 ){
-			alert('선택된 연수가 없습니다.');
+		if ( '${teachBookManage.teach_idx}' == 0 ){
+			alert('선택된 강좌가 없습니다.');
 			return false;
 		}
+
+		$('#excelDownloadForm #sel_date').val($('#search_start_date').val().substring(0,7));
 
 		$('#excelDownloadForm').submit();
 	});
@@ -131,18 +133,18 @@ $(function(){
 	}
 </style>
 
-<form:form id="studentListForm" modelAttribute="trainingBookManage" action="student.do">
+<form:form id="studentListForm" modelAttribute="teachBookManage" action="student.do">
 	<form:hidden path="homepage_id"/>
-	<form:hidden path="training_idx"/>
+	<form:hidden path="teach_idx"/>
 	<form:hidden path="student_idx" />
-	<form:hidden path="training_book_manage_idx"/>
-	<form:hidden path="training_status"/>
-	<form:hidden path="training_type"/>
+	<form:hidden path="teach_book_manage_idx"/>
+	<form:hidden path="teach_status"/>
+	<form:hidden path="teach_type"/>
 	<form:hidden path="editMode"/>
 		<div class="mask"></div>
 	<div class="btn-wrapper">
         <div style="display: flex; gap: 12px;">
-            검색 결과 : ${trainingBookManageCount}건
+            검색 결과 : ${teachBookManageCount}건
             <div class="radio-group attendance">
                 <label>
                     <form:radiobutton path="attendance_status" value="ALL"/>
@@ -164,95 +166,51 @@ $(function(){
                 <form:input id="search_end_date" path="search_end_date" class="text ui-calendar" placeholder="조회종료일 선택" readonly="true"/>
 				<a class="btn btn1 search_qr_btn">검색</a>
             </div>
-
-        </div>
-
-        <div style="display: flex; align-items: center; gap: 5px;">
-            <div class="button btn-group inline">
-                <a class="btn btn2" id="checkBtn">출석처리</a>
-                <a class="btn btn2" id="uncheckBtn">미출석처리</a>
-            </div>
-			회차 선택:
-			<form:select path="qr_count" cssClass="selectmenu">
-				<form:option value="">전체</form:option>
-				<c:forEach var="i" begin="1" end="${training.qr_check_count}">
-					<form:option value="${i}">${i}회차</form:option>
-				</c:forEach>
-			</form:select>
         </div>
 	</div>
 	<table class="type1 center">
 		<colgroup>
-			<col width="3%">
-			<col width="5%" />
-			<col width="5%" />
-			<col width="5%" />
-			<col width="10%" />
-			<col width="5%" />
-			<col width="5%" />
-			<col width="5%" />
-			<col width="5%" />
-			<col width="5%" />
-			<col width="10%" />
-			<col width="10%" />
+			<col width="5%"/>
+			<col width="5%"/>
+			<col width="5%"/>
+			<col width="10%"/>
+			<col width="5%"/>
+			<col width="10%"/>
 		</colgroup>
 		<thead>
 			<tr>
-				<th><input type="checkbox" id="checkAll"></th>
 				<th>이름</th>
 				<th>ID</th>
 				<th>생년월일</th>
-				<th>신청시 소속기관</th>
 				<th>휴대폰 번호</th>
-				<th>직급</th>
-				<th>회차</th>
 				<th>출석현황</th>
-				<th>출석방식</th>
 				<th>출석일시</th>
-				<th>기능</th>
 			</tr>
 		</thead>
 		<tbody>
-		<c:if test="${fn:length(trainingBookManageList) < 1}">
+		<c:if test="${fn:length(teachBookManageList) < 1}">
 			<tr style="height:100%">
-				<td colspan="12" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="6" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
-		<c:forEach var="i" varStatus="status" items="${trainingBookManageList}">
+		<c:forEach var="i" varStatus="status" items="${teachBookManageList}">
 			<tr>
-				<td><form:checkbox path="training_book_manage_idx_arr" cssClass="training_book_manage_idx_arr" value="${i.training_book_manage_idx}"/></td>
 				<td class="num">${i.student_name}</td>
 				<td class="num">${i.web_id}</td>
 				<td class="num">${i.student_birth}</td>
-				<td class="num">${i.belong_name}</td>
 				<td class="num">${i.applicant_cell_phone}</td>
-				<td class="num">${i.student_rank}</td>
-				<td class="num">${i.qr_count}</td>
 				<td class="num">
 					<c:choose>
-						<c:when test="${i.training_status eq '1'}">
+						<c:when test="${i.teach_status eq '1'}">
 							미출석
 						</c:when>
-						<c:when test="${i.training_status eq '2'}">
+						<c:when test="${i.teach_status eq '2'}">
 							출석
 						</c:when>
 					</c:choose>
 				</td>
 				<td class="num">
-					<c:choose>
-						<c:when test="${i.training_type eq '1'}">
-							QR출석
-						</c:when>
-						<c:when test="${i.training_type eq '2'}">
-							수동출석
-						</c:when>
-					</c:choose>
-				</td>
-				<td class="num">
-					<fmt:formatDate value="${i.training_date}" pattern="yyyy-MM-dd HH:mm:ss" />
-				</td>
-				<td>
-					<a href="" class="btn check-btn" keyValue1="${i.training_book_manage_idx}">수동출석</a><br/>
+					<fmt:formatDate value="${i.teach_date}" pattern="yyyy-MM-dd HH:mm:ss" />
 				</td>
 			</tr>
 		</c:forEach>
@@ -269,8 +227,6 @@ $(function(){
 		<fieldset>
 			<form:select path="search_type" cssClass="selectmenu">
 				<form:option value="student_name">이름</form:option>
-				<form:option value="belong_name">소속기관</form:option>
-				<form:option value="student_rank">직급</form:option>
 			</form:select>
 			<form:input path="search_text" cssClass="text" cssStyle="width:200px;"/>
 			<button id="search_btn"><i class="fa fa-search"></i><span>검색</span></button>
@@ -279,8 +235,12 @@ $(function(){
 	</div>
 </form:form>
 
-<form:form id="excelDownloadForm" action="excelDownload.do" modelAttribute="TraininigBookManage" hidden="hidden" >
+<form:form id="excelDownloadForm" action="/cms/module/teachBook/excelDownload.do" modelAttribute="teachBook" hidden="hidden" method="get">
 	<input type="hidden" name="_csrf" value="${_csrf.token}">
-	<input type="hidden" name="training_idx" value="${training.training_idx}">
-	<input type="hidden" name="homepage_id" value="${training.homepage_id}">
+	<input type="hidden" name="teach_idx" value="${teach.teach_idx}">
+	<input type="hidden" name="homepage_id" value="${teach.homepage_id}">
+	<input type="hidden" name="group_idx" value="${teach.group_idx}">
+	<input type="hidden" name="category_idx" value="${teach.category_idx}">
+	<input type="hidden" name="large_category_idx" value="${teach.large_category_idx}">
+	<input type="hidden" id="sel_date" name="sel_date">
 </form:form>

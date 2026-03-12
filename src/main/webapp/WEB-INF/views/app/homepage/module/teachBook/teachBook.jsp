@@ -166,9 +166,9 @@ $(function(){
 			<div class="infodesk center">
 			
 				<div class="monthYear"> 
-					<a href="#" id="month_prev" class="btn prev"><i class="fa fa-angle-left"></i><span class="blind">이전달</span></a>
+					<a href="#" id="month_prev" class="btn prev" style="font-size: 10px;"><i class="fa fa-chevron-left" aria-hidden="true"></i>◀<span class="blind">이전달</span></a>
 					<b>${teachBook.sel_date}</b>
-					<a href="#" id="month_next" class="btn next"><i class="fa fa-angle-right"></i><span class="blind">다음달</span></a>
+					<a href="#" id="month_next" class="btn next" style="font-size: 10px;"><i class="fa fa-angle-right"></i>▶<span class="blind">다음달</span></a>
 					<!-- <a class="btn btn2 print-btn" style="float:right;">인쇄</a> -->
 			    </div>
 			    <br/>
@@ -192,8 +192,8 @@ $(function(){
 				</div>
 			</div>
 			</div>
-			<div class="calendar-table">
-				<div id="teachBookScroll" class="box auto-scroll" style="height:400px; width:100%">
+			<div class="calendar-table rsv-info" style="height:400px;margin-bottom: 30px;">
+				<div id="teachBookScroll" class="box auto-scroll" style="overflow-x: auto !important;height: 100%;">
 						<table id="teachBookArea" class="type1 center" >
 							<thead>
 								<tr>

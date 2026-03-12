@@ -1,4 +1,4 @@
-package kr.go.gbelib.app.cms.module.training.trainingBookManage;
+package kr.go.gbelib.app.cms.module.teach.teachBookManage;
 
 import jxl.format.Alignment;
 import jxl.format.Border;
@@ -16,23 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class TrainingBookManageWorkbook {
+public class TeachBookManageWorkbook {
 	
-	protected WritableWorkbook workbookForm(WritableWorkbook workbook, Training training, List<TrainingBookManage> trainingBookManageList, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<Integer, List<TrainingBookManage>> qrCountMap = new LinkedHashMap<Integer, List<TrainingBookManage>>();
-
-		for (TrainingBookManage one : trainingBookManageList) {
-			Integer turn = one.getQr_count(); // 회차
-
-			List<TrainingBookManage> list = qrCountMap.get(turn);
-
-			if (list == null) {
-				list = new ArrayList<TrainingBookManage>();
-				qrCountMap.put(turn, list);
-			}
-
-			list.add(one);
-		}
+	protected WritableWorkbook workbookForm(WritableWorkbook workbook, Training training, List<TeachBookManage> trainingBookManageList, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<Integer, List<TeachBookManage>> qrCountMap = new LinkedHashMap<Integer, List<TeachBookManage>>();
 
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat dateSdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -90,7 +77,7 @@ public class TrainingBookManageWorkbook {
 		sheet.addCell(new Label(9, 0, "출석일시", format));
 
 		int row = 1;
-		for (TrainingBookManage one : trainingBookManageList) {
+		for (TeachBookManage one : trainingBookManageList) {
 			String trainingStatus = "";
 			String trainingType = "";
 			String trainingDate = "";
@@ -98,27 +85,24 @@ public class TrainingBookManageWorkbook {
 			sheet.addCell(new Label(0, row, one.getStudent_name(), format1));
 			sheet.addCell(new Label(1, row, one.getWeb_id(), format1));
 			sheet.addCell(new Label(2, row, one.getStudent_birth(), format1));
-			sheet.addCell(new Label(3, row, one.getBelong_name(), format1));
 			sheet.addCell(new Label(4, row, one.getApplicant_cell_phone(), format1));
-			sheet.addCell(new Label(5, row, one.getStudent_rank(), format1));
-			sheet.addCell(new Label(6, row, String.valueOf(one.getQr_count()), format1));
 
-			if ("1".equals(one.getTraining_status())) {
+			if ("1".equals(one.getTeach_status())) {
 				trainingStatus = "미출석";
 			} else {
 				trainingStatus = "출석";
 			}
 			sheet.addCell(new Label(7, row, trainingStatus, format1));
 
-			if ("1".equals(one.getTraining_type())) {
+			if ("1".equals(one.getTeach_type())) {
 				trainingType = "QR출석";
 			} else {
 				trainingType = "수동출석";
 			}
 			sheet.addCell(new Label(8, row, trainingType, format1));
 
-			if (one.getTraining_date() != null) {
-				trainingDate = sdf.format(one.getTraining_date());
+			if (one.getTeach_date() != null) {
+				trainingDate = sdf.format(one.getTeach_date());
 			}
 			sheet.addCell(new Label(9, row, trainingDate, format1));
 
@@ -148,47 +132,6 @@ public class TrainingBookManageWorkbook {
 
 		Map<String, Map<Integer, Boolean>> attendanceMap = new LinkedHashMap<String, Map<Integer, Boolean>>();
 		Map<String, String[]> keyToBasicInfo = new HashMap<String, String[]>();
-
-		for (TrainingBookManage one : trainingBookManageList) {
-			Date addDate = one.getAdd_date();
-			String dateOnly = dateSdf.format(addDate);
-			String key = one.getStudent_name() + "||" + one.getBelong_name() + "||" + one.getStudent_rank() + "||" + dateOnly;
-			keyToBasicInfo.put(key, new String[]{one.getStudent_name(), one.getBelong_name(), one.getStudent_rank(), dateOnly});
-
-			Map<Integer, Boolean> sessionMap;
-			if (attendanceMap.containsKey(key)) {
-				sessionMap = attendanceMap.get(key);
-			} else {
-				sessionMap = new HashMap<Integer, Boolean>();
-			}
-
-			boolean isPresent = !"1".equals(one.getTraining_status()); // "1" = 미출석, 아니면 출석
-			int session = one.getQr_count();
-
-			Boolean oldVal = sessionMap.get(session);
-			if (oldVal == null) {
-				oldVal = Boolean.FALSE;
-			}
-			sessionMap.put(session, oldVal.booleanValue() || isPresent);
-
-			attendanceMap.put(key, sessionMap);
-		}
-
-		for (String key : attendanceMap.keySet()) {
-			String[] info = keyToBasicInfo.get(key);
-			sheet.addCell(new Label(0, row, info[0], format1));  // 이름
-			sheet.addCell(new Label(1, row, info[1], format1));  // 소속기관
-			sheet.addCell(new Label(2, row, info[2], format1));  // 직급
-			sheet.addCell(new Label(3, row, info[3], format1));  // 날짜
-
-			Map<Integer, Boolean> sessionMap = attendanceMap.get(key);
-			for (int session = 1; session <= training.getQr_check_count(); session++) {
-				Boolean present = sessionMap.get(session);
-				String val = (present != null && present.booleanValue()) ? "O" : "X";
-				sheet.addCell(new Label(3 + session, row, val, format1));
-			}
-			row++;
-		}
 
 		return workbook;
 	}

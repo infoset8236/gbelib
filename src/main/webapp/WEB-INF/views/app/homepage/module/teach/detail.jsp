@@ -18,7 +18,12 @@ $(function() {
 		e.preventDefault();
 		history.back();
 	});
-	
+
+	$('a.teachBook-btn').on('click', function(e) {
+		e.preventDefault();
+		var $this = $(this);
+		doGetLoad('/${homepage.context_path}/module/teachBook/index.do','menu_idx='+'${param.menu_idx}'+'&homepage_id='+$this.attr('keyValue1')+'&group_idx='+$this.attr('keyValue2')+'&category_idx='+$this.attr('keyValue3')+'&teach_idx='+$this.attr('keyValue4')+'&large_category_idx='+$this.attr('keyValue5'));
+	});
 });
 </script>
 
@@ -221,39 +226,42 @@ $(function() {
 <div class="sbtn">
 	<a id="back-btn" href="" class="btn"><i class="fa fa-reorder"></i><span>목록으로</span></a>
 	<c:choose>
-	<c:when test="${teach.teach_status eq '0'}">
-		<a href="" class="btn btn1 apply-btn" apply_status="1">
-		<i class="fa fa-pencil-square-o"></i><span>수강신청 </span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '1'}">
-		<a href="" class="btn btn1 apply-btn" apply_status="2">
-		<i class="fa fa-pencil-square-o"></i><span>대기자신청</span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '2' or teach.teach_status eq '10'}">
-		<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
-		<i class="fa fa-circle-o"></i><span>신청완료</span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '3'}">
-		<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
-		<i class="fa fa-circle-o"></i><span>대기자 신청완료</span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '9'}">
-		<a href="javascript:void(0);" class="btn" style="cursor: default;">
-		<i class="fa fa-pencil"></i><span>수강종료</span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '4'or i.teach_status eq '44'}">
-		<a href="javascript:void(0);" class="btn" style="cursor: default;">
-		<span>접수마감</span></a>
-	</c:when>
-	<c:when test="${teach.teach_status eq '5'}">
-		<a href="javascript:void(0);" class="btn" style="cursor: default;">
-		<i class="fa fa-user"></i><span>정원마감</span></a>
-	</c:when>
-	<c:when test="${tach.teach_status eq '6'}">
-		<a href="javascript:void(0);" class="btn btn4" style="cursor: default;">
-		<i class="fa fa-clock-o"></i><span>신청대기</span></a>
-	</c:when>
-</c:choose>
+		<c:when test="${teach.teach_status eq '0'}">
+			<a href="" class="btn btn1 apply-btn" apply_status="1">
+			<i class="fa fa-pencil-square-o"></i><span>수강신청 </span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '1'}">
+			<a href="" class="btn btn1 apply-btn" apply_status="2">
+			<i class="fa fa-pencil-square-o"></i><span>대기자신청</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '2' or teach.teach_status eq '10'}">
+			<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
+			<i class="fa fa-circle-o"></i><span>신청완료</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '3'}">
+			<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
+			<i class="fa fa-circle-o"></i><span>대기자 신청완료</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '9'}">
+			<a href="javascript:void(0);" class="btn" style="cursor: default;">
+			<i class="fa fa-pencil"></i><span>수강종료</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '4'or i.teach_status eq '44'}">
+			<a href="javascript:void(0);" class="btn" style="cursor: default;">
+			<span>접수마감</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '5'}">
+			<a href="javascript:void(0);" class="btn" style="cursor: default;">
+			<i class="fa fa-user"></i><span>정원마감</span></a>
+		</c:when>
+		<c:when test="${teach.teach_status eq '6'}">
+			<a href="javascript:void(0);" class="btn btn4" style="cursor: default;">
+			<i class="fa fa-clock-o"></i><span>신청대기</span></a>
+		</c:when>
+	</c:choose>
+	<c:if test="${member.teacher_yn eq 'Y'}">
+		<a class="btn btn3 teachBook-btn" keyValue1="${teach.homepage_id}" keyValue2="${teach.group_idx }" keyValue3="${teach.category_idx}" keyValue4="${teach.teach_idx}"keyValue5="${teach.large_category_idx}">출석체크 하기</a>
+	</c:if>
 </div>
 
 </div>

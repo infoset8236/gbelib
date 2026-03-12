@@ -66,4 +66,8 @@ public interface TeachDao  {
 	public int getWaitingNumber(Teach result);
 
 	public List<Teach> getTeachApiList(Teach teach);
+
+	public int modifyToken(Teach teach);
+
+	public Teach getTeachByQr(Teach teach);
 }

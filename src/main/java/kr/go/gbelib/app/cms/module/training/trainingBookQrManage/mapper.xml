@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManageDao">
+    <sql id="field">
+        training_book_qr_manage_idx, homepage_id, training_idx, qr_count, token,
+        add_date, add_id
+    </sql>
+
+    <insert id="addTrainingBookQrManage">
+        <selectKey keyProperty="training_book_qr_manage_idx" resultType="int" order="BEFORE">
+            SELECT NVL(MAX(training_book_qr_manage_idx),0)+1 FROM TRAINING_BOOK_QR_MANAGE
+        </selectKey>
+        INSERT INTO TRAINING_BOOK_QR_MANAGE
+        (
+            training_book_qr_manage_idx, homepage_id, training_idx, qr_count, token,
+            add_date, add_id
+        ) VALUES
+        (
+            #{training_book_qr_manage_idx}, #{homepage_id}, #{training_idx}, #{qr_count}, #{token},
+            SYSDATE, #{add_id}
+        )
+    </insert>
+
+    <select id="getTrainingBookQrManage" resultType="kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManage">
+        SELECT
+            <include refid="field"/>
+        FROM
+            TRAINING_BOOK_QR_MANAGE
+        WHERE
+            homepage_id = #{homepage_id}
+        AND training_idx = #{training_idx}
+        AND qr_count = #{qr_count}
+    </select>
+
+    <update id="modifyTrainingBookQrManage">
+        UPDATE
+            TRAINING_BOOK_QR_MANAGE
+        SET
+            token = #{token}
+        WHERE
+            homepage_id = #{homepage_id}
+        AND training_idx = #{training_idx}
+        AND qr_count = #{qr_count}
+    </update>
+
+</mapper>

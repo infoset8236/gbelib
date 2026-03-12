@@ -1468,4 +1468,24 @@
 		ABS(SYSDATE - (TO_DATE(a.end_join_date ||' '|| a.end_join_time, 'YYYY-MM-DD HH24:MI'))) ASC
 	</select>
 
+	<update id="modifyToken">
+		UPDATE
+			TEACH
+		SET
+			token = #{token}
+		WHERE
+			homepage_id = #{homepage_id}
+	  	AND teach_idx = #{teach_idx}
+	</update>
+
+	<select id="getTeachByQr" resultType="kr.go.gbelib.app.cms.module.teach.Teach">
+		SELECT
+			homepage_id, group_idx, category_idx, teach_idx, teach_name,
+			token
+		FROM
+			TEACH
+		WHERE
+			homepage_id = #{homepage_id}
+	  	AND teach_idx = #{teach_idx}
+	</select>
 </mapper>

@@ -71,6 +71,8 @@
                                 <input type="hidden" name="training_idx" value="${param.training_idx}">
                                 <input type="hidden" name="token" value="${param.token}">
                                 <input type="hidden" name="qr_count" value="${param.qr_count}">
+                                <input type="hidden" name="teach_idx" value="${param.teach_idx}">
+                                <input type="hidden" name="qr_check_type" value="${param.qr_check_type}">
                                 <div class="form-box">
                                     <p class="idtype" class="blind">
                                         <label class="blind" for="member_id">아이디</label>

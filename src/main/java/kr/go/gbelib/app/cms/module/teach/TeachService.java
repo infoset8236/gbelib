@@ -406,4 +406,12 @@ public class TeachService extends BaseService {
 	public List<Teach> getTeachApiList(Teach teach) {
 		return teachDao.getTeachApiList(teach);
 	}
+
+	public int modifyToken(Teach teach) {
+		return teachDao.modifyToken(teach);
+	}
+
+	public Teach getTeachByQr(Teach teach) {
+		return teachDao.getTeachByQr(teach);
+	}
 }

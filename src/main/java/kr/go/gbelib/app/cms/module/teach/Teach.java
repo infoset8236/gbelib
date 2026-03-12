@@ -178,6 +178,7 @@ public class Teach extends PagingUtils {
 	private String dataUse;
 
 	private String search_year;
+	private String token;
 
 	public Teach() {}
 
@@ -1334,5 +1335,13 @@ public class Teach extends PagingUtils {
 
 	public void setSearch_year(String search_year) {
 		this.search_year = search_year;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 }

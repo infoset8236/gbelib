@@ -15,10 +15,18 @@ import javax.servlet.http.HttpSession;
 import com.yhdb.solution.secukeypad.interweb.SecuKeypadConstant;
 import com.yhdb.solution.secukeypad.interweb.SecuKeypadDecoder;
 
+import kr.go.gbelib.app.cms.module.teach.Teach;
+import kr.go.gbelib.app.cms.module.teach.TeachService;
+import kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManage;
+import kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManageService;
+import kr.go.gbelib.app.cms.module.teachBook.TeachBook;
+import kr.go.gbelib.app.cms.module.teachBook.TeachBookService;
 import kr.go.gbelib.app.cms.module.training.Training;
 import kr.go.gbelib.app.cms.module.training.TrainingService;
 import kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManage;
 import kr.go.gbelib.app.cms.module.training.trainingBookManage.TrainingBookManageService;
+import kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManage;
+import kr.go.gbelib.app.cms.module.training.trainingBookQrManage.TrainingBookQrManageService;
 import kr.go.gbelib.app.common.api.LoginAPI;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,6 +96,18 @@ public class CommonJoinController extends BaseController {
 
 	@Autowired
 	private TrainingBookManageService trainingBookManageService;
+
+	@Autowired
+	private TrainingBookQrManageService trainingBookQrManageService;
+
+	@Autowired
+	private TeachService teachService;
+
+	@Autowired
+	private TeachBookManageService teachBookManageService;
+
+	@Autowired
+	private TeachBookService teachBookService;
 
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -2188,7 +2208,7 @@ public class CommonJoinController extends BaseController {
 
 	@RequestMapping(value = "/qrLoginProc.*")
 	public String qrLoginProc(Model model, @RequestParam(required = false) String training_idx, @RequestParam(required = false) String token, @RequestParam(required = false) String qr_count,
-							  Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+							  @RequestParam(required = false) String teach_idx, @RequestParam(required = false) String qr_check_type, Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		boolean sessionValid = SecuKeypadDecoder.sessionValidation(request);
 
@@ -2206,50 +2226,108 @@ public class CommonJoinController extends BaseController {
 			if ( result instanceof Member ) {
 				member = (Member) result;
 
-				Training training = new Training();
-				training.setTraining_idx(Integer.parseInt(training_idx));
-				training.setHomepage_id(homepage.getHomepage_id());
+				if ("TEACH".equals(qr_check_type)) {
+					Teach teach = new Teach();
+					teach.setTeach_idx(Integer.parseInt(teach_idx));
+					teach.setHomepage_id(homepage.getHomepage_id());
 
-				Training qrTraining = trainingService.getTrainingByQr(training);
+					Teach qrTeach = teachService.getTeachByQr(teach);
 
-				if (qrTraining == null) {
-					trainingBookManageService.alertMessage("등록된 연수가 없습니다.", request, response);
-					return null;
-				}
-
-				if (!token.equals(qrTraining.getToken())) {
-					trainingService.alertMessage("이미 만료된 토큰입니다.", request, response);
-					return null;
-				}
-
-				TrainingBookManage trainingBookManage = new TrainingBookManage();
-				trainingBookManage.setWeb_id(member.getMember_id());
-				trainingBookManage.setQr_count(Integer.valueOf(qr_count));
-				trainingBookManage.setTraining_idx(Integer.valueOf(training_idx));
-
-				if (trainingBookManageService.checkTrainingStudentCount(trainingBookManage) <= 0) {
-					trainingBookManageService.alertMessage("해당 연수신청자가 아닙니다.", request, response);
-					return null;
-				} else {
-					TrainingBookManage checkTrainingBookManage = trainingBookManageService.checkTrainingStudent(trainingBookManage);
-
-					if (checkTrainingBookManage != null) {
-						if ("2".equals(checkTrainingBookManage.getTraining_status())) {
-							trainingBookManageService.alertMessage("이미 출석체크가 완료되었습니다.", request, response);
-							return null;
-						}
+					if (qrTeach == null) {
+						teachService.alertMessage("등록된 강좌가 없습니다.", request, response);
+						return null;
 					}
 
-					trainingBookManage.setTraining_status("2");
-					trainingBookManage.setTraining_type("1");
-					trainingBookManageService.modifyTrainingStudent(trainingBookManage);
-				}
+					if (!token.equals(qrTeach.getToken())) {
+						teachService.alertMessage("이미 만료된 토큰입니다.", request, response);
+						return null;
+					}
 
+					TeachBookManage teachBookManage = new TeachBookManage();
+					teachBookManage.setWeb_id(member.getMember_id());
+					teachBookManage.setTeach_idx(Integer.valueOf(teach_idx));
+
+					if (teachBookManageService.checkTeachStudentCount(teachBookManage) <= 0) {
+						teachBookManageService.alertMessage("해당 강좌신청자가 아닙니다.", request, response);
+						return null;
+					} else {
+						TeachBookManage checkTeachBookManage = teachBookManageService.checkTeachStudent(teachBookManage);
+
+						TeachBook teachBook = new TeachBook();
+						teachBook.setHomepage_id(homepage.getHomepage_id());
+						teachBook.setGroup_idx(qrTeach.getGroup_idx());
+						teachBook.setCategory_idx(qrTeach.getCategory_idx());
+						teachBook.setTeach_idx(qrTeach.getTeach_idx());
+
+						Date today = new Date();
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+						teachBook.setTeach_date(sdf.format(today));
+						teachBook.setStatus("1");
+						teachBook.setAdd_id(member.getMember_id());
+
+						if (checkTeachBookManage != null) {
+							teachBook.setStudent_idx(checkTeachBookManage.getStudent_idx());
+
+							if ("2".equals(checkTeachBookManage.getTeach_status()) || teachBookService.checkTeachBookStudentByDate(teachBook) > 0) {
+								teachBookManageService.alertMessage("이미 출석체크가 완료되었습니다.", request, response);
+								return null;
+							}
+						}
+
+						teachBookManage.setTeach_status("2");
+						teachBookManage.setTeach_type("1");
+						teachBookManageService.modifyTeachStudent(teachBookManage);
+
+						if ( teachBookService.checkTeachBookStudentByDate(teachBook) == 0 ) {
+							teachBookService.addTeachBook(teachBook);
+						}
+					}
+				} else {
+					TrainingBookQrManage trainingBookQrManage = new TrainingBookQrManage();
+					trainingBookQrManage.setHomepage_id(homepage.getHomepage_id());
+					trainingBookQrManage.setTraining_idx(Integer.parseInt(training_idx));
+					trainingBookQrManage.setQr_count(Integer.parseInt(qr_count));
+
+					TrainingBookQrManage qrTraining = trainingBookQrManageService.getTrainingBookQrManage(trainingBookQrManage);
+
+					if (qrTraining == null) {
+						trainingBookManageService.alertMessage("생성된 qr이 없습니다.", request, response);
+						return null;
+					}
+
+					if (!token.equals(qrTraining.getToken())) {
+						trainingService.alertMessage("이미 만료된 토큰입니다.", request, response);
+						return null;
+					}
+
+					TrainingBookManage trainingBookManage = new TrainingBookManage();
+					trainingBookManage.setWeb_id(member.getMember_id());
+					trainingBookManage.setQr_count(Integer.valueOf(qr_count));
+					trainingBookManage.setTraining_idx(Integer.valueOf(training_idx));
+
+					if (trainingBookManageService.checkTrainingStudentCount(trainingBookManage) <= 0) {
+						trainingBookManageService.alertMessage("해당 연수신청자가 아닙니다.", request, response);
+						return null;
+					} else {
+						TrainingBookManage checkTrainingBookManage = trainingBookManageService.checkTrainingStudent(trainingBookManage);
+
+						if (checkTrainingBookManage != null) {
+							if ("2".equals(checkTrainingBookManage.getTraining_status())) {
+								trainingBookManageService.alertMessage("이미 출석체크가 완료되었습니다.", request, response);
+								return null;
+							}
+						}
+
+						trainingBookManage.setTraining_status("2");
+						trainingBookManage.setTraining_type("1");
+						trainingBookManageService.modifyTrainingStudent(trainingBookManage);
+					}
+				}
 			} else {
 				trainingService.alertMessage("신청자 정보가 맞지 않습니다.", request, response);
 				return null;
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			trainingService.alertMessage("문제가 발생했습니다. 관리자에게 문의해주세요.",  request, response);

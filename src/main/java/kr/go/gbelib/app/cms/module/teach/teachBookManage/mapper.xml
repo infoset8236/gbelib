@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManageDao">
+    <sql id="field">
+        teach_book_manage_idx, homepage_id, teach_idx, student_idx, student_name,
+        web_id, student_birth, applicant_cell_phone, teach_status, teach_type,
+        teach_date, TO_CHAR(add_date, 'YYYY-MM-DD HH24:MI:SS') AS add_date, add_id
+    </sql>
+
+    <insert id="addTeachBookManage">
+        INSERT INTO TEACH_BOOK_MANAGE
+        (
+            teach_book_manage_idx, homepage_id, teach_idx, student_idx, student_name,
+            web_id, student_birth, applicant_cell_phone, teach_status, teach_type,
+            teach_date, add_date, add_id
+        )
+        SELECT
+            TEACH_BOOK_MANAGE_SEQ.NEXTVAL, homepage_id, teach_idx, student_idx, student_name,
+            CASE WHEN s.apply_type = 'CMS' THEN s.member_id ELSE s.web_id END AS web_id,
+            student_birth, applicant_cell_phone, '1', #{teach_type}, #{teach_date},
+            SYSDATE, #{add_id}
+        FROM
+            STUDENT s
+        WHERE
+            homepage_id = #{homepage_id}
+        AND teach_idx = #{teach_idx}
+        AND apply_status in ('1', '2', '5')
+        AND NOT EXISTS (
+            SELECT
+                tbm.web_id
+            FROM
+                TEACH_BOOK_MANAGE tbm
+            WHERE
+                tbm.web_id = CASE WHEN s.apply_type = 'CMS' THEN s.member_id ELSE s.web_id END
+            AND tbm.teach_idx = s.teach_idx
+            AND tbm.homepage_id = s.homepage_id
+            AND TRUNC(tbm.add_date) = TRUNC(SYSDATE)
+        )
+    </insert>
+
+    <select id="getTeachBookManage" resultType="kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManage">
+        ${pagingTop}
+        SELECT
+            <include refid="field" />
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            homepage_id = #{homepage_id}
+        AND teach_idx = #{teach_idx}
+        <if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+            AND	${search_type} LIKE '%'||#{search_text}||'%'
+        </if>
+        <if test="attendance_status != null and attendance_status != '' and attendance_status != 'ALL'">
+            AND teach_status = #{attendance_status}
+        </if>
+        <if test="search_start_date != null and search_start_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') >= #{search_start_date}
+        </if>
+        <if test="search_end_date != null and search_end_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') &lt;= #{search_end_date}
+        </if>
+        ORDER BY
+            add_date desc
+        ${pagingBottom}
+    </select>
+
+    <select id="getTeachBookManageCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            homepage_id = #{homepage_id}
+        AND teach_idx = #{teach_idx}
+        <if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+            AND	${search_type} LIKE '%'||#{search_text}||'%'
+        </if>
+        <if test="attendance_status != null and attendance_status != '' and attendance_status != 'ALL'">
+            AND teach_status = #{attendance_status}
+        </if>
+        <if test="search_start_date != null and search_start_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') >= #{search_start_date}
+        </if>
+        <if test="search_end_date != null and search_end_date != ''">
+            AND TO_CHAR(add_date, 'YYYY-MM-DD') &lt;= #{search_end_date}
+        </if>
+        ORDER BY
+            add_date desc
+    </select>
+
+    <select id="checkTeachBookManage" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            teach_idx = #{teach_idx}
+        AND qr_count = #{qr_count}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <select id="checkTeachStudent" resultType="kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManage">
+        SELECT
+            <include refid="field"/>
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            teach_idx = #{teach_idx}
+        AND web_id = #{web_id}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <select id="checkTeachStudentCount" resultType="int">
+        SELECT
+            COUNT(*)
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            teach_idx = #{teach_idx}
+        AND web_id = #{web_id}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </select>
+
+    <update id="modifyTeachStudent">
+        UPDATE
+            TEACH_BOOK_MANAGE
+        SET
+            teach_type = #{teach_type},
+            teach_status = #{teach_status},
+            teach_date = SYSDATE
+        WHERE
+            teach_idx = #{teach_idx}
+        AND web_id = #{web_id}
+        AND TRUNC(add_date) = TRUNC(SYSDATE)
+    </update>
+
+    <update id="modifyTeachStudentByIdx">
+        UPDATE
+            TEACH_BOOK_MANAGE
+        SET
+            teach_type = #{teach_type},
+            teach_status = #{teach_status},
+            <choose>
+                <when test="editMode == 'notQR'">
+                    teach_date = NULL
+                </when>
+                <otherwise>
+                    teach_date = SYSDATE
+                </otherwise>
+            </choose>
+        <where>
+            <choose>
+                <when test="teach_book_manage_idx_arr != null and teach_book_manage_idx_arr.size() > 0">
+                    teach_book_manage_idx IN <foreach collection="teach_book_manage_idx_arr" item="i" open="(" close=")" separator=",">#{i}</foreach>
+                </when>
+                <otherwise>
+                    teach_book_manage_idx = #{teach_book_manage_idx}
+                </otherwise>
+            </choose>
+        </where>
+    </update>
+
+    <select id="getExcelTeachBookManage" resultType="kr.go.gbelib.app.cms.module.teach.teachBookManage.TeachBookManage">
+        SELECT
+            <include refid="field"/>
+        FROM
+            TEACH_BOOK_MANAGE
+        WHERE
+            teach_idx = #{teach_idx}
+        ORDER BY
+            student_name, add_date desc, teach_date desc
+    </select>
+
+</mapper>
