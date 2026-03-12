@@ -251,7 +251,11 @@ $(function() {
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${student.editMode eq 'ADD' }">
-	         				<form:input path="member_id" class="text" /> <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/> <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/> <a class="btn btn1 idCheck">ID 확인</a>
+	         				<form:input path="member_id" class="text" />
+                            <br>
+                            <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/>
+                            <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/>
+                            <a class="btn btn1 idCheck">ID 확인</a>
 	         			</c:when>
 	         			<c:otherwise>
 	         				${empty student.web_id ? student.member_id : student.web_id}
@@ -276,7 +280,9 @@ $(function() {
 	        </tr>
 	        <tr>
 	         	<th>신청자 - 우편번호(<span style="color: red; font-weight: bold;">*</span>)</th>
-	         	<td><form:input path="applicant_zipcode" class="text" readonly="true" cssStyle="width: 15%;"/><button class="btn btn2 findPostCode" keyValue1="#applicant_zipcode" keyValue2="#applicant_address" keyValue3="#applicant_address">우편번호 찾기</button></td>
+	         	<td><form:input path="applicant_zipcode" class="text" readonly="true" cssStyle="width: 20%;"/>
+                    <button class="btn findPostCode" keyValue1="#applicant_zipcode" keyValue2="#applicant_address" keyValue3="#applicant_address">우편번호 찾기</button>
+                </td>
         	</tr>
 	        <tr>
 	         	<th>신청자 - 주소(<span style="color: red; font-weight: bold;">*</span>)</th>
@@ -288,9 +294,9 @@ $(function() {
 				<th>신청자 - 휴대전화번호(<span style="color: red; font-weight: bold;">*</span>)</th>
 				<td>
 					<form:hidden path="applicant_cell_phone" cssClass="text"/>
-					<input id="applicant_cell_phone_1" style="width:40px;" class="text" maxlength="3" numberonly="true" /> -
-					<input id="applicant_cell_phone_2" style="width:50px;" class="text" maxlength="4" numberonly="true" /> -
-					<input id="applicant_cell_phone_3" style="width:50px;" class="text" maxlength="4" numberonly="true" />
+					<input id="applicant_cell_phone_1" style="width:60px;" class="text" maxlength="3" numberonly="true" /> -
+					<input id="applicant_cell_phone_2" style="width:70px;" class="text" maxlength="4" numberonly="true" /> -
+					<input id="applicant_cell_phone_3" style="width:70px;" class="text" maxlength="4" numberonly="true" />
 					<div class="ui-state-highlight">
 						<em>* ex) 010-1234-5678</em>
 					</div>
@@ -339,7 +345,9 @@ $(function() {
         	</tr>
 	        <tr>
 	         	<th>수강생 - 우편번호(<span style="color: red; font-weight: bold;">*</span>)</th>
-	         	<td><form:input path="student_zipcode" class="text" readonly="true" cssStyle="width: 15%;"/><button class="btn btn2 findPostCode student_zipcode" keyValue1="#student_zipcode" keyValue2="#student_address" keyValue3="#student_address">우편번호 찾기</button></td>
+	         	<td><form:input path="student_zipcode" class="text" readonly="true" cssStyle="width: 20%;"/>
+                    <button class="btn findPostCode student_zipcode" keyValue1="#student_zipcode" keyValue2="#student_address" keyValue3="#student_address">우편번호 찾기</button>
+                </td>
         	</tr>
 	        <tr>
 	         	<th>수강생 - 주소(<span style="color: red; font-weight: bold;">*</span>)</th>
@@ -385,9 +393,9 @@ $(function() {
 					<th>보호자연락처</th>
 					<td>
 						<form:hidden path="family_cell_phone" cssClass="text"/>
-						<input id="family_cell_phone_1" style="width:40px;" class="text" maxlength="3" numberonly="true" /> -
-						<input id="family_cell_phone_2" style="width:50px;" class="text" maxlength="4" numberonly="true" /> -
-						<input id="family_cell_phone_3" style="width:50px;" class="text" maxlength="4" numberonly="true" />
+						<input id="family_cell_phone_1" style="width:60px;" class="text" maxlength="3" numberonly="true" /> -
+						<input id="family_cell_phone_2" style="width:70px;" class="text" maxlength="4" numberonly="true" /> -
+						<input id="family_cell_phone_3" style="width:70px;" class="text" maxlength="4" numberonly="true" />
 						<div class="ui-state-highlight">
 							<em>* ex) 010-1234-5678</em>
 						</div>
@@ -416,7 +424,7 @@ $(function() {
         	<c:if test="${training.school_info_yn eq 'Y'}">
         	<tr>
 	         	<th>수강생 - 학교</th>
-	         	<td><form:input path="student_school" class="text" cssStyle="width:250px;" /></td>
+	         	<td><form:input path="student_school" class="text" cssStyle="width:270px;" /></td>
         	</tr>
         	</c:if>
         	<c:if test="${training.school_grade_yn eq 'Y'}">

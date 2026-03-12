@@ -98,7 +98,7 @@ $(function() {
 	});	
 
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 640,
+		width: 700,
 		height: 600
 	});
 	
@@ -190,7 +190,7 @@ $(function() {
 					</c:forEach>
 					<c:if test="${ilusReqConfig.editMode eq 'ADD'}">
 					<div class="ui-state-highlight">
-						<em>* 기능제한이 가능한 자료실에 대해서 등록됩니다.</em><br>
+						<em>* 기능제한이 가능한 자료실에 대해서 등록됩니다.</em>
 						<em>* 등록된 자료실의 사용기간은 목록에서 수정버튼을 이용해 수정이 가능합니다.</em>
 					</div>
 					</c:if>
@@ -210,10 +210,10 @@ $(function() {
 				<th>기간</th>
 				<td>
 					<form:input path="ilus_config_list[${status.index}].str_date" id="str_date_${status.index}" class="text ui-calendar"/>
-					<form:input path="ilus_config_list[${status.index}].str_time" class="text" cssStyle="width:50px;" maxlength="5"/>
+					<form:input path="ilus_config_list[${status.index}].str_time" class="text" cssStyle="width:70px;" maxlength="5"/>
 					<span id="tilde" style="font-size:12px">~</span>
 					<form:input path="ilus_config_list[${status.index}].end_date" id="end_date_${status.index}" class="text ui-calendar"/>
-					<form:input path="ilus_config_list[${status.index}].end_time" class="text" cssStyle="width:50px;" maxlength="5"/>
+					<form:input path="ilus_config_list[${status.index}].end_time" class="text" cssStyle="width:70px;" maxlength="5"/>
 					<div class="ui-state-highlight">
 						<em>* 시간 입력 ex) 10:30</em>
 					</div>

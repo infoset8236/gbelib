@@ -797,7 +797,7 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 800,
+		width: 1100,
 		height: 700
 	});
 	
@@ -951,7 +951,11 @@ function removeChar(event) {
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${teacher.editMode eq 'ADD' }">
-	         				<form:input path="teacher_id" class="text" /> <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/> <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/> <a class="btn btn1 idCheck">ID 확인</a>	
+	         				<form:input path="teacher_id" class="text" />
+                            <br>
+                            <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/>
+                            <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/>
+                            <a class="btn btn1 idCheck">ID 확인</a>
 	         			</c:when>
 	         			<c:otherwise>
 	         				${teacher.teacher_id}
@@ -998,9 +1002,9 @@ function removeChar(event) {
 				<td>
 					<form:hidden path="teacher_cell_phone" class="text" maxlength="13"/>
 					<c:set var="cellPhoneArr" value="${fn:split(teacher.teacher_cell_phone, '-')}"/>
-					<input id="cell_phone1" style="width:40px;" class="text" maxlength="3" numberonly="true" value="${cellPhoneArr[0]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/> -
-					<input id="cell_phone2" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[1]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/> -
-					<input id="cell_phone3" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[2]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/>
+					<input id="cell_phone1" style="width:60px;" class="text" maxlength="3" numberonly="true" value="${cellPhoneArr[0]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/> -
+					<input id="cell_phone2" style="width:70px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[1]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/> -
+					<input id="cell_phone3" style="width:70px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[2]}" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)"/>
 					<div class="ui-state-highlight">
 						<em>* ex) 010-1234-5678</em>
 					</div>
@@ -1141,22 +1145,22 @@ function removeChar(event) {
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" id="t_cer00" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer00').val(''); return false;" style="width: 50px;">삭제</button></td>
+				<td><input type="text" id="t_cer00" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer00').val(''); return false;" style="width: 70px;">삭제</button></td>
 				<td><input type="text" id="t_cer01" class="text" maxlength="30" style="width:99%;"></td>
 				<td><input type="text" id="t_cer02" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_cer10" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer10').val(''); return false;" style="width: 50px;">삭제</button></td>
+				<td><input type="text" id="t_cer10" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer10').val(''); return false;" style="width: 70px;">삭제</button></td>
 				<td><input type="text" id="t_cer11" class="text" maxlength="30" style="width:99%;"></td>
 				<td><input type="text" id="t_cer12" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_cer20" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer20').val(''); return false;" style="width: 50px;">삭제</button></td>
+				<td><input type="text" id="t_cer20" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer20').val(''); return false;" style="width: 70px;">삭제</button></td>
 				<td><input type="text" id="t_cer21" class="text" maxlength="30" style="width:99%;"></td>
 				<td><input type="text" id="t_cer22" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_cer30" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer30').val(''); return false;" style="width: 50px;">삭제</button></td>
+				<td><input type="text" id="t_cer30" class="text ui-calendar" readonly="readonly"><button class="btn" onclick="$('#t_cer30').val(''); return false;" style="width: 70px;">삭제</button></td>
 				<td><input type="text" id="t_cer31" class="text" maxlength="30" style="width:99%;"></td>
 				<td><input type="text" id="t_cer32" class="text" maxlength="30"></td>
 			</tr>
@@ -1185,25 +1189,25 @@ function removeChar(event) {
 		</thead>
 		<tbody>
 			<tr>
-				<td><input type="text" id="t_exp00" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"> ~ <input type="text" id="t_exp01" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"></td>
+				<td><input type="text" id="t_exp00" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"> ~ <input type="text" id="t_exp01" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"></td>
 				<td><input type="text" id="t_exp02" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp03" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp04" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_exp10" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"> ~ <input type="text" id="t_exp11" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"></td>
+				<td><input type="text" id="t_exp10" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"> ~ <input type="text" id="t_exp11" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"></td>
 				<td><input type="text" id="t_exp12" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp13" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp14" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_exp20" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"> ~ <input type="text" id="t_exp21" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"></td>
+				<td><input type="text" id="t_exp20" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"> ~ <input type="text" id="t_exp21" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"></td>
 				<td><input type="text" id="t_exp22" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp23" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp24" class="text" maxlength="30"></td>
 			</tr>
 			<tr>
-				<td><input type="text" id="t_exp30" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"> ~ <input type="text" id="t_exp31" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 70px;"></td>
+				<td><input type="text" id="t_exp30" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"> ~ <input type="text" id="t_exp31" class="text" onkeydown="return onlyNumber(event)" onkeyup="removeChar(event)" maxlength="6" placeholder="예) 198102 (연도4자리+월2자리)" style="width: 120px;"></td>
 				<td><input type="text" id="t_exp32" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp33" class="text" maxlength="30"></td>
 				<td><input type="text" id="t_exp34" class="text" maxlength="30"></td>

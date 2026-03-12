@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 <div style="clear:both">&nbsp;</div>
 <h3>게시판 첨부파일 현황</h3>
-<table id="accessTableData" class="chartData">
+<table id="accessTableData" class="chartData type1">
 	<thead>
 		<tr>
 			<th width="50%;">메뉴명</th>

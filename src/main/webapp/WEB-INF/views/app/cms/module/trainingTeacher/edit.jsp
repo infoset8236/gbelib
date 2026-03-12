@@ -191,7 +191,11 @@ $(function() {
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${teacher.editMode eq 'ADD' }">
-	         				<form:input path="teacher_id" class="text" /> <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/> <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/> <a class="btn btn1 idCheck">ID 확인</a>	
+	         				<form:input path="teacher_id" class="text" />
+                            <br>
+                            <form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/>
+                            <form:radiobutton path="search_api_type" value="USERID" label="대출번호"/>
+                            <a class="btn btn1 idCheck">ID 확인</a>
 	         			</c:when>
 	         			<c:otherwise>
 	         				${teacher.teacher_id}
@@ -241,9 +245,9 @@ $(function() {
 				<td>
 					<form:hidden path="teacher_phone"/>
 					<c:set var="phoneArr" value="${fn:split(teacher.teacher_phone, '-')}"/>
-					<input id="phone1" style="width:40px;" class="text" maxlength="3" numberonly="true" value="${phoneArr[0]}"/> -
-					<input id="phone2" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${phoneArr[1]}"/> -
-					<input id="phone3" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${phoneArr[2]}"/>
+					<input id="phone1" style="width:60px;" class="text" maxlength="3" numberonly="true" value="${phoneArr[0]}"/> -
+					<input id="phone2" style="width:60px;" class="text" maxlength="4" numberonly="true" value="${phoneArr[1]}"/> -
+					<input id="phone3" style="width:60px;" class="text" maxlength="4" numberonly="true" value="${phoneArr[2]}"/>
 					<div class="ui-state-highlight">
 						<em>* ex) 053-666-7777</em>
 					</div>
@@ -254,9 +258,9 @@ $(function() {
 				<td>
 					<form:hidden path="teacher_cell_phone" class="text" maxlength="13"/>
 					<c:set var="cellPhoneArr" value="${fn:split(teacher.teacher_cell_phone, '-')}"/>
-					<input id="cell_phone1" style="width:40px;" class="text" maxlength="3" numberonly="true" value="${cellPhoneArr[0]}"/> -
-					<input id="cell_phone2" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[1]}"/> -
-					<input id="cell_phone3" style="width:50px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[2]}"/>
+					<input id="cell_phone1" style="width:60px;" class="text" maxlength="3" numberonly="true" value="${cellPhoneArr[0]}"/> -
+					<input id="cell_phone2" style="width:60px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[1]}"/> -
+					<input id="cell_phone3" style="width:60px;" class="text" maxlength="4" numberonly="true" value="${cellPhoneArr[2]}"/>
 					<div class="ui-state-highlight">
 						<em>* ex) 010-1234-5678</em>
 					</div>
@@ -279,7 +283,10 @@ $(function() {
         	</tr>
         	<tr>
 	         	<th>우편번호</th>			
-	         	<td><form:input path="teacher_zipcode" class="text" maxlength="15"/> <button class="btn btn2 findPostCode" keyValue1="#teacher_zipcode" keyValue2="#teacher_address">우편번호 찾기</button></td>
+	         	<td>
+                    <form:input path="teacher_zipcode" class="text" maxlength="15"/>
+                    <button class="btn findPostCode" keyValue1="#teacher_zipcode" keyValue2="#teacher_address">우편번호 찾기</button>
+                </td>
         	</tr>
 			<tr>
 	         	<th>주소</th>			

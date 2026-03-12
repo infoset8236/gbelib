@@ -228,7 +228,7 @@ $(function() {
 	<div class="search">
 		<fieldset>
 			<label class="blind">검색</label>							
-				<form:select class="selectmenu-search" style="width:100px" path="locker_status" id="locker_status_1">							
+				<form:select class="selectmenu-search selectmenu" style="width:100px" path="locker_status" id="locker_status_1">
 					<option value="">전체</option>			
 					<option value="assing" <c:if test="${'assing' eq lockerReqApply.locker_status }">selected="selected"</c:if>>배정</option>
 					<option value="unassing" <c:if test="${'unassing' eq lockerReqApply.locker_status }">selected="selected"</c:if>>대기자</option>

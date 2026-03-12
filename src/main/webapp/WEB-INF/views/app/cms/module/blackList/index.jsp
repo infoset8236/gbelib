@@ -26,7 +26,7 @@ $(function() {
 		$('#dialog-1').load('edit.do?editMode=ADD&homepage_id=' + $('#homepage_id').val() , function( response, status, xhr ) {
 			$('#dialog-1').dialog({
 				width: 600,
-				height: 300
+				height: 400
 			});	
 			$('#dialog-1').dialog('open');
 		});
@@ -37,7 +37,7 @@ $(function() {
 		$('#dialog-1').load('edit.do?editMode=MODIFY&homepage_id=' + $('#homepage_id').val() + '&black_idx=' + $(this).attr('keyValue') , function( response, status, xhr ) {
 			$('#dialog-1').dialog({
 				width: 600,
-				height: 300
+				height: 400
 			});
 			$('#dialog-1').dialog('open');
 		});

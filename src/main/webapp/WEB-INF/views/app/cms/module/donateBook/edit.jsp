@@ -139,7 +139,7 @@ $(function() {
 	         		<div class="monthYear">
 						<form:select path="donate_year" class="selectmenu" style="width:90px;" ></form:select>
 				        <form:select path="donate_month" class="selectmenu" style="width:70px;" onchange="javascript:lastday();"></form:select>
-				        <form:select path="donate_day" class="selectmenu" style="width:70px;" ></form:select>
+				        <form:select path="donate_day" class="selectmenu" style="width:90px;" ></form:select>
 				    </div>
 	         	</td>
         	</tr>
@@ -150,9 +150,9 @@ $(function() {
 					<%-- <form:select path="phone1" cssClass="selectmenu">
 						<form:options items="${phoneCode}" itemLabel="code_name" itemValue="code_id"/>
 					</form:select> - --%>
-					<form:input path="phone1" cssStyle="width:40px;" class="text" maxlength="3" numberonly="true"/> -
-					<form:input path="phone2" cssStyle="width:40px;" class="text" maxlength="4" numberonly="true"/> -
-					<form:input path="phone3" cssStyle="width:40px;" class="text" maxlength="4" numberonly="true"/>	
+					<form:input path="phone1" cssStyle="width:60px;" class="text" maxlength="3" numberonly="true"/> -
+					<form:input path="phone2" cssStyle="width:60px;" class="text" maxlength="4" numberonly="true"/> -
+					<form:input path="phone3" cssStyle="width:60px;" class="text" maxlength="4" numberonly="true"/>
 				</td>
 			</tr>
 			<tr> 
@@ -162,8 +162,8 @@ $(function() {
 					<form:select path="cell_phone1" cssClass="selectmenu">
 						<form:options items="${cellPhoneCode}" itemLabel="code_name" itemValue="code_id"/>
 					</form:select> -
-					<form:input path="cell_phone2" cssStyle="width:40px;" class="text" maxlength="4" numberonly="true"/> -
-					<form:input path="cell_phone3" cssStyle="width:40px;" class="text" maxlength="4" numberonly="true"/>	
+					<form:input path="cell_phone2" cssStyle="width:60px;" class="text" maxlength="4" numberonly="true"/> -
+					<form:input path="cell_phone3" cssStyle="width:60px;" class="text" maxlength="4" numberonly="true"/>
 				</td>
 			</tr>
 	        <tr>

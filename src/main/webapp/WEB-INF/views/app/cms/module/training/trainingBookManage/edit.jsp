@@ -44,7 +44,7 @@ $(function() {
 
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
 		width: 600,
-		height: 200
+		height: 300
 	});
 
 });

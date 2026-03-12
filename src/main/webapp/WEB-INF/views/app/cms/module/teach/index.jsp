@@ -166,7 +166,7 @@ $(function() {
 				</form:select>
 			</span>
 			<span>상태 : 
-				<form:select path="search_join_status">
+				<form:select path="search_join_status"  cssClass="selectmenu">
 					<form:option class="all" value="" label="전체" />
 					<form:option class="all" value="접수중" label="접수중" />
 					<form:option class="all" value="접수대기" label="접수대기" />
@@ -176,19 +176,19 @@ $(function() {
 				</form:select>
 			</span>
 			<span>대분류 : 
-				<form:select path="large_category_idx">
+				<form:select path="large_category_idx" cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 				</form:select>
 			</span>
 			<span>중분류 : 
-				<form:select path="group_idx">
+				<form:select path="group_idx"  cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
 			<span>소분류 : 
-				<form:select path="category_idx" >
+				<form:select path="category_idx"  cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<c:forEach items="${categoryList}" var="i">
 		       				<form:option class="group_${i.group_idx}" value="${i.category_idx}" hidden="hidden">${i.category_name}</form:option>
@@ -203,89 +203,98 @@ $(function() {
 		</div>
 	</div>
 	<!-- 교육소식 관리 table -->
-	<table class="type1 center">
-		<colgroup>
-			<col width="50" />
-			<col width="120" />
-			<col width=""/>
-			<col width="100" />
-			<col width="100" />
-			<col width="200" />
-			<col width="120" />
-			<col width="100" />
-			<col width="80" />
-			<col width="80" />
-			<col width="80" />
-			<col width="100" />
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>강의분류</th>
-				<th>강의명</th>
-				<th>강의계획서</th>	
-				<th>강의대상</th>
-				<th>강좌일</th>
-				<th>강좌시간</th>	
-				<th>강의장소</th>	
-				<th>참여/모집</th>
-				<th>참여/후보</th>
-				<th>참여/오프</th>
-				<th>기능</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="i" varStatus="status" items="${teachList}">
-				<tr>
-					<td>${teach.listRowNum - status.index}</td>
-					<td>${i.large_category_name}<br/>${i.group_name}<br/>${i.category_name}</td>
-					<td>
-						${i.teach_name}
-					</td>
-					<td><c:if test="${i.real_file_name ne null and i.real_file_name ne ''}"><a href="/cms/module/teach/download/${i.homepage_id}/${i.group_idx}/${i.category_idx}/${i.teach_idx}.do"><i class="fa fa-floppy-o"></i>${i.plan_file_name}</a></c:if></td>
-					<td>${i.teach_target}</td>
-					<td>
-						${i.start_date} ~ ${i.end_date}<br/>
-						( 매주&nbsp;
-						<c:forEach var="j" varStatus="status_j" items="${i.teach_day_arr}">
-							<c:choose>
-								<c:when test="${j eq '1'}">일</c:when>
-								<c:when test="${j eq '2'}">월</c:when>
-								<c:when test="${j eq '3'}">화</c:when>
-								<c:when test="${j eq '4'}">수</c:when>
-								<c:when test="${j eq '5'}">목</c:when>
-								<c:when test="${j eq '6'}">금</c:when>
-								<c:when test="${j eq '7'}">토</c:when>
-							</c:choose>
-							<c:if test="${!status_j.last}">
-								, 
-							</c:if>
-						</c:forEach>
-						)
-					</td>
-					<td>${i.start_time} ~ ${i.end_time}</td>
-					<td>${i.teach_stage}</td>
-					<td>${i.teach_join_count} / ${i.teach_limit_count}</td>
-					<td>${i.teach_backup_join_count} / ${i.teach_backup_count}</td>
-					<td>${i.teach_off_join_count} / ${i.teach_offline_count}</td>
-					<td>
-						<c:if test="${authU}">
-							<a href="" class="btn dialog-modify" keyValue1="${i.group_idx}" keyValue2="${i.category_idx}" keyValue3="${i.teach_idx}">수정</a>
-						</c:if>
-						<c:if test="${authD and i.teach_join_count eq 0 and i.teach_backup_join_count eq 0 and i.teach_off_join_count eq 0}">
-							<a href="" class="btn delete-btn" keyValue1="${i.group_idx}" keyValue2="${i.category_idx}" keyValue3="${i.teach_idx}">삭제</a>
-						</c:if>
-						<a href="" class="btn btn1 certificate-btn" keyValue1="${i.group_idx}" keyValue2="${i.category_idx}" keyValue3="${i.teach_idx}">수료자 조회</a>
-					</td>
-				</tr>
-			</c:forEach>
-			<c:if test="${teachListCount eq 0}">
-				<tr>
-					<td colspan="12">데이터가 존재하지 않습니다.</td>
-				</tr>
-			</c:if>
-		</tbody>
-	</table>
+    <div style="overflow-x: auto">
+        <table class="type1 center">
+            <colgroup>
+                <col width="50"/>
+                <col width="120"/>
+                <col width=""/>
+                <col width="100"/>
+                <col width="100"/>
+                <col width="200"/>
+                <col width="120"/>
+                <col width="100"/>
+                <col width="80"/>
+                <col width="80"/>
+                <col width="80"/>
+                <col width="100"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>강의분류</th>
+                <th>강의명</th>
+                <th>강의계획서</th>
+                <th>강의대상</th>
+                <th>강좌일</th>
+                <th>강좌시간</th>
+                <th>강의장소</th>
+                <th>참여/모집</th>
+                <th>참여/후보</th>
+                <th>참여/오프</th>
+                <th>기능</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="i" varStatus="status" items="${teachList}">
+                <tr>
+                    <td>${teach.listRowNum - status.index}</td>
+                    <td>${i.large_category_name}<br/>${i.group_name}<br/>${i.category_name}</td>
+                    <td>
+                        ${i.teach_name}
+                    </td>
+                    <td>
+                        <c:if test="${i.real_file_name ne null and i.real_file_name ne ''}"><a
+                                href="/cms/module/teach/download/${i.homepage_id}/${i.group_idx}/${i.category_idx}/${i.teach_idx}.do"><i
+                                class="fa fa-floppy-o"></i>${i.plan_file_name}</a></c:if>
+                    </td>
+                    <td>${i.teach_target}</td>
+                    <td>
+                        ${i.start_date} ~ ${i.end_date}<br/>
+                        ( 매주&nbsp;
+                        <c:forEach var="j" varStatus="status_j" items="${i.teach_day_arr}">
+                            <c:choose>
+                                <c:when test="${j eq '1'}">일</c:when>
+                                <c:when test="${j eq '2'}">월</c:when>
+                                <c:when test="${j eq '3'}">화</c:when>
+                                <c:when test="${j eq '4'}">수</c:when>
+                                <c:when test="${j eq '5'}">목</c:when>
+                                <c:when test="${j eq '6'}">금</c:when>
+                                <c:when test="${j eq '7'}">토</c:when>
+                            </c:choose>
+                            <c:if test="${!status_j.last}">
+                                ,
+                            </c:if>
+                        </c:forEach>
+                        )
+                    </td>
+                    <td>${i.start_time} ~ ${i.end_time}</td>
+                    <td>${i.teach_stage}</td>
+                    <td>${i.teach_join_count} / ${i.teach_limit_count}</td>
+                    <td>${i.teach_backup_join_count} / ${i.teach_backup_count}</td>
+                    <td>${i.teach_off_join_count} / ${i.teach_offline_count}</td>
+                    <td>
+                        <c:if test="${authU}">
+                            <a href="" class="btn dialog-modify" keyValue1="${i.group_idx}"
+                               keyValue2="${i.category_idx}" keyValue3="${i.teach_idx}">수정</a>
+                        </c:if>
+                        <c:if test="${authD and i.teach_join_count eq 0 and i.teach_backup_join_count eq 0 and i.teach_off_join_count eq 0}">
+                            <a href="" class="btn delete-btn" keyValue1="${i.group_idx}" keyValue2="${i.category_idx}"
+                               keyValue3="${i.teach_idx}">삭제</a>
+                        </c:if>
+                        <a href="" class="btn btn1 certificate-btn" keyValue1="${i.group_idx}"
+                           keyValue2="${i.category_idx}" keyValue3="${i.teach_idx}">수료자 조회</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            <c:if test="${teachListCount eq 0}">
+                <tr>
+                    <td colspan="12">데이터가 존재하지 않습니다.</td>
+                </tr>
+            </c:if>
+            </tbody>
+        </table>
+    </div>
 	<jsp:include page="/WEB-INF/views/app/cms/common/paging.jsp" flush="false">
 		<jsp:param name="formId" value="#teachListForm"/>
 	</jsp:include>

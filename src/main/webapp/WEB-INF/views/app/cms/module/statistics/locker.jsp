@@ -8,7 +8,7 @@ $(function(){
 });
 </script>
 
-<table class="chartData center">
+<table class="chartData center type1">
 	<thead>
 		<tr>
 			<th width="200">사물함 설정명</th>

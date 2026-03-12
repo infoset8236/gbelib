@@ -73,7 +73,7 @@ $(function() {
 	<a class="btn btn1 btn-small btn-inverse" id="searchBtn">
 		<span>검색</span>
 	</a>
-	<div class="button">
+	<div class="button table-action">
 		<c:if test="${authC}">
 			<a href="javascript:void(0)" class="btn btn5 left add"><i class="fa fa-plus"></i><span>등록</span></a>
 			<a href="javascript:void(0)" id="excelDownload" class="btn btn1 left"><span>양식다운로드</span></a>
@@ -91,7 +91,7 @@ $(function() {
        	<col width="200" />
        	<col width="*" />
        	<col width="150"/>
-       	<col width="50"/>
+       	<col width="100"/>
        	<col width="100"/>
      	</colgroup>
      	<thead>

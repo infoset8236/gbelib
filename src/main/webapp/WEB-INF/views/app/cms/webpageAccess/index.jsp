@@ -226,7 +226,7 @@ $(function(){
 
 <div style="clear:both">&nbsp;</div>
 <br/>
-<table id="accessTableData" class="chartData">
+<table id="accessTableData" class="chartData type1">
 	<thead>
 		<tr>
 			<th width="200">일</th>

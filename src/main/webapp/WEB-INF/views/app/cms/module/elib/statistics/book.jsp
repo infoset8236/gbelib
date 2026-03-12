@@ -177,7 +177,6 @@ function submit(e) {
 			<col width="80"/>
 			<col width="80"/>
 			<col width="80"/>
-			<col width="50"/>
 		</colgroup>
 		<thead>
 			<tr>
@@ -203,7 +202,8 @@ function submit(e) {
 		<tbody>
 			<c:if test="${fn:length(elibStatisticsList) < 1}">
 				<tr style="height:100%">
-					<td colspan="12" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+					<td colspan="14"
+>조회된 자료가 없습니다.</td>
 				</tr>
 			</c:if>
 				<tr>

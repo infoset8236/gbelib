@@ -9,8 +9,9 @@ $(function() {
 	$('.dialog-common').dialog({ //모달창 기본 스크립트 선언
 		autoOpen: false,
 		resizable: false,
-		modal: true, 
-	    open: function(){
+		modal: true,
+        width: 600,
+        open: function(){
 	        $('.ui-widget-overlay').addClass('custom-overlay');
 	    },
 	    close: function(){

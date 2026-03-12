@@ -36,3 +36,4 @@ if(commonAppName == "Microsoft Internet Explorer"){
 	//IE=edge
 	}
 }
+

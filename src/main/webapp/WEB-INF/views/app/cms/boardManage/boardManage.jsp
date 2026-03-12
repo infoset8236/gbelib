@@ -113,7 +113,7 @@ $(function(){
 	</div>
 	<div class="table-wrap">
 		<div class="msg">&nbsp;</div>
-		<table class="bbs center">
+		<table class="bbs center type1">
 			<thead>
 				<tr>
 					<th>순번</th>
@@ -153,9 +153,10 @@ $(function(){
 		</table>
 		
 		<c:if test="${fn:length(boardManageList) < 1}">
-		<table class="bbs center">
+		<table class="bbs type1 center">
 			<tr style="height:100%;">
-				<td style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td
+>데이터가 존재하지 않습니다.</td>
 			</tr>
 		</table>
 		</c:if>

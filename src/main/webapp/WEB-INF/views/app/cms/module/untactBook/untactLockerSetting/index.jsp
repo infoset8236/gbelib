@@ -123,7 +123,8 @@ function bookSettingEdit() {
 		<tbody>
 		<c:if test="${fn:length(untactLockerSettingList) < 1}">
 			<tr style="height:100%">
-				<td colspan="10" style="background:#f8fafb;">기본설정에서 총 사물함 갯수를 설정해주세요.</td>
+				<td colspan="10"
+>기본설정에서 총 사물함 갯수를 설정해주세요.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${untactLockerSettingList}">
@@ -131,7 +132,7 @@ function bookSettingEdit() {
 				<td width="20"><form:checkbox path="locker_number_arr" value="${i.locker_number}"/></td>
 				<td width="30">${i.locker_number}번</td>
 				<td width="50">
-					<select class="changeStatus" data-number="${i.locker_number}" onchange="changeStatus($(this));">
+					<select class="changeStatus selectmenu " data-number="${i.locker_number}" onchange="changeStatus($(this));">
 						<option value="일반사물함" <c:if test="${i.locker_type eq '일반사물함'}">selected</c:if>>일반사물함</option>
 						<option value="도서대출" <c:if test="${i.locker_type eq '도서대출'}">selected</c:if>>도서대출</option>
 						<option value="사용안함" <c:if test="${i.locker_type eq '사용안함'}">selected</c:if>>사용안함</option>

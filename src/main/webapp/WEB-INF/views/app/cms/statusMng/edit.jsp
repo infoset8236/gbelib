@@ -31,7 +31,7 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 380
+		width: 500
 	});
 	
 	$('a#div-add').on('click', function(e) {
@@ -96,7 +96,7 @@ $(function() {
 		</tbody>
 	</table>
 	<br>
-	<table class="center">
+	<table class="type2 center">
 		<colgroup>
 			<col>
 			<col>
@@ -116,7 +116,7 @@ $(function() {
 					<input type="text" id="div_${i.div_idx}" value="${i.div_name}" class="text"/>
 				</td>
 				<td>
-					<input type="text" id="print_${i.div_idx}" value="${i.div_print_seq}" style="width:30px;" class="text spinner"/>
+					<input type="text" id="print_${i.div_idx}" value="${i.div_print_seq}" style="width:60px;" class="text spinner"/>
 				</td>
 				<td>
 					<a href="#" class="btn div-mod" keyValue="${i.div_idx}" keyValue2="div_${i.div_idx}" keyValue3="print_${i.div_idx}">수정</a>

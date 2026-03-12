@@ -133,8 +133,8 @@ function deleteOne(board_idx) {
 	<a href="javascript:void(0);" id="deleteAll" class="btn btn5" onclick="deleteAll();">전체삭제(영구)</a>
 </div>
 <div class="wrapper-bbs">
-	<div class="table-wrap">
-		<table class="bbs center">
+	<div class="table-wrap" style="overflow-x: auto">
+		<table class="bbs type1 center">
 			<colgroup>
 				<col width="50px"/>
 				<col width="12%"/>
@@ -205,9 +205,10 @@ function deleteOne(board_idx) {
 			</tbody>
 		</table>
 		<c:if test="${fn:length(boardList) < 1}">
-		<table class="bbs center">
+		<table class="bbs type1 center">
 			<tr>
-				<td width="100%" style="background:#f8fafb;">검색된 게시물이 없습니다.</td>
+				<td width="100%"
+>검색된 게시물이 없습니다.</td>
 			</tr>
 		</table>
 		</c:if>

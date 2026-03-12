@@ -101,20 +101,21 @@ $(document).ready(function() {
 	&nbsp;&nbsp;&nbsp;<form:checkbox path="hwp_only" value="Y" label="한글 첨부파일(.hwp)이 포함된 게시글 보기" id="hwp_only"/> 
 	&nbsp;&nbsp;&nbsp;<form:checkbox path="excel_only" value="Y" label="엑셀 첨부파일(.xlsx, xls)이 포함된 게시글 보기" id="excel_only"/> 
 	<br/>
-	게시판 선택 :
-	<form:select path="manage_idx" class="selectmenu" style="width:300px;">
-		<form:option value="0">전체 게시판</form:option>
-		<c:forEach items="${boardManageList}" var="i" varStatus="status">
-		<form:option value="${i.manage_idx}">${i.board_name}</form:option>
-		</c:forEach>
-	</form:select>
-	<a href="#" id="excelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
-	<a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
+    <div style="margin-top: 10px;">
+        게시판 선택 :
+        <form:select path="manage_idx" class="selectmenu" style="width:300px;">
+            <form:option value="0">전체 게시판</form:option>
+            <c:forEach items="${boardManageList}" var="i" varStatus="status">
+                <form:option value="${i.manage_idx}">${i.board_name}</form:option>
+            </c:forEach>
+        </form:select>
+        <a href="#" id="excelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
+        <a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a></div>
 
 </div>
 <div class="wrapper-bbs">
-	<div class="table-wrap">
-		<table class="bbs center">
+	<div class="table-wrap" style="overflow-x: auto;">
+		<table class="bbs type1 center">
 			<colgroup>
 				<col width="50px"/>
 				<col width="12%"/>
@@ -180,9 +181,10 @@ $(document).ready(function() {
 			</tbody>
 		</table>
 		<c:if test="${fn:length(boardList) < 1}">
-		<table class="bbs center">
+		<table class="bbs type1 center">
 			<tr>
-				<td width="100%" style="background:#f8fafb;">검색된 게시물이 없습니다.</td>
+				<td width="100%"
+>검색된 게시물이 없습니다.</td>
 			</tr>
 		</table>
 		</c:if>

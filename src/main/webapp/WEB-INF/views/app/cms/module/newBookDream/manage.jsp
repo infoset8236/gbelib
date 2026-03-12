@@ -78,7 +78,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 </table>
 </form:form>
 <div class="infodesk">
-	<div class="button">
+	<div class="button" style="margin-top: 10px;">
 		<a href="" class="btn btn5 left" id="dialog-add"><span>저장</span></a>
 	</div>
 </div>

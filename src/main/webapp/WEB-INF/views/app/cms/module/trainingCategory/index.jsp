@@ -76,14 +76,14 @@ $(function() {
 	<fieldset>
 		<label class="blind">검색</label>
 		대분류 선택 :
-		<form:select path="large_category_idx" items="${trainingLargeCategoryList}" itemLabel="code_name" itemValue="training_code">
+		<form:select path="large_category_idx" cssClass="selectmenu" items="${trainingLargeCategoryList}" itemLabel="code_name" itemValue="training_code">
 		</form:select>
 	</fieldset>
 </div>
 </form:form>
 <div class="column ban" >
 
-	<div class="areaL" style="width:45%;">
+	<div class="areaL">
 		<h3>중분류정보</h3>
 		<div class="group-menu-header">
 			<span>검색 결과 : ${categoryGroupListCount}건</span>
@@ -169,13 +169,9 @@ $(function() {
 	<div id="categoryLayer" class="areaR" style="float:left; width:45%%" >
 	</div>
 </div>
-<div class="ui-state-highlight">
+<div class="ui-state-highlight" style="flex-direction: column;">
 	<em>* 메뉴연결시 번호 중분류 아랫부분 괄호 안의 번호를 입력해주세요.</em>
-</div>
-<div class="ui-state-highlight">
 	<em>* 중분류 삭제는 해당 중분류에 소분류가 있을시 불가능 합니다.</em>
-</div>
-<div class="ui-state-highlight">
 	<em>* 소분류 삭제는 해당 소분류에 연수가 있을시 불가능 합니다.</em>
 </div>
 <div id="dialog-1" class="dialog-common" title="중분류 정보">

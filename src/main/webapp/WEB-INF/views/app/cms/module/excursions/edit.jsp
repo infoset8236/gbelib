@@ -55,7 +55,7 @@ $(function() {
 
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 600,
+		width: 650,
 		height: 520
 	});
 	
@@ -169,7 +169,7 @@ $(function() {
 		<tr>
 			<th>최대신청팀수(<span style="color: red; font-weight: bold;">*</span>)</th>
 			<td>
-				<form:input path="max_apply" class="text" cssStyle="width:30px"/>
+				<form:input path="max_apply" class="text" cssStyle="width:50px"/>
 				<em>* 신청수에 제한이 없다면 0을 입력해주세요.</em>
 			</td>
 		</tr>

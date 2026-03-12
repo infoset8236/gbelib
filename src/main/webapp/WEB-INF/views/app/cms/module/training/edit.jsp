@@ -554,7 +554,8 @@ function getLength(s, b, i, c) {
 	         		<a class="btn btn1 delete-image-btn">삭제</a>
 	         		<br/>
 	         		</c:if>
-	         		<input type="file" id="image_plan_file" name="image_plan_file" class="text" accept=".gif,.jpeg,.jpg,.png"/><button id="cancelImage">등록취소</button>
+	         		<input type="file" id="image_plan_file" name="image_plan_file" class="text" accept=".gif,.jpeg,.jpg,.png"/>
+                    <button id="cancelImage" class="btn btn5">등록취소</button>
 	         		<div class="ui-state-highlight">
 						<em>* 파일 확장자가  gif, jpeg, jpg, png 인 경우에만 업로드 가능합니다. <br/> * 기타 파일(pdf, hwp 등)을 등록하실 경우 정상적으로 나타나지 않습니다. </em>
 					</div>
@@ -580,10 +581,10 @@ function getLength(s, b, i, c) {
         	<tr>
 	         	<th>모집인원 (<span style="color: red; font-weight: bold;">*</span>)</th>
 	         	<td>
-	         		<form:input path="training_limit_count" class="text" cssStyle="width:30px" maxlength="5"/>
+	         		<form:input path="training_limit_count" class="text" cssStyle="width:60px" maxlength="5"/>
 	         		<%-- <c:choose>
 	         			<c:when test="${(training.editMode eq 'ADD') or (training.training_join_count < 1)}">
-	         				<form:input path="training_limit_count" class="text" cssStyle="width:30px" maxlength="5"/>
+	         				<form:input path="training_limit_count" class="text" cssStyle="width:60px" maxlength="5"/>
          				</c:when>
 	         			<c:otherwise>${training.training_limit_count}</c:otherwise>
 	         		</c:choose> --%>
@@ -591,11 +592,11 @@ function getLength(s, b, i, c) {
 	        </tr>
 	        <tr>
 	         	<th>모집후보인원</th>
-	         	<td><form:input path="training_backup_count" class="text" cssStyle="width:30px" maxlength="5"/></td>
+	         	<td><form:input path="training_backup_count" class="text" cssStyle="width:60px" maxlength="5"/></td>
 	        </tr>
 	        <tr>
 	         	<th>모집오프라인인원</th>
-	         	<td><form:input path="training_offline_count" class="text" cssStyle="width:30px" maxlength="5"/></td>
+	         	<td><form:input path="training_offline_count" class="text" cssStyle="width:60px" maxlength="5"/></td>
 	        </tr>
 	        <tr>
 	         	<th>강사명</th>
@@ -607,13 +608,16 @@ function getLength(s, b, i, c) {
 	        <tr>
 				<th>접수기간 (<span style="color: red; font-weight: bold;">*</span>)</th>
 				<td>
-					<form:input path="start_join_date" class="text ui-calendar"/> <form:input path="start_join_time" class="text" style="width:50px;" maxlength="5"/> ~ <form:input path="end_join_date" class="text ui-calendar"/> <form:input path="end_join_time" class="text" style="width:50px;" maxlength="5"/>
+					<form:input path="start_join_date" class="text ui-calendar calender_ico"/>
+                    <form:input path="start_join_time" class="text" style="width:70px;" maxlength="5"/> ~
+                    <form:input path="end_join_date" class="text ui-calendar calender_ico"/>
+                    <form:input path="end_join_time" class="text" style="width:70px;" maxlength="5"/>
 					<div class="ui-state-highlight">
 						<em>* 시간 입력 ex) 10:30</em>
 					</div>
 					<%-- <c:choose>
 						<c:when test="${(training.editMode eq 'ADD') or (training.training_join_count < 1)}">
-							<form:input path="start_join_date" class="text ui-calendar"/> <form:input path="start_join_time" class="text" style="width:50px;" maxlength="5"/> ~ <form:input path="end_join_date" class="text ui-calendar"/> <form:input path="end_join_time" class="text" style="width:50px;" maxlength="5"/>
+							<form:input path="start_join_date" class="text ui-calendar"/> <form:input path="start_join_time" class="text" style="width:70px;" maxlength="5"/> ~ <form:input path="end_join_date" class="text ui-calendar"/> <form:input path="end_join_time" class="text" style="width:70px;" maxlength="5"/>
 							<div class="ui-state-highlight">
 								<em>* 시간 입력 ex) 10:30</em>
 							</div>
@@ -653,7 +657,10 @@ function getLength(s, b, i, c) {
 			<tr>
 				<th>접수취소기간</th>
 				<td>
-					<form:input path="start_cancle_date" class="text ui-calendar"/> <form:input path="start_cancle_time" class="text" style="width:50px;" maxlength="5"/> ~ <form:input path="end_cancle_date" class="text ui-calendar"/> <form:input path="end_cancle_time" class="text" style="width:50px;" maxlength="5"/>
+					<form:input path="start_cancle_date" class="text ui-calendar calender_ico"/>
+                    <form:input path="start_cancle_time" class="text" style="width:70px;" maxlength="5"/> ~
+                    <form:input path="end_cancle_date" class="text ui-calendar calender_ico"/>
+                    <form:input path="end_cancle_time" class="text" style="width:70px;" maxlength="5"/>
 					<div class="ui-state-highlight">
 						<em>* 시간 입력 ex) 10:30</em>
 					</div>
@@ -671,7 +678,7 @@ function getLength(s, b, i, c) {
 			<tr>
 				<th>동일연수접수제한 횟수</th>
 				<td>
-					<form:input path="training_same_limit_count" class="text" cssStyle="width:30px" maxlength="5"/>
+					<form:input path="training_same_limit_count" class="text" cssStyle="width:60px" maxlength="5"/>
 					<div class="ui-state-highlight">
 						<em>* 동일연수 기준은 '연수명' 입니다.</em>
 					</div>
@@ -691,12 +698,12 @@ function getLength(s, b, i, c) {
 						<input type="checkbox" id="training_join_limit_unit2" name="training_join_limit_unit" value="OLD" class="OLD" <c:if test="${fn:indexOf(training.training_join_limit_unit, 'OLD') ne -1}">checked="checked"</c:if>/><label for="training_join_limit_unit2">나이</label>
 						<c:choose>
 							<c:when test="${fn:indexOf(training.training_join_limit_unit, 'OLD') ne -1}">
-								: <input class="text" id="training_join_limit_value1" name="training_join_limit_value" style="width:50px;" value="${fn:indexOf(training.training_join_limit_unit, 'SEX') == -1 ? limitValues[0] : limitValues[1]}" maxlength="3"/> 세 이상 ~ 
-						  		<input class="text" id="training_join_limit_value2" name="training_join_limit_value" style="width:50px;" value="${fn:indexOf(training.training_join_limit_unit, 'SEX') == -1 ? limitValues[1] : limitValues[2]}" maxlength="3"/> 세 이하
+								: <input class="text" id="training_join_limit_value1" name="training_join_limit_value" style="width:70px;" value="${fn:indexOf(training.training_join_limit_unit, 'SEX') == -1 ? limitValues[0] : limitValues[1]}" maxlength="3"/> 세 이상 ~
+						  		<input class="text" id="training_join_limit_value2" name="training_join_limit_value" style="width:70px;" value="${fn:indexOf(training.training_join_limit_unit, 'SEX') == -1 ? limitValues[1] : limitValues[2]}" maxlength="3"/> 세 이하
 							</c:when>
 							<c:otherwise>
-								: <input class="text" id="training_join_limit_value1" name="training_join_limit_value" style="width:50px;" value="" maxlength="3" disabled="true"/> 세 이상 ~ 
-					  			<input class="text" id="training_join_limit_value2" name="training_join_limit_value" style="width:50px;" value="" maxlength="3" disabled="true"/> 세 이하	
+								: <input class="text" id="training_join_limit_value1" name="training_join_limit_value" style="width:70px;" value="" maxlength="3" disabled="true"/> 세 이상 ~
+					  			<input class="text" id="training_join_limit_value2" name="training_join_limit_value" style="width:70px;" value="" maxlength="3" disabled="true"/> 세 이하
 							</c:otherwise>
 						</c:choose> 
 					</div>
@@ -811,10 +818,10 @@ function getLength(s, b, i, c) {
 			<tr>
 				<th>연수시간 (<span style="color: red; font-weight: bold;">*</span>)</th>
 				<td>
-					<form:input path="start_time" class="text" style="width:50px;" maxlength="5"/> ~ <form:input path="end_time" class="text" style="width:50px;" maxlength="5"/>
+					<form:input path="start_time" class="text" style="width:70px;" maxlength="5"/> ~ <form:input path="end_time" class="text" style="width:70px;" maxlength="5"/>
 					<%-- <c:choose>
 						<c:when test="${training.editMode eq 'ADD'}">
-							<form:input path="start_time" class="text" style="width:50px;" maxlength="5"/> ~ <form:input path="end_time" class="text" style="width:50px;" maxlength="5"/>
+							<form:input path="start_time" class="text" style="width:70px;" maxlength="5"/> ~ <form:input path="end_time" class="text" style="width:70px;" maxlength="5"/>
 							<div class="ui-state-highlight">
 								<em>* 시간 입력 ex) 10:30</em>
 							</div>
@@ -829,10 +836,10 @@ function getLength(s, b, i, c) {
 			<tr>
 	         	<th>연수 총 횟수 (<span style="color: red; font-weight: bold;">*</span>)</th>
 	         	<td>
-	         		<form:input path="training_count" class="text" cssStyle="width:30px" maxlength="5"/> 회
+	         		<form:input path="training_count" class="text" cssStyle="width:60px" maxlength="5"/> 회
 		         	<%-- <c:choose>
 						<c:when test="${(training.editMode eq 'ADD') or (training.training_join_count < 1)}">
-	         				<form:input path="training_count" class="text" cssStyle="width:30px" maxlength="5"/> 회
+	         				<form:input path="training_count" class="text" cssStyle="width:60px" maxlength="5"/> 회
 	         				<div class="ui-state-highlight">
 								<em>* 출석부와 연계 됩니다.</em>
 							</div>
@@ -849,7 +856,7 @@ function getLength(s, b, i, c) {
 	         			<br/>
 	         		</c:if>
 	         		<input type="file" id="plan_file" name="plan_file" class="text"/><form:hidden path="plan_file_name"/>
-	         		<button id="cancelFile">등록취소</button>
+	         		<button id="cancelFile" class="btn btn5">등록취소</button>
          		</td>
 	        </tr>
 	        <%-- <tr>
@@ -883,13 +890,13 @@ function getLength(s, b, i, c) {
 			<tr>
 				<th>qr출석체크회차</th>
 				<td>
-					<form:input path="qr_check_count" class="text" cssStyle="width:30px"/>
+					<form:input path="qr_check_count" class="text" cssStyle="width:60px"/>
 				</td>
 			</tr>
 	        <tr>
 	         	<th>출력순서</th>
 	         	<td>
-	         		<form:input path="print_seq" class="text" cssStyle="width:30px" maxlength="5"/>
+	         		<form:input path="print_seq" class="text" cssStyle="width:60px" maxlength="5"/>
 				</td>
 	        </tr>
 	        <%-- <tr>
@@ -1035,25 +1042,29 @@ function getLength(s, b, i, c) {
 	        <tr>
 	         	<th>휴강일설정</th>
 	         	<td>
-	         		<div style="float: left; margin-right: 10px;">
-	         		<input type="text" class="text ui-calendar" id="tempHoliDay" style="vertical-align: top">
-	         		<input type="text" class="text ui-calendar" id="tempHoliDayDummy" style="vertical-align: top; display: none;">
-	         		<br/>
-	         		<a href="#" id="addHoliday" class="btn btn5" style="vertical-align: top; width:95px;"><i class="fa fa-plus" aria-hidden="true"></i>휴강일 추가 </a>
-	         		<br/>
-	         		<a href="#" id="deleteHoliday" class="btn" style="vertical-align: top; width:95px;"><i class="fa fa-times" aria-hidden="true"></i>선택 삭제 </a>
-	         		<br/>
-	         		</div>
-	         		<div>
-	         		<form:select path="holidays" multiple="true" cssClass="selectmenu" cssStyle="width:40%;" size="5">
-	         			<c:forEach items="${training.holidays}" var="i" varStatus="status">
-	         			<form:option value="${i}">${i}</form:option>
-	         			</c:forEach>
-	         		</form:select>
-	         		</div>
-					<div class="ui-state-highlight" style="clear: both;">
-						<em>* '이달의 행사' 메뉴에서 '(휴강)연수명' 으로 표시됩니다.<br/>* Ctrl+클릭 시 다중선택 가능합니다.</em>
-					</div>
+                    <div style="display: flex;gap: 10px;">
+                        <div style="display: flex; gap: 4px; flex-direction: column;">
+                            <input type="text" class="text ui-calendar" id="tempHoliDay" style="vertical-align: top">
+                            <input type="text" class="text ui-calendar" id="tempHoliDayDummy"
+                                   style="vertical-align: top; display: none;">
+                            <a href="#" id="addHoliday" class="btn btn5" style="vertical-align: top; width:95px;"><i
+                                    class="fa fa-plus" aria-hidden="true"></i>휴강일 추가 </a>
+                            <a href="#" id="deleteHoliday" class="btn" style="vertical-align: top; width:95px;"><i
+                                    class="fa fa-times" aria-hidden="true"></i>선택 삭제 </a>
+                        </div>
+                        <div>
+                            <form:select path="holidays" multiple="true" cssClass="selectmenu"
+                                         cssStyle="width:100%;background: none;" size="5">
+                                <c:forEach items="${training.holidays}" var="i" varStatus="status">
+                                    <form:option value="${i}">${i}</form:option>
+                                </c:forEach>
+                            </form:select>
+                            <div class="ui-state-highlight" style="clear: both;">
+                                <em>* '이달의 행사' 메뉴에서 '(휴강)연수명' 으로 표시됩니다.<br/>* Ctrl+클릭 시 다중선택 가능합니다.</em>
+                            </div>
+                        </div>
+
+                    </div>
 				</td>
 	        </tr>
 	        <tr>

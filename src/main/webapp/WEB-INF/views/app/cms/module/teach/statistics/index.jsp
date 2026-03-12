@@ -94,7 +94,7 @@ $(function(){
 			<c:when test="${member.admin}">
 			<div style="margin-bottom:5px">
 				홈페이지 : 
-				<form:select path="homepage_id" >
+				<form:select path="homepage_id" cssClass="selectmenu">
 					<form:options items="${homepageList}" itemValue="homepage_id" itemLabel="homepage_name"/>
 				</form:select>
 			</div>
@@ -105,15 +105,15 @@ $(function(){
 		</c:choose>
 				
 		기간 : <form:input path="start_date" class="text ui-calendar"/> ~ <form:input path="end_date" class="text ui-calendar"/>
-		대분류 : <form:select path="large_category_idx" style="width:200px">
+		대분류 : <form:select path="large_category_idx" cssClass="selectmenu" style="width:200px">
 				<form:option class="all" value="0" label="전체" />
 				<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 			   </form:select>
-		중분류 : <form:select path="group_idx" style="width:200px">
+		중분류 : <form:select path="group_idx" cssClass="selectmenu" style="width:200px">
 				<form:option value="0" label="전체"/>
 				<form:options items="${groupList}" itemValue="group_idx" itemLabel="group_name"/>
 			  </form:select>
-		소분류 : <form:select path="category_idx" style="width:200px"></form:select>
+		소분류 : <form:select path="category_idx" cssClass="selectmenu" style="width:200px"></form:select>
 		<button id="searchBtn"><i class="fa fa-search"></i><span>검색</span></button>
 		<a href="#" id="excelDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>엑셀저장</span></a>
 		<a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>

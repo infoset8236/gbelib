@@ -90,7 +90,7 @@ function regExp(str){
 		<div class="column ban">
 			<div class="areaL auto-scroll" style="width:33%;height:500px">
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
-				<div class="infodesk" style="overflow:hidden;">
+				<div class="infodesk" style="overflow:hidden; display: flex; gap: 4px;"">
 					<span style="float:left;">강좌연도 :
 						<form:select path="search_year">
 							<form:option value="">전체</form:option>
@@ -101,18 +101,19 @@ function regExp(str){
 
 						</form:select>
 					</span>
+				<div class="infodesk" style="overflow:hidden; display: flex; gap: 4px;">
 					<span style="float:left;">대분류 :
-					<form:select path="large_category_idx">
+					<form:select path="large_category_idx" cssClass="selectmenu">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 					</form:select></span>&nbsp;
 					<span style="float:left;">중분류 : 
-					<form:select path="group_idx" cssStyle="width:100px;">
+					<form:select path="group_idx" cssClass="selectmenu" cssStyle="width:100px;">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 					</form:select></span>&nbsp;
 					<span style="float:left;">소분류 : 
-					<form:select path="category_idx" >
+					<form:select path="category_idx" cssClass="selectmenu">
 						<form:option class="all" value="0" label="전체" />
 						<c:forEach items="${categoryList}" var="i">
 	         				<form:option class="group_${i.group_idx}" value="${i.category_idx}" >${i.category_name}</form:option>

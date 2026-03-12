@@ -33,7 +33,7 @@ $(function() {
 				</div>
 			</div>
 			<div class="table-wrap">
-				<div class="ui-state-highlight">
+				<div class="ui-state-highlight" style="margin-bottom: 10px;">
 					<i class="fa fa-question-circle"></i><em>단어와 단어를 , 로 구분하여 주세요.(예 : 개나리, 십장생)</em>
 				</div>
 				<form:textarea path="word" cssStyle="width:100%; height:200px;"/>

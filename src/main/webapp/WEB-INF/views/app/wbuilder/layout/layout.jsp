@@ -33,61 +33,59 @@
 <![endif]-->
 </head>
 <body style="background: #fff; ">
-<div id="wrap" style="width: 300px; float: left; height: 100%; background: #293649">
+<div id="wrap" style="width: 300px; float: left; height: 100%; background: #EFF0F4">
 	<div class="aside">
 		<div id="header">
 			<h1><b>W</b>Builder</h1>
 			<div>
-				<p><b>(${sessionScope.member.member_name})</b>님 로그인 중입니다.</p>
-				<p>
+				<p  class="user-name"><b>(${sessionScope.member.member_name})</b>님 로그인 중입니다.</p>
+				<p class="aside-btn">
 					<a href="/cms/login/logout.do" target="_parent">
 						<i class="fa fa-sign-out"></i>
 						<em>로그아웃</em>
 					</a>
-					<span>|</span>
 					<a class="pass-change-btn" href="/cms/index.do">
 						<i class="fa fa-gear"></i>
 						<em>사이트관리 이동</em>
 					</a>
 				</p>
-				<p>
-					
-				</p>
 			</div>
 		</div>
-		<ul>
-			<li id="memberGroup">
-				<a href="" class="code2"><i class="fa fa-desktop"></i><span>사용자 관리</span></a>
-				<ul>
-					<li><a href="/wbuilder/memberGroup/index.do" >그룹관리</a></li>
-					<li><a href="/wbuilder/member/index.do" >사용자관리</a></li>
-					<li><a href="/wbuilder/accountLock/index.do" >계정 잠금 관리</a></li>
-					<li><a href="/wbuilder/loginLog/index.do" >로그인 기록 관리</a></li>
-					<li><a href="/wbuilder/memberAuthLog/index.do">권한추가 및 삭제 기록</a></li>
-					<li><a href="/wbuilder/groupAuthLog/index.do">그룹 권한추가 및 삭제 기록</a></li>
-					<li><a href="/wbuilder/member/member_access.do">관리자 접근기록</a></li>
-					<li><a href="/wbuilder/memberDownLog/index.do">독서/문화 강좌 엑셀 다운기록</a></li>
-					<li><a href="/wbuilder/excelDownLog/excelDownLogIndex.do">엑셀 다운기록</a></li>
-				</ul>
-			</li>
-			<li id="memberGroupAuth">
-				<a href="" class="code2"><i class="fa fa-desktop"></i><span>권한 관리</span></a>
-				<ul>
-					<li><a href="/wbuilder/memberGroupAuth/index.do" >그룹권한 관리</a></li>
-				</ul>
-			</li>
-			<li id="cmsManage">
-				<a href="" class="code2"><i class="fa fa-desktop"></i><span>CMS 관리</span></a>
-				<ul>
-					<li><a href="/wbuilder/accessIp/index.do" >접근가능 IP</a></li>
-					<li><a href="/wbuilder/code/cms/index.do" >공통코드 관리</a></li>
-					<li><a href="/wbuilder/moduleMngt/index.do" >모듈관리</a></li>
-				</ul>
-			</li>
-			<li>
-				<a href="/wbuilder/adminMenu/index.do" class="code1" ><i class="fa fa-folder-open"></i><span>CMS관리자 메뉴</span></a>
-			</li>
-		</ul>
+        <div class="menu-list">
+            <ul>
+                <li id="memberGroup">
+                    <a href="" class="code2"><i class="fa fa-desktop"></i><span>사용자 관리</span></a>
+                    <ul>
+                        <li><a href="/wbuilder/memberGroup/index.do">그룹관리</a></li>
+                        <li><a href="/wbuilder/member/index.do">사용자관리</a></li>
+                        <li><a href="/wbuilder/accountLock/index.do">계정 잠금 관리</a></li>
+                        <li><a href="/wbuilder/loginLog/index.do">로그인 기록 관리</a></li>
+                        <li><a href="/wbuilder/memberAuthLog/index.do">권한추가 및 삭제 기록</a></li>
+                        <li><a href="/wbuilder/groupAuthLog/index.do">그룹 권한추가 및 삭제 기록</a></li>
+                        <li><a href="/wbuilder/member/member_access.do">관리자 접근기록</a></li>
+                        <li><a href="/wbuilder/memberDownLog/index.do">독서/문화 강좌 엑셀 다운기록</a></li>
+                        <li><a href="/wbuilder/excelDownLog/excelDownLogIndex.do">엑셀 다운기록</a></li>
+                    </ul>
+                </li>
+                <li id="memberGroupAuth">
+                    <a href="" class="code2"><i class="fa fa-desktop"></i><span>권한 관리</span></a>
+                    <ul>
+                        <li><a href="/wbuilder/memberGroupAuth/index.do">그룹권한 관리</a></li>
+                    </ul>
+                </li>
+                <li id="cmsManage">
+                    <a href="" class="code2"><i class="fa fa-desktop"></i><span>CMS 관리</span></a>
+                    <ul>
+                        <li><a href="/wbuilder/accessIp/index.do">접근가능 IP</a></li>
+                        <li><a href="/wbuilder/code/cms/index.do">공통코드 관리</a></li>
+                        <li><a href="/wbuilder/moduleMngt/index.do">모듈관리</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/wbuilder/adminMenu/index.do" class="code1"><i class="fa fa-folder-open"></i><span>CMS관리자 메뉴</span></a>
+                </li>
+            </ul>
+        </div>
 	</div>
 
 </div>
@@ -187,16 +185,16 @@ $(document).ready(function(){
 	});
 	
 	//왼쪽메뉴
-	$('.aside > ul > li').each(function(){
+	$('.aside .menu-list > ul > li').each(function(){
 		if($(this).find('ul').length > 0){
 			$(this).children('a').on('click',function(){
 				if($(this).parent().hasClass('active')){
-					$('.aside > ul > li > ul').slideUp(80);
-					$('.aside > ul > li').removeClass('active');
+					$('.aside .menu-list > ul > li > ul').slideUp(80);
+					$('.aside .menu-list > ul > li').removeClass('active');
 					$(this).parent().removeClass('active');
 				}else{
-					$('.aside > ul > li > ul').slideUp(80);
-					$('.aside > ul > li').removeClass('active');
+					$('.aside .menu-list > ul > li > ul').slideUp(80);
+					$('.aside .menu-list > ul > li').removeClass('active');
 					$(this).parent().children('ul').slideDown(80);
 					$(this).parent().addClass('active');
 				}
@@ -209,16 +207,17 @@ $(document).ready(function(){
 			$(this).addClass('s');
 		}
 	});
-	$('.aside > ul > li > ul > li').each(function(){
+
+    $('.aside .menu-list > ul > li > ul > li').each(function(){
 		if($(this).find('ul').length > 0){
 			$(this).children('a').on('click',function(){
 				if($(this).parent().hasClass('active')){
-					$('.aside > ul > li > ul > li > ul').slideUp(80);
-					$('.aside > ul > li > ul > li').removeClass('active');
+					$('.aside .menu-list > ul > li > ul > li > ul').slideUp(80);
+					$('.aside .menu-list > ul > li > ul > li').removeClass('active');
 					$(this).parent().removeClass('active');
 				}else{
-					$('.aside > ul > li > ul > li > ul').slideUp(80);
-					$('.aside > ul > li > ul > li').removeClass('active');
+					$('.aside .menu-list > ul > li > ul > li > ul').slideUp(80);
+					$('.aside .menu-list > ul > li > ul > li').removeClass('active');
 					$(this).parent().children('ul').slideDown(80);
 					$(this).parent().addClass('active');
 				}
@@ -227,8 +226,9 @@ $(document).ready(function(){
 		}else{
 			$(this).addClass('s');
 		}
+
 	});
-	
+
 	$('.selectmenu').select2({
 		//셀렉트 메뉴에 검색 기능 사용 안함
 		minimumResultsForSearch: Infinity

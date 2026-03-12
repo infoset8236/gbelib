@@ -221,9 +221,9 @@ function doAjaxPostSms(form, ajaxBody) {
 							<li style="margin-top:5px;margin-left:9px">
 								발신번호 <br/>
 								<form:hidden path="caller_cell_phone"/>
-								<form:input path="caller_cell_phone1" cssStyle="width:36px;" cssClass="text" maxlength="4" numberOnly="true"/> -
-								<form:input path="caller_cell_phone2" cssStyle="width:36px;" cssClass="text" maxlength="4" numberOnly="true"/> -
-								<form:input path="caller_cell_phone3" cssStyle="width:36px;" cssClass="text" maxlength="4" numberOnly="true"/>
+								<form:input path="caller_cell_phone1" cssStyle="width:52px;" cssClass="text" maxlength="4" numberOnly="true"/> -
+								<form:input path="caller_cell_phone2" cssStyle="width:52px;" cssClass="text" maxlength="4" numberOnly="true"/> -
+								<form:input path="caller_cell_phone3" cssStyle="width:52px;" cssClass="text" maxlength="4" numberOnly="true"/>
 							</li>
 						</ul>
 					</div>

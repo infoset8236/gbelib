@@ -134,7 +134,8 @@ $(function(){
 		</c:forEach>
 		<c:if test="${fn:length(fieldManageList) < 1}">
 			<tr>
-				<td style="background:#f8fafb;" colspan="19">데이터가 존재하지 않습니다.</td>
+				<td
+ colspan="19">데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		</tbody>

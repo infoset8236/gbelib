@@ -104,7 +104,7 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 780,
+		width: 820,
 		height: 550
 	});
 	
@@ -123,7 +123,7 @@ $(function() {
 		<tr>
 			<th>약관구분</th>
 			<td>
-				<form:select path="terms_type" cssStyle="height:24px;">									
+				<form:select path="terms_type">
 					<c:forEach var="i" varStatus="status" items="${trainingtermsTypeList}">
 						<option value="${i.code_id}" <c:if test="${i.code_id eq trainingTerms.terms_type}">selected="selected"</c:if>>${i.code_name}</option>
 					</c:forEach>

@@ -35,8 +35,8 @@ $(document).ready(function() {
 	});	
 
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 550,
-		height: 360
+		width: 600,
+		height: 600
 	});
 	
 	$('input#str_date').datepicker({
@@ -81,10 +81,10 @@ $(document).ready(function() {
 				<th>기간</th>
 				<td>
 					<form:input path="str_date" class="text ui-calendar"/>
-					<form:input path="str_time" class="text" cssStyle="width:50px;" maxlength="5"/>
+					<form:input path="str_time" class="text" cssStyle="width:70px;" maxlength="5"/>
 					<span id="tilde" style="font-size:12px">~</span>
 					<form:input path="end_date" class="text ui-calendar"/>
-					<form:input path="end_time" class="text" cssStyle="width:50px;" maxlength="5"/>
+					<form:input path="end_time" class="text" cssStyle="width:70px;" maxlength="5"/>
 					<div class="ui-state-highlight">
 						<em>* 시간 입력 ex) 10:30</em>
 					</div>

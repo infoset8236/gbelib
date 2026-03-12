@@ -44,7 +44,7 @@ $(function() {
 <form:form id="commentForm" modelAttribute="comment" method="post" action="save.do" >
 	<form:hidden path="comment_idx"/>
 	<form:hidden path="editMode" value="MODIFY"/>
-	<table>
+	<table class="type2">
 		<colgroup>
 	       <col width="130" />
 	       <col width="*"/>

@@ -217,8 +217,8 @@ $(document).ready(function() {
 	<div class="mask"></div>
 	</c:if>
 	<div class="infodesk" style="padding-top: 0px;">
-		<div style="float:left;">
-			<div class="tabmenu tab1" style="padding:0px;">
+		<div>
+			<div class="tabmenu tab1">
 				<ul>
 					<li class="active"><a href="#" keyValue="table1" id="tabLi1" data-tab="D">기본정보</a></li>
 					<li class=""><a href="#" keyValue="table2" id="tabLi2" data-tab="R">그룹관계설정</a></li>
@@ -232,12 +232,8 @@ $(document).ready(function() {
 	<form:form modelAttribute="memberGroup" method="POST" action="saveRelation.do">
 	<form:hidden path="member_group_idx"/>
 	<div class="table-wrap" id="table1" title="기본정보">
-		<table class="border-all">
+		<table class="border-all type1">
 			<colgroup>
-				<col width="120"/>
-				<col/>
-				<col width="120"/>
-				<col/>
 				<col width="120"/>
 				<col/>
 			</colgroup>
@@ -293,7 +289,8 @@ $(document).ready(function() {
 				<tbody id="authGroupList">
 					<c:if test="${fn:length(memberGroupList) < 1}">
 					<tr style="height:100%">
-						<td style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+						<td
+>데이터가 존재하지 않습니다.</td>
 					</tr>
 					</c:if>
 					<c:forEach var="i" varStatus="status" items="${memberGroupList}">

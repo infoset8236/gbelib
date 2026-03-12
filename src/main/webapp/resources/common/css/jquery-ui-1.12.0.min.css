@@ -232,16 +232,13 @@ position:absolute;
 top:50%;
 width:20px;
 height:20px;
-margin-top:-10px
 }
 .ui-datepicker .ui-datepicker-prev:hover,
 .ui-datepicker .ui-datepicker-next:hover,
 .ui-datepicker .ui-datepicker-prev-hover:hover,
 .ui-datepicker .ui-datepicker-next-hover:hover,
 .ui-datepicker .ui-datepicker-prev-hover,
-.ui-datepicker .ui-datepicker-next-hover{border:1px solid #3f5370;background:#3f5370}
 .ui-datepicker .ui-datepicker-prev .ui-icon,
-.ui-datepicker .ui-datepicker-next .ui-icon{background-image:url('../img/ui-icons_ffffff_256x240.png')}
 .ui-datepicker .ui-datepicker-prev{left:5px}
 .ui-datepicker .ui-datepicker-next{right:5px}
 .ui-datepicker .ui-datepicker-prev-hover{left:4px}
@@ -249,7 +246,7 @@ margin-top:-10px
 .ui-datepicker .ui-datepicker-prev span,
 .ui-datepicker .ui-datepicker-next span{display:block;position:absolute;left:50%;margin-left:-8px;top:50%;margin-top:-8px;cursor:pointer}
 .ui-datepicker .ui-datepicker-header{font-size:0;line-height:0}
-.ui-datepicker .ui-datepicker-title{font-size:12px;margin:0 2.3em;line-height:1.7em;text-align:center}
+.ui-datepicker .ui-datepicker-title{font-size:12px;line-height:1.7em;text-align:center}
 .ui-datepicker .ui-datepicker-title select{font-size:1em;margin:2px 1px;padding:1px}
 .ui-datepicker select.ui-datepicker-month,
 .ui-datepicker select.ui-datepicker-year{width:44%;border:none;border-radius:2px}
@@ -268,11 +265,7 @@ color:#5c5c5c
 .ui-datepicker td a{display:block;padding:.2em;text-align:center;text-decoration:none}
 .ui-datepicker td a{border-color:#f0f0f0!important;background-color:#fdfdfd!important}
 .ui-datepicker td a:hover{border-color:#d3d3d3!important;background-color:#f5f5f5!important}
-.ui-datepicker td a.ui-state-active{
-border-color:#0059ac!important;
-background-color:#1f6db6!important;
-color:#fff;
-}
+
 .ui-datepicker .ui-datepicker-buttonpane{
 background-image:none;
 margin:.7em 0 0 0;
@@ -329,10 +322,10 @@ top:.3em;
 .ui-dialog .ui-dialog-titlebar{
 padding:8px 1em;
 position:relative;
-border-bottom-right-radius:0!important;
-border-bottom-left-radius:0!important;
-border-top-right-radius:0!important;
-border-top-left-radius:0!important;
+border-bottom-right-radius:0;
+border-bottom-left-radius:0;
+border-top-right-radius:0;
+border-top-left-radius:0;
 border:0!important;
 border-bottom-width:1px!important;
 height:28px
@@ -605,7 +598,7 @@ white-space:nowrap;
 .ui-icon,
 .ui-widget-content .ui-icon{background-image:url("../img/ui-icons_444444_256x240.png")}
 .ui-widget-header .ui-icon{background-image:url("../img/ui-icons_444444_256x240.png")}
-.ui-button .ui-icon{background-image:url("../img/ui-icons_555555_256x240.png")}
+/*.ui-button .ui-icon{background-image:url("../img/ui-icons_555555_256x240.png")}*/
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon,
 .ui-button:hover .ui-icon,

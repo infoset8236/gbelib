@@ -102,6 +102,7 @@ $(function() {
 	         		<c:choose>
 	         			<c:when test="${blackListOne.editMode eq 'ADD' }">
 	         				<form:input path="member_id" class="text" />
+                            <br>
 	         				<form:radiobutton path="search_api_type" value="WEBID" label="웹ID"/>
 	         				<form:radiobutton path="search_api_type" value="USERID" label="대출번호"/> <a class="btn btn1 idCheck">ID 확인</a>
 	         			</c:when>

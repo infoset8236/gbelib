@@ -61,9 +61,9 @@ $(function(){
 		</form:select>
 		<div style="float: right;">
 			DLSC ID & PW 확인 -
-			아이디 : <input id="dlsId">
-			패스워드 : <input id="dlsPw">
-			<button id="dlsCheck"><i class="fa fa-search"></i><span>검색</span></button>
+			아이디 : <input id="dlsId" class="text">
+			패스워드 : <input id="dlsPw" class="text">
+			<button id="dlsCheck" class="btn btn1"><i class="fa fa-search"></i><span>검색</span></button>
 		</div>
 	</div>
 	<table class="type1 center">
@@ -80,7 +80,8 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(dlscMemberList) < 1}">
 			<tr style="height:100%">
-				<td colspan="6" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="6"
+>데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${dlscMemberList}">

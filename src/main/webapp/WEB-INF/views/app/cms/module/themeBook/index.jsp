@@ -31,7 +31,7 @@ $(function() {
 		$('#dialog-1').load(formData, function( response, status, xhr ) {
 			$('#dialog-1').dialog({
 				width: 600,
-				height: 300
+				height: 400
 			});	
 			$('#dialog-1').dialog('open');
 		});
@@ -46,7 +46,7 @@ $(function() {
 		$('#dialog-1').load(formData, function( response, status, xhr ) {
 			$('#dialog-1').dialog({
 				width: 600,
-				height: 300
+				height: 400
 			});
 			$('#dialog-1').dialog('open');
 		});

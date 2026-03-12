@@ -63,16 +63,11 @@ $(function() {
 	});
 
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 700,
+		width: 800,
 		height: 830
 	});
 
-	$('input#print_seq').spinner({
-		min: 0,
-		max: 2500,
-		step: 1,
-		start: 1000
-	});
+
 });
 
 </script>
@@ -241,29 +236,29 @@ $(function() {
 		<tr>
 			<th>SNS 계정관리</th>
 			<td>
-				<table>
+				<table class="type2">
 					<colgroup>
 						<col width="130"/>
 						<col width="*"/>
 					</colgroup>
 					<tr align="center">
-						<td>구분</td>
+						<th>구분</th>
 						<td>URL</td>
 					</tr>
 					<tr align="center">
-						<td>네이버블로그</td>
+						<th>네이버블로그</th>
 						<td><form:input path="blog_url" cssStyle="width:90%;" /></td>
 					</tr>
 					<tr align="center">
-						<td>페이스북</td>
+						<th>페이스북</th>
 						<td><form:input path="facebook_url" cssStyle="width:90%;"/></td>
 					</tr>
 					<tr align="center">
-						<td>트위터</td>
+						<th>트위터</th>
 						<td><form:input path="twitter_url" cssStyle="width:90%;"/></td>
 					</tr>
 					<tr align="center">
-						<td>카카오스토리</td>
+						<th>카카오스토리</t>
 						<td><form:input path="kakao_url" cssStyle="width:90%;"/></td>
 					</tr>
 				</table>
@@ -290,7 +285,7 @@ $(function() {
 		<tr>
 			<th>출력순서</th>
 			<td>
-				<form:input path="print_seq" cssClass="text spinner" style="width:70px;"/>
+				<form:input path="print_seq" cssClass="text" style="width:70px;"/>
 				<div class="ui-state-highlight">
 					<i class="fa fa-question-circle"></i><em>오름차순으로 정렬됩니다.(낮은번호가 상단에 출력.)<br/>순서가 동일할 경우 홈페이지명 오름차순으로 정렬됩니다.</em>
 				</div>

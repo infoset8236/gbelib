@@ -163,7 +163,8 @@ function submit(e) {
 		<tbody>
 			<c:if test="${fn:length(elibStatisticsList) < 1}">
 				<tr style="height:100%">
-					<td colspan="2" style="background:#f8fafb;">조회된 자료가 없습니다.</td>
+					<td colspan="2"
+>조회된 자료가 없습니다.</td>
 				</tr>
 			</c:if>
 			<c:forEach var="i" varStatus="status" items="${elibStatisticsList}">

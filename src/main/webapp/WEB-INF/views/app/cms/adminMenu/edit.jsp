@@ -33,12 +33,7 @@ $(function() {
 		$('span.menuName').text(txt);
 	});
 	
-	$('input#print_seq').spinner({
-		min: 0,
-		max: 2500,
-		step: 1,
-		start: 1000
-	});
+
 	
 	//메뉴 유형 선택 시 추가 옵션 (cont2.jsp)
 	$('.menuType').each(function(i){
@@ -211,7 +206,7 @@ $(function() {
 			<tr>
 				<th>출력 순서</th>
 				<td>
-					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text spinner"/>
+					<form:input path="print_seq" cssStyle="width:60px;" cssClass="text spinner"/>
 				</td>
 			</tr>
 			<tr>

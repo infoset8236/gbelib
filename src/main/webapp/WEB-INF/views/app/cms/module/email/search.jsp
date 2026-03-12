@@ -4,6 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" uri="/WEB-INF/config/tld/cmsTag.tld" %>
 
+<style>
+    select{
+        width: 120px;
+    }
+</style>
+
 <script type="text/javascript">
 $(function() {
 	if($('#loading2').length == 0) {
@@ -421,7 +427,7 @@ $(function() {
 	</c:if>
 	<c:if test="${member.admin}">
 		<div class="search">
-			<fieldset>
+			<fieldset style="display: flex; align-items: center; gap: 4px">
 				<label class="blind">검색</label>
 				<form:select class="selectmenu-search" style="width:250px" id="homepage_id" path="homepage_id">
 					<option value="">홈페이지를 선택하세요.</option>
@@ -434,10 +440,10 @@ $(function() {
 	</c:if>
 
 	<div class="search">
-		<fieldset>
+		<fieldset style="display: flex; align-items: center; gap: 4px">
 			메뉴구분 :
 			<label class="blind">메뉴구분</label>
-			<form:select path="codeList_1" cssStyle="height:24px;">
+			<form:select path="codeList_1" cssClass="selectmenu" cssStyle="height: 36px">
 				<option value="">===선택===</option>
 				<c:forEach var="i" varStatus="status" items="${menuType}">
 					<option value="${i.code_id}" <c:if test="${i.code_id eq emailSend.codeList_1}">selected="selected"</c:if>>${i.code_name}</option>
@@ -446,7 +452,7 @@ $(function() {
 
 			<div id="div_select_list2" class="selectBox" style="display:inline;">
 				모듈2 :<label class="blind">모듈</label>
-				<form:select path="codeList_2" cssStyle="height:24px;">
+				<form:select path="codeList_2" cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_2}">
 						<c:if test="${!emailSend.code_type_2}">
@@ -461,7 +467,7 @@ $(function() {
 
 			<div id="div_select_list3" class="selectBox" style="display:inline;">
 				모듈3 : <label class="blind">모듈</label>
-				<form:select path="codeList_3" cssStyle="height:24px;">
+				<form:select path="codeList_3" cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_3}">
 						<c:if test="${!emailSend.code_type_3}">
@@ -476,7 +482,7 @@ $(function() {
 
 			<div id="div_select_list4" class="selectBox" style="display:inline;">
 				모듈4 :<label class="blind">모듈</label>
-				<form:select path="codeList_4" cssStyle="height:24px;">
+				<form:select path="codeList_4" cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_4}">
 						<c:if test="${!emailSend.code_type_4}">
@@ -491,7 +497,7 @@ $(function() {
 
 			<div id="div_select_list5" class="selectBox" style="display:inline;">
 				모듈5 :<label class="blind">모듈</label>
-				<form:select path="codeList_5" cssStyle="height:24px;">
+				<form:select path="codeList_5" cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_5}">
 						<c:if test="${!emailSend.code_type_5}">
@@ -510,31 +516,31 @@ $(function() {
 
 			<div id="loan_member_search" class="selectBox" style="display:none;">
 				신분 :
-				<form:select path="codeList_6" cssStyle="height:24px;">
+				<form:select path="codeList_6"  cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_6}">
 						<option value="${i.CODE}" <c:if test="${i.CODE eq emailSend.codeList_6}">selected="selected"</c:if>>${i.NAME}</option>
 					</c:forEach>
 				</form:select>
 				나이(생년월일) :
-					<form:input path="start_age" placeholder="19990919" cssStyle="width:80px;" maxlength="8" class="text"/>~
-					<form:input path="end_age" placeholder="20120919" cssStyle="width:80px;" maxlength="8" class="text"/>
+					<form:input path="start_age" placeholder="19990919" cssStyle="width:100px;" maxlength="8" class="text"/>~
+					<form:input path="end_age" placeholder="20120919" cssStyle="width:100px;" maxlength="8" class="text"/>
 				성별 :
-				<form:select path="codeList_8" cssStyle="height:24px;">
+				<form:select path="codeList_8"  cssClass="selectmenu" cssStyle="height: 36px">
 					<option value="">===선택===</option>
 					<c:forEach var="i" varStatus="status" items="${codeList_8}">
 						<option value="${i.CODE}" <c:if test="${i.CODE eq emailSend.codeList_8}">selected="selected"</c:if>>${i.NAME}</option>
 					</c:forEach>
 				</form:select>
 <!-- 				기관 : -->
-<%-- 				<form:select path="codeList_9" cssStyle="height:24px;" disabled="true">									 --%>
+<%-- 				<form:select path="codeList_9"  cssClass="selectmenu" cssStyle="height: 36px" disabled="true">									 --%>
 <!-- 					<option value="">===선택===</option> -->
 <%-- 					<c:forEach var="i" varStatus="status" items="${codeList_9}">					 --%>
 <%-- 						<option value="${i.CODE}" <c:if test="${i.CODE eq emailSend.homepage_code}">selected="selected"</c:if>>${i.NAME}</option> --%>
 <%-- 					</c:forEach> --%>
 <%-- 				</form:select> --%>
 <!-- 				소속 : -->
-<%-- 				<form:select path="codeList_10" cssStyle="height:24px;">									 --%>
+<%-- 				<form:select path="codeList_10" cssClass="selectmenu" cssStyle="height: 36px">									 --%>
 <!-- 					<option value="">===선택===</option> -->
 <%-- 					<c:forEach var="i" varStatus="status" items="${codeList_10}"> --%>
 <%-- 						<option value="${i.CODE}" <c:if test="${i.CODE eq emailSend.codeList_10}">selected="selected"</c:if>>${i.NAME}</option> --%>

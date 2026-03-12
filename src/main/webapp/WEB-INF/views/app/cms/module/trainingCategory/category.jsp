@@ -69,7 +69,7 @@ $(function() {
 <form:hidden path="group_idx"/>
 <form:hidden path="homepage_id"/>
 	<h3>소분류정보<c:if test="${not empty categoryGroupOne}"> (${categoryGroupOne.group_name})</c:if></h3>
-	<div class="group-menu-header">
+	<div class="group-menu-header" style="margin: 0;">
 		검색 결과 : 총 ${categoryListCount}건
 		<div class="button">
 			<c:if test="${authC}">

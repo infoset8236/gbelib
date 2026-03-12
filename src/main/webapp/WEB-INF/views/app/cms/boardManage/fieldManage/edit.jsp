@@ -5,12 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 $(function(){
-	$('input#list_seq, input#write_seq, input#search_seq').spinner({
-		min: 0,
-		max: 100,
-		step: 1,
-		start: 1
-	});
+
 	
 	$('a#fieldManage_add').on('click', function(e) {
 		$('#fieldManageEditLayer').load('/cms/boardManage/fieldManage/edit.do?editMode=ADD&manage_idx=${fieldManage.manage_idx}', function() {

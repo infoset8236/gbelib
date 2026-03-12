@@ -195,10 +195,12 @@ table tbody th{text-align: center; font-weight: bold !important;}
 				<tr>
 					<th>설문기간</th>
 					<td>
-						<form:input type="text" id="survey_start_date" path="survey_start_date" class="text ui-calendar"/> <form:input path="survey_start_time" class="text" style="width:50px;" maxlength="5"/>
+						<form:input type="text" id="survey_start_date" path="survey_start_date" class="text ui-calendar"/>
+                        <form:input path="survey_start_time" class="text" style="width:70px;" maxlength="5"/>
 						<span id="tilde" style="font-size:12px">~</span>
-						<form:input type="text" id="survey_end_date" path="survey_end_date" class="text ui-calendar"/> <form:input path="survey_end_time" class="text" style="width:50px;" maxlength="5"/>
-						<div class="ui-state-highlight" style="width: 380px;">
+						<form:input type="text" id="survey_end_date" path="survey_end_date" class="text ui-calendar"/>
+                        <form:input path="survey_end_time" class="text" style="width:70px;" maxlength="5"/>
+						<div class="ui-state-highlight" style="width: 380px; margin-top: 10px;">
 							<em>* 시간 입력 ex) 10:30</em>
 						</div>
 					</td>

@@ -68,7 +68,7 @@ $(document).ready(function() {
 	</div>
 	<c:choose>
 		<c:when test="${fn:length(statusList) > 0}">
-		<table class="center">
+		<table class="type1 center">
 			<thead>
 				<tr>
 					<th rowspan="2" width="80">구분</th>

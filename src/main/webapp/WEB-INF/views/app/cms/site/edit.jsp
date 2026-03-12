@@ -36,7 +36,7 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 400,
+		width: 600,
 		height: 500
 	});
 	
@@ -69,7 +69,7 @@ $(function() {
 	        <tr>
 				<th>출력 순서</th>
 				<td>
-					<form:input path="print_seq" cssStyle="width:30px;" cssClass="text spinner"/>
+					<form:input path="print_seq" cssStyle="width:60px;" cssClass="text spinner"/>
 				</td>
 			</tr>
 		</tbody>

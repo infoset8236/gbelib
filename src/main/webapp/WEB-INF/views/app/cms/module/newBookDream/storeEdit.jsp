@@ -88,7 +88,7 @@ $(function() {
 	});
 	
 	$("#dialog-1").dialog({ //개별 모달창 띄울 시 선택자 선언 및 크기 값 설정
-		width: 1200,
+		width: 600,
 		height: 800
 	});
 	
@@ -113,12 +113,11 @@ function getFileData(fileData) {
 <form:form modelAttribute="bookDreamStoreEdit" action="saveStore.do" method="post" onsubmit="return false;">
 <form:hidden path="editMode" />
 <form:hidden path="s_no"/>
-	<table class="tstyle lbook" summary="서점명, 대표자, 아이디, 비밀번호, 전화번호를 수정할 수 있는 서점관리 표입니다.">
+	<table class="tstyle lbook type2" summary="서점명, 대표자, 아이디, 비밀번호, 전화번호를 수정할 수 있는 서점관리 표입니다.">
 		<caption class="blind">서점관리 수정</caption>
 		<colgroup>
 			<col style="width:110px" />
 			<col />
-			<col style="width:400px" />
 		</colgroup>
 		<thead>
 			<tr>

@@ -138,19 +138,19 @@ $(function() {
 		검색 결과 : 총 ${trainingListCount}건
 		<div class="button">
 			<span>대분류 : 
-				<form:select path="large_category_idx">
+				<form:select path="large_category_idx" cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="training_code" itemLabel="code_name" items="${trainingLargeCategoryList}"/>
 				</form:select>
 			</span>
 			<span>중분류 : 
-				<form:select path="group_idx">
+				<form:select path="group_idx" cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />
 					<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 				</form:select>
 			</span>
 			<span>소분류 : 
-				<form:select path="category_idx" >
+				<form:select path="category_idx" cssClass="selectmenu" >
 					<form:option class="all" value="0" label="전체" />
 					<c:forEach items="${categoryList}" var="i">
 		       				<form:option class="group_${i.group_idx}" value="${i.category_idx}" hidden="hidden">${i.category_name}</form:option>

@@ -43,21 +43,21 @@ $(function(){
 <form:form id="adminStudentForm" modelAttribute="student">
 	<div class="wrapper wrapper-white">
 		<div class="column ban">
-			<div class="areaL auto-scroll" style="width:30%;height:500px">
+			<div class="areaL auto-scroll" style="width:30%;height:500px;margin-right: 10px;">
 			<span>검색 결과 : ${fn:length(trainingList)}건</span>
 				<div class="infodesk">
 					<span style="float:left;">대분류 : 
-					<form:select path="large_category_idx">
+					<form:select path="large_category_idx" cssClass="selectmenu">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="training_code" itemLabel="code_name" items="${trainingLargeCategoryList}"/>
 					</form:select></span>
 					<span style="float:left;">중분류 : 
-					<form:select path="group_idx" cssStyle="width:100px;">
+					<form:select path="group_idx" cssClass="selectmenu" cssStyle="width:100px;">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 					</form:select></span>
 					<span style="float:right;">소분류 : 
-					<form:select path="category_idx" >
+					<form:select path="category_idx" cssClass="selectmenu" >
 						<form:option class="all" value="0" label="전체" />
 						<c:forEach items="${categoryList}" var="i">
 	         				<form:option class="group_${i.group_idx}" value="${i.category_idx}" >${i.category_name}</form:option>

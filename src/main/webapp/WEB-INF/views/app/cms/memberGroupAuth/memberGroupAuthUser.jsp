@@ -119,22 +119,10 @@ $(document).ready(function() {
 	<div class="table-wrap">
 		<div class="table-scroll">
 			<table class="type1">
-				<colgroup>
-					<col width="10%"/>
-					<col width="10%"/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-					<col/>
-				</colgroup>
 				<thead>
 					<tr>
-						<th class="width200">메뉴명</th>
-						<th class="width200">모듈명</th>
+						<th>메뉴명</th>
+						<th>모듈명</th>
 						<th><input type="checkbox" id="masterCheck"/>전체</th>
 						<th><input type="checkbox" id="masterCheckR"/><label for="masterCheckR">조회</label></th>
 						<th><input type="checkbox" id="masterCheckC"/><label for="masterCheckC">등록</label></th>
@@ -146,13 +134,14 @@ $(document).ready(function() {
 				<tbody id="authGroupList">
 					<c:if test="${fn:length(menuList) < 1}">
 					<tr style="height:100%">
-						<td style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+						<td
+>데이터가 존재하지 않습니다.</td>
 					</tr>
 					</c:if>
 					<c:forEach var="i" varStatus="status" items="${menuList}" begin="1">
 					<tr>
-						<th class="width200"><span style="padding-left: ${(i.menu_level-2)*16}px;">${i.menu_name}</span></th>
-						<th class="width200"><span><c:if test="${i.menu_type eq 'BOARD'}">게시판 - </c:if>${i.moduleName} </span></th>
+						<th><span style="padding-left: ${(i.menu_level-2)*16}px;">${i.menu_name}</span></th>
+						<th><span><c:if test="${i.menu_type eq 'BOARD'}">게시판 - </c:if>${i.moduleName} </span></th>
 						<c:choose>
 							<c:when test="${not empty i.moduleName}">
 						<td>

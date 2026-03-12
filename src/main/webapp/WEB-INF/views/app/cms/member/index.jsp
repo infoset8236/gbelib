@@ -76,45 +76,51 @@ $(function(){
 <form:hidden id="editMode_index" path="editMode"/>
 <form:hidden path="search_auth"/>
 <form:hidden path="search_auth_name"/>
-	<table class="type1 center">
-		<thead>
-			<tr>
-				<th width="50">순번</th>
-				<th width="50">사용자ID</th>
-				<th width="80">사용자명</th>
-				<th width="100">전화번호</th>
-<!-- 				<th width="130">사용자 구분</th> -->
-				<th width="100">사용자 타입</th>
-				<th width="130">등록일자</th>
-				<th width="">권한</th>
-				<th width="">기능</th>
-			</tr>
-		</thead>
-		<tbody>
-		<c:if test="${fn:length(memberList) < 1}">
-			<tr>
-				<td colspan="8">데이터가 존재하지 않습니다.</td>
-			</tr>
-		</c:if>
-		<c:forEach var="i" varStatus="status" items="${memberList}">
-			<tr>
-				<td width="50">${paging.listRowNum - status.index}</td>
-				<td width="50" class="left">${i.member_id}</td>
-				<td width="80">${i.member_name}</td>
-				<td width="100">${i.phone}</td>
-<%-- 				<td width="130">${i.auth_name_list}</td> --%>
-				<td width="100">${i.link_member_yn eq 'Y' ? '일루스 연결회원':''}</td>
-				<td width="130"><fmt:formatDate value="${i.add_date}" pattern="yyyy-MM-dd"/> </td>
-				<td width="">${i.search_auth}</td>
-				<td width="">
-					<a href="#" class="btn dialog-modify" id="dialog-modify-${i.member_id}" keyValue="${i.member_id}">수정</a>
-					<a href="#" class="btn delete" keyValue="${i.member_id}">삭제</a>
-					<a href="#" class="btn btn3 grouping" keyValue="${i.member_id}">그룹설정</a>
-				</td>
-			</tr>
-		</c:forEach>
-		</tbody>
-	</table>
+    <div style="overflow-x: auto;">
+        <table class="type1">
+            <thead>
+            <tr>
+                <th>순번</th>
+                <th>사용자ID</th>
+                <th>사용자명</th>
+                <th>전화번호</th>
+                <th>사용자 타입</th>
+                <th>등록일자</th>
+                <th>권한</th>
+                <th>기능</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${fn:length(memberList) < 1}">
+                <tr>
+                    <td colspan="8">데이터가 존재하지 않습니다.</td>
+                </tr>
+            </c:if>
+            <c:forEach var="i" varStatus="status" items="${memberList}">
+                <tr>
+                    <td>${paging.listRowNum - status.index}</td>
+                    <td class="left">${i.member_id}</td>
+                    <td>${i.member_name}</td>
+                    <td>${i.phone}</td>
+                    <%--
+                    <td>${i.auth_name_list}</td>
+                    --%>
+                    <td>${i.link_member_yn eq 'Y' ? '일루스 연결회원':''}</td>
+                    <td>
+                        <fmt:formatDate value="${i.add_date}" pattern="yyyy-MM-dd"/>
+                    </td>
+                    <td>${i.search_auth}</td>
+                    <td>
+                        <a href="#" class="btn dialog-modify" id="dialog-modify-${i.member_id}"
+                           keyValue="${i.member_id}">수정</a>
+                        <a href="#" class="btn delete" keyValue="${i.member_id}">삭제</a>
+                        <a href="#" class="btn btn3 grouping" keyValue="${i.member_id}">그룹설정</a>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 
 	<jsp:include page="/WEB-INF/views/app/cms/common/paging.jsp" flush="false">
 		<jsp:param name="formId" value="#member_index"/>

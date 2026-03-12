@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<style>
-	div.leftBox {float: left;}
-	div.rightBox {float: left;}
-</style>
 <script>
 var edit_cate_dialog;
 
@@ -458,8 +454,8 @@ function doAjaxPostResponse(form, ajaxBody) {
 }
 </script>
 
-<div style="margin-left: 100px; height: 600px; text-align: center;">
-<form name="fm" method="post" action="#">
+<div style="height: 600px; text-align: center;">
+<form name="fm" method="post" action="#" style="display: flex">
 <input type="hidden" name="_csrf" value="${_csrf.token}">
 <input type="hidden" name="data_list">
 
@@ -520,7 +516,7 @@ function doAjaxPostResponse(form, ajaxBody) {
 <form:hidden path="mid_code"/>
 <form:hidden path="small_code"/>
 
-<table class="tableTy02">
+<table class="tableTy02 type2">
 	<colgroup>
 		<col width="30%">
 		<col width="70%">
