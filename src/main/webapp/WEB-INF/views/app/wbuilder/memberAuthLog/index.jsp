@@ -70,14 +70,14 @@ $(function(){
 
 <form:form id="adminAuthLog_index" modelAttribute="adminAuthLog" onsubmit="return false;">
 <div class="search">
-	<fieldset>
+	<fieldset class="table-action">
 		<label class="blind">검색</label>
 		권한 종류 :&nbsp;
 		<select id="module_type" name="module_type" class="selectmenu" style="width: 150px;">
 			<option value>전체</option>
 			<option value="CMS" <c:if test="${adminAuthLog.getModule_type() eq 'CMS'}"> selected="selected"</c:if>>관리자 페이지</option>
 			<option value="SITE" <c:if test="${adminAuthLog.getModule_type() eq 'SITE'}"> selected="selected"</c:if>>이용자 페이지</option>
-		</select>&nbsp;<br/>
+		</select>&nbsp;
 		기간 :&nbsp;
 		<input type="text" id="start_date" name="start_date" class="text ui-calendar" value="${adminAuthLog.getStart_date()}"/>
 		<input type="text" id="end_date" name="end_date" class="text ui-calendar" value="${adminAuthLog.getEnd_date()}"/>

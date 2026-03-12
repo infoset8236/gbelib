@@ -169,7 +169,11 @@ code{font-family:consolas;background:#dee7f9;border:1px solid #b3c8f1;padding:2p
 /* 레이아웃 */
 .btn-group{font-size:0}
 .btn,
-body{font-size:13px}
+body{
+	font-size:13px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
 #container{padding:10px 0;min-width:500px}
 
 .wrapper{background:url('../img/tab_line.gif') repeat-x 0 0}

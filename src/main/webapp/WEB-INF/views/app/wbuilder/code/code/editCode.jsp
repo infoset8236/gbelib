@@ -38,13 +38,7 @@ $(function() {
 		width: 400, 
 		height: 400
 	});
-	
-	$('input#print_seq').spinner({
-		min: 0,
-		max: 2500,
-		step: 1,
-		start: 1000
-	});
+
 });
 
 </script>
