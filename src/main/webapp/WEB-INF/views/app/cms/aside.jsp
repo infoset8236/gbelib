@@ -37,7 +37,7 @@ $(function(){
 <div id="wrap">
 	<div class="aside">
 		<div id="header">
-			<h1><b>W</b>Builder</h1>
+			<h1 class="sjc-logo"><img src="/resources/cms/img/main/logo.png" alt=""></h1>
 			<div>
 				<p class="user-name"><b>(${member.member_name})</b>님 로그인 중입니다.</p>
 				<p class="aside-btn">

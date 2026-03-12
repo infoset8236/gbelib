@@ -543,6 +543,10 @@ table.type1 .btn{font-size:90%}
 	border-radius: 4px;
 	border: 1px solid #ddd;
 }
+a.btn {
+	line-height: normal !important;
+}
+
 a.a-button{
 	font-family: Pretendard-Medium, serif !important;
 	font-size: 11px;

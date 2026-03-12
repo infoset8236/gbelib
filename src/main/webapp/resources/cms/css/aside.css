@@ -86,9 +86,17 @@ body{
 }
 
 .aside{
-    padding: 20px 20px 50px 20px;
+    padding: 60px 20px 50px 20px;
     background: #EFF0F4;
 }
+
+.sjc-logo{
+    width: 120px;
+    height: 30px;
+    margin: 4px auto 24px;
+    object-fit: contain;
+}
+
 .aside > ul > li > ul > li.active > ul,
 .aside > ul > li.active > ul{display:block}
 .aside > ul > li > a,

@@ -142,7 +142,7 @@ $(document).ready(function() {
 			</c:forEach>
 			<c:if test="${fn:length(ilusReqConfigList) < 1}">
 			<tr>
-				<td colspan="9">등록된 정보가 없습니다.</td>
+				<td colspan="12">등록된 정보가 없습니다.</td>
 			</tr>
 			</c:if>
 		</tbody>

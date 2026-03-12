@@ -56,7 +56,7 @@ $(function(){
 <form:form id="adminStudentForm" modelAttribute="student">
 	<div class="wrapper wrapper-white">
 		<div class="column ban">
-			<div class="areaL auto-scroll" style="width:30%;height:500px">
+			<div class="areaL auto-scroll" style="width:30%;height:500px;margin-right: 10px;">
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
 				<div class="infodesk">
 					<span style="float:left;">대분류 : 

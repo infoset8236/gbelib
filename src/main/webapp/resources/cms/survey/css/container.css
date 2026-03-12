@@ -4,6 +4,13 @@ body{
 	background: #fff;
 }
 
+.sjc-logo{
+	width: 120px;
+	height: 30px;
+	margin: 4px auto 24px;
+	object-fit: contain;
+}
+
 h1,h2,h3,h4,h5{line-height:180%}
 h1{font-size:24px}
 h2{font-size:22px}
@@ -356,7 +363,7 @@ table.type1 input[type="checkbox"]{width:15px;height:15px;vertical-align:middle;
 .ui-dialog-content .styleBox,
 .group-menu .set-area .subImgView div{overflow:hidden;margin-top:3px;border:1px dashed #e8e4d9;background:#f9f7f2;border-radius:5px;padding:5px 10px 10px}
 .group-menu .set-area .subImgView div a.btn{float:right;margin-top:3px;font-size:11px;padding:1px 5px 0}
-.group-menu-header{overflow:hidden;height:35px}
+.group-menu-header{overflow:hidden;height:36px}
 .group-menu-header,
 .group-menu .tree-box{margin-right:20px}
 .group-menu .tree-box{

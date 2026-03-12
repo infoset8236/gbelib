@@ -143,7 +143,7 @@ $(function(){
 	<form:hidden path="editMode"/>
 		<div class="mask"></div>
 	<div class="btn-wrapper">
-        <div style="display: flex; gap: 12px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
             검색 결과 : ${teachBookManageCount}건
             <div class="radio-group attendance">
                 <label>
@@ -190,7 +190,7 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(teachBookManageList) < 1}">
 			<tr style="height:100%">
-				<td colspan="6" style="background:#f8fafb;">데이터가 존재하지 않습니다.</td>
+				<td colspan="6">데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${teachBookManageList}">

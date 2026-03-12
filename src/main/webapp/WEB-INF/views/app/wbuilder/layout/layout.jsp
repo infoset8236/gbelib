@@ -33,10 +33,12 @@
 <![endif]-->
 </head>
 <body style="background: #fff; ">
-<div id="wrap" style="width: 300px; float: left; height: 100%; background: #EFF0F4">
-	<div class="aside">
+<div id="wrap" style="width: 270px; float: left; height: 100%; background: #EFF0F4">
+	<div class="aside" style="position: fixed; width: 270px; box-sizing: border-box; height: 100vh; top: 0;">
 		<div id="header">
-			<h1><b>W</b>Builder</h1>
+            <h1 class="sjc-logo">
+                <img src="/resources/cms/img/main/logo.png" alt="">
+            </h1>
 			<div>
 				<p  class="user-name"><b>(${sessionScope.member.member_name})</b>님 로그인 중입니다.</p>
 				<p class="aside-btn">
