@@ -1,6 +1,6 @@
 $(function () {
     const $slide_item = $('.slide_item');
-	const itemsPerGrid = 12;
+	const itemsPerGrid = 10;
 
 	const $slide = $('.slide');
 
