@@ -34,10 +34,10 @@
 	<sql id="sort">
 		<choose>
 		<when test="sortField != null and sortField != ''">
-		ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.${sortField} ${sortType} NULLS LAST, a.book_idx DESC
+			ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.${sortField} ${sortType} NULLS LAST, a.book_idx DESC
 		</when>
 		<otherwise>
-		ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.book_idx DESC NULLS LAST, a.book_name
+			ORDER BY DECODE(a.library_code,'9999999',1,99) ASC, a.book_idx DESC NULLS LAST, a.book_name
 		</otherwise>
 		</choose>
 	</sql>
@@ -145,7 +145,7 @@
 		a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
 		a.use_yn, a.type, a.format, a.book_image, a.parent_id,
 		a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
-		a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+		a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no, a.application_cell_phone,
 		CASE
 		WHEN a.library_code = '9999999' THEN '통합'
 		ELSE e.homepage_name
@@ -276,7 +276,7 @@
 			a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
 			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
 			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
-			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
+			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no, a.application_cell_phone,
 			CASE
 			WHEN a.library_code = '9999999' THEN '통합'
 			ELSE e.homepage_name
@@ -327,7 +327,7 @@
 			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
 			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
 			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no,
-			a.application_cancel_date, a.application_cancel_id, a.application_remarks, a.application_approval_date, a.application_approval_id,
+			a.application_cancel_date, a.application_cancel_id, a.application_remarks, a.application_approval_date, a.application_approval_id, a.application_cell_phone,
 			CASE
 			WHEN a.library_code = '9999999' THEN '통합'
 			ELSE e.homepage_name
@@ -368,7 +368,7 @@
 			BOOK_PUBNAME, BOOK_REGDT, BOOK_RESERVE, CATE_ID, COM_CODE,
 			DEVICE, FORMAT, ISBN13, LEND_TOTAL, LIBRARY_CODE,
 			MAX_LEND, MOD_DATE, MOD_ID, PARENT_ID, RECOMMEND_CNT,
-			TYPE, USE_YN
+			TYPE, USE_YN, APPLICATION_CELL_PHONE
 			FROM
 				ELIB_HOPE_BOOK
 		WHERE
@@ -547,6 +547,7 @@
 		    application_user_id = #{member.member_id},
 		    application_user_name = #{member.member_name},
 		    application_status = #{hopeElibBook.application_status},
+		    application_cell_phone = #{hopeElibBook.application_cell_phone},
 		    application_add_date = SYSDATE
 		WHERE
 		    BOOK_IDX = #{hopeElibBook.book_idx}

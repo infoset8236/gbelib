@@ -11,6 +11,9 @@ import java.util.Map;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kr.co.whalesoft.app.cms.homepage.Homepage;
+import kr.co.whalesoft.app.cms.homepage.HomepageService;
 import kr.co.whalesoft.app.cms.member.Member;
 import kr.co.whalesoft.framework.base.BaseController;
 import kr.co.whalesoft.framework.exception.AuthException;
@@ -25,6 +28,7 @@ import kr.go.gbelib.app.cms.module.elib.code.ElibCodeService;
 import kr.go.gbelib.app.cms.module.elib.member.ElibMember;
 import kr.go.gbelib.app.cms.module.elib.member.ElibMemberService;
 import kr.go.gbelib.app.common.api.MemberAPI;
+import kr.go.gbelib.app.common.api.PushAPI;
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.POIXMLException;
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -57,12 +61,18 @@ public class HopeElibBookController extends BaseController {
 
     @Autowired
     private HopeElibBookService service;
+
     @Autowired
     private ElibCategoryService elibCategoryService;
+
     @Autowired
     private ElibCodeService elibCodeService;
+
     @Autowired
     private ElibMemberService elibMemberService;
+
+    @Autowired
+	private HomepageService homepageService;
 
     @RequestMapping(value = {"/cms/module/elib/hopeElibBook/{type}/index.*"})
     public String book_index(Model model, @PathVariable String type, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
@@ -630,12 +640,44 @@ public class HopeElibBookController extends BaseController {
     public @ResponseBody JsonResponse changeStatus(Model model, HopeElibBook hopeElibBook, BindingResult result, HttpServletRequest request) {
         JsonResponse res = new JsonResponse(request);
 
+        Homepage smsHomepage = new Homepage();
+        smsHomepage.setHomepage_id(getAsideHomepageId(request));
+        smsHomepage = homepageService.getHomepageOne(smsHomepage);
+
         setApplicationMember(hopeElibBook, getSessionMemberInfo(request));
 
         if (!result.hasErrors()) {
             service.updateApplicationStatusAdmin(hopeElibBook);
             res.setValid(true);
             res.setMessage("수정 되었습니다.");
+
+            String status = "";
+            switch (hopeElibBook.getApplication_status()) {
+                case "1":
+                    status = "신청";
+                    break;
+                case "2":
+                    status = "처리";
+                    break;
+                case "3":
+                    status = "구입";
+                    break;
+                case "4":
+                case "5":
+                    status = "취소";
+                    break;
+            }
+
+            String bookName = hopeElibBook.getBook_name();
+            String shortBookName = bookName;
+
+            if (bookName != null && bookName.length() > 7) {
+                shortBookName = bookName.substring(0, 7) + "...";
+            }
+
+            String message = String.format("신청하신 [%s] 전자책이 %s되었습니다.", shortBookName, status);
+
+            PushAPI.sendMessage(smsHomepage, PushAPI.SMS_TYPE_SMS, hopeElibBook.getApplication_cell_phone(), message, smsHomepage.getHomepage_send_tell(), true);
         } else {
             res.setValid(false);
             res.setResult(result.getAllErrors());

@@ -40,6 +40,7 @@
     <form:hidden path="book_idx"/>
     <form:hidden path="book_code"/>
     <form:hidden path="editMode"/>
+    <form:hidden path="application_cell_phone"/>
     <form:hidden path="type"/>
     <table class="type2">
         <colgroup>
