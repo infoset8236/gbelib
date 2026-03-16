@@ -101,6 +101,8 @@ public class HopeElibBook extends PagingUtils {
     private String approved_yn = "Y";
     private MultipartFile mfile;
 
+    private String application_cell_phone;
+
     public HopeElibBook() {
         this.setSortField("book_pubdt");
     }
@@ -854,4 +856,11 @@ public class HopeElibBook extends PagingUtils {
         return String.format("Book [book_idx=%s, book_code=%s, com_code=%s]", book_idx, book_code, com_code);
     }
 
+    public String getApplication_cell_phone() {
+        return application_cell_phone;
+    }
+
+    public void setApplication_cell_phone(String application_cell_phone) {
+        this.application_cell_phone = application_cell_phone;
+    }
 }

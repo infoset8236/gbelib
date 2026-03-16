@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import kr.co.whalesoft.app.cms.menu.Menu;
+import kr.co.whalesoft.app.cms.menu.menuHtml.MenuHtml;
+import kr.co.whalesoft.app.cms.menu.menuHtml.MenuHtmlService;
 import kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook;
 import kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBookService;
 import org.apache.commons.codec.binary.Base64;
@@ -113,6 +116,9 @@ public class ElibController extends BaseController {
 
 	@Autowired
 	private HopeElibBookService hopeElibBookService;
+
+	@Autowired
+	private MenuHtmlService menuHtmlService;
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -1296,6 +1302,11 @@ public class ElibController extends BaseController {
 	public String hopeElibSearch(Model model, HopeElibBook hopeElibBook, HttpServletRequest request, @PathVariable String homepagePath) {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 
+		Menu menuOne = (Menu) request.getAttribute("menuOne");
+		if ( menuOne != null ) {
+			model.addAttribute("html", menuHtmlService.getLastMenuHtmlOne(new MenuHtml(homepage.getHomepage_id(), menuOne.getMenu_idx())));
+		}
+
 		hopeElibBook.setHomepage_id(homepage.getHomepage_id());
 
 		ElibCategory elibCategory = new ElibCategory(hopeElibBook.getType(), 1);
@@ -1304,6 +1315,8 @@ public class ElibController extends BaseController {
 
 		int count = hopeElibBookService.getBookListCnt(hopeElibBook);
 		hopeElibBookService.setPaging(model, count, hopeElibBook);
+
+		hopeElibBook.setSortField(null);
 
 		model.addAttribute("categoryList", categoryList);
 		model.addAttribute("hopeBookList", hopeElibBookService.getBookListAll(hopeElibBook));
@@ -1379,6 +1392,8 @@ public class ElibController extends BaseController {
 			res.setUrl(String.format("/%s/index.do", homepage.getContext_path()));
 			return res;
 		}
+
+		hopeElibBook.setApplication_cell_phone(member.getCell_phone1()+"-"+member.getCell_phone2()+"-"+member.getCell_phone3());
 
 		if (!result.hasErrors()) {
 			String editMode = hopeElibBook.getEditMode();

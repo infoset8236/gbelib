@@ -97,6 +97,7 @@
 		    , a.kiosk_type
 		    , a.smartbook_type
 		    , a.mediawall_type
+		    , a.homepage_send_tell
 		FROM
 			CMS_HOMEPAGE a
 		WHERE
