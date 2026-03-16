@@ -101,6 +101,14 @@ $(function() {
 		}
 		
 		if ( "${member.loginType eq 'HOMEPAGE' and member.login }" == 'true' ) {
+			if ($('#quizReq select[name="terms_yn"]').length > 0) {
+				if ($('#quizReq select[name="terms_yn"]').val() != 'Y') {
+					alert('이용약관 및 개인정보 수집·이용에 동의하셔야 신청이 가능합니다.');
+					$('#quizReq select[name="terms_yn"]').focus();
+					return;
+				}
+			}
+
 			var answerList = [];
 			$('div.txt-box').each(function(i, divE) {
 				var $this = $(this);
