@@ -18,7 +18,7 @@
 					<em>전화 054) 450-7000</em>
 					<em>팩스 054) 458-8370</em>
 				</p>
-				<span>Copyright &copy;  by Gyeongsangbuk-do gumi Public Library, All rights reserved.</span>
+				<span>Copyright &copy;  by Gyeongsangbuk-do gumi, All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

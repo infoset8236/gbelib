@@ -8,7 +8,7 @@
 					<em>전화 <b>(사무실)054-791-2294, (자료실)054-791-1949, (팩스)054-791-5211</b></em><br/>
 					<em><b>(섬초롱도서관)054-791-3061</b></em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Ulleung Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Ulleung  All rights reserved.</span>
 			</address>
 			<div class="box">
 				<div class="info">

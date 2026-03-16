@@ -18,7 +18,7 @@
 					<em>/</em>
 					<em>팩스 054)382-0520</em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Samgukyusa Gunwi Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Samgukyusa Gunwi  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

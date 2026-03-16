@@ -17,7 +17,7 @@
 					<em>전화 054)631-8140</em>
 					<em>팩스 054)631-8144</em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Yeongju Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Yeongju  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

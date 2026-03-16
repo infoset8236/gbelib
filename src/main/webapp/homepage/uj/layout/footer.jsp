@@ -17,7 +17,7 @@
 					<em><b>전화</b> : (자료실) 054)783-2371~3  /  (평생학습,사무실) 054)783-2375 </em>
 					<em> <b>팩스</b> : 054)782-2679 </em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Uljin Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Uljin  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

@@ -21,7 +21,7 @@
 					<em>전화 054)971-1507</em>
 					<em>팩스 054)973-8595</em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Chilgok Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Chilgok  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

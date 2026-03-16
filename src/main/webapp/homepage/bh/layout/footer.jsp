@@ -11,7 +11,7 @@
 							<label>대표전화.</label> 054)673-0973,0974<br />
 							<label>팩스번호.</label> 054)673-2544 
 						</dd>
-						<dd>Copyright &copy; by Gyeongsangbuk-do <br />bonghwa Public Library, All rights reserved.</dd>
+						<dd>Copyright &copy; by Gyeongsangbuk-do <br />bonghwa  All rights reserved.</dd>
 					</dl>
 					<div class="fcr">
 						<dl>

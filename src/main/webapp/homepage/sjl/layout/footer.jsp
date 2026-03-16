@@ -21,7 +21,7 @@
 					<em>전화 054)933-2095</em>
 					<em>팩스 054)931-2495 </em>
 				</p>
-				<span>COPYRIGHT &copy; BY Seongju Public Library, ALL RIGHTS RESERVED.</span>
+				<span>COPYRIGHT &copy; BY Seongju  ALL RIGHTS RESERVED.</span>
 			</address>
 			<div class="site_link">
 				<div>

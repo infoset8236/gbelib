@@ -17,7 +17,7 @@
 					<em>전화 053)810-9999</em>
 					<em>팩스 053)810-9730</em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Jumchon Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Jumchon  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

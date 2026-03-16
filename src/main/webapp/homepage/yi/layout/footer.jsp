@@ -19,7 +19,7 @@
 					<em>전화 054)261-8856,2201</em>
 					<em>팩스 054)262-2525</em>
 				</p>
-				<span>Copyright &copy; by Gyeongbuk Provincial Youngil Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongbuk Provincial Youngil  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

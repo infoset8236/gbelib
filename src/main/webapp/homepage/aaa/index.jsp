@@ -13,7 +13,7 @@
 
 		<div style="padding:20px 0;background:#f2f2f2;clear:both">
 			<div class="section code-info">
-				<p>Copyright &amp;copy; by Gyeongsangbuk-do Cheongdo Public Library, All rights reserved.</p>
+				<p>Copyright &amp;copy; by Gyeongsangbuk-do Cheongdo  All rights reserved.</p>
 				<br/>
 				<p>CMS : <a href="http://gbelib.kr/cms/login/index.do" target="_blank">http://gbelib.kr/cms/login/index.do</a></p>
 				<p>csadmin , csadmin!@3 / gbelib.kr/cd/index.do</p>

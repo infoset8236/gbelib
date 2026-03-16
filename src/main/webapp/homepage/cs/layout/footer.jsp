@@ -18,7 +18,7 @@
 					<em>/</em>
 					<em>팩스 <b>054)873-1542</b></em>
 				</p>
-				<span>Copyright © by Gyeongsangbuk-do Cheongsong Public Library, All rights reserved.</span>
+				<span>Copyright © by Gyeongsangbuk-do Cheongsong  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

@@ -21,7 +21,7 @@
 					<span class="bar">/</span>
 					<em><strong>팩스</strong> 054)821-7540</em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Andong Youngsang Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Andong Youngsang  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

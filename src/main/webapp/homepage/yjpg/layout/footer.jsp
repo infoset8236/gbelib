@@ -17,7 +17,7 @@
 					<em>전화 <b>054)637-9811</b></em>
 					<em>팩스 <b>054)635-3030</b></em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Yeongju Punggi Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Yeongju Punggi  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

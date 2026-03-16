@@ -17,7 +17,7 @@
 					<em>전화 <b>054)530-6300</b></em>
 					<em>팩스 <b>054)536-0409</b></em>
 				</p>
-				<span>Copyright &copy; by Gyeongsangbuk-do Sang-ju Public Library, All rights reserved.</span>
+				<span>Copyright &copy; by Gyeongsangbuk-do Sang-ju  All rights reserved.</span>
 			</address>
 			<div class="site_link">
 				<div>

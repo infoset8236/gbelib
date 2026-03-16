@@ -11,7 +11,7 @@
 							<label>Tel.</label> 자료실 054)654-9666  l  행정  054)652-6076<br />
 							<label>Fax.</label> 054)654-6770 
 						</dd>
-						<dd>Copyright &copy; by Gyeongsangbuk-do <br />Yecheon Public Library, All rights reserved.</dd>
+						<dd>Copyright &copy; by Gyeongsangbuk-do <br />Yecheon  All rights reserved.</dd>
 					</dl>
 					<div class="fcr">
 						<dl>
