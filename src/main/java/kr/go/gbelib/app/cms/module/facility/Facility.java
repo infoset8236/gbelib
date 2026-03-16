@@ -49,6 +49,8 @@ public class Facility extends PagingUtils implements Cloneable {
 	private String facilityType;
 
 	private String[] choice_Month;
+
+	private String blackboard_use_yn = "N";
 	
 	public Facility() { }
 	
@@ -357,5 +359,13 @@ public class Facility extends PagingUtils implements Cloneable {
 
 	public void setChoice_Month(String[] choice_Month) {
 		this.choice_Month = choice_Month;
+	}
+
+	public String getBlackboard_use_yn() {
+		return blackboard_use_yn;
+	}
+
+	public void setBlackboard_use_yn(String blackboard_use_yn) {
+		this.blackboard_use_yn = blackboard_use_yn;
 	}
 }
