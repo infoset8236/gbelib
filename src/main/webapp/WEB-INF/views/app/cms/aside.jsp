@@ -81,111 +81,67 @@ $(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 	//왼쪽메뉴
-    $('.aside .menu-list > ul > li').each(function(){
+    const $menu = $('.aside .menu-list');
+    const $depth1 = $menu.find('> ul > li');
+    const $depth2 = $depth1.find('> ul > li');
 
-        if($(this).find('ul').length > 0){
+    const closeSiblings = $el => {
+        $el.siblings().removeClass('active').children('ul').slideUp(80);
+    };
 
-            $(this).children('a').on('click', function(){
+    $menu.on('click', 'li > a', function(e){
+        const $li = $(this).parent();
+        const $ul = $li.children('ul');
+        const isDepth1 = $li.parent().parent().is('.menu-list');
 
-                const parent = $(this).parent();
-
-                if(parent.hasClass('active')){
-                    parent.removeClass('active');
-                    parent.children('ul').slideUp(80);
-                    parent.find('ul li').removeClass('active');
-                }else{
-                    $('.aside .menu-list > ul > li').removeClass('active');
-                    $('.aside .menu-list > ul > li > ul').slideUp(80);
-                    $('.aside .menu-list > ul > li > ul li').removeClass('active');
-
-                    parent.addClass('active');
-                    parent.children('ul').slideDown(80);
-                }
-
-                return false;
-            });
-
-            if($(this).find('li').hasClass('active')){
-                $(this).addClass('active');
-                $(this).children('ul').show();
+        if($ul.length){
+            e.preventDefault();
+            if($li.hasClass('active')){
+                $li.removeClass('active');
+                $ul.slideUp(80);
+                return;
             }
-
-        }else{
-            $(this).addClass('s');
+            if(isDepth1){
+                $depth1.not($li).removeClass('active').children('ul').slideUp(80);
+            }else{
+                closeSiblings($li);
+            }
+            $li.addClass('active');
+            $ul.slideDown(80);
+            return;
         }
 
+        if($li.parent().is($depth1.children('ul'))){
+            closeSiblings($li);
+            $li.addClass('active');
+            return;
+        }
+
+        if($li.parent().parent().is($depth2)){
+            const $d2 = $li.closest('li').parent().parent();
+            $depth2.not($d2).removeClass('active');
+            $d2.addClass('active');
+            closeSiblings($li);
+            $li.addClass('active');
+        }
     });
 
+    $depth1.each(function(){
+        const $li = $(this);
+        if(!$li.children('ul').length) $li.addClass('s');
+        if($li.find('li.active').length) $li.addClass('active').children('ul').show();
+    });
 
-    $('.aside .menu-list > ul > li > ul > li').each(function(){
-
-        if($(this).find('ul').length > 0){
-
-            $(this).children('a').on('click', function(){
-
-                const parent = $(this).parent();
-
-                if(parent.hasClass('active')){
-                    parent.removeClass('active');
-                    parent.children('ul').slideUp(80);
-                    parent.find('ul li').removeClass('active');
-                }else{
-                    parent.siblings().removeClass('active')
-                            .children('ul').slideUp(80);
-
-                    parent.siblings()
-                            .find('ul li')
-                            .removeClass('active');
-
-                    parent.addClass('active');
-                    parent.children('ul').slideDown(80);
-                }
-
-                return false;
-
-            });
-
-        }else{
-
-            $(this).addClass('s');
-
-            if($(this).children('a').text() == 'ICT'){
+    $depth2.each(function(){
+        const $li = $(this);
+        if(!$li.children('ul').length){
+            $li.addClass('s');
+            if($li.children('a').text()==='ICT'){
                 <c:if test="${adminMenu.homepage_id ne 'h28'}">
-                    $(this).css('display','none');
+                    $li.css('display','none');
                 </c:if>
             }
-
         }
-
-    });
-
-
-    $('.aside .menu-list > ul > li > ul > li > a').on('click', function(){
-
-        const parent = $(this).parent();
-
-        parent.siblings().removeClass('active')
-                .find('ul li').removeClass('active');
-
-        parent.addClass('active');
-
-    });
-
-
-    $('.aside .menu-list > ul > li > ul > li > ul > li > a').on('click', function(){
-
-        const parent = $(this).parent();
-        const depth2 = parent.closest('.aside .menu-list > ul > li > ul > li');
-
-        $('.aside .menu-list > ul > li > ul > li').not(depth2)
-                .removeClass('active')
-                .find('ul li').removeClass('active');
-
-        depth2.addClass('active');
-
-        parent.siblings().removeClass('active');
-        parent.addClass('active');
-
     });
 
 	$('a.pass-change-btn').on('click', function(e) {
