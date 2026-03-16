@@ -27,4 +27,6 @@ public interface TrainingBelongDao  {
 	public int checkCode(TrainingBelong trainingBelong);
 
 	int deleteAlltrainingBelong(TrainingBelong trainingBelong);
+
+	int deleteEvery(TrainingBelong trainingBelong);
 }

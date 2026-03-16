@@ -119,6 +119,30 @@ function deleteAll() {
 	}
 }
 
+function deleteEvery() {
+	if(confirm('전체 삭제 하시겠습니까?')) {
+		if(confirm('전체 삭제 후 데이터 복원은 불가능합니다.\n\n그래도 전체 삭제를 진행하시겠습니까?')) {
+			$.ajax({
+				type: "POST",
+				url: "deleteEvery.do",
+				dataType: "json",
+				success: function(response) {
+					if(response && response.valid){
+						alert("전체 삭제되었습니다.");
+						location.reload();
+					}else{
+						alert("삭제 처리 중 문제가 발생했습니다.");
+					}
+				},
+				error: function() {
+					alert("전체 삭제에 실패했습니다.\n\n관리자에게 문의해 주세요.");
+				}
+			});
+
+		}
+	}
+}
+
 function PageReload(){
 	location.reload();
 }
@@ -142,9 +166,11 @@ function PageReload(){
             <a href="javascript:void(0)" id="excelDownload" class="btn btn1 left"><span>양식다운로드</span></a>
             <form:input path="mfile" name="mfile" type="file"/>
 
-            <div style="margin-left: auto"><a href="javascript:void(0)" id="excelUpload" class="btn btn1 left"><span>일괄등록</span></a>
-                <a href="javascript:void(0)" id="deleteAll" class="btn btn1 left"
-                   onclick="deleteAll()"><span>일괄삭제</span></a></div>
+            <div style="margin-left: auto">
+				<a href="javascript:void(0)" id="excelUpload" class="btn btn1 left"><span>일괄등록</span></a>
+                <a href="javascript:void(0)" id="deleteAll" class="btn btn4 left" onclick="deleteAll()"><span>선택삭제</span></a>
+                <a href="javascript:void(0)" id="deleteEvery" class="btn btn5 left" onclick="deleteAll()"><span>일괄삭제</span></a>
+			</div>
         </c:if>
     </div>
 	<!-- 교육소식 관리 table -->

@@ -109,4 +109,8 @@ public class TrainingBelongService extends BaseService {
 	public int deleteAlltrainingBelong(TrainingBelong trainingBelong) {
 		return dao.deleteAlltrainingBelong(trainingBelong);
 	}
+
+    public int deleteEvery(TrainingBelong trainingBelong) {
+		return dao.deleteEvery(trainingBelong);
+    }
 }

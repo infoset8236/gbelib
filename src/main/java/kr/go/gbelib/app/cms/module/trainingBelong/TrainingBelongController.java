@@ -154,4 +154,22 @@ public class TrainingBelongController extends BaseController {
 		return res;
 
 	}
+
+	@RequestMapping (value = {"/deleteEvery.*"}, method = RequestMethod.POST)
+	public @ResponseBody JsonResponse deleteEvery(TrainingBelong trainingBelong, BindingResult result, Model model, HttpServletRequest request) {
+		trainingBelong.setHomepage_id(getAsideHomepageId(request));
+
+		JsonResponse res = new JsonResponse(request);
+
+		if (!result.hasErrors()) {
+			service.deleteEvery(trainingBelong);
+			res.setValid(true);
+			res.setMessage("삭제되었습니다.");
+		} else {
+			res.setValid(false);
+			res.setResult(result.getAllErrors());
+		}
+		return res;
+
+	}
 }

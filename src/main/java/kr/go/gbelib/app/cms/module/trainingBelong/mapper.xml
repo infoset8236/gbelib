@@ -92,6 +92,7 @@
 			homepage_id = #{homepage_id}
 		AND	belong_idx = #{belong_idx}
 	</delete>
+
 	<delete id="deleteAlltrainingBelong">
 		DELETE FROM
 			TRAINING_BELONG
@@ -117,4 +118,11 @@
 		#{manager_name}, #{manager_phone}, #{belong_name}, SYSDATE, #{add_id}
 		)
 	</insert>
+
+	<delete id="deleteEvery">
+		DELETE FROM
+			TRAINING_BELONG
+		WHERE
+			1 = 1
+	</delete>
 </mapper>
