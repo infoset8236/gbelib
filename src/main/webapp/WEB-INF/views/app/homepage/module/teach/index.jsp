@@ -30,7 +30,7 @@ $(function(){
 		var $this = $(this);
 		doGetLoad('/${homepage.context_path}/module/teach/student/edit.do', 
 				'editMode=ADD&homepage_id='+$this.attr('keyValue1')+'&group_idx='+$this.attr('keyValue2')+'&category_idx='+$this.attr('keyValue3')
-				+'&teach_idx='+$this.attr('keyValue4')+'&large_category_idx='+$this.attr('keyValue5')+ '&black_yn='+$this.attr('keyValue6') + '&apply_status='+ $this.attr('apply_status')+'&menu_idx='+$('input#menu_idx').val());
+				+'&teach_idx='+$this.attr('keyValue4')+'&large_category_idx='+$this.attr('keyValue5')+ '&black_yn='+$this.attr('keyValue6') + '&apply_status='+ $this.attr('apply_status')+'&menu_idx='+$('input#menu_idx').val()+'&searchCate1='+'${param.searchCate1}');
 		
 		e.preventDefault();
 	});
@@ -349,7 +349,7 @@ $(function(){
 						<th class="important">장소</th>
 						<th class="important">접수기간</th>
 						<th>강좌일</th>
-						<th>모집인원</th>
+						<th>접수현황</th>
 						<th>신청</th>
 					</tr>
 				</thead>
@@ -376,9 +376,9 @@ $(function(){
 														</c:if>
 													</c:forEach>
 												) ${i.start_time} ~ ${i.end_time}</td>
-									<td class="file"><span><strong>온라인</strong> ${i.teach_limit_count}명 </span>
-						<c:if test="${i.teach_offline_count > 0}"><span>, <strong>오프라인</strong> ${i.teach_offline_count}명</span></c:if>
-						<c:if test="${i.teach_backup_count > 0}"><span>, ( <strong>후보자</strong> ${i.teach_backup_count}명 )</span></c:if></td>
+									<td class="file"><span><strong>온라인</strong> ${i.teach_join_count} / ${i.teach_limit_count} </span>
+						<c:if test="${i.teach_offline_count > 0}"><span>, <strong>오프라인</strong> ${i.teach_off_join_count} / ${i.teach_offline_count}</span></c:if>
+						<c:if test="${i.teach_backup_count > 0}"><span>, ( <strong>후보자</strong> ${i.teach_backup_join_count} / ${i.teach_backup_count} )</span></c:if></td>
 									<td>
 										<c:choose>
 				<c:when test="${member.login and (member.loginType eq 'HOMEPAGE') and (i.member_key eq member.seq_no)}">

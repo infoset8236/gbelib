@@ -84,6 +84,8 @@
 		WHERE
 			TERMS_IDX IN (SELECT TERMS_IDX FROM CMS_MODULE_TERMS WHERE MODULE_IDX = #{module_idx})
 			AND DELETE_YN = 'N' AND USE_YN = 'Y'
+		ORDER BY
+		    TERMS_IDX
 	</select>
 
 	<select id="getTermsListNotInModule" resultType="kr.co.whalesoft.app.cms.terms.Terms">

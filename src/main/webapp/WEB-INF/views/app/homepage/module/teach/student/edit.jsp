@@ -77,10 +77,12 @@ $(function() {
 			("#student_birth").focus();
 			return false;
 		}
-		
-		if ( $form.find('#self_info_yn').val() != 'Y' ) {
+
+		if ( $form.find('.self_info_yn option:selected[value="N"]').length > 0 ) {
 			alert('이용약관 및 개인정보의 수집·이용 동의 하여야 신청이 가능합니다.');
 			return false;
+		} else {
+			$('#self_info_yn').val('Y');
 		}
 
 		var cellPhone1 = $form.find('#applicant_cell_phone_1').val();
@@ -213,17 +215,34 @@ $(function() {
 });
 $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(this).val().replace(/[^0-9]/gi,"") );});
 </script>
-<c:forEach items="${termsList}" var="terms">
-	${terms.contents }
-</c:forEach>
-
 <form:form id="studentForm" modelAttribute="student" method="post" action="save.do" onsubmit="return false;">
-	<div style="text-align: right"><b>이용약관 및 개인정보의 수집·이용 동의 여부</b>(<span style="color: red; font-weight: bold;">*</span>)
-		<form:select path="self_info_yn" cssClass="selectmenu" cssStyle="width : 70px" title="동의여부">
-			<form:option value="Y" label="동의"/>
-			<form:option value="N" label="미동의"/>
-		</form:select>
-	</div>
+	<c:set var="searchCate1Str" value="${param.searchCate1}"/>
+	<c:forEach items="${termsList}" var="terms" varStatus="status">
+		<c:choose>
+			<c:when test="${searchCate1Str eq '16,17' and (terms.terms_idx eq 20 or terms.terms_idx eq 21)}">
+				${terms.contents}
+				<div style="text-align: right">
+					<b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b>
+					(<span style="color: red; font-weight: bold;">*</span>)
+					<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
+						<option value="Y">동의</option>
+						<option value="N">미동의</option>
+					</select>
+				</div>
+			</c:when>
+			<c:when test="${searchCate1Str eq '18' and (terms.terms_idx eq 18 or terms.terms_idx eq 19)}">
+				${terms.contents}
+				<div style="text-align: right">
+					<b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b>
+					(<span style="color: red; font-weight: bold;">*</span>)
+					<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
+						<option value="Y">동의</option>
+						<option value="N">미동의</option>
+					</select>
+				</div>
+			</c:when>
+		</c:choose>
+	</c:forEach>
 
 	<form:hidden path="homepage_id"/>
 	<form:hidden path="large_category_idx"/>
@@ -235,6 +254,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 	<form:hidden path="menu_idx"/>
 	<form:hidden path="apply_status"/>
 	<form:hidden path="member_key" />
+	<form:hidden path="self_info_yn"/>
 	<h3>신청자정보</h3>
 	<div style="text-align: right; ${param.ageType eq 'under' ? 'display:none;':''}">
 		(<span style="color: red; font-weight: bold;">*</span>) 항목은 필수 입력값입니다.
