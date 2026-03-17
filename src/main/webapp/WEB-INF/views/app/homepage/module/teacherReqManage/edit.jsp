@@ -819,34 +819,343 @@ function removeChar(event) {
     else
         event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const allAgree = document.getElementById("allAgree");
+    const form = document.getElementById("agreeForm");
+
+
+    // 전체동의 클릭
+    allAgree.addEventListener("change", function () {
+
+        if (this.checked) {
+
+            document.querySelectorAll('.agreeChk input[value="yes"]').forEach(el => {
+                el.checked = true;
+            });
+
+        } else {
+
+            document.querySelectorAll('.agreeChk input[value="no"]').forEach(el => {
+                el.checked = true;
+            });
+
+        }
+
+    });
+
+
+    // 개별 선택 변경 시 전체동의 자동 체크
+    document.querySelectorAll('.agreeChk input').forEach(el => {
+
+        el.addEventListener("change", function () {
+
+            const total = document.querySelectorAll('.agreeChk').length;
+            const agreed = document.querySelectorAll('.agreeChk input[value="yes"]:checked').length;
+
+            allAgree.checked = (total === agreed);
+
+        });
+
+    });
+
+
+    // 제출 시 필수 체크
+    form.addEventListener("submit", function (e) {
+
+        const requiredList = document.querySelectorAll('.requiredAgree');
+
+        let isAgree = true;
+
+        requiredList.forEach(el => {
+
+            const name = el.name;
+            const checked = document.querySelector(`input[name="${name}"]:checked`).value;
+
+            if (checked !== "yes") {
+                isAgree = false;
+            }
+
+        });
+
+        if (!isAgree) {
+
+            alert("필수 개인정보 수집 및 이용에 모두 동의해야 합니다.");
+            e.preventDefault();
+
+        }
+
+    });
+
+});
+
 </script>
 <style>
 	.Box {padding:20px; overflow: auto;border: 1px solid #ccc;background: #f3f3f3;color: #666; margin: 0 0 10px;}
+    .agreeBox{
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0 30px 0;
+    }
+    .allAgreeBox{
+        text-align: center;
+        margin: 30px 0;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .agreeChk input {
+        display: none;
+    }
+
+    .agreeChk span {
+        position: relative;
+        padding-left: 26px;
+        cursor: pointer;
+    }
+
+    .agreeChk span::before {
+        content: "";
+        position: absolute;
+        left: 7px;
+        top: 5px;
+        width: 10px;
+        height: 10px;
+        border: 2px solid #666;
+        border-radius: 3px;
+    }
+
+    .agreeChk span::after{
+        content: "";
+        position: absolute;
+        left: 10px;
+        top: 7px;
+        width: 6px;
+        height: 4px;
+        border: 2px solid #fff;
+        border-top: none;
+        border-right: none;
+        transform: rotate(-45deg);
+    }
+
+    /* 체크 상태 */
+    .agreeChk input:checked + span::before{
+        background:#0078ff;
+        border-color:#0078ff;
+    }
+
+    .agreeChk input:checked + span::after{
+        opacity:1;
+    }
 </style>
 <c:forEach items="${termsList}" var="terms">
 	${terms.contents }
 </c:forEach>
 
 <c:if test="${homepage.context_path eq 'geic'}">
-	<h4>개인정보 수집·이용 동의</h4>
-	<div class="Box" style="height:200px" tabindex="0">
-    <h4>▣ 개인정보 수집·이용 목적</h4>
-    <p class="mB20 mL10">&nbsp; · 경북지역 평생학습 강사정보의 체계적 관리</p>
-    <h4>▣ 수집하는 개인정보의 항목</h4>
-    <p class="mB20 mL10">&nbsp; · 정보주체</p>
-    <p class="mB20 mL10">&nbsp;&nbsp;&nbsp; - 필수: 이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능
-        지역, 강의계획서</p>
-    <p class="mB20 mL10">&nbsp;&nbsp;&nbsp; - 선택: 이메일, 자격·면허·수상 내역, 강의 경력</p>
-    <h4>▣ 개인정보의 보유 및 이용 기간</h4>
-    <p class="mB20 mL10">&nbsp; · 5년</p>
-    <h4>▣ 개인정보 수집·이용에 대한 동의를 거부할 권리:</h4>
-    <p class="mB20 mL10">&nbsp; · 개인정보 수집·이용을 거부할
-        수 있으며, 미동의 시 강사은행에 강사
-        등록 신청이 제한됩니다.
+    <h4>개인정보 수집·이용 동의</h4>
+    <p class="mB20 mL10">
+        본 기관은 강사등록 신청을 위하여 「개인정보보호법」에 따라 귀하의 개인정보를 수집·이용하고자 합니다.<br />
+        내용을 자세히 읽으신 후 동의 여부를 결정하여 주십시오.
     </p>
+    <h4>1. [필수] 개인정보 수집 및 이용 동의</h4>
+    <div class="rsv-info"></div>
+    <div class="auto-scroll">
+        <table class="tbl-type01" summary="">
+            <colgroup>
+                <col width="30%" />
+            </colgroup>
+            <thead>
+            <th>구분</th>
+            <th>내용</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>수집·이용 목적</td>
+                <td>경북지역 평생학습 강사정보의 체계적 관리</td>
+            </tr>
+            <tr>
+                <td>수집 항목</td>
+                <td>이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서</td>
+            </tr>
+            <tr>
+                <td>보유·이용 기간</td>
+                <td>5년(동의 철회 시 까지)</td>
+            </tr>
+            <tr>
+                <td>동의 거부 권리 및 불이익</td>
+                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 강사등록 신청이 제한될 수 있습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="agreeBox">
+            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+
+            <div class="agreeChk">
+                <label>
+                    <input type="radio" name="agree1" value="yes" class="requiredAgree"> <span>동의함</span>
+                </label>
+                <label>
+                    <input type="radio" name="agree1" value="no" checked> <span>동의하지 않음</span>
+                </label>
+            </div>
+        </div>
     </div>
 
-	<h4>개인정보 제3자 제공 동의</h4>
+    <h4>2. [선택] 개인정보 수집 및 이용 동의</h4>
+    <div class="rsv-info"></div>
+    <div class="auto-scroll">
+        <table class="tbl-type01" summary="">
+            <colgroup>
+                <col width="30%" />
+            </colgroup>
+            <thead>
+            <th>구분</th>
+            <th>내용</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>수집·이용 목적</td>
+                <td>경북지역 평생학습 강사정보의 체계적 관리</td>
+            </tr>
+            <tr>
+                <td>수집 항목</td>
+                <td>이메일, 자격·면허·수상 내역, 강의 경력</td>
+            </tr>
+            <tr>
+                <td>보유·이용 기간</td>
+                <td>5년(동의 철회 시 까지)</td>
+            </tr>
+            <tr>
+                <td>동의 거부 권리 및 불이익</td>
+                <td>선택 항목 수집에 동의하지 않더라도 강사 등록 신청은 가능합니다. 다만, 자격 및 경력 사항 확인이 불가능하여 선발 심사에서 불이익을 받을 수 있습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="agreeBox">
+            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+
+            <div class="agreeChk">
+                <label>
+                    <input type="radio" name="agree2" value="yes" class="optionalAgree"> <span>동의함</span>
+                </label>
+                <label>
+                    <input type="radio" name="agree2" value="no" checked> <span>동의하지 않음</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <h4>3. [필수] 개인정보 제 3자 제공 동의</h4>
+    <div class="rsv-info"></div>
+    <div class="auto-scroll">
+        <table class="tbl-type01" summary="">
+            <colgroup>
+                <col width="30%" />
+            </colgroup>
+            <thead>
+            <th>구분</th>
+            <th>내용</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>개인정보를 제공받는 자</td>
+                <td>경상북도교육청 소속 교직원 및 누리집 이용자</td>
+            </tr>
+            <tr>
+                <td>제공받는 자의 개인정보 이용 목적</td>
+                <td>교육프로그램 운영</td>
+            </tr>
+            <tr>
+                <td>제공하는 개인정보 항목</td>
+                <td>
+                    - 교직원: 이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서 <br />
+                    - 누리집 이용자: 이름(비식별), 강의가능지역, 과목구분, 과목명
+                </td>
+            </tr>
+            <tr>
+                <td>개인정보 보유 및 이용 기간</td>
+                <td>5년(동의 철회 시 까지)</td>
+            </tr>
+            <tr>
+                <td>동의 거부 권리 및 불이익</td>
+                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 강사등록 신청이 제한될 수 있습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="agreeBox">
+            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+            <div class="agreeChk">
+                <div class="agreeChk">
+                    <label>
+                        <input type="radio" name="agree3" value="yes" class="requiredAgree"> <span>동의함</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="agree3" value="no" checked> <span>동의하지 않음</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <h4>4. [선택] 개인정보 제 3자 제공 동의</h4>
+    <div class="rsv-info"></div>
+    <div class="auto-scroll">
+        <table class="tbl-type01" summary="">
+            <colgroup>
+                <col width="30%" />
+            </colgroup>
+            <thead>
+            <th>구분</th>
+            <th>내용</th>
+            </thead>
+            <tbody>
+            <tr>
+                <td>개인정보를 제공받는 자</td>
+                <td>경상북도교육청 소속 교직원</td>
+            </tr>
+            <tr>
+                <td>제공받는 자의 개인정보 이용 목적</td>
+                <td>교육프로그램 운영</td>
+            </tr>
+            <tr>
+                <td>제공하는 개인정보 항목</td>
+                <td>5년(동의 철회 시 까지)</td>
+            </tr>
+            <tr>
+                <td>개인정보 보유 및 이용 기간</td>
+                <td>5년(동의 철회 시 까지)</td>
+            </tr>
+            <tr>
+                <td>동의 거부 권리 및 불이익/td></td>
+                <td>선택 항목 수집에 동의하지 않더라도 강사 등록 신청은 가능합니다. 다만, 자격 및 경력 사항 확인이 불가능하여 선발 심사에서 불이익을 받을 수 있습니다.</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="agreeBox">
+            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+
+            <div class="agreeChk">
+                <label>
+                    <input type="radio" name="agree4" value="yes" class="optionalAgree"> <span>동의함</span>
+                </label>
+                <label>
+                    <input type="radio" name="agree4" value="no" checked> <span>동의하지 않음</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="allAgreeBox">
+        <label>
+            <input type="checkbox" id="allAgree"> 모든 약관에 동의합니다.
+        </label>
+    </div>
+
+
+    <h4>개인정보 제3자 제공 동의</h4>
 	<div class="Box" style="height:200px" tabindex="0" >
 		<h4>▣ 개인정보를 제공받는 자</h4>
 		<p class="mB20 mL10">&nbsp; · 경상북도교육청 소속 교직원 및 누리집 이용자</p>
