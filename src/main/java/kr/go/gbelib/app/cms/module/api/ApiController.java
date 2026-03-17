@@ -143,6 +143,7 @@ public class ApiController extends BaseController {
 						m.put("imsi_v_8", b.getImsi_v_8());
 						m.put("title", b.getTitle());
 						m.put("imsi_v_3", b.getImsi_v_3());
+						m.put("imsi_v_5", b.getImsi_v_5());
 						m.put("preview_img", b.getPreview_img());
 						listData.add(m);
 					}
