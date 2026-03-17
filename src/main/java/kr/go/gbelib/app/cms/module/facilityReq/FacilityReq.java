@@ -49,6 +49,8 @@ public class FacilityReq extends PagingUtils {
 	private String desired_start_time; 			// 희망이용시작시간
 	private String desired_end_time; 			// 희망이용시작시간
 	private int user_aplly_count;		// 신청자의 신청인원
+
+	private String blackboard_use_yn = "N";
 	
 	public FacilityReq() { }
 	
@@ -330,5 +332,12 @@ public class FacilityReq extends PagingUtils {
 	public void setDesired_end_time(String desired_end_time) {
 		this.desired_end_time = desired_end_time;
 	}
-	
+
+	public String getBlackboard_use_yn() {
+		return blackboard_use_yn;
+	}
+
+	public void setBlackboard_use_yn(String blackboard_use_yn) {
+		this.blackboard_use_yn = blackboard_use_yn;
+	}
 }

@@ -153,15 +153,6 @@ $(function() {
 					<form:radiobutton path="use_yn" class="N" value="N"/> <label for="use_yn2" style="cursor:pointer;">사용안함</label>
 				</td>
 	        </tr>
-			<c:if test="${facility.homepage_id eq 'h23'}">
-				<tr>
-					<th>전자칠판 사용여부</th>
-					<td>
-						<form:radiobutton path="blackboard_use_yn" class="Y" value="Y"/> <label for="blackboard_use_yn1" style="cursor:pointer;">사용함</label>&nbsp;
-						<form:radiobutton path="blackboard_use_yn" class="N" value="N"/> <label for="blackboard_use_yn2" style="cursor:pointer;">사용안함</label>
-					</td>
-				</tr>
-			</c:if>
 		</tbody>
 	</table>
 </form:form>

@@ -52,55 +52,106 @@ $(function() {
 			<col width="180"/>
 			<col width="120"/>
 			<col width="120"/>
-			<col width=""/>
-			<c:if test="${facilityReq.homepage_id eq 'h2' }">
+			<col width="*"/>
+
+			<c:if test="${facilityReq.homepage_id eq 'h2'}">
 				<col width="90"/>
 				<col width="90"/>
 				<col width="90"/>
 			</c:if>
+
+			<c:if test="${facilityReq.homepage_id eq 'h23'}">
+				<col width="120"/>
+			</c:if>
+
 			<col width="90"/>
 			<col width="100"/>
 		</colgroup>
+
 		<thead>
 			<tr>
 				<th>시설물 명</th>
 				<th>이용가능일</th>
 				<th>이용시간</th>
 				<th>사용목적</th>
-				<c:if test="${facilityReq.homepage_id eq 'h2' }">
+
+				<c:if test="${facilityReq.homepage_id eq 'h2'}">
 					<th>희망이용시작시간</th>
 					<th>희망이용종료시간</th>
 					<th>사용자신청인원</th>
 				</c:if>
+
+				<c:if test="${facilityReq.homepage_id eq 'h23'}">
+					<th>전자칠판<br/>사용 여부</th>
+				</c:if>
+
 				<th>신청상태</th>
 				<th>기능</th>
 			</tr>
 		</thead>
+
 		<tbody>
-			<c:forEach var="i" varStatus="status" items="${applyList}">				
-				<tr>
-					<td>${i.facility_name}</td>
-					<td>${i.use_date}</td>
-					<td>${i.start_time}~${i.end_time}</td>
-					<td>${i.apply_desc}</td>
-					<c:if test="${facilityReq.homepage_id eq 'h2' }">
-						<td>${i.desired_start_time }</td>
-						<td>${i.desired_end_time }</td>
-						<td>${i.user_aplly_count }</td>
-					</c:if>
-					<td>${i.apply_status}</td>
-					<td>
-						<c:if test="${i.apply_status ne '취소'}">
-							<a class="btn btn5 facility-cancel-btn" keyValue1="${i.homepage_id}" keyValue2="${i.facility_idx}" keyValue3="${i.facility_req_idx}">취소</a>
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
-			<c:if test="${fn:length(applyList) < 1}">
-				<tr>
-					<td colspan="6">데이터가 존재하지 않습니다.</td>
-				</tr>
-			</c:if>
+			<c:choose>
+				<c:when test="${fn:length(applyList) > 0}">
+					<c:forEach var="i" items="${applyList}">
+						<tr>
+							<td>${empty i.facility_name ? '-' : i.facility_name}</td>
+							<td>${empty i.use_date ? '-' : i.use_date}</td>
+							<td>${i.start_time} ~ ${i.end_time}</td>
+							<td>${empty i.apply_desc ? '-' : i.apply_desc}</td>
+
+							<c:if test="${facilityReq.homepage_id eq 'h2'}">
+								<td>${i.desired_start_time}</td>
+								<td>${i.desired_end_time}</td>
+								<td>${i.user_aplly_count}</td>
+							</c:if>
+
+							<c:if test="${facilityReq.homepage_id eq 'h23'}">
+								<td>
+									<c:choose>
+										<c:when test="${i.blackboard_use_yn eq 'Y'}">사용함</c:when>
+										<c:otherwise>사용안함</c:otherwise>
+									</c:choose>
+								</td>
+							</c:if>
+
+							<td>
+								<c:choose>
+									<c:when test="${i.apply_status eq '신청'}">
+										<span class="status status1">신청</span>
+									</c:when>
+									<c:when test="${i.apply_status eq '승인'}">
+										<span class="status status2">승인</span>
+									</c:when>
+									<c:when test="${i.apply_status eq '취소'}">
+										<span class="status status3">취소</span>
+									</c:when>
+									<c:otherwise>-</c:otherwise>
+								</c:choose>
+							</td>
+
+							<td>
+								<c:if test="${i.apply_status ne '3'}">
+									<a class="btn btn5 facility-cancel-btn"
+									   data-homepage="${i.homepage_id}"
+									   data-facility="${i.facility_idx}"
+									   data-req="${i.facility_req_idx}">
+									   취소
+									</a>
+								</c:if>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:when>
+
+				<c:otherwise>
+					<tr>
+						<td colspan="${facilityReq.homepage_id eq 'h2' ? 9 : (facilityReq.homepage_id eq 'h23' ? 8 : 6)}">
+							데이터가 존재하지 않습니다.
+						</td>
+					</tr>
+				</c:otherwise>
+			</c:choose>
 		</tbody>
 	</table>
 </div>

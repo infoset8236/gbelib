@@ -5,7 +5,7 @@
 	<select id="getFacilityReqListAll" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">			
 		SELECT
 			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY, APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS
-			, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID
+			, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID, BLACKBOARD_USE_YN
 		FROM
 			FACILITY_REQ 
 		WHERE
@@ -21,7 +21,7 @@
 	<select id="getFacilityReqList" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">
 		SELECT
 			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY, APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS
-			, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID,
+			, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID, BLACKBOARD_USE_YN,
 			(SELECT COUNT(*) FROM BLACKLIST WHERE HOMEPAGE_ID = FACILITY_REQ.HOMEPAGE_ID AND MEMBER_KEY = FACILITY_REQ.MEMBER_KEY AND INSTR(BLACK_TYPE, '30') != 0) as isBlackList,
 		DESIRED_START_TIME,DESIRED_END_TIME, USER_APLLY_COUNT
 		FROM
@@ -41,7 +41,7 @@
 		SELECT
 			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY,
 			APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS, ADD_DATE,
-			ADD_ID, MOD_DATE, MOD_ID, SELF_INFO_YN,DESIRED_START_TIME,DESIRED_END_TIME,USER_APLLY_COUNT
+			ADD_ID, MOD_DATE, MOD_ID, SELF_INFO_YN,DESIRED_START_TIME,DESIRED_END_TIME,USER_APLLY_COUNT, BLACKBOARD_USE_YN
 		FROM
 			FACILITY_REQ
 		WHERE HOMEPAGE_ID = #{homepage_id} 
@@ -66,13 +66,13 @@
 		INSERT INTO FACILITY_REQ
 		(
 			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY, APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS, SELF_INFO_YN
-			, DELETE_YN, ADD_DATE, ADD_ID
+			, DELETE_YN, ADD_DATE, ADD_ID, BLACKBOARD_USE_YN
 			<if test="homepage_id == 'h2'">
 				,DESIRED_START_TIME,DESIRED_END_TIME, USER_APLLY_COUNT
 			</if>
 		) VALUES (
 			#{homepage_id}, #{facility_idx}, #{facility_req_idx}, #{apply_id}, #{member_key}, #{apply_name}, #{apply_phone}, #{apply_desc}, '1', #{self_info_yn}
-			, 'N', SYSDATE, #{add_id}
+			, 'N', SYSDATE, #{add_id}, #{blackboard_use_yn}
 			<if test="homepage_id == 'h2'">
 				,#{desired_start_time},#{desired_end_time},#{user_aplly_count}
 			</if>
@@ -87,7 +87,8 @@
 			, APPLY_DESC 		= #{apply_desc}
 			, MOD_DATE 			= SYSDATE
 			, MOD_ID 			= #{mod_id}
-		WHERE 
+			, BLACKBOARD_USE_YN = #{blackboard_use_yn}
+		WHERE
 			HOMEPAGE_ID = #{homepage_id} 
 			AND FACILITY_IDX = #{facility_idx} 
 			AND FACILITY_REQ_IDX = #{facility_req_idx} 
@@ -126,7 +127,7 @@
 	<select id="getFacilityReqCalendar" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">
 		SELECT
 			A.HOMEPAGE_ID, A.FACILITY_IDX, A.FACILITY_REQ_IDX, A.APPLY_NAME, REGEXP_REPLACE(A.APPLY_NAME, '.', '*', 2) AS MASKING_NAME, A.APPLY_PHONE, 
-			A.APPLY_STATUS, B.FACILITY_NAME, B.USE_DATE
+			A.APPLY_STATUS, B.FACILITY_NAME, B.USE_DATE, A.BLACKBOARD_USE_YN
 		FROM
 			FACILITY_REQ A, FACILITY_MANAGE B
 		WHERE
@@ -164,6 +165,7 @@
 		SELECT 
 			b.HOMEPAGE_ID, b.FACILITY_IDX, b.FACILITY_REQ_IDX, a.FACILITY_NAME, a.USE_DATE, 
 			a.START_TIME, a.END_TIME, b.APPLY_NAME, b.APPLY_PHONE, b.APPLY_DESC,b.DESIRED_START_TIME,b.DESIRED_END_TIME,b.USER_APLLY_COUNT,
+			a.BLACKBOARD_USE_YN,
 			CASE 
 				WHEN b.APPLY_STATUS = '1' THEN '신청'
 				WHEN b.APPLY_STATUS = '2' THEN '승인'

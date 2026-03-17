@@ -23,7 +23,7 @@ $(function() {
 				text: "닫기",
 				"class": 'btn',
 				click: function() {
-					$(this).dialog('destroy');
+					$(this).dialog('close');
 				}
 			}
 		]
@@ -162,94 +162,150 @@ $(function() {
 </form:form>
 
 <table class="type1 center">
-	<colgroup>
-       	<col width="5%" />
-       	<col width="8%" />
-       	<col width="12%" />
-    	<col width="*"/>
-    	<col width="5%" />
-    	<col width="10%" />
-    	<col width="10%" />
-    	<c:if test="${facilityReq.homepage_id eq 'h2' }">
-    	<col width="12%" />
-    	<col width="5%" />
-    	</c:if>
-    	<col width="18%" />
+    <colgroup>
+        <col width="5%" />
+        <col width="8%" />
+        <col width="12%" />
+        <col width="*" />
+        <col width="5%" />
+        <col width="10%" />
+        <col width="10%" />
+        <c:if test="${facilityReq.homepage_id eq 'h2'}">
+            <col width="12%" />
+            <col width="5%" />
+        </c:if>
+        <c:if test="${facilityReq.homepage_id eq 'h23'}">
+            <col width="10%" />
+        </c:if>
+        <col width="18%" />
     </colgroup>
+
     <thead>
-    	<tr>
-    		<th>번호</th>
-    		<th>신청자명</th>
-    		<th>휴대전화번호</th>
-    		<th>사용목적</th>
-    		<th>신청상태</th>
-    		<th>신청날짜</th>
-    		<th>신청시간</th>
-    		<c:if test="${facilityReq.homepage_id eq 'h2' }">
-    		<th>희망<br>이용시간</th>
-    		<th>신청인원</th>
-    		</c:if>
-    		<th>기능</th>
-    	</tr>
+        <tr>
+            <th>번호</th>
+            <th>신청자명</th>
+            <th>휴대전화번호</th>
+            <th>사용목적</th>
+            <th>신청상태</th>
+            <th>신청날짜</th>
+            <th>신청시간</th>
+
+            <c:if test="${facilityReq.homepage_id eq 'h2'}">
+                <th>희망<br>이용시간</th>
+                <th>신청인원</th>
+            </c:if>
+
+            <c:if test="${facilityReq.homepage_id eq 'h23'}">
+                <th>전자칠판 사용 여부</th>
+            </c:if>
+
+            <th>기능</th>
+        </tr>
     </thead>
+
     <tbody>
-		<c:choose>
-			<c:when test="${fn:length(applyList) > 0}">
-				<c:forEach items="${applyList}" var="i" varStatus="status">
-    				<tr>
-         				<td>${status.count}</td>
-			         	<td>${i.apply_name}</td>
-			         	<td>${i.apply_phone}</td>
-			         	<td>${i.apply_desc}</td>
-			         	<td>
-			         		<c:choose>
-			         			<c:when test="${i.apply_status eq '1'}"><p style="color:black; font-weight:bold;">신청</p></c:when>
-			         			<c:when test="${i.apply_status eq '2'}"><p style="color:blue; font-weight:bold;">승인</p></c:when>
-			         			<c:when test="${i.apply_status eq '3'}"><p style="color:red; font-weight:bold;">취소</p></c:when>
-			         		</c:choose>
-			         	</td>
-						<td>
-							${fn:substring(i.add_date, 0, 11)}
-						</td>
-						<td>
-							${fn:substring(i.add_date, 11, 19)}
-						</td>
-						<c:if test="${facilityReq.homepage_id eq 'h2' }">
-							<td>
-								${i.desired_start_time }~${i.desired_end_time }
-							</td>
-							<td>
-								${i.user_aplly_count }
-							</td>
-						</c:if>
-			         	<td>
-			         		<c:choose>
-			         			<c:when test="${i.apply_status eq '1' or i.apply_status eq '3'}">
-			         				<a class="btn btn1 apply-ok-btn" keyValue1="${i.homepage_id}" keyValue2="${i.facility_idx}" keyValue3="${i.facility_req_idx}" keyValue4="${i.apply_id}" keyValue5="${i.apply_phone}">승인하기</a>
-			         			</c:when>
-			         			<c:when test="${i.apply_status eq '2'}">
-			         				<a class="btn btn5 apply-cancel-btn" keyValue1="${i.homepage_id}" keyValue2="${i.facility_idx}" keyValue3="${i.facility_req_idx}">취소하기</a>	
-			         			</c:when>
-			         		</c:choose>
-							<a class="btn apply-modify-btn" keyValue1="${i.homepage_id}" keyValue2="${i.facility_idx}" keyValue3="${i.facility_req_idx}">수정</a>
-							<a class="btn apply-delete-btn" keyValue1="${i.homepage_id}" keyValue2="${i.facility_idx}" keyValue3="${i.facility_req_idx}">삭제</a>
-							<c:if test="${i.isBlackList > 0 }">
-							<a href="" class="btn btn4 delete_blackList" homepage_id="${i.homepage_id}" keyValue="${i.member_key}">블랙리스트 삭제</a>
-							</c:if>
-							<c:if test="${i.isBlackList < 1 }">
-							<a href="" class="btn btn1 add_blackList" homepage_id="${i.homepage_id}" keyValue="${i.apply_id}" keyValue1="${i.member_key}">블랙리스트 추가</a>
-							</c:if>
-						</td>
-			        </tr>
-    			</c:forEach>	
-			</c:when>
-			<c:otherwise>
-				<tr>
-					<td colspan="6">조회된 정보가 없습니다.</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>    
-	</tbody>
+        <c:choose>
+            <c:when test="${fn:length(applyList) > 0}">
+                <c:forEach items="${applyList}" var="i" varStatus="status">
+                    <tr>
+                        <td>${status.count}</td>
+                        <td>${empty i.apply_name ? '-' : i.apply_name}</td>
+                        <td>${empty i.apply_phone ? '-' : i.apply_phone}</td>
+                        <td>${empty i.apply_desc ? '-' : i.apply_desc}</td>
+
+                        <td>
+                            <c:choose>
+                                <c:when test="${i.apply_status eq '1'}">
+                                    <span class="status status1">신청</span>
+                                </c:when>
+                                <c:when test="${i.apply_status eq '2'}">
+                                    <span class="status status2">승인</span>
+                                </c:when>
+                                <c:when test="${i.apply_status eq '3'}">
+                                    <span class="status status3">취소</span>
+                                </c:when>
+                                <c:otherwise>-</c:otherwise>
+                            </c:choose>
+                        </td>
+
+                        <td>${fn:substring(i.add_date, 0, 10)}</td>
+                        <td>${fn:substring(i.add_date, 11, 19)}</td>
+
+                        <c:if test="${facilityReq.homepage_id eq 'h2'}">
+                            <td>${i.desired_start_time} ~ ${i.desired_end_time}</td>
+                            <td>${i.user_aplly_count}</td>
+                        </c:if>
+
+                        <c:if test="${facilityReq.homepage_id eq 'h23'}">
+                            <td>${i.blackboard_use_yn eq 'Y' ? '사용함' : '사용안함'}</td>
+                        </c:if>
+
+                        <td>
+                            <c:choose>
+                                <c:when test="${i.apply_status eq '1' or i.apply_status eq '3'}">
+                                    <a class="btn btn1 apply-ok-btn"
+                                       data-homepage="${i.homepage_id}"
+                                       data-facility="${i.facility_idx}"
+                                       data-req="${i.facility_req_idx}"
+                                       data-apply="${i.apply_id}"
+                                       data-phone="${i.apply_phone}">
+                                       승인하기
+                                    </a>
+                                </c:when>
+                                <c:when test="${i.apply_status eq '2'}">
+                                    <a class="btn btn5 apply-cancel-btn"
+                                       data-homepage="${i.homepage_id}"
+                                       data-facility="${i.facility_idx}"
+                                       data-req="${i.facility_req_idx}">
+                                       취소하기
+                                    </a>
+                                </c:when>
+                            </c:choose>
+
+                            <a class="btn apply-modify-btn"
+                               data-homepage="${i.homepage_id}"
+                               data-facility="${i.facility_idx}"
+                               data-req="${i.facility_req_idx}">
+                               수정
+                            </a>
+
+                            <a class="btn apply-delete-btn"
+                               data-homepage="${i.homepage_id}"
+                               data-facility="${i.facility_idx}"
+                               data-req="${i.facility_req_idx}">
+                               삭제
+                            </a>
+
+                            <c:if test="${i.isBlackList gt 0}">
+                                <a href="javascript:void(0);" class="btn btn4 delete_blackList"
+                                   data-homepage="${i.homepage_id}"
+                                   data-member="${i.member_key}">
+                                   블랙리스트 삭제
+                                </a>
+                            </c:if>
+
+                            <c:if test="${empty i.isBlackList or i.isBlackList le 0}">
+                                <a href="javascript:void(0);" class="btn btn1 add_blackList"
+                                   data-homepage="${i.homepage_id}"
+                                   data-apply="${i.apply_id}"
+                                   data-member="${i.member_key}">
+                                   블랙리스트 추가
+                                </a>
+                            </c:if>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </c:when>
+
+            <c:otherwise>
+                <tr>
+                    <td colspan="${facilityReq.homepage_id eq 'h2' ? 10 : (facilityReq.homepage_id eq 'h23' ? 9 : 8)}">
+                        조회된 정보가 없습니다.
+                    </td>
+                </tr>
+            </c:otherwise>
+        </c:choose>
+    </tbody>
 </table>
 
 <div id="dialog-4" class="dialog-common" title="블랙리스트 추가"></div>

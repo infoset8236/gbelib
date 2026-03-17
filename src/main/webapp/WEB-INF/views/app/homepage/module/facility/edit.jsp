@@ -158,7 +158,7 @@ $(function() {
 			<form:hidden path="member_key"/>
 			<table class="type1">
 				<colgroup>
-			       <col width="130" />
+			       <col width="${facility.homepage_id eq 'h23' ? 140 : 130}" />
 			       <col width="*"/>
 		       	</colgroup>
 		       	<tbody>
@@ -170,38 +170,6 @@ $(function() {
 			         	<th>이용일</th>
 			         	<td>${facility.use_date}</td>
 			        </tr>
-					<%--<c:if test="${facility.homepage_id eq 'h19'}">
-						<tr>
-							<th>이용시간</th>
-							<td>
-								<form:select path="start_time" cssClass="select">
-									<c:forEach begin="9" end="23" var="i">
-										<c:choose>
-											<c:when test="${i eq 9}">
-												<form:option value="0${i}:00">0${i}:00</form:option>
-											</c:when>
-											<c:otherwise>
-												<form:option value="${i}:00">${i}:00</form:option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</form:select>
-								~
-								<form:select path="end_time" cssClass="select">
-									<c:forEach begin="9" end="23" var="i">
-										<c:choose>
-											<c:when test="${i eq 9}">
-												<form:option value="0${i}:00">0${i}:00</form:option>
-											</c:when>
-											<c:otherwise>
-												<form:option value="${i}:00">${i}:00</form:option>
-											</c:otherwise>
-										</c:choose>
-									</c:forEach>
-								</form:select>
-							</td>
-						</tr>
-					</c:if>--%>
 			        <tr>
 			         	<th>신청자명 (<span style="color: red; font-weight: bold;">*</span>)</th>
 			         	<td>
@@ -217,6 +185,15 @@ $(function() {
 						 	- <form:input path="apply_phone3" class="text" cssStyle="width:50px;" maxlength="4" numberonly="true" value="${fn:substring(member.mobile_no,7,11)}"/>
 						</td>
 					</tr>
+					<c:if test="${facility.homepage_id eq 'h23'}">
+						<tr>
+							<th>전자칠판 사용여부</th>
+							<td>
+								<form:radiobutton path="blackboard_use_yn" class="Y" value="Y"/> <label for="blackboard_use_yn1" style="cursor:pointer;">사용함</label>&nbsp;
+								<form:radiobutton path="blackboard_use_yn" class="N" value="N"/> <label for="blackboard_use_yn2" style="cursor:pointer;">사용안함</label>
+							</td>
+						</tr>
+					</c:if>
 					<tr>
 						<th>사용목적 (<span style="color: red; font-weight: bold;">*</span>)</th>
 						<td>

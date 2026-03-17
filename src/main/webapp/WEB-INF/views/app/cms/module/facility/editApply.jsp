@@ -84,17 +84,17 @@ $(function() {
 	       <col width="130" />
 	       <col width="*"/>
        	</colgroup>
-       	<tbody>       		
+       	<tbody>
        		<tr>
 	         	<th>시설물명</th>
 	         	<td>${facility.facility_name}</td>
-	        </tr>   
+	        </tr>
 	        <tr>
 	         	<th>이용일</th>
 	         	<td>${facility.use_date}</td>
-	        </tr>       		
+	        </tr>
 	        <tr>
-	         	<th>신청자ID (<span style="color: red; font-weight: bold;">*</span>)</th>			
+	         	<th>신청자ID (<span style="color: red; font-weight: bold;">*</span>)</th>
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${facilityReq.editMode eq 'ADD' }">
@@ -115,7 +115,7 @@ $(function() {
 	         	<td>
 	         		<c:choose>
 	         			<c:when test="${facilityReq.editMode eq 'ADD'}">
-	         				<form:input path="apply_name" class="text" readonly="true"/>	
+	         				<form:input path="apply_name" class="text" readonly="true"/>
 	         			</c:when>
 	         			<c:otherwise>
 	         				${facilityReq.apply_name}
@@ -145,7 +145,7 @@ $(function() {
 		         	<td>
 	         			<c:choose>
 		         			<c:when test="${facilityReq.editMode eq 'ADD'}">
-		         				<form:input path="user_aplly_count" class="text" numberonly="true"/>	
+		         				<form:input path="user_aplly_count" class="text" numberonly="true"/>
 		         			</c:when>
 		         			<c:otherwise>
 		         				${facilityReq.user_aplly_count}
@@ -169,6 +169,15 @@ $(function() {
 					<form:textarea path="apply_desc" class="text" cssStyle="width:100%; height:100px;"/>
 				</td>
 			</tr>
+			<c:if test="${facilityReq.homepage_id eq 'h23'}">
+				<tr>
+					<th>전자칠판 사용여부</th>
+					<td>
+						<form:radiobutton path="blackboard_use_yn" class="Y" value="Y"/> <label for="blackboard_use_yn1" style="cursor:pointer;">사용함</label>&nbsp;
+						<form:radiobutton path="blackboard_use_yn" class="N" value="N"/> <label for="blackboard_use_yn2" style="cursor:pointer;">사용안함</label>
+					</td>
+				</tr>
+			</c:if>
 			<tr>
 				<th>개인정보 동의 여부</th>
 				<td>
