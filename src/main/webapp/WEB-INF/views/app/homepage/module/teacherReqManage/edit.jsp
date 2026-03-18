@@ -1129,7 +1129,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>5년(동의 철회 시 까지)</td>
             </tr>
             <tr>
-                <td>동의 거부 권리 및 불이익/td></td>
+                <td>동의 거부 권리 및 불이익</td>
                 <td>선택 항목 수집에 동의하지 않더라도 강사 등록 신청은 가능합니다. 다만, 자격 및 경력 사항 확인이 불가능하여 선발 심사에서 불이익을 받을 수 있습니다.</td>
             </tr>
             </tbody>
