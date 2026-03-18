@@ -169,7 +169,7 @@ function PageReload(){
             <div style="margin-left: auto">
 				<a href="javascript:void(0)" id="excelUpload" class="btn btn1 left"><span>일괄등록</span></a>
                 <a href="javascript:void(0)" id="deleteAll" class="btn btn4 left" onclick="deleteAll()"><span>선택삭제</span></a>
-                <a href="javascript:void(0)" id="deleteEvery" class="btn btn5 left" onclick="deleteAll()"><span>일괄삭제</span></a>
+                <a href="javascript:void(0)" id="deleteEvery" class="btn btn5 left" onclick="deleteEvery()"><span>일괄삭제</span></a>
 			</div>
         </c:if>
     </div>

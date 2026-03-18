@@ -9,9 +9,9 @@ $(function() {
 	$('a.facility-cancel-btn').on('click', function(e) {
 		e.preventDefault();
 		if(confirm("해당 신청내역을 취소 하시겠습니까?")) {
-			$('#applyEdit #homepage_id').val($(this).attr('keyValue1'));
-			$('#applyEdit #facility_idx').val($(this).attr('keyValue2'));
-			$('#applyEdit #facility_req_idx').val($(this).attr('keyValue3'));
+			$('#applyEdit #homepage_id').val($(this).data('homepage'));
+			$('#applyEdit #facility_idx').val($(this).data('facility'));
+			$('#applyEdit #facility_req_idx').val($(this).data('req'));
 			
 			if ( doAjaxPost($('#applyEdit')) ) {
 				location.reload();

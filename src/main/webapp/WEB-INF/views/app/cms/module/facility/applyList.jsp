@@ -36,7 +36,7 @@ $(function() {
  
 	$('a.apply-modify-btn').on('click', function(e) {
 		e.preventDefault();
-		$('#dialog-2').load('editApply.do?editMode=MODIFY&homepage_id=' + $(this).attr('keyValue1') + '&facility_idx=' + $(this).attr('keyValue2') + '&facility_req_idx=' + $(this).attr('keyValue3'), function( response, status, xhr ) {
+		$('#dialog-2').load('editApply.do?editMode=MODIFY&homepage_id=' + $(this).data('homepage') + '&facility_idx=' + $(this).data('facility') + '&facility_req_idx=' + $(this).data('req'), function( response, status, xhr ) {
 			$('#dialog-2').dialog('open');
 		});
 	});
@@ -45,11 +45,11 @@ $(function() {
 		e.preventDefault();
 		if ( confirm('해당 신청자를 정말 삭제 하시겠습니까?') ) {
 			$('#facilityApplyListForm #editMode').val('DELETE');
-			$('#facilityApplyListForm #homepage_id').val($(this).attr('keyValue1'));
-			$('#facilityApplyListForm #facility_idx').val($(this).attr('keyValue2'));
-			$('#facilityApplyListForm #facility_req_idx').val($(this).attr('keyValue3'));
+            $('#facilityApplyListForm #homepage_id').val($(this).data('homepage'));
+            $('#facilityApplyListForm #facility_idx').val($(this).data('facility'));
+            $('#facilityApplyListForm #facility_req_idx').val($(this).data('req'));
 			if ( doAjaxPost($('#facilityApplyListForm')) ) {
-				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).attr('keyValue1') + '&facility_idx=' + $(this).attr('keyValue2'), function( response, status, xhr ) {
+				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).data('homepage') + '&facility_idx=' + $(this).data('facility'), function( response, status, xhr ) {
 					$('#dialog-3').dialog('open');
 				});
 			}	
@@ -60,13 +60,13 @@ $(function() {
 		e.preventDefault();
 		if ( confirm('해당 신청자를 승인 하시겠습니까?') ) {
 			$('#facilityApplyListForm #editMode').val('OK');
-			$('#facilityApplyListForm #homepage_id').val($(this).attr('keyValue1'));
-			$('#facilityApplyListForm #facility_idx').val($(this).attr('keyValue2'));
-			$('#facilityApplyListForm #facility_req_idx').val($(this).attr('keyValue3'));
-			$('#facilityApplyListForm #apply_id').val($(this).attr('keyValue4'));
-			$('#facilityApplyListForm #apply_phone').val($(this).attr('keyValue5'));
-			if ( doAjaxPost($('#facilityApplyListForm')) ) {
-				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).attr('keyValue1') + '&facility_idx=' + $(this).attr('keyValue2') + '&apply_phone=' + $(this).attr('keyValue5'), function( response, status, xhr ) {
+            $('#facilityApplyListForm #homepage_id').val($(this).data('homepage'));
+            $('#facilityApplyListForm #facility_idx').val($(this).data('facility'));
+            $('#facilityApplyListForm #facility_req_idx').val($(this).data('req'));
+            $('#facilityApplyListForm #apply_id').val($(this).data('apply'));
+            $('#facilityApplyListForm #apply_phone').val($(this).data('phone'));
+            if ( doAjaxPost($('#facilityApplyListForm')) ) {
+				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).data('homepage') + '&facility_idx=' + $(this).data('facility') + '&apply_phone=' + $(this).data('phone'), function( response, status, xhr ) {
 					$('#dialog-3').dialog('open');
 				});
 			}	
@@ -77,11 +77,11 @@ $(function() {
 		e.preventDefault();
 		if ( confirm('해당 신청자를 취소 하시겠습니까?') ) {
 			$('#facilityApplyListForm #editMode').val('CANCEL');
-			$('#facilityApplyListForm #homepage_id').val($(this).attr('keyValue1'));
-			$('#facilityApplyListForm #facility_idx').val($(this).attr('keyValue2'));
-			$('#facilityApplyListForm #facility_req_idx').val($(this).attr('keyValue3'));
+			$('#facilityApplyListForm #homepage_id').val($(this).data('homepage'));
+			$('#facilityApplyListForm #facility_idx').val($(this).data('facility'));
+			$('#facilityApplyListForm #facility_req_idx').val($(this).data('req'));
 			if ( doAjaxPost($('#facilityApplyListForm')) ) {
-				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).attr('keyValue1') + '&facility_idx=' + $(this).attr('keyValue2'), function( response, status, xhr ) {
+				$('#dialog-3').load('applyList.do?homepage_id=' + $(this).data('homepage') + '&facility_idx=' + $(this).data('facility'), function( response, status, xhr ) {
 					$('#dialog-3').dialog('open');
 				});
 			}	
@@ -89,7 +89,7 @@ $(function() {
 	});
 	
 	$('a.add_blackList').on('click', function(e) {		
-		$('#dialog-4').load('/cms/module/blackList/edit.do?editMode=ADD&black_type=30&after_click_btn=a.list_${facilityReq.facility_idx}&homepage_id=' + $(this).attr('homepage_id') + '&member_id=' + $(this).attr('keyValue')+ '&member_key=' + $(this).attr('keyValue1'), function( response, status, xhr ) {
+		$('#dialog-4').load('/cms/module/blackList/edit.do?editMode=ADD&black_type=30&after_click_btn=a.list_${facilityReq.facility_idx}&homepage_id=' + $(this).data('homepage') + '&member_id=' + $(this).data('apply')+ '&member_key=' + $(this).data('member'), function( response, status, xhr ) {
 			$('#dialog-4').dialog({
 				width: 600,
 				height: 300
@@ -106,8 +106,8 @@ $(function() {
 		if (confirm('해당 수강생을 블랙리스트 목록에서 삭제하시겠습니까?')) {
 			var data = {
 					editMode : 'BLACKTYPEDELETE',
-					homepage_id : $(this).attr('homepage_id'),
-					member_key : $(this).attr('keyValue'),
+					homepage_id : $(this).data('homepage'),
+					member_key : $(this).data('member'),
 					black_type	: '30'
 			}
 			
