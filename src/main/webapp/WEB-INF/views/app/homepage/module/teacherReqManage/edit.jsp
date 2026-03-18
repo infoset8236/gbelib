@@ -8,11 +8,71 @@
 --%>
 <script src="/resources/cms/js/malsup.jquery.form.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function () {
+
+		const allAgree = document.getElementById("allAgree");
+		const form = document.getElementById("agreeForm");
+
+
+		// 전체동의 클릭
+		allAgree.addEventListener("change", function () {
+
+			if (this.checked) {
+
+				document.querySelectorAll('.agreeChk input[value="yes"]').forEach(el => {
+					el.checked = true;
+				});
+
+			} else {
+
+				document.querySelectorAll('.agreeChk input[value="no"]').forEach(el => {
+					el.checked = true;
+				});
+
+			}
+
+		});
+
+
+		// 개별 선택 변경 시 전체동의 자동 체크
+		document.querySelectorAll('.agreeChk input').forEach(el => {
+
+			el.addEventListener("change", function () {
+
+				const total = document.querySelectorAll('.agreeChk').length;
+				const agreed = document.querySelectorAll('.agreeChk input[value="yes"]:checked').length;
+
+				allAgree.checked = (total === agreed);
+
+			});
+
+		});
+	});
+
 $(function () {
 	$('#full_adder').val($('#teacher_zipcode').val() + " " + $('#teacher_address').val());
 
-	$('#save-btn').on('click', function() {
+	$('#save-btn').on('click', function(e) {
 		jQuery.ajaxSettings.traditional = true;
+
+		const requiredList = document.querySelectorAll('.requiredAgree');
+
+		let isAgree = true;
+
+		requiredList.forEach(el => {
+
+			const name = el.name;
+			const checked = document.querySelector('input[name="' + name + '"]:checked');
+
+			if (!checked || checked.value !== "yes") {
+				isAgree = false;
+			}
+		});
+
+		if (!isAgree) {
+			alert("필수 개인정보 수집 및 이용에 모두 동의해야 합니다.");
+			return false;
+		}
 
 		if ((isEmpty($('#t_edu00').val()) && isEmpty($('#t_edu01').val())) &&
 			(isEmpty($('#t_edu10').val()) && isEmpty($('#t_edu11').val())&& isEmpty($('#t_edu12').val()) && $("#t_edu13").is(":checked") == false) &&
@@ -819,77 +879,6 @@ function removeChar(event) {
     else
         event.target.value = event.target.value.replace(/[^0-9]/g, "");
 }
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const allAgree = document.getElementById("allAgree");
-    const form = document.getElementById("agreeForm");
-
-
-    // 전체동의 클릭
-    allAgree.addEventListener("change", function () {
-
-        if (this.checked) {
-
-            document.querySelectorAll('.agreeChk input[value="yes"]').forEach(el => {
-                el.checked = true;
-            });
-
-        } else {
-
-            document.querySelectorAll('.agreeChk input[value="no"]').forEach(el => {
-                el.checked = true;
-            });
-
-        }
-
-    });
-
-
-    // 개별 선택 변경 시 전체동의 자동 체크
-    document.querySelectorAll('.agreeChk input').forEach(el => {
-
-        el.addEventListener("change", function () {
-
-            const total = document.querySelectorAll('.agreeChk').length;
-            const agreed = document.querySelectorAll('.agreeChk input[value="yes"]:checked').length;
-
-            allAgree.checked = (total === agreed);
-
-        });
-
-    });
-
-
-    // 제출 시 필수 체크
-    form.addEventListener("submit", function (e) {
-
-        const requiredList = document.querySelectorAll('.requiredAgree');
-
-        let isAgree = true;
-
-        requiredList.forEach(el => {
-
-            const name = el.name;
-            const checked = document.querySelector(`input[name="${name}"]:checked`).value;
-
-            if (checked !== "yes") {
-                isAgree = false;
-            }
-
-        });
-
-        if (!isAgree) {
-
-            alert("필수 개인정보 수집 및 이용에 모두 동의해야 합니다.");
-            e.preventDefault();
-
-        }
-
-    });
-
-});
-
 </script>
 <style>
 	.Box {padding:20px; overflow: auto;border: 1px solid #ccc;background: #f3f3f3;color: #666; margin: 0 0 10px;}

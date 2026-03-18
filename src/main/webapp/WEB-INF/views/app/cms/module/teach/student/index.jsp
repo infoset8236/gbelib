@@ -37,6 +37,10 @@ $(function(){
 	$('select#category_idx').on('change', function() {
 		doGetLoad('index.do', $('#adminStudentForm').serialize());
 	});
+
+	$('select#search_year').on('change', function() {
+		doGetLoad('index.do', $('#adminStudentForm').serialize());
+	});
 	
 	$('#studentLayer').load('student.do?editMode=FIRST');
 

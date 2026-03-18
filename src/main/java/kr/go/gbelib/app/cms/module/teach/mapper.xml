@@ -63,6 +63,9 @@
 		<if test="search_text != '' and search_text != '' ">
 			AND	a.teach_name LIKE '%'||#{search_text}||'%'
 		</if>
+		<if test="search_year != null and search_year != ''">
+			AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
+		</if>
 		ORDER BY
 			(TO_DATE(a.START_JOIN_DATE,'yyyy-mm-dd') - SYSDATE) DESC,
 			(TO_DATE(a.END_JOIN_DATE,'yyyy-mm-dd') - SYSDATE) DESC,
