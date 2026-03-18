@@ -5,7 +5,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" uri="/WEB-INF/config/tld/cmsTag.tld" %>
 <script type="text/javascript">
+
 $(function(){
+
+    $(window).on("load", function() {
+        $("#calendar .cal-tbl tbody tr td > ul li").each(function() {
+            let text = $(this).text().replace(/\s/g, "");
+            const found = rules.find(rule => text.includes(rule.keyword));
+            $(this).removeClass("circle study pre");
+            this.className = found ? found.className : "pre";
+        });
+    });
 	
 	var sysDate = new Date();
 	var year = sysDate.getFullYear();
@@ -227,9 +237,41 @@ $(function(){
 		cwFunc();
 	});
 	/* 달력 제어 종료 */
-	
+    const rules = [
+        { keyword: "동아리실", className: "circle" },
+        { keyword: "스터디실", className: "study" }
+    ];
+
 });
+
 </script>
+
+<style>
+    .cal-tbl{width:100%;}
+    .cal-tbl th, .cal-tbl td{color:#333;border:1px solid #e5e8eb;}
+    .cal-tbl td div{color:#333;font-size:15px;padding:1.8px 0;width:20px;height:20px;line-height:20px;margin:0 auto;}
+    a{color:#555;}
+    #calendar .cal-tbl tbody tr td > ul li::before{
+        content: "";
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        vertical-align: -2px;
+        border-radius: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-right: 5px;
+    }
+    li.circle::before{
+        background: red;
+    }
+    li.study::before{
+        background: blue;
+    }
+    li.pre::before{
+        background: #ffd100;
+    }
+</style>
 
 <c:if test="${homepage.context_path eq 'yd' and param.menu_idx eq '249'}">
 	<style>
