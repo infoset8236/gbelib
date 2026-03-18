@@ -5,7 +5,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" uri="/WEB-INF/config/tld/cmsTag.tld" %>
 <script type="text/javascript">
+
 $(function(){
+
+    $(window).on("load", function() {
+        $("#calendar .cal-tbl tbody tr td > ul li").each(function() {
+            let text = $(this).text().replace(/\s/g, "");
+            const found = rules.find(rule => text.includes(rule.keyword));
+            $(this).removeClass("circle study pre");
+            this.className = found ? found.className : "pre";
+        });
+    });
 	
 	var sysDate = new Date();
 	var year = sysDate.getFullYear();
@@ -231,14 +241,6 @@ $(function(){
         { keyword: "동아리실", className: "circle" },
         { keyword: "스터디실", className: "study" }
     ];
-    $(window).on("load", function() {
-        $("li").each(function() {
-            let text = $(this).text().replace(/\s/g, "");
-            const found = rules.find(rule => text.includes(rule.keyword));
-            $(this).removeClass("circle study pre");
-            this.className = found ? found.className : "pre";
-        });
-    });
 
 });
 
