@@ -90,14 +90,6 @@
 </form:form>
 
 ${html.html}
-<h3>신청시 유의사항 안내</h3>
-<div class="txt-box">
-	<ul class="con">
-		<li>정회원에 한하여 월별 1인당 최대 2권까지 신청하실 수 있습니다.</li>
-		<li>일반도서와 달리 출판사에서 개인소비자(B2C)와 기관(B2B)에 납품되는 전자책을 구분하여 운영 중이므로, 모든 희망 전자책를 구입할 수 없는 점 양해 부탁드립니다.</li>
-		<li>희망 전자책 구입 후 신청 이용자에게 우선 대출은 되지 않으며, 최대 5명까지 대출 가능합니다.</li>
-	</ul>
-</div>
 <br/>
 <form:form id="bookListForm" modelAttribute="hopeElibBook" action="hopeElibSearch.do" method="GET" autocomplete="off">
 	<div id="searchBox">
