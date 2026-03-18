@@ -31,10 +31,7 @@
 				AND	facility_name LIKE '%'||#{facilityType}||'%'
 			</if>
 		ORDER BY
-			USE_DATE, FACILITY_NAME, START_TIME
-		<if test="homepage_id == 'h19'">
-			,FACILITY_NAME,START_TIME,END_TIME
-		</if>
+			USE_DATE, FACILITY_NAME, START_TIME, END_TIME
 	</select>
 	
 	<select id="getFacilityListByExcel" resultType="kr.go.gbelib.app.cms.module.facility.Facility">
@@ -74,10 +71,7 @@
 				AND	facility_name LIKE '%'||#{facilityType}||'%'
 			</if>
 		ORDER BY
-			USE_DATE
-			<if test="homepage_id == 'h19'">
-				,START_TIME, END_TIME
-			</if>
+			USE_DATE, FACILITY_NAME, START_TIME, END_TIME
 	</select>
 	
 	<select id="getFacilityOne" resultType="kr.go.gbelib.app.cms.module.facility.Facility">
@@ -264,7 +258,7 @@
 			EXTRACT(YEAR from sysdate) || '-' || #{i}
 		</foreach>
 		ORDER BY
-		USE_DATE
+		USE_DATE, FACILITY_NAME, START_TIME, END_TIME
 	</select>
 	
 </mapper>
