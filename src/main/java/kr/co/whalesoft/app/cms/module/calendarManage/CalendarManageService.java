@@ -299,4 +299,8 @@ public class CalendarManageService extends BaseService {
 	public List<CalendarManage> getToDayEvent(CalendarManage calendarManage) {
 		return dao.getToDayEvent(calendarManage);
 	}
+
+    public List<CalendarManage> getCalendarForIct(CalendarManage calendarManage) {
+		return dao.getCalendarForIct(calendarManage);
+    }
 }

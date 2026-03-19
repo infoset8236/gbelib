@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.whalesoft.app.board.Board;
@@ -416,6 +417,52 @@ public class ApiController extends BaseController {
 			return nodeList.item(0).getTextContent().trim();
 		}
 		return null;
+	}
+
+	@RequestMapping(value = "/getCalendarForIct.*")
+	@ResponseBody
+	public Map<String, Object> getCalendarForIct(@RequestParam int year, @RequestParam int month, @RequestParam String homepage_id) {
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+
+		Calendar calStart = Calendar.getInstance();
+		calStart.set(year, month - 1, 1);
+		calStart.add(Calendar.MONTH, -1);
+
+		Calendar calEnd = Calendar.getInstance();
+		calEnd.set(year, month - 1, 1);
+		calEnd.add(Calendar.MONTH, 1);
+		calEnd.set(Calendar.DAY_OF_MONTH, calEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		String startDate = sdf.format(calStart.getTime());
+		String endDate   = sdf.format(calEnd.getTime());
+
+		CalendarManage param = new CalendarManage();
+		param.setHomepage_id(homepage_id);
+		param.setStart_date(startDate);
+		param.setEnd_date(endDate);
+
+		List<CalendarManage> list = calendarManageService.getCalendarForIct(param);
+
+		List<Map<String, Object>> listData = new ArrayList<Map<String, Object>>();
+
+		for (CalendarManage c : list) {
+			Map<String, Object> m = new HashMap<String, Object>();
+
+			m.put("startDate", c.getStart_date());
+			m.put("endDate", c.getEnd_date());
+			m.put("title", c.getTitle());
+			m.put("contents", c.getContents());
+			m.put("dateType", c.getDate_type());
+
+			listData.add(m);
+		}
+
+		resultMap.put("list", listData);
+
+		return resultMap;
 	}
 	
 }

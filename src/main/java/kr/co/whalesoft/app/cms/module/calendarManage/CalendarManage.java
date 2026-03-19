@@ -16,7 +16,7 @@ public class CalendarManage extends PagingUtils {
 	private String title;  //제목
 	private String contents;  //내용
 	private String date_type;  //일정종류
-	private String delete_yn;
+	private String delete_yn = "N";
 	private String weekday;
 	private List<String> weekdayArr = new ArrayList<String>();
 	
