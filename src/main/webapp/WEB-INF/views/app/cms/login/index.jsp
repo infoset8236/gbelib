@@ -22,7 +22,7 @@
 <script type="text/javascript" src="/resources/common/js/common.js"></script>
 <script type="text/javascript" src="/resources/cms/js/design.js"></script>
 <body>
-<
+
 
 <script>
 $(document).ready(function() {
@@ -47,6 +47,7 @@ $(function(){
 </div> -->
 
 <div class="wrap">
+    <img src="/resources/cms/img/main/sjc_logo.png" alt="" class="sjc">
 	<div class="login-box">
 		<div class="info">
 			<div class="container">
@@ -73,7 +74,7 @@ $(function(){
 				<div class="title">
 					<h1>
 						<img src="/resources/cms/img/logo.png" alt="로고 이미지 입니다."/>
-						<b>통합 홈페이지 관리 시스템</b>
+						<b style="color: #000">통합 홈페이지 관리 시스템</b>
 					</h1>
 					<i class='fa fa-power-off'></i>
 				</div>
@@ -81,13 +82,13 @@ $(function(){
 					<form:form modelAttribute="login" action="login.do" method="post">
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <i class="fa fa-user"></i>
 								<form:input path="member_id" maxlength="25" cssClass="form-control" placeholder="아이디" value=""/>
 							</div>
 						</div>
 						<div class="form-group">
 							<div class="input-group">
-								<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                                <i class="fa fa-lock"></i>
 								<form:password path="member_pw" maxlength="25" cssClass="form-control" placeholder="비밀번호" value=""/>
 							</div>
 						</div>
@@ -102,7 +103,7 @@ $(function(){
 				<form:hidden id="editMode_index" path="editMode"/>
 				
 					<div class="txt-center">
-						<a href="javascript:void(0);" class="btn btn2" id="dialog-add" >관리자 등록</a>
+						<a href="javascript:void(0);" class="admin-btn" id="dialog-add" >관리자 등록</a>
 						<!-- <a href="javascript:void(0);" id="dialog-add">.</a> -->
 					</div>
 				</form:form>
