@@ -72,7 +72,11 @@ public class CalendarManageController extends BaseController {
 		Board board = new Board();
 		board.setHomepage_id(homepage.getHomepage_id());
 		board.setImsi_v_1(calendarManage.getPlan_date());
-		
+
+		if ("h23".equals(homepage.getHomepage_id())) {
+			calendarManage.setCalendar_view_type("YCHOMEPAGE");
+		}
+
 		model.addAttribute("moveList", boardService.getBoardMovie(board));
 		model.addAttribute("calendarList", service.getCalendar(calendarManage));
 		model.addAttribute("calendarManage", calendarManage);
@@ -98,7 +102,11 @@ public class CalendarManageController extends BaseController {
 		Board board = new Board();
 		board.setHomepage_id(homepage.getHomepage_id());
 		board.setImsi_v_1(calendarManage.getPlan_date());
-		
+
+		if ("h23".equals(homepage.getHomepage_id())) {
+			calendarManage.setCalendar_view_type("YCHOMEPAGE");
+		}
+
 		model.addAttribute("moveList", boardService.getBoardMovie(board));
 		model.addAttribute("calendarList", service.getCalendar(calendarManage));
 		model.addAttribute("calendarListType", service.getCalendarListType(calendarManage));

@@ -43,7 +43,10 @@ public class CalendarManage extends PagingUtils {
 	private String individual_yn = "N";
 	private String individual_yn2 = "N";//임시변수
 	private int group_count;
-	
+
+	private String memo;
+	private String calendar_view_type;
+
 	public CalendarManage() {}
 	
 	public CalendarManage(String homepage_id, String plan_date) {
@@ -303,5 +306,20 @@ public class CalendarManage extends PagingUtils {
 	public void setGroup_idx_tmp(int group_idx_tmp) {
 		this.group_idx_tmp = group_idx_tmp;
 	}
-	
+
+	public String getCalendar_view_type() {
+		return calendar_view_type;
+	}
+
+	public void setCalendar_view_type(String calendar_view_type) {
+		this.calendar_view_type = calendar_view_type;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
 }

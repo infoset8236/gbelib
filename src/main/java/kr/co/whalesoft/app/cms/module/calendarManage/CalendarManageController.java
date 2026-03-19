@@ -74,7 +74,6 @@ public class CalendarManageController extends BaseController {
 		board.setImsi_v_1(calendarManage.getPlan_date());
 		
 		model.addAttribute("moveList", boardService.getBoardMovie(board));
-
 		model.addAttribute("calendarList", service.getCalendar(calendarManage));
 		model.addAttribute("calendarListType", service.getCalendarListType(calendarManage));
 		model.addAttribute("calendarManage", calendarManage);

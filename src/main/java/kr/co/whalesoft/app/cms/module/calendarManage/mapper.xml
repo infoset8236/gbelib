@@ -6,7 +6,7 @@
 	<sql id="field">
 		homepage_id, cm_idx, start_date, start_time, end_date, 
 		end_time, title, contents, date_type, link_url,
-		weekday, individual_yn
+		weekday, individual_yn, memo
 	</sql>
 
 	<!-- 	일정관리 list -->
@@ -16,10 +16,13 @@
 		FROM 
 			CMS_CALENDAR_MANAGE
 		WHERE HOMEPAGE_ID = #{homepage_id}
-	 <if test="plan_date != null and plan_date != ''">
-	 	AND (substr(start_date,1,7) = #{plan_date}
-	 	OR substr(end_date,1,7) = #{plan_date})
-	 </if>
+		<if test="plan_date != null and plan_date != ''">
+			AND (substr(start_date,1,7) = #{plan_date}
+			OR substr(end_date,1,7) = #{plan_date})
+		</if>
+		<if test='"YCHOMEPAGE".equals(calendar_view_type)'>
+			AND DATE_TYPE NOT IN (3, 4, 5, 6)
+		</if>
 	 	AND DELETE_YN = 'N'
 	</select>
 	
@@ -27,7 +30,7 @@
 		SELECT
 			homepage_id, cm_idx, start_date, start_time, end_date, 
 			end_time, title, contents, date_type, link_url,
-			individual_yn, group_idx,
+			individual_yn, group_idx, memo,
 			CASE
 				WHEN weekday = '1,2,3,4,5,6,7'
 				THEN '0'
@@ -198,11 +201,11 @@
 		INSERT INTO CMS_CALENDAR_MANAGE (
 		   		HOMEPAGE_ID, CM_IDX, START_DATE, START_TIME, END_DATE, 
 				END_TIME, TITLE, CONTENTS, DATE_TYPE, link_url, group_idx,
-				individual_yn, weekday
+				individual_yn, weekday, MEMO, DELETE_YN
 	   )VALUES (
 	   		#{homepage_id}, (SELECT NVL(MAX(cm_idx),0)+1 FROM CMS_CALENDAR_MANAGE ), #{start_date}, #{start_time}, #{end_date},
 	   		#{end_time}, #{title}, #{contents}, #{date_type}, #{link_url}, #{group_idx},
-	   		'N', #{weekday}
+	   		'N', #{weekday}, #{memo}, 'N'
 		)
 	</insert>
 	
@@ -218,7 +221,8 @@
 			CONTENTS = #{contents},
 			link_url = #{link_url},
 			individual_yn = #{individual_yn},
-			weekday = #{weekday}
+			weekday = #{weekday},
+			memo = #{memo}
 		WHERE
 			HOMEPAGE_ID = #{homepage_id} 
 		AND DELETE_YN = 'N'

@@ -204,6 +204,12 @@ $(function() {
 			</td>
 		</tr>
 		<tr>
+			<th>메모</th>
+			<td>
+				<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
+			</td>
+		</tr>
+		<tr>
 			<th>링크URL</th>
 			<td>
 				<form:input path="link_url" cssStyle="width:90%;" cssClass="text" maxlength="500"/>
