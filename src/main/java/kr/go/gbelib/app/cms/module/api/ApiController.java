@@ -456,6 +456,7 @@ public class ApiController extends BaseController {
 			m.put("title", c.getTitle());
 			m.put("contents", c.getContents());
 			m.put("dateType", c.getDate_type());
+			m.put("memo", c.getMemo());
 
 			listData.add(m);
 		}
