@@ -40,6 +40,9 @@ $(document).on("submit", function(e) {
 				case "ㄷ":
 					worknumcon += worknum.charAt(i).replace('ㄷ','e');
 					break;
+				case "ㄸ":
+					worknumcon += worknum.charAt(i).replace('ㄸ','E');
+					break;
 				case "ㄹ":
 					worknumcon += worknum.charAt(i).replace('ㄹ','f');
 					break;
@@ -76,14 +79,23 @@ $(document).on("submit", function(e) {
 				case "ㅂ":
 					worknumcon += worknum.charAt(i).replace('ㅂ','q');
 					break;
+				case "ㅃ":
+					worknumcon += worknum.charAt(i).replace('ㅃ','Q');
+					break;
 				case "ㄱ":
 					worknumcon += worknum.charAt(i).replace('ㄱ','r');
+					break;
+				case "ㄲ":
+					worknumcon += worknum.charAt(i).replace('ㄲ','R');
 					break;
 				case "ㄴ":
 					worknumcon += worknum.charAt(i).replace('ㄴ','s');
 					break;
 				case "ㅅ":
 					worknumcon += worknum.charAt(i).replace('ㅅ','t');
+					break;
+				case "ㅆ":
+					worknumcon += worknum.charAt(i).replace('ㅆ','T');
 					break;
 				case "ㅕ":
 					worknumcon += worknum.charAt(i).replace('ㅕ','u');
@@ -93,6 +105,9 @@ $(document).on("submit", function(e) {
 					break;
 				case "ㅈ":
 					worknumcon += worknum.charAt(i).replace('ㅈ','w');
+					break;
+				case "ㅉ":
+					worknumcon += worknum.charAt(i).replace('ㅉ','W');
 					break;
 				case "ㅌ":
 					worknumcon += worknum.charAt(i).replace('ㅌ','x');
