@@ -14,7 +14,7 @@ public class MenuAccessService extends BaseController {
 	@Autowired
 	private MenuAccessDao dao;
 
-	@Async
+	/*@Async*/
 	public void updateMenuAccess(MenuAccess menuAccess) {
 		dao.updateMenuAccess(menuAccess);
 	}

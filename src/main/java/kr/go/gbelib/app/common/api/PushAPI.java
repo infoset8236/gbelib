@@ -34,7 +34,7 @@ public class PushAPI {
 	 * @param fromTel SMS_TYPE_SMS : 발신번호, SMS_TYPE_EMAIL : 발신 메일주소
 	 * @param includeLibName SMS_TYPE_SMS : 문자메시지 앞에 도서관명 포함여부, SMS_TYPE_EMAIL : null
 	 */
-	@Async
+	//@Async
 	public void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
@@ -42,7 +42,7 @@ public class PushAPI {
 		sendMessage(homepage, type, member, message, null, fromTel, includeLibName, "");
 	}
 	
-	@Async
+	//@Async
 	public void sendMessageForCallNoSms(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
@@ -61,7 +61,7 @@ public class PushAPI {
 	 * @param includeLibName SMS_TYPE_SMS : 문자메시지 앞에 도서관명 포함여부, SMS_TYPE_EMAIL : null
 	 * @param includeLibName SMS_TYPE_EMAIL : 메일 제목
 	 */
-	@Async
+	//@Async
 	public void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName, String title) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
@@ -75,7 +75,7 @@ public class PushAPI {
 	 * @param message 전송될 문구
 	 * @param sendTime 전송될 시간 yyyy-MM-dd hh:mm
 	 */
-	@Async
+	//@Async
 	public void sendMessage(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
 		switch (type) {
 			case SMS_TYPE_EMAIL:
@@ -89,7 +89,7 @@ public class PushAPI {
 		}
 	}
 	
-	@Async
+	//@Async
 	public void sendMessageForCallNoSms(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
 		switch (type) {
 			case SMS_TYPE_EMAIL:
@@ -107,7 +107,7 @@ public class PushAPI {
 	 * @param member
 	 * @param message
 	 */
-	@Async
+	//@Async
     public void sendEmail(Homepage homepage, Member member, String message, String sendTime, String fromEmail, String title) {
 		String sendEmail = member.getEmail();
 		if ( sendEmail != null && message != null ) {

@@ -239,7 +239,7 @@ public class HomepageBaseInterceptor extends HandlerInterceptorAdapter {
 	}
 
 
-	@Async
+	//@Async
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
 		String uri = request.getRequestURI().substring(request.getContextPath().length());
