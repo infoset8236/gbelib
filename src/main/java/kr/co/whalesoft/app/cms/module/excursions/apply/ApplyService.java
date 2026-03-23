@@ -27,8 +27,7 @@ public class ApplyService extends BaseService {
 	@Autowired
 	private LoginService loginService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	public List<Apply> getApply(Apply apply) {
 		return Dao.getApply(apply);

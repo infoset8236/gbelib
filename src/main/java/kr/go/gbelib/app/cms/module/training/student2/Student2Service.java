@@ -54,8 +54,7 @@ public class Student2Service extends BaseService {
 	@Autowired
 	private CodeService codeService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	public List<Student2> getStudent2ListAll(Student2 student2) {
 		return dao.getStudent2ListAll(student2);

@@ -53,8 +53,7 @@ public class SmsSendController extends BaseController{
 	@Autowired
 	private AddressBookService addressBookService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, SmsSend smsSend, HttpServletRequest request) throws AuthException {

@@ -40,8 +40,7 @@ public class NewBookDreamController extends BaseController{
 	@Autowired
 	private HomepageService homepageService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, NewBookDream bookDream, HttpServletRequest request, HttpServletResponse response) throws Exception {

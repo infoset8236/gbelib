@@ -63,8 +63,7 @@ public class TrainingTeacherReqManageController extends BaseController {
 	@Autowired
 	private CodeService codeService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {

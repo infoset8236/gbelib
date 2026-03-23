@@ -60,8 +60,7 @@ public class LockerController extends BaseController {
 	@Autowired
 	private TermsService termsService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 		
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {

@@ -20,8 +20,7 @@ public class SupportService extends BaseService {
 	@Autowired
 	private SupportDao dao;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	public List<Calendar> getCalendar(Support support) {
 		return dao.getCalendar(support);

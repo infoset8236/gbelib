@@ -62,8 +62,7 @@ public class LibrarySearchController extends BaseController {
 	@Autowired
 	private BookImageService bookImageService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	@ModelAttribute("liboneApiUrl")
 	private String getLiboneApiUrl() {

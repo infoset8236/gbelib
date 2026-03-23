@@ -13,7 +13,7 @@ import kr.co.whalesoft.app.cms.member.Member;
 import kr.co.whalesoft.app.cms.module.emailSend.EmailSender;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class PushAPI {
 	protected final static Logger log = LoggerFactory.getLogger(PushAPI.class);
 

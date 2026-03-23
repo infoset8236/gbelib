@@ -53,8 +53,7 @@ public class StudentService extends BaseService {
 	@Autowired
 	private CodeService codeService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	public List<Student> getStudentListAll(Student student) {
 		return dao.getStudentListAll(student);

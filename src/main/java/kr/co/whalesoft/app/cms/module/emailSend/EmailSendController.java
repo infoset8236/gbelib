@@ -49,8 +49,7 @@ public class EmailSendController extends BaseController{
 	@Autowired
 	private AddressBookService addressBookService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, EmailSend emailSend, HttpServletRequest request) throws AuthException {

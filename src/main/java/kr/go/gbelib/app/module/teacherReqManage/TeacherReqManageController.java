@@ -67,8 +67,7 @@ public class TeacherReqManageController extends BaseController {
 	@Autowired
 	private MenuService menuService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {

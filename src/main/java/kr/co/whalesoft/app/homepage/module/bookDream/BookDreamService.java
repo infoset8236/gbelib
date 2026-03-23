@@ -38,8 +38,7 @@ public class BookDreamService extends BaseService{
 	@Autowired
 	private HomepageService homepageService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	protected Map<String, Object> getApiKey() {
 		Map<String, Object> map = new HashMap<String, Object>();

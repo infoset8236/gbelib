@@ -32,8 +32,7 @@ public class DonateBookController extends BaseController {
 	@Autowired
 	private CodeService codeService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@RequestMapping(value = {"/index.*"})
 	public String index(Model model, DonateBook donateBook, HttpServletRequest request) throws AuthException {

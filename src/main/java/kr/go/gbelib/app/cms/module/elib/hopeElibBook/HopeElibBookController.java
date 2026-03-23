@@ -74,8 +74,7 @@ public class HopeElibBookController extends BaseController {
     @Autowired
 	private HomepageService homepageService;
 
-    @Autowired
-	private PushAPI pushAPI;
+    private PushAPI pushAPI = new PushAPI();
 
     @RequestMapping(value = {"/cms/module/elib/hopeElibBook/{type}/index.*"})
     public String book_index(Model model, @PathVariable String type, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {

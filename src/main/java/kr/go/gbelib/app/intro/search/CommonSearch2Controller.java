@@ -105,8 +105,7 @@ public class CommonSearch2Controller extends BaseController {
 	@Autowired
 	private UntactBookPenaltySettingService untactBookPenaltySettingService;
 	
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {

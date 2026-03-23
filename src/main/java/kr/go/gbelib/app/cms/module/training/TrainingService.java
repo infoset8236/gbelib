@@ -41,8 +41,7 @@ public class TrainingService extends BaseService {
 	@Autowired
 	private HomepageService homepageService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	public List<Training> getTrainingListAll(Training training) {
 		return trainingDao.getTrainingListAll(training);

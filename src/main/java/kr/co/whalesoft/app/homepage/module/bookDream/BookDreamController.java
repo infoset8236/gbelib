@@ -85,8 +85,7 @@ public class BookDreamController extends BaseController {
 	@Autowired
 	private LoginLogService loginLogService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	/**
 	 * 첫화면

@@ -48,8 +48,7 @@ public class LockerReqController extends BaseController {
 	@Autowired
 	private CodeService codeService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	@RequestMapping(value = {"/index.*"})
 	public String index(Model model, LockerReq lockerReq, HttpServletRequest request) throws AuthException {

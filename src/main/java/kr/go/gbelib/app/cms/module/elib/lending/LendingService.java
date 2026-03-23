@@ -47,8 +47,7 @@ public class LendingService extends BaseService {
 	@Autowired
 	private APIService apiService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	private static final String KYOBO = "KYOB";
 	

@@ -44,8 +44,7 @@ public class TeachService extends BaseService {
 	@Autowired
 	private HomepageService homepageService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 	
 	public List<Teach> getTeachListAll(Teach teach) {
 		return teachDao.getTeachListAll(teach);

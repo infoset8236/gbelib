@@ -46,8 +46,7 @@ public class BoardCommentService extends BaseService {
 	@Autowired
 	private MemberService memberService;
 
-	@Autowired
-	private PushAPI pushAPI;
+	private PushAPI pushAPI = new PushAPI();
 
 	@Autowired
 	@Qualifier("boardCommentStorage")
