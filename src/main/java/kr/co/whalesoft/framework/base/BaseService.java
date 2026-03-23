@@ -11,7 +11,6 @@ import kr.co.whalesoft.app.cms.homepage.Homepage;
 import kr.co.whalesoft.app.cms.member.Member;
 import kr.co.whalesoft.framework.utils.PagingUtils;
 import kr.go.gbelib.app.common.api.MemberAPI;
-import net.sf.classifier4J.util.WFMultiPartPost;
 import net.sf.classifier4J.util.WFMPPost;
 
 import org.apache.commons.lang.StringUtils;

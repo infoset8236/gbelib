@@ -39,7 +39,6 @@ import kr.co.whalesoft.framework.utils.PagingUtils;
 import kr.co.whalesoft.framework.utils.RequestUtils;
 import kr.co.whalesoft.framework.utils.SanitizeHTML;
 import kr.co.whalesoft.framework.utils.StrUtil;
-import net.sf.classifier4J.util.WFMultiPartPost;
 import net.sf.classifier4J.util.WFMPPost;
 
 @Service

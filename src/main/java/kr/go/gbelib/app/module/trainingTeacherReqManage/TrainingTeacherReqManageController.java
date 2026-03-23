@@ -62,6 +62,9 @@ public class TrainingTeacherReqManageController extends BaseController {
 
 	@Autowired
 	private CodeService codeService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -325,7 +328,7 @@ public class TrainingTeacherReqManageController extends BaseController {
 					String teacher_name = teacher.getTeacher_name();
 					String name = teacher_name.substring(0, 1) + "*" + teacher_name.substring(teacher_name.length()-1, teacher_name.length());
 					for(Code code: phoneNumbers) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, code.getCode_name(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, code.getCode_name(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
 					}
 				}
 				res.setValid(true);
@@ -347,7 +350,7 @@ public class TrainingTeacherReqManageController extends BaseController {
 					String teacher_name = teacher.getTeacher_name();
 					String name = teacher_name.substring(0, 1) + "*" + teacher_name.substring(teacher_name.length()-1, teacher_name.length());
 					for(Code code: phoneNumbers) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, code.getCode_name(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, code.getCode_name(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
 					}
 				}
 				teacher.setConfirm_yn("N");

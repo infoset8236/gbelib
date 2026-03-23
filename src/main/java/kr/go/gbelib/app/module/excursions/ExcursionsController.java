@@ -65,6 +65,10 @@ public class ExcursionsController extends BaseController {
 
 	@Autowired
 	private MenuService menuService;
+
+	@Autowired
+	private PushAPI pushAPI;
+	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
@@ -289,7 +293,7 @@ public class ExcursionsController extends BaseController {
 				res.setValid(true);
 				res.setMessage("신청 되었습니다.");	
 				if (StringUtils.equals(getSessionMemberInfo(request).getSms_service_yn(), "Y")) {
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, apply.getApplicant_tel(), "도서관 견학 신청이 정상 처리 되었습니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, apply.getApplicant_tel(), "도서관 견학 신청이 정상 처리 되었습니다.", homepage.getHomepage_send_tell(), true);
 				}
 				
 			} 

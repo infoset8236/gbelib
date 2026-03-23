@@ -52,6 +52,9 @@ public class StudentService extends BaseService {
 	
 	@Autowired
 	private CodeService codeService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	public List<Student> getStudentListAll(Student student) {
 		return dao.getStudentListAll(student);
@@ -221,7 +224,7 @@ public class StudentService extends BaseService {
 						String message = String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", teach.getTeach_name());
 						Homepage homepage = homepageService.getHomepageOne(new Homepage(student.getHomepage_id()));
 						if (isSmsReceive(student.getSearch_api_type(), student.getMember_id())) {
-							PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
+							pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
 						}
 						addResult[0] = true;
 						addResult[1] = String.format("%s번째 참여자로 신청 되었습니다.", curJoinCount + 1);
@@ -249,7 +252,7 @@ public class StudentService extends BaseService {
 							String message = String.format("[%s] 해당 강좌에 %s번째 대기자로 신청이 완료되었습니다.", teach.getTeach_name(), curBackupJoinCount + 1);
 							Homepage homepage = homepageService.getHomepageOne(new Homepage(student.getHomepage_id()));
 							if (isSmsReceive(student.getSearch_api_type(), student.getMember_id())) {
-								PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
+								pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
 							}
 							return addResult;
 						}
@@ -305,7 +308,7 @@ public class StudentService extends BaseService {
 			//TODO 휴대문자 동의 여부 확인 후 전송
 			Homepage homepage = homepageService.getHomepageOne(new Homepage(student.getHomepage_id()));
 			if (isSmsReceive("USERID", st.getMember_id())) {
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, st.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 취소 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, st.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 취소 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
 			}
 		}
 		int result = dao.cancelStudent(student);
@@ -331,13 +334,13 @@ public class StudentService extends BaseService {
 								if (!StringUtils.isNotEmpty(reject)) {
 									if ( dao.updateJoinToBackupMember(firstBackupStudent) > 0 ) {
 										//대기자에서 정상참여로 변경될 경우
-										PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
+										pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
 									}
 									return result;
 								} else {
 									firstBackupStudent.setCancel_id("gbeadmin");
 									if (dao.cancelStudent(firstBackupStudent) > 0) {
-										PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 강좌 신청 제한으로 인해 해당 강좌 대기자 신청이 취소 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
+										pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 강좌 신청 제한으로 인해 해당 강좌 대기자 신청이 취소 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
 									}
 								}
 							}
@@ -348,7 +351,7 @@ public class StudentService extends BaseService {
 								if ( dao.updateJoinToBackupMember(firstBackupStudent) > 0 ) {
 									//대기자에서 정상참여로 변경될 경우
 									Homepage homepage = homepageService.getHomepageOne(new Homepage(firstBackupStudent.getHomepage_id()));
-									PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
+									pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", teach.getTeach_name()), homepage.getHomepage_send_tell(), true);
 								}
 							}
 						}
@@ -381,7 +384,7 @@ public class StudentService extends BaseService {
 						if ( firstBackupStudent != null ) {
 							if ( dao.updateJoinToBackupMember(firstBackupStudent) > 0 ) {
 								Homepage homepage = homepageService.getHomepageOne(new Homepage(firstBackupStudent.getHomepage_id()));
-								PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getHomepage_send_tell(), String.format("[%s] 정상 참여 되었습니다.", teach.getTeach_name()), firstBackupStudent.getApplicant_cell_phone(), true);
+								pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getHomepage_send_tell(), String.format("[%s] 정상 참여 되었습니다.", teach.getTeach_name()), firstBackupStudent.getApplicant_cell_phone(), true);
 							}
 						}
 					}

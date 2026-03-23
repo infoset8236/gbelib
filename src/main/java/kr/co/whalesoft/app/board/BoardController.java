@@ -91,6 +91,8 @@ public class BoardController extends BaseController {
 	private ThemeBookService themeBookService;
 	@Autowired
 	private CalendarManageService calendarManageService;
+	@Autowired
+	private PushAPI pushAPI;
 
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -923,14 +925,14 @@ public class BoardController extends BaseController {
 								Homepage homepage = (Homepage)request.getAttribute("homepage");
 								if (StringUtils.isNotEmpty(member.getCell_phone())) {
 									boolean isPms = !(boardManage.getManage_idx() == 563 || boardManage.getManage_idx() == 592);
-									PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getCell_phone(), message, homepage.getHomepage_send_tell(), isPms);
+									pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getCell_phone(), message, homepage.getHomepage_send_tell(), isPms);
 								}
 							}
 
 							if ( boardManage.getCharge_email_receive_yn().equals("Y") ) {
 								Homepage homepage = (Homepage)request.getAttribute("homepage");
 								if (StringUtils.isNotEmpty(member.getEmail())) {
-									PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, member.getEmail(), null, board.getContent(), true, message);
+									pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, member.getEmail(), null, board.getContent(), true, message);
 								}
 							}
 
@@ -952,7 +954,7 @@ public class BoardController extends BaseController {
 						catch ( Exception e ) {
 						}
 						if (tempCode != null && StringUtils.isNotEmpty(tempCode.getRemark()) ) {
-							PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, tempCode.getRemark(), null, board.getContent(), true, "디자인 요청이 접수되었습니다. 프로젝트사이트를 확인해 주세요.");
+							pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, tempCode.getRemark(), null, board.getContent(), true, "디자인 요청이 접수되었습니다. 프로젝트사이트를 확인해 주세요.");
 						}
 					}
 
@@ -997,7 +999,7 @@ public class BoardController extends BaseController {
 					adminMember.setMember_id(parentBoard.getAdd_id());
 					adminMember = memberService.getMemberOne(adminMember);
 					try {
-						PushAPI.sendMessage((Homepage)request.getAttribute("homepage"), PushAPI.SMS_TYPE_SMS, adminMember.getCell_phone(), board.getRequest_state(), null, true);
+						pushAPI.sendMessage((Homepage)request.getAttribute("homepage"), PushAPI.SMS_TYPE_SMS, adminMember.getCell_phone(), board.getRequest_state(), null, true);
 						res.setMessage("요청자 에게 알림을 보내고 등록 되었습니다.");
 					}
 					catch ( Exception e ) {

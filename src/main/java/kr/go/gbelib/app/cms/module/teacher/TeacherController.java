@@ -28,7 +28,7 @@ import kr.co.whalesoft.framework.utils.AttachmentUtils;
 import kr.co.whalesoft.framework.utils.JsonResponse;
 import kr.co.whalesoft.framework.utils.ValidationUtils;
 import kr.go.gbelib.app.common.api.MemberAPI;
-import net.sf.classifier4J.util.WFMultiPartPost;
+
 import net.sf.classifier4J.util.WFMPPost;
 
 @Controller

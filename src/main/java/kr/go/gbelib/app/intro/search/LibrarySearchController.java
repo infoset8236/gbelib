@@ -62,6 +62,9 @@ public class LibrarySearchController extends BaseController {
 	@Autowired
 	private BookImageService bookImageService;
 
+	@Autowired
+	private PushAPI pushAPI;
+
 	@ModelAttribute("liboneApiUrl")
 	private String getLiboneApiUrl() {
 		return CommonAPI.LIBONE_API_URL;
@@ -1056,7 +1059,7 @@ public class LibrarySearchController extends BaseController {
 				sb.append("서가명 : " + booksh_name +"\n");
 				
 				try {
-					PushAPI.sendMessageForCallNoSms(homepage, PushAPI.SMS_TYPE_SMS, phone, sb.toString(), homepage.getHomepage_send_tell(), true);					
+					pushAPI.sendMessageForCallNoSms(homepage, PushAPI.SMS_TYPE_SMS, phone, sb.toString(), homepage.getHomepage_send_tell(), true);
 					pushCount += 1;
 				} catch (Exception e) {
 					

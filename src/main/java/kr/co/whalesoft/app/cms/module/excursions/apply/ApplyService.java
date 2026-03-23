@@ -26,6 +26,9 @@ public class ApplyService extends BaseService {
 	
 	@Autowired
 	private LoginService loginService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	public List<Apply> getApply(Apply apply) {
 		return Dao.getApply(apply);
@@ -111,7 +114,7 @@ public class ApplyService extends BaseService {
 			if (isSmsReceive("USERID", apply_temp.getApply_id())) {
 				Homepage homepage = new Homepage(apply.getHomepage_id());
 				homepage = homepageService.getHomepageOne(homepage);
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, apply.getApplicant_tel(), "["+apply_temp.getApplicant_name() + "] 도서관 견학 신청이 승인 되었습니다.", homepage.getHomepage_send_tell(), true);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, apply.getApplicant_tel(), "["+apply_temp.getApplicant_name() + "] 도서관 견학 신청이 승인 되었습니다.", homepage.getHomepage_send_tell(), true);
 			}
 		}
 		

@@ -25,7 +25,6 @@ public class EmailSender {
 //	private static final String userName = "************";
 //	private static final String userPassword = "*************";//
 
-	@Async
 	public static void sendMail(String title, String content, String fromEmail, List<String> toMail) {
 
 	

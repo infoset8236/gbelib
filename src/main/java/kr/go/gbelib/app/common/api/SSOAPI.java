@@ -1,10 +1,6 @@
 package kr.go.gbelib.app.common.api;
 
-import com.google.gson.JsonObject;
-import kr.co.whalesoft.framework.utils.PagingUtils;
 import org.apache.commons.lang.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.*;
 
 public class SSOAPI {

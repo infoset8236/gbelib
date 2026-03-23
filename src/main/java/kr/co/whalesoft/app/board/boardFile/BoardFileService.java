@@ -21,7 +21,6 @@ import kr.co.whalesoft.app.cms.boardManage.BoardManageService;
 import kr.co.whalesoft.framework.base.BaseService;
 import kr.co.whalesoft.framework.file.FileStorage;
 import kr.co.whalesoft.framework.file.FileUtil;
-import net.sf.classifier4J.util.WFMultiPartPost;
 import net.sf.classifier4J.util.WFMPPost;
 
 @Service

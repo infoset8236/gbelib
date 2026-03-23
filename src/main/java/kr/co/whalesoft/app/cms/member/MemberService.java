@@ -19,7 +19,6 @@ import org.apache.commons.lang.StringUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.openssl.PEMKeyPair;
 import org.bouncycastle.openssl.PEMParser;
-import org.bouncycastle.util.encoders.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,11 +34,11 @@ import kr.co.whalesoft.app.cms.homepage.HomepageService;
 import kr.co.whalesoft.app.cms.memberAuth.MemberAuth;
 import kr.co.whalesoft.app.cms.memberAuth.MemberAuthDao;
 import kr.co.whalesoft.app.cms.memberGroupAuth.MemberGroupAuthService;
-/*import kr.co.whalesoft.app.cms.memberGroupSubord.MemberGroupSubord;
-import kr.co.whalesoft.app.cms.memberGroupSubord.MemberGroupSubordService;*/
 import kr.co.whalesoft.framework.base.BaseService;
 import kr.co.whalesoft.framework.utils.CalculateHashUtils;
 import kr.co.whalesoft.framework.utils.StrUtil;
+
+import java.util.Base64;
 
 @Service
 public class MemberService extends BaseService {
@@ -98,7 +97,7 @@ public class MemberService extends BaseService {
 		try {
 			cipher = Cipher.getInstance("RSA");
 			cipher.init(Cipher.DECRYPT_MODE, privateKey);
-			decBytes = cipher.doFinal(Base64.decode(s));
+			decBytes = Base64.getDecoder().decode(s);
 			decryptedText = new String(decBytes, "UTF-8");
 		} catch (Exception e) {
 			System.out.println("Decryption failed: " + e.getMessage());

@@ -63,8 +63,12 @@ public class TeacherReqManageController extends BaseController {
 
 	@Autowired
 	private CodeService codeService;
+	
 	@Autowired
 	private MenuService menuService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -306,7 +310,7 @@ public class TeacherReqManageController extends BaseController {
 				if(StringUtils.isNotBlank(homepage.getSupport_teacher_phone())) {
 					String teacher_name = teacher.getTeacher_name();
 					String name = teacher_name.substring(0, 1) + "*" + teacher_name.substring(teacher_name.length()-1, teacher_name.length());
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_teacher_phone(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_teacher_phone(), "강사은행 신청이 등록됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
 				}
 
 				res.setValid(true);
@@ -326,7 +330,7 @@ public class TeacherReqManageController extends BaseController {
 				if(StringUtils.isNotBlank(homepage.getSupport_teacher_phone())) {
 					String teacher_name = teacher.getTeacher_name();
 					String name = teacher_name.substring(0, 1) + "*" + teacher_name.substring(teacher_name.length()-1, teacher_name.length());
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_teacher_phone(), "강사은행 신청이 수정됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_teacher_phone(), "강사은행 신청이 수정됐습니다(성명:" + name + "). 승인필요.", homepage.getHomepage_send_tell(), true);
 				}
 
 				teacher.setConfirm_yn("N");

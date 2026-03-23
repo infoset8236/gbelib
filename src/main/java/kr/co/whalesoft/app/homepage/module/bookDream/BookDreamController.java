@@ -85,6 +85,9 @@ public class BookDreamController extends BaseController {
 	@Autowired
 	private LoginLogService loginLogService;
 
+	@Autowired
+	private PushAPI pushAPI;
+
 	/**
 	 * 첫화면
 	 * @param model
@@ -517,7 +520,7 @@ public class BookDreamController extends BaseController {
 					}
 					String fromTel = service.getBookDreamConfigOne(bookDream);
 					smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDream.getTitle(), 20));
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getMobileno(), smsMsg, fromTel, false);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getMobileno(), smsMsg, fromTel, false);
 
 					//담당자에게 전송
 					if (member.getLoca().equals("00147039")) {
@@ -534,7 +537,7 @@ public class BookDreamController extends BaseController {
 					bookDream.setC_no(22);
 					smsMsg = service.getBookDreamConfigOne(bookDream);
 					smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDream.getTitle(), 20));
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, toTel, smsMsg, fromTel, false);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, toTel, smsMsg, fromTel, false);
 					//담당자에게 전송 끝
 
 					res.setValid(true);
@@ -621,7 +624,7 @@ public class BookDreamController extends BaseController {
 					smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDreamOne.getR_title(), 20));
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					smsMsg =  smsMsg.replace("{{D_DAY}}", sdf.format(bookDreamOne.getR_return_close()));
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getMobileno(), smsMsg, fromTel, false);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getMobileno(), smsMsg, fromTel, false);
 				}
 			} else if (bookDream.getEditMode().equals("CANCEL")) {
 				Homepage homepage = new Homepage();
@@ -638,7 +641,7 @@ public class BookDreamController extends BaseController {
 					fromTel = bookDreamOne.getFromTel3();
 				}
 				smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDreamOne.getR_title(), 20));
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
 				bookDream.setR_state("-10");
 				bookDream.setRh_set("-10");
 				service.modifyBookDream(bookDream);
@@ -660,7 +663,7 @@ public class BookDreamController extends BaseController {
 					fromTel = bookDreamOne.getFromTel3();
 				}
 				smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDreamOne.getR_title(), 20));
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
 				bookDream.setR_state("-20");
 				bookDream.setRh_set("-20");
 				service.modifyBookDream(bookDream);
@@ -746,7 +749,7 @@ public class BookDreamController extends BaseController {
 					Calendar cal = Calendar.getInstance();
 					cal.add(Calendar.DATE, 14);
 					smsMsg =  smsMsg.replace("{{D_DAY}}", sdf.format(cal.getTime()));
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDreamOne.getR_hp(), smsMsg, fromTel, false);
 				}
 			}
 		} else {

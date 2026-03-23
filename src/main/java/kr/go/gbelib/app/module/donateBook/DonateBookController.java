@@ -41,6 +41,9 @@ public class DonateBookController extends BaseController{
 	
 	@Autowired
 	private TermsService termsService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -122,7 +125,7 @@ public class DonateBookController extends BaseController{
 				res.setUrl("index.do?menu_idx=" + donateBook.getMenu_idx());
 				Member member = getSessionMemberInfo(request);
 				if (StringUtils.equals(member.getSms_service_yn(), "Y")) {
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, donateBook.getCell_phone(), "기증도서 신청이 완료되었습니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, donateBook.getCell_phone(), "기증도서 신청이 완료되었습니다.", homepage.getHomepage_send_tell(), true);
 				}
 			} else if(editMode.equals("MODIFY")) {
 				service.modifyDonateBook(donateBook);

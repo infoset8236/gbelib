@@ -11,7 +11,9 @@ import org.springframework.scheduling.annotation.Async;
 import kr.co.whalesoft.app.cms.homepage.Homepage;
 import kr.co.whalesoft.app.cms.member.Member;
 import kr.co.whalesoft.app.cms.module.emailSend.EmailSender;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PushAPI {
 	protected final static Logger log = LoggerFactory.getLogger(PushAPI.class);
 
@@ -33,7 +35,7 @@ public class PushAPI {
 	 * @param includeLibName SMS_TYPE_SMS : 문자메시지 앞에 도서관명 포함여부, SMS_TYPE_EMAIL : null
 	 */
 	@Async
-	public static void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
+	public void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
 		member.setEmail(cellPhone);
@@ -41,7 +43,7 @@ public class PushAPI {
 	}
 	
 	@Async
-	public static void sendMessageForCallNoSms(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
+	public void sendMessageForCallNoSms(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
 		member.setEmail(cellPhone);
@@ -60,7 +62,7 @@ public class PushAPI {
 	 * @param includeLibName SMS_TYPE_EMAIL : 메일 제목
 	 */
 	@Async
-	public static void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName, String title) {
+	public void sendMessage(Homepage homepage, int type, String cellPhone, String message, String fromTel, boolean includeLibName, String title) {
 		Member member = new Member();
 		member.setCell_phone(cellPhone);
 		member.setEmail(cellPhone);
@@ -74,7 +76,7 @@ public class PushAPI {
 	 * @param sendTime 전송될 시간 yyyy-MM-dd hh:mm
 	 */
 	@Async
-	private static void sendMessage(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
+	public void sendMessage(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
 		switch (type) {
 			case SMS_TYPE_EMAIL:
 				sendEmail(homepage, member, message, sendTime, fromTel, title);
@@ -88,7 +90,7 @@ public class PushAPI {
 	}
 	
 	@Async
-	private static void sendMessageForCallNoSms(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
+	public void sendMessageForCallNoSms(Homepage homepage, int type, Member member, String message, String sendTime, String fromTel, boolean includeLibName, String title) {
 		switch (type) {
 			case SMS_TYPE_EMAIL:
 				sendEmail(homepage, member, message, sendTime, fromTel, title);
@@ -102,12 +104,11 @@ public class PushAPI {
 	}
 
 	/**
-	 * @param homepage_id
 	 * @param member
 	 * @param message
 	 */
 	@Async
-	private static void sendEmail(Homepage homepage, Member member, String message, String sendTime, String fromEmail, String title) {
+    public void sendEmail(Homepage homepage, Member member, String message, String sendTime, String fromEmail, String title) {
 		String sendEmail = member.getEmail();
 		if ( sendEmail != null && message != null ) {
 			if ( StringUtils.isNotEmpty(sendEmail.trim()) && StringUtils.isNotEmpty(message.trim())) {
@@ -125,7 +126,6 @@ public class PushAPI {
 	}
 
 	/**
-	 * @param homepage_id
 	 * @param member
 	 * @param message
 	 */

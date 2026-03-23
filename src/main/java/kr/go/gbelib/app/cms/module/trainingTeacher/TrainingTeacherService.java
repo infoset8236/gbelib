@@ -21,7 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.whalesoft.framework.base.BaseService;
 import kr.co.whalesoft.framework.file.FileStorage;
-import net.sf.classifier4J.util.WFMultiPartPost;
+
 import net.sf.classifier4J.util.WFMPPost;
 import net.sf.jxls.transformer.XLSTransformer;
 

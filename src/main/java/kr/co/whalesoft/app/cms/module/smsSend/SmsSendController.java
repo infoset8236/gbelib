@@ -52,6 +52,9 @@ public class SmsSendController extends BaseController{
 	
 	@Autowired
 	private AddressBookService addressBookService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, SmsSend smsSend, HttpServletRequest request) throws AuthException {
@@ -213,11 +216,11 @@ public class SmsSendController extends BaseController{
 				
 				for(int i=0; i< phone.length; i++) {
 					smsSend.setUser_phone(phone[i].replaceAll("-", ""));
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, smsSend.getUser_phone(), smsSend.getSend_msg(), smsSend.getCaller_cell_phone(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, smsSend.getUser_phone(), smsSend.getSend_msg(), smsSend.getCaller_cell_phone(), true);
 				}
 			} else {
 				smsSend.setUser_phone(smsSend.getUser_phone().replaceAll("-", ""));
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, smsSend.getUser_phone(), smsSend.getSend_msg(), smsSend.getCaller_cell_phone(), true);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, smsSend.getUser_phone(), smsSend.getSend_msg(), smsSend.getCaller_cell_phone(), true);
 			}
 			
 			res.setValid(true);

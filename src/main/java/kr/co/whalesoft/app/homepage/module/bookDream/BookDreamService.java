@@ -38,6 +38,9 @@ public class BookDreamService extends BaseService{
 	@Autowired
 	private HomepageService homepageService;
 
+	@Autowired
+	private PushAPI pushAPI;
+
 	protected Map<String, Object> getApiKey() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("X-Naver-Client-Id", "TOqdlc19MURV_gFfLqbo");
@@ -238,7 +241,7 @@ public class BookDreamService extends BaseService{
 				smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDream.getR_title(), 20));
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 				smsMsg =  smsMsg.replace("{{D_DAY}}", sdf.format(bookDream.getR_return_close()));
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getR_hp(), smsMsg, fromTel, false);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getR_hp(), smsMsg, fromTel, false);
 				bookDream.setD3_send_yn("Y");
 				dao.sendedMessage(bookDream);
 			}
@@ -268,7 +271,7 @@ public class BookDreamService extends BaseService{
 				bookDream.setC_no(15);
 				String smsMsg = getBookDreamConfigOne(bookDream);
 				smsMsg =  smsMsg.replace("{{BookName}}", StrUtil.cutStr(bookDream.getR_title(), 20));
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getR_hp(), smsMsg, fromTel, false);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, bookDream.getR_hp(), smsMsg, fromTel, false);
 				bookDream.setDday_send_yn("Y");
 				dao.sendedMessage(bookDream);
 			}

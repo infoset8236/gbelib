@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,12 +21,9 @@ import kr.co.whalesoft.app.cms.menu.menuHtml.MenuHtml;
 import kr.co.whalesoft.app.cms.menu.menuHtml.MenuHtmlService;
 import kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook;
 import kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBookService;
-import org.apache.commons.codec.binary.Base64;
+import java.util.Base64;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mobile.device.Device;
 import org.springframework.mobile.device.DeviceUtils;
@@ -530,7 +529,8 @@ public class ElibController extends BaseController {
 			model.addAttribute("isMobile", isMobile);
 			
 			if(isMobile) {
-				model.addAttribute("memberIdBase64", new String(Base64.encodeBase64(lending.getMember_id().getBytes())));
+				model.addAttribute("memberIdBase64", Base64.getEncoder().encodeToString(lending.getMember_id().getBytes()));
+
 				List<Map<String, String>> mobileList = new ArrayList<Map<String, String>>();
 				for(Lending l: lendingList) {
 					if(StringUtils.equals(l.getCom_code(), "KYOB")) {
@@ -759,17 +759,24 @@ public class ElibController extends BaseController {
 
 			List<Book> courseList = bookService.getCourseList(book);
 			
-			if("EDUW".equals(book1.getCom_code()) && courseList != null) {
+			if ("EDUW".equals(book1.getCom_code()) && courseList != null) {
 				HttpSession session = request.getSession();
-				DateTime dt = new DateTime();
-				DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-				DateTimeFormatter formatter2 = DateTimeFormat.forPattern("yyyy-MM-dd");
-				
-				model.addAttribute("EndDate", formatter2.print(dt.plusYears(1)));
 
-				for(Book course: courseList) {
-					String mkSessData = course.getLesson_no() + "$" + session.getId() + "$" + formatter.print(dt.plusMinutes(10)) + "$";
-					mkSessData = new String(Base64.encodeBase64(mkSessData.getBytes()));
+				LocalDateTime now = LocalDateTime.now();
+
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+				DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+				model.addAttribute("EndDate", formatter2.format(now.plusYears(1)));
+
+				for (Book course : courseList) {
+					String mkSessData = course.getLesson_no()
+							+ "$" + session.getId()
+							+ "$" + formatter.format(now.plusMinutes(10))
+							+ "$";
+
+					mkSessData = Base64.getEncoder().encodeToString(mkSessData.getBytes());
+
 					course.setMkSessData(mkSessData);
 				}
 			}

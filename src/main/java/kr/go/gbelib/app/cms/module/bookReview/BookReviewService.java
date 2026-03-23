@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.whalesoft.framework.base.BaseService;
 import kr.co.whalesoft.framework.utils.PagingUtils;
-import net.sf.classifier4J.util.WFMultiPartPost;
+
 import net.sf.classifier4J.util.WFMPPost;
 
 @Service

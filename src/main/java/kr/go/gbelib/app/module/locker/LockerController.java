@@ -59,6 +59,9 @@ public class LockerController extends BaseController {
 	
 	@Autowired
 	private TermsService termsService;
+
+	@Autowired
+	private PushAPI pushAPI;
 		
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -218,7 +221,7 @@ public class LockerController extends BaseController {
 				res.setMessage("신청 되었습니다.");
 				res.setUrl("index.do?menu_idx=" + lockerReq.getMenu_idx());
 				if (StringUtils.equals(getSessionMemberInfo(request).getSms_service_yn(), "Y")) {
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, lockerReq.getCell_phone(), "사물함 배정이 완료 되었습니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, lockerReq.getCell_phone(), "사물함 배정이 완료 되었습니다.", homepage.getHomepage_send_tell(), true);
 				}
 			}	else if(editMode.equals("MODIFY")) {
 				lockerReq.setMod_id(getSessionWebId(request));

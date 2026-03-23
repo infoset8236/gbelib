@@ -47,6 +47,9 @@ public class LendingService extends BaseService {
 	@Autowired
 	private APIService apiService;
 
+	@Autowired
+	private PushAPI pushAPI;
+
 	private static final String KYOBO = "KYOB";
 	
 	public List<Lending> getLendMemberList(Lending lending) {
@@ -155,7 +158,7 @@ public class LendingService extends BaseService {
 		if(data != null && StringUtils.equals("Y", data.get("SMS_CHECK"))) {
 			Book book = bookService.getBookInfo(new Book(lending));
 			String message = String.format("경상북도 전자도서관 <%s> 책이 대출되었습니다. 반납예정일은 %s입니다.", book.getBook_name(), koreanDateFormat(lending.getReturn_due_dt()));
-			PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, data.get("MOBILE_NO"), message, homepage.getHomepage_send_tell(), true);
+			pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, data.get("MOBILE_NO"), message, homepage.getHomepage_send_tell(), true);
 		}
 	}
 	
@@ -175,7 +178,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _borrowProc(Lending lending, boolean isFromReturn, boolean useApi, Object[] args) throws ElibException {
+	public int _borrowProc(Lending lending, boolean isFromReturn, boolean useApi, Object[] args) throws ElibException {
 		int result = checkBorrow(lending, isFromReturn);
 		if(result < 0) return result;
 		
@@ -224,7 +227,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _returnProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
+	public int _returnProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
 		Config config = configService.getConfig();
  		if(config == null) 	return -1;
 		
@@ -387,7 +390,7 @@ public class LendingService extends BaseService {
 	}
 		
 	@Transactional
-	private int _reserveCancel(Lending lending, boolean useApi) throws ElibException {
+	public int _reserveCancel(Lending lending, boolean useApi) throws ElibException {
 		
 		// 예약 정보가 있는지 검사
 		int cnt = dao.getReserveCnt(lending);
@@ -441,7 +444,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _reserveProc(Lending lending, boolean useApi) throws ElibException {
+	public int _reserveProc(Lending lending, boolean useApi) throws ElibException {
 		Config config = configService.getConfig();
 		if(config == null) return -1;
 		
@@ -545,7 +548,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _extendProc(Lending lending, Book book, boolean useApi) throws ElibException {
+	public int _extendProc(Lending lending, Book book, boolean useApi) throws ElibException {
 		int result = checkExtend(lending);
 		if(result < 0) return result;
 		
@@ -602,7 +605,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _autoReturnProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
+	public int _autoReturnProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
 		Config config = configService.getConfig();
 		if(config == null) 	return -1;
 		
@@ -682,7 +685,7 @@ public class LendingService extends BaseService {
 	}
 	
 	@Transactional
-	private int _autoReserveToLendProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
+	public int _autoReserveToLendProc(Lending lending, boolean useApi, Object[] args) throws ElibException {
 		Config config = configService.getConfig();
 		if(config == null) 	return -1;
 		

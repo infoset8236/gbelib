@@ -104,6 +104,9 @@ public class CommonSearch2Controller extends BaseController {
 	
 	@Autowired
 	private UntactBookPenaltySettingService untactBookPenaltySettingService;
+	
+	@Autowired
+	private PushAPI pushAPI;
 
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -1592,12 +1595,12 @@ public class CommonSearch2Controller extends BaseController {
 					// 신청자에게 SMS 전송
 					String message = "보존서고 신청이 완료 되었습니다.[" + librarySearch.getTitle() + "]";
 					if (isSmsReceive("WEBID", getSessionMemberId(request))) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), message, smsHomepage.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), message, smsHomepage.getHomepage_send_tell(), true);
 					}
 
 					// 관리자에게 SMS 전송
 					for(SmsReception one : receptionsList) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), message, smsHomepage.getHomepage_send_tell(), false);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), message, smsHomepage.getHomepage_send_tell(), false);
 					}
 				} else {
 					res.setValid(false);
@@ -1611,12 +1614,12 @@ public class CommonSearch2Controller extends BaseController {
 					// 신청자에게 SMS 전송
 					String message = "보존서고 신청이 취소 되었습니다.[" + librarySearch.getTitle() + "]";
 					if (isSmsReceive("WEBID", getSessionMemberId(request))) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), message, smsHomepage.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), message, smsHomepage.getHomepage_send_tell(), true);
 					}
 
 					// 관리자에게 SMS 전송
 					for(SmsReception one : receptionsList) {
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), message, smsHomepage.getHomepage_send_tell(), false);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), message, smsHomepage.getHomepage_send_tell(), false);
 					}
 				} else {
 					res.setValid(false);
@@ -1951,12 +1954,12 @@ public class CommonSearch2Controller extends BaseController {
 					//2019.02.26 이용자에게 신청 문자 삭제(일루스에서 전송)
 //					String userMessage = "상호대차 신청이 완료되었습니다. ["+librarySearch.getTitle()+"]";
 //					if (isSmsReceive("WEBID", getSessionMemberId(request))) {
-//						PushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), userMessage, homepage2.getHomepage_send_tell(), true);
+//						pushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), userMessage, homepage2.getHomepage_send_tell(), true);
 //					}
 					// 관리자에게 SMS 전송
 					String adminMessage = "상호대차 신청건이 발생하였습니다. 수령:"+member.getLoca_name()+" 도서명:"+librarySearch.getTitle();
 					for(SmsReception one : receptionsList) {
-						PushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), adminMessage, homepage2.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), adminMessage, homepage2.getHomepage_send_tell(), true);
 					}
 				} else {
 					res.setValid(false);
@@ -1971,12 +1974,12 @@ public class CommonSearch2Controller extends BaseController {
 					//신청자에게 SMS 전송
 					String userMessage = "상호대차 신청취소 완료되었습니다. ["+librarySearch.getTitle()+"]";
 					if (isSmsReceive("WEBID", getSessionMemberId(request))) {
-						PushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), userMessage, homepage2.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, member.getMobile_no(), userMessage, homepage2.getHomepage_send_tell(), true);
 					}
 					// 관리자에게 SMS 전송
 					String adminMessage = "상호대차 취소건이 발생하였습니다. 수령:"+member.getLoca_name()+" 도서명:"+librarySearch.getTitle();
 					for(SmsReception one : receptionsList) {
-						PushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), adminMessage, homepage2.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage2, PushAPI.SMS_TYPE_SMS, one.getReception_phone(), adminMessage, homepage2.getHomepage_send_tell(), true);
 					}
 				} else {
 					res.setValid(false);

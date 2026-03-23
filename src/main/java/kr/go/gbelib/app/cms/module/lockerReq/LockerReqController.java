@@ -47,6 +47,9 @@ public class LockerReqController extends BaseController {
 	
 	@Autowired
 	private CodeService codeService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@RequestMapping(value = {"/index.*"})
 	public String index(Model model, LockerReq lockerReq, HttpServletRequest request) throws AuthException {
@@ -212,7 +215,7 @@ public class LockerReqController extends BaseController {
 				    	service.assingLocker(targetLockerReq);
 				    	//사물함 상태값 변경
 				    	service.modifyLocekr(targetLockerReq);
-				    	//PushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "사물함 배정이 완료 되었습니다.");
+				    	//pushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "사물함 배정이 완료 되었습니다.");
 					}
 			    }
 				
@@ -320,7 +323,7 @@ public class LockerReqController extends BaseController {
 			    		service.modifyLocekrReq(lockerReqApply);
 			    		//사물함 상태값 변경
 			    		service.modifyLocekr(lockerReqApply);
-			    		PushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "사물함 배정이 완료 되었습니다.");
+			    		pushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "사물함 배정이 완료 되었습니다.");
 			    	}
 			    }*/
 				
@@ -434,7 +437,7 @@ public class LockerReqController extends BaseController {
 			    		service.modifyLocekrReq(lockerReqApply);
 			    		//사물함 상태값 변경
 			    		service.modifyLocekr(lockerReqApply);
-			    		PushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "["+lockerReqList.get(num2).getLocker_pre_name()+"] 사물함 배정이 완료 되었습니다.");
+			    		pushAPI.sendMessage(lockerReqApply.getHomepage_id(), PushAPI.SMS_TYPE_SMS, lockerReqApply.getCell_phone(), "["+lockerReqList.get(num2).getLocker_pre_name()+"] 사물함 배정이 완료 되었습니다.");
 			    	}
 			    }*/
 				
@@ -473,7 +476,7 @@ public class LockerReqController extends BaseController {
 
 					LockerReq temp = service.getLockerReqOne(lockerReq);
 					if (service.isSmsReceive("USERID", temp.getApply_id())) {
-						PushAPI.sendMessage(getHomepageOne(lockerReq.getHomepage_id()), PushAPI.SMS_TYPE_SMS, temp.getCell_phone(), "사물함 배정이 완료 되었습니다.", getHomepageOne(lockerReq.getHomepage_id()).getHomepage_send_tell(), true);
+						pushAPI.sendMessage(getHomepageOne(lockerReq.getHomepage_id()), PushAPI.SMS_TYPE_SMS, temp.getCell_phone(), "사물함 배정이 완료 되었습니다.", getHomepageOne(lockerReq.getHomepage_id()).getHomepage_send_tell(), true);
 					}
 					
 				} else {
@@ -526,7 +529,7 @@ public class LockerReqController extends BaseController {
 				res.setValid(true);
 				res.setMessage("등록 되었습니다.");
 				if (service.isSmsReceive(lockerReq.getSearch_api_type(), lockerReq.getApply_id())) {
-					PushAPI.sendMessage(getHomepageOne(lockerReq.getHomepage_id()), PushAPI.SMS_TYPE_SMS, lockerReq.getCell_phone(), "사물함신청이 완료 되었습니다.", getHomepageOne(lockerReq.getHomepage_id()).getHomepage_send_tell(), true);
+					pushAPI.sendMessage(getHomepageOne(lockerReq.getHomepage_id()), PushAPI.SMS_TYPE_SMS, lockerReq.getCell_phone(), "사물함신청이 완료 되었습니다.", getHomepageOne(lockerReq.getHomepage_id()).getHomepage_send_tell(), true);
 				}
 			} else if (editMode.equals("MODIFY")) {
 				lockerReq.setMod_id(getSessionMemberId(request));

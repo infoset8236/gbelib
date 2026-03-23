@@ -39,6 +39,9 @@ public class NewBookDreamController extends BaseController{
 
 	@Autowired
 	private HomepageService homepageService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, NewBookDream bookDream, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -146,7 +149,7 @@ public class NewBookDreamController extends BaseController{
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						smsMsg =  smsMsg.replace("{{D_DAY}}", sdf.format(user.getR_return_close()));
 					}
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, user.getR_hp(), smsMsg, fromTel, false);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, user.getR_hp(), smsMsg, fromTel, false);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

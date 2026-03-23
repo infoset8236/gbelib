@@ -19,6 +19,9 @@ public class SupportService extends BaseService {
 	
 	@Autowired
 	private SupportDao dao;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	public List<Calendar> getCalendar(Support support) {
 		return dao.getCalendar(support);
@@ -72,12 +75,12 @@ public class SupportService extends BaseService {
         	
         	// 신청자 문자 발신
         	String message = support.getRequer_name()+"님 "+date_str+ "에 ["+support.getReq_name()+"](으)로 현장지원 신청이 완료 되었습니다.";
-        	PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, support.getRequer_tel1()+"-"+support.getRequer_tel2()+"-"+support.getRequer_tel3(), message, homepage.getHomepage_send_tell(), true);
+        	pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, support.getRequer_tel1()+"-"+support.getRequer_tel2()+"-"+support.getRequer_tel3(), message, homepage.getHomepage_send_tell(), true);
         	// 관리자 문자 발신
         	String adminMessage = date_str+ "에 ["+support.getReq_name()+"](으)로 현장지원 신청이 접수 되었습니다.";
         	
         	if (StringUtils.isNotEmpty(homepage.getSupport_manager_phone())) {
-        		PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_manager_phone(), adminMessage, homepage.getHomepage_send_tell(), true);
+        		pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_manager_phone(), adminMessage, homepage.getHomepage_send_tell(), true);
         	}
 		} catch (Exception e) {
 			e.printStackTrace();

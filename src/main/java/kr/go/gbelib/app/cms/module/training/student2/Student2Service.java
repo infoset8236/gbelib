@@ -53,6 +53,9 @@ public class Student2Service extends BaseService {
 	
 	@Autowired
 	private CodeService codeService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	public List<Student2> getStudent2ListAll(Student2 student2) {
 		return dao.getStudent2ListAll(student2);
@@ -227,7 +230,7 @@ public class Student2Service extends BaseService {
 						
 						Homepage homepage = homepageService.getHomepageOne(new Homepage(student2.getHomepage_id()));
 						if (isSmsReceive(student2.getSearch_api_type(), student2.getMember_id())) {
-							PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
+							pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
 						}
 						addResult[0] = true;
 						addResult[1] = String.format("%s번째 참여자로 신청 되었습니다.", curJoinCount + 1);
@@ -255,7 +258,7 @@ public class Student2Service extends BaseService {
 							String	message = String.format("[%s] 해당 강좌에 %s번째 대기자로 신청이 완료되었습니다.", training.getTraining_name(), curBackupJoinCount + 1);
 							Homepage homepage = homepageService.getHomepageOne(new Homepage(student2.getHomepage_id()));
 							if (isSmsReceive(student2.getSearch_api_type(), student2.getMember_id())) {
-								PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
+								pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
 							}
 							return addResult;
 						}
@@ -293,7 +296,7 @@ public class Student2Service extends BaseService {
 			else  if ( student2.getApply_status().equals("1") ) {
 /*				Training training = trainingDao.getTrainingOne(new Training(student2.getHomepage_id(), student2.getGroup_idx(), student2.getCategory_idx(), student2.getTraining_idx()));
 				String message = String.format("[%s] 해당 강좌 정상 참여 되었습니다.", training.getTraining_name());
-				PushAPI.sendMessage(student2.getHomepage_id(), PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message);*/
+				pushAPI.sendMessage(student2.getHomepage_id(), PushAPI.SMS_TYPE_SMS, student2.getApplicant_cell_phone(), message);*/
 			}
 		}
 		
@@ -311,7 +314,7 @@ public class Student2Service extends BaseService {
 			//TODO 휴대문자 동의 여부 확인 후 전송
 			Homepage homepage = homepageService.getHomepageOne(new Homepage(student2.getHomepage_id()));
 			if (isSmsReceive("USERID", st.getMember_id())) {
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, st.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 취소 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, st.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 취소 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
 			}
 		}
 		int result = dao.cancelStudent2(student2);
@@ -330,7 +333,7 @@ public class Student2Service extends BaseService {
 							if ( dao.updateJoinToBackupMember(firstBackupStudent2) > 0 ) {
 								//대기자에서 정상참여로 변경될 경우
 								Homepage homepage = homepageService.getHomepageOne(new Homepage(firstBackupStudent2.getHomepage_id()));
-								PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent2.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
+								pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, firstBackupStudent2.getApplicant_cell_phone(), String.format("[%s] 해당 강좌 신청이 완료 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
 							}
 						}	
 					}
@@ -361,7 +364,7 @@ public class Student2Service extends BaseService {
 						if ( firstBackupStudent2 != null ) {
 							if ( dao.updateJoinToBackupMember(firstBackupStudent2) > 0 ) {
 								Homepage homepage = homepageService.getHomepageOne(new Homepage(firstBackupStudent2.getHomepage_id()));
-								PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getHomepage_send_tell(), String.format("[%s] 정상 참여 되었습니다.", training.getTraining_name()), firstBackupStudent2.getApplicant_cell_phone(), true);
+								pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getHomepage_send_tell(), String.format("[%s] 정상 참여 되었습니다.", training.getTraining_name()), firstBackupStudent2.getApplicant_cell_phone(), true);
 							}
 						}
 					}

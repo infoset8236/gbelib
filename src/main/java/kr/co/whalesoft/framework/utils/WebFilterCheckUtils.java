@@ -1,6 +1,6 @@
 package kr.co.whalesoft.framework.utils;
 
-import net.sf.classifier4J.util.WFMultiPartPost;
+
 import net.sf.classifier4J.util.WFMPPost;
 
 public class WebFilterCheckUtils {

@@ -31,6 +31,9 @@ public class DonateBookController extends BaseController {
 	
 	@Autowired
 	private CodeService codeService;
+
+	@Autowired
+	private PushAPI pushAPI;
 	
 	@RequestMapping(value = {"/index.*"})
 	public String index(Model model, DonateBook donateBook, HttpServletRequest request) throws AuthException {
@@ -82,7 +85,7 @@ public class DonateBookController extends BaseController {
 				res.setMessage("등록 되었습니다.");
 				if (StringUtils.equals(donateBook.getDonate_yn(), "Y")) {
 					Homepage homepage = getHomepageOne(donateBook.getHomepage_id());
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, donateBook.getCell_phone(), "기증도서 신청이 정상 접수 되었습니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, donateBook.getCell_phone(), "기증도서 신청이 정상 접수 되었습니다.", homepage.getHomepage_send_tell(), true);
 				}
 			} else if(editMode.equals("MODIFY")) {
 				donateBookService.modifyDonateBook(donateBook);

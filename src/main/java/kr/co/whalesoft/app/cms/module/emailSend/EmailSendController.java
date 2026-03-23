@@ -49,6 +49,9 @@ public class EmailSendController extends BaseController{
 	@Autowired
 	private AddressBookService addressBookService;
 
+	@Autowired
+	private PushAPI pushAPI;
+
 	@RequestMapping(value = { "/index.*" })
 	public String index(Model model, EmailSend emailSend, HttpServletRequest request) throws AuthException {
 		checkAuth("R", model, request);
@@ -186,13 +189,13 @@ public class EmailSendController extends BaseController{
 
 				for(int i=0; i< emailList.length; i++) {
 					emailSend.setUser_phone(emailList[i].replaceAll("-", ""));
-//					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getSend_msg(), emailSend.getCaller_cell_phone(), true);
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailList[i], emailSend.getContent(), "gbelib@info.go.kr", false, emailSend.getTitle());
+//					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getSend_msg(), emailSend.getCaller_cell_phone(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailList[i], emailSend.getContent(), "gbelib@info.go.kr", false, emailSend.getTitle());
 				}
 			} else {
 				emailSend.setUser_phone(emailSend.getUser_phone().replaceAll("-", ""));
-//				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getSend_msg(), emailSend.getCaller_cell_phone(), true);
-				PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getContent(), "gbelib@info.go.kr", false, emailSend.getTitle());
+//				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getSend_msg(), emailSend.getCaller_cell_phone(), true);
+				pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_EMAIL, emailSend.getUser_phone(), emailSend.getContent(), "gbelib@info.go.kr", false, emailSend.getTitle());
 			}
 
 			res.setValid(true);

@@ -32,12 +32,6 @@ public class QrCodeController {
 
 	private String basePath = "/cms/module/qrcode/";
 
-	/*public ModelAndView index(QRCode qrcode,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		ModelAndView mv = new ModelAndView("/test/QRTest.jsp");
-		mv.addObject("qrcode",qrcode);
-		return mv;
-	}*/
-
 	@RequestMapping(value = { "/qrcode.*" })
 	public String qrCode(Model model, QRCode qrcode,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		qrcode.setExtension("jpg");

@@ -3,7 +3,7 @@ package kr.go.gbelib.app.cms.module.guestbook;
 import kr.co.whalesoft.app.board.Board;
 import kr.co.whalesoft.app.board.BoardService;
 import kr.co.whalesoft.framework.base.BaseController;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

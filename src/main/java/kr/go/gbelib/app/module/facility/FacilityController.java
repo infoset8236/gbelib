@@ -61,6 +61,9 @@ public class FacilityController extends BaseController {
 	
 	@Autowired
 	private BlackListService blackListService;
+
+	@Autowired
+	private PushAPI pushAPI;
 		
 	@ModelAttribute("siteList")
 	public List<Site> getAreaCdList(HttpServletRequest request) {
@@ -288,13 +291,13 @@ public class FacilityController extends BaseController {
 				Facility oneFacility = service.getFacilityOne(new Facility(facilityReq.getHomepage_id(), facilityReq.getFacility_idx()));
 
 				if (StringUtils.equals(getSessionMemberInfo(request).getSms_service_yn(), "Y")) {
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, facilityReq.getApply_phone(), "시설물 이용 신청이 정상 처리 되었습니다. 시설물 이용 신청은 담당자 승인 후 사용가능합니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, facilityReq.getApply_phone(), "시설물 이용 신청이 정상 처리 되었습니다. 시설물 이용 신청은 담당자 승인 후 사용가능합니다.", homepage.getHomepage_send_tell(), true);
 				}
 
 				if (("h19").equals(homepage.getHomepage_id())) {	//청도 - 시설물 이용일자 추가
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_facility_phone(), homepage.getHomepage_name() + "의 시설물이 신청 되었습니다.\n시설물 일자 : " + oneFacility.getUse_date(), homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_facility_phone(), homepage.getHomepage_name() + "의 시설물이 신청 되었습니다.\n시설물 일자 : " + oneFacility.getUse_date(), homepage.getHomepage_send_tell(), true);
 				} else {
-					PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_facility_phone(), homepage.getHomepage_name() + "의 시설물이 신청 되었습니다.", homepage.getHomepage_send_tell(), true);
+					pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, homepage.getSupport_facility_phone(), homepage.getHomepage_name() + "의 시설물이 신청 되었습니다.", homepage.getHomepage_send_tell(), true);
 				}
 				
 			} 

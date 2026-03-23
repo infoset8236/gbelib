@@ -40,7 +40,10 @@ public class TrainingService extends BaseService {
 	
 	@Autowired
 	private HomepageService homepageService;
-	
+
+	@Autowired
+	private PushAPI pushAPI;
+
 	public List<Training> getTrainingListAll(Training training) {
 		return trainingDao.getTrainingListAll(training);
 	}
@@ -187,7 +190,7 @@ public class TrainingService extends BaseService {
 						studentDao.modifyStudent2Status(backupStudent);
 						
 						Homepage homepage = homepageService.getHomepageOne(new Homepage(backupStudent.getHomepage_id()));
-						PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, backupStudent.getApplicant_cell_phone(), String.format("[%s] 정상 참여 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
+						pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, backupStudent.getApplicant_cell_phone(), String.format("[%s] 정상 참여 되었습니다.", training.getTraining_name()), homepage.getHomepage_send_tell(), true);
 						
 					}
 				}
@@ -367,7 +370,7 @@ public class TrainingService extends BaseService {
 					
 					for(Student2 one : studentList) {
 						if (isSmsReceive2("WEBID", one.getMember_key()).equals("Y")) {
-							PushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
+							pushAPI.sendMessage(homepage, PushAPI.SMS_TYPE_SMS, one.getApplicant_cell_phone(), message, homepage.getHomepage_send_tell(), true);
 						}
 					}
 				}

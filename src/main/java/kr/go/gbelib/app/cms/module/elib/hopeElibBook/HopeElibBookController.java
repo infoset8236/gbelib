@@ -74,6 +74,9 @@ public class HopeElibBookController extends BaseController {
     @Autowired
 	private HomepageService homepageService;
 
+    @Autowired
+	private PushAPI pushAPI;
+
     @RequestMapping(value = {"/cms/module/elib/hopeElibBook/{type}/index.*"})
     public String book_index(Model model, @PathVariable String type, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
         checkAuth("R", model, request);
@@ -677,7 +680,7 @@ public class HopeElibBookController extends BaseController {
 
             String message = String.format("신청하신 [%s] 전자책이 %s되었습니다.", shortBookName, status);
 
-            PushAPI.sendMessage(smsHomepage, PushAPI.SMS_TYPE_SMS, hopeElibBook.getApplication_cell_phone(), message, smsHomepage.getHomepage_send_tell(), true);
+            pushAPI.sendMessage(smsHomepage, PushAPI.SMS_TYPE_SMS, hopeElibBook.getApplication_cell_phone(), message, smsHomepage.getHomepage_send_tell(), true);
         } else {
             res.setValid(false);
             res.setResult(result.getAllErrors());
