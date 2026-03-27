@@ -318,7 +318,8 @@ $(function(){
 		<form:select path="plan_month" class="" style="width:80px;height:33px;"></form:select>
 		<a id="next-btn" href="#next" class="btn next"><img src="/resources/common/img/notice_type03/popupzone-next-btn.png" style="width:15px;"><span class="blind">다음달</span></a>
 	</div>
-
+    <div class="rsv-info"></div>
+    <div class="auto-scroll">
 	<div id="calendar">
 	<table class="cal-tbl">
 		<thead>
@@ -535,4 +536,5 @@ $(function(){
 			</tbody>
 		</table>
 	</div>
+    </div>
 </form:form>
