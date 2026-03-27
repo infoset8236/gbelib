@@ -10,7 +10,7 @@ ${boardManage.top_html}
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		if('${param.manage_idx}' == '673'){
+		if('${param.manage_idx}' == '673' || '${param.manage_idx}' == '436'){
 			$('#secret_yn_yes').prop('checked', true);
 		}
 	});

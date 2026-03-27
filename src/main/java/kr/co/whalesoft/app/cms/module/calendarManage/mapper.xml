@@ -513,7 +513,7 @@
 			OR substr(end_date,1,10) = TO_CHAR(SYSDATE, 'YYYY-MM-DD'))
 		</if>
 		AND DELETE_YN = 'N'
-		AND date_type !='1'
+		AND DATE_TYPE = '2'
 	</select>
 
 	<select id="getCalendarForIct" resultType="kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage">

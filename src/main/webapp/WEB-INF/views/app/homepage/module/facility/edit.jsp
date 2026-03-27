@@ -69,7 +69,11 @@ $(function() {
 			        <tr>
 			         	<th>이용일</th>
 			         	<td>${facility.use_date}</td>
-			        </tr>       		
+			        </tr>
+					<tr>
+			         	<th>이용시간</th>
+			         	<td>${facility.start_time}~${facility.end_time}</td>
+			        </tr>
 			        <tr>
 			         	<th>신청자명 (<span style="color: red; font-weight: bold;">*</span>)</th>
 			         	<td>
@@ -169,6 +173,10 @@ $(function() {
 			        <tr>
 			         	<th>이용일</th>
 			         	<td>${facility.use_date}</td>
+			        </tr>
+					<tr>
+			         	<th>이용시간</th>
+			         	<td>${facility.start_time}~${facility.end_time}</td>
 			        </tr>
 			        <tr>
 			         	<th>신청자명 (<span style="color: red; font-weight: bold;">*</span>)</th>
