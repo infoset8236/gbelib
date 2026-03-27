@@ -112,6 +112,14 @@ $(document).ready(function() {
 		}
 		</c:if>
 
+        if('${param.manage_idx}' == '436'){
+            if(!$('input[name="secret_yn"]:checked').val() || $('input[name="secret_yn"]:checked').val() !== 'Y'){
+                alert('비밀글로 설정해야 글 작성이 가능합니다.');
+                $('#secret_yn_yes').focus();
+                return false;
+            }
+        }
+
 		<c:if test="${boardManage.editor_use_yn eq 'Y'}">
 		if(isEditorOn()) {
 			oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
