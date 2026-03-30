@@ -106,7 +106,8 @@
             TEACH_BOOK_MANAGE
         WHERE
             teach_idx = #{teach_idx}
-        AND web_id = #{web_id}
+        AND student_name = #{student_name}
+        AND applicant_cell_phone = #{applicant_cell_phone}
         AND TRUNC(add_date) = TRUNC(SYSDATE)
     </select>
 
@@ -117,7 +118,8 @@
             TEACH_BOOK_MANAGE
         WHERE
             teach_idx = #{teach_idx}
-        AND web_id = #{web_id}
+        AND student_name = #{student_name}
+        AND applicant_cell_phone = #{applicant_cell_phone}
         AND TRUNC(add_date) = TRUNC(SYSDATE)
     </select>
 
@@ -130,7 +132,8 @@
             teach_date = SYSDATE
         WHERE
             teach_idx = #{teach_idx}
-        AND web_id = #{web_id}
+        AND student_name = #{student_name}
+        AND applicant_cell_phone = #{applicant_cell_phone}
         AND TRUNC(add_date) = TRUNC(SYSDATE)
     </update>
 

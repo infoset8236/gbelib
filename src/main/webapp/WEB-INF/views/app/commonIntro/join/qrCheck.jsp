@@ -49,6 +49,15 @@
     SecuKeypadEncoder skePc = factory.createEncoder(confPc);
 %>
 
+<script>
+    $(function() {
+        $('#member').on('submit', function() {
+            var cell_phone = $('#cell_phone1').val() + '-' + $('#cell_phone2').val() + '-' + $('#cell_phone3').val();
+            $('#cell_phone').val(cell_phone);
+        });
+    })
+</script>
+
 <div class="login-box">
     <div class="login-body">
         <div class="tab">
@@ -68,21 +77,49 @@
                                 <%-- y-SecuKeypad Hidden Object --%>
                                 <form:hidden path="menu_idx"/>
                                 <form:hidden path="homepage_id"/>
+                                <form:hidden path="cell_phone"/>
                                 <input type="hidden" name="training_idx" value="${param.training_idx}">
                                 <input type="hidden" name="token" value="${param.token}">
                                 <input type="hidden" name="qr_count" value="${param.qr_count}">
                                 <input type="hidden" name="teach_idx" value="${param.teach_idx}">
                                 <input type="hidden" name="qr_check_type" value="${param.qr_check_type}">
-                                <div class="form-box">
-                                    <p class="idtype" class="blind">
-                                        <label class="blind" for="member_id">아이디</label>
-                                        <form:input path="member_id" class="txt" placeholder="아이디" title="아이디" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off" />
-                                    </p>
-                                    <p id="pwp" class="idtype" class="blind">
-                                        <label for="member_pw" class="blind" >비밀번호</label>
-                                        <form:password path="member_pw" class="txt" placeholder="비밀번호" title="비밀번호" maxlength="20"/>
-                                    </p>
-                                </div>
+                                <c:choose>
+                                    <c:when test="${param.qr_check_type eq 'TEACH'}">
+                                        <div class="form-box">
+                                            <p class="idtype" class="blind">
+                                                <label class="blind" for="member_name">성명</label>
+                                                <form:input path="member_name" class="txt" placeholder="성명" title="성명" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
+                                            </p>
+                                            <div>핸드폰 번호</div>
+                                            <label for="cell_phone" class="blind">핸드폰 번호</label>
+                                            <div style="display: flex; align-items: center; gap: 4px;">
+                                                <p class="idtype" class="blind">
+                                                    <form:input path="cell_phone1" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
+                                                </p>
+                                                -
+                                                <p class="idtype" class="blind">
+                                                    <form:input path="cell_phone2" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
+                                                </p>
+                                                -
+                                                <p class="idtype" class="blind">
+                                                    <form:input path="cell_phone3" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="form-box">
+                                            <p class="idtype" class="blind">
+                                                <label class="blind" for="member_id">아이디</label>
+                                                <form:input path="member_id" class="txt" placeholder="아이디" title="아이디" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off" />
+                                            </p>
+                                            <p id="pwp" class="idtype" class="blind">
+                                                <label for="member_pw" class="blind" >비밀번호</label>
+                                                <form:password path="member_pw" class="txt" placeholder="비밀번호" title="비밀번호" maxlength="20"/>
+                                            </p>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                                 <button id="save-btn">
                                     출석체크
                                 </button>

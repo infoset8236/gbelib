@@ -2207,83 +2207,85 @@ public class CommonJoinController extends BaseController {
 	}
 
 	@RequestMapping(value = "/qrLoginProc.*")
-	public String qrLoginProc(Model model, @RequestParam(required = false) String training_idx, @RequestParam(required = false) String token, @RequestParam(required = false) String qr_count,
+	public String qrLoginProc(@RequestParam(required = false) String training_idx, @RequestParam(required = false) String token, @RequestParam(required = false) String qr_count,
 							  @RequestParam(required = false) String teach_idx, @RequestParam(required = false) String qr_check_type, Member member, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
-		boolean sessionValid = SecuKeypadDecoder.sessionValidation(request);
-
-		String decodeStr = SecuKeypadDecoder.decode(request, SecuKeypadConstant.SECU_KEYPAD_TYPE_PC_ALPHABET);
-
-		if (sessionValid) {
-			if(decodeStr != null && !decodeStr.equals("")) {
-				decodeStr = decodeStr.replace(" ", "&nbsp;");
-				member.setMember_pw(decodeStr);
-			}
-		}
 
 		try {
-			Object result = LoginAPI.login(member);
-			if ( result instanceof Member ) {
-				member = (Member) result;
+			if ("TEACH".equals(qr_check_type)) {
+				Teach teach = new Teach();
+				teach.setTeach_idx(Integer.parseInt(teach_idx));
+				teach.setHomepage_id(homepage.getHomepage_id());
 
-				if ("TEACH".equals(qr_check_type)) {
-					Teach teach = new Teach();
-					teach.setTeach_idx(Integer.parseInt(teach_idx));
-					teach.setHomepage_id(homepage.getHomepage_id());
+				Teach qrTeach = teachService.getTeachByQr(teach);
 
-					Teach qrTeach = teachService.getTeachByQr(teach);
+				if (qrTeach == null) {
+					teachService.alertMessage("등록된 강좌가 없습니다.", request, response);
+					return null;
+				}
 
-					if (qrTeach == null) {
-						teachService.alertMessage("등록된 강좌가 없습니다.", request, response);
-						return null;
-					}
+				if (!token.equals(qrTeach.getToken())) {
+					teachService.alertMessage("이미 만료된 토큰입니다.", request, response);
+					return null;
+				}
 
-					if (!token.equals(qrTeach.getToken())) {
-						teachService.alertMessage("이미 만료된 토큰입니다.", request, response);
-						return null;
-					}
+				TeachBookManage teachBookManage = new TeachBookManage();
+				teachBookManage.setStudent_name(member.getMember_name());
+				teachBookManage.setApplicant_cell_phone(member.getCell_phone());
+				teachBookManage.setTeach_idx(Integer.valueOf(teach_idx));
 
-					TeachBookManage teachBookManage = new TeachBookManage();
-					teachBookManage.setWeb_id(member.getMember_id());
-					teachBookManage.setTeach_idx(Integer.valueOf(teach_idx));
-
-					if (teachBookManageService.checkTeachStudentCount(teachBookManage) <= 0) {
-						teachBookManageService.alertMessage("해당 강좌신청자가 아닙니다.", request, response);
-						return null;
-					} else {
-						TeachBookManage checkTeachBookManage = teachBookManageService.checkTeachStudent(teachBookManage);
-
-						TeachBook teachBook = new TeachBook();
-						teachBook.setHomepage_id(homepage.getHomepage_id());
-						teachBook.setGroup_idx(qrTeach.getGroup_idx());
-						teachBook.setCategory_idx(qrTeach.getCategory_idx());
-						teachBook.setTeach_idx(qrTeach.getTeach_idx());
-
-						Date today = new Date();
-						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-						teachBook.setTeach_date(sdf.format(today));
-						teachBook.setStatus("1");
-						teachBook.setAdd_id(member.getMember_id());
-
-						if (checkTeachBookManage != null) {
-							teachBook.setStudent_idx(checkTeachBookManage.getStudent_idx());
-
-							if ("2".equals(checkTeachBookManage.getTeach_status()) || teachBookService.checkTeachBookStudentByDate(teachBook) > 0) {
-								teachBookManageService.alertMessage("이미 출석체크가 완료되었습니다.", request, response);
-								return null;
-							}
-						}
-
-						teachBookManage.setTeach_status("2");
-						teachBookManage.setTeach_type("1");
-						teachBookManageService.modifyTeachStudent(teachBookManage);
-
-						if ( teachBookService.checkTeachBookStudentByDate(teachBook) == 0 ) {
-							teachBookService.addTeachBook(teachBook);
-						}
-					}
+				if (teachBookManageService.checkTeachStudentCount(teachBookManage) <= 0) {
+					teachBookManageService.alertMessage("해당 강좌신청자가 아닙니다.", request, response);
+					return null;
 				} else {
+					TeachBookManage checkTeachBookManage = teachBookManageService.checkTeachStudent(teachBookManage);
+
+					TeachBook teachBook = new TeachBook();
+					teachBook.setHomepage_id(homepage.getHomepage_id());
+					teachBook.setGroup_idx(qrTeach.getGroup_idx());
+					teachBook.setCategory_idx(qrTeach.getCategory_idx());
+					teachBook.setTeach_idx(qrTeach.getTeach_idx());
+
+					Date today = new Date();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+					teachBook.setTeach_date(sdf.format(today));
+					teachBook.setStatus("1");
+					teachBook.setAdd_id(member.getMember_id());
+
+					if (checkTeachBookManage != null) {
+						teachBook.setStudent_idx(checkTeachBookManage.getStudent_idx());
+
+						if ("2".equals(checkTeachBookManage.getTeach_status()) || teachBookService.checkTeachBookStudentByDate(teachBook) > 0) {
+							teachBookManageService.alertMessage("이미 출석체크가 완료되었습니다.", request, response);
+							return null;
+						}
+					}
+
+					teachBookManage.setTeach_status("2");
+					teachBookManage.setTeach_type("1");
+					teachBookManageService.modifyTeachStudent(teachBookManage);
+
+					if ( teachBookService.checkTeachBookStudentByDate(teachBook) == 0 ) {
+						teachBookService.addTeachBook(teachBook);
+					}
+				}
+			} else {
+				boolean sessionValid = SecuKeypadDecoder.sessionValidation(request);
+
+				String decodeStr = SecuKeypadDecoder.decode(request, SecuKeypadConstant.SECU_KEYPAD_TYPE_PC_ALPHABET);
+
+				if (sessionValid) {
+					if(decodeStr != null && !decodeStr.equals("")) {
+						decodeStr = decodeStr.replace(" ", "&nbsp;");
+						member.setMember_pw(decodeStr);
+					}
+				}
+
+				Object result = LoginAPI.login(member);
+				if ( result instanceof Member ) {
+					member = (Member) result;
+
 					TrainingBookQrManage trainingBookQrManage = new TrainingBookQrManage();
 					trainingBookQrManage.setHomepage_id(homepage.getHomepage_id());
 					trainingBookQrManage.setTraining_idx(Integer.parseInt(training_idx));
@@ -2323,10 +2325,10 @@ public class CommonJoinController extends BaseController {
 						trainingBookManage.setTraining_type("1");
 						trainingBookManageService.modifyTrainingStudent(trainingBookManage);
 					}
+				} else {
+					trainingService.alertMessage("아이디 또는 비밀번호를 다시 확인하세요.", request, response);
+					return null;
 				}
-			} else {
-				trainingService.alertMessage("신청자 정보가 맞지 않습니다.", request, response);
-				return null;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
