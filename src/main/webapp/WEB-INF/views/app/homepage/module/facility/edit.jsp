@@ -205,7 +205,14 @@ $(function() {
 					<tr>
 						<th>사용목적 (<span style="color: red; font-weight: bold;">*</span>)</th>
 						<td>
-							<form:textarea path="apply_desc" class="text" cssStyle="width:100%; height:100px;"/>
+							<c:choose>
+								<c:when test="${facility.homepage_id eq 'h23'}">
+									<form:textarea path="apply_desc" class="text" cssStyle="width:100%; height:100px;" placeholder="[필수]사용목적 및 인원을 적어주세요"/>
+								</c:when>
+								<c:otherwise>
+									<form:textarea path="apply_desc" class="text" cssStyle="width:100%; height:100px;"/>
+								</c:otherwise>
+							</c:choose>
 						</td>
 					</tr>
 				</tbody>
