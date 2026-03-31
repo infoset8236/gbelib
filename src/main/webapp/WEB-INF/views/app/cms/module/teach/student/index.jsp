@@ -96,7 +96,7 @@ function regExp(str){
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
 				<div class="infodesk" style="overflow:hidden; display: flex; gap: 4px;"">
 					<span style="float:left;">강좌연도 :
-						<form:select path="search_year">
+						<form:select path="search_year" cssClass="selectmenu">
 							<form:option value="">전체</form:option>
 
 							<c:forEach var="y" begin="${currentYear - 5}" end="${currentYear + 5}">

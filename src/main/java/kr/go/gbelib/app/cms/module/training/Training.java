@@ -162,6 +162,8 @@ public class Training extends PagingUtils {
 	private Integer qr_check_count;
 	private String token;
 
+	private String search_year;
+
 	public Training() {}
 
 	public Training(String homepage_id, int mainViewCount) {
@@ -1505,5 +1507,13 @@ public class Training extends PagingUtils {
 
 	public void setToken(String token) {
 		this.token = token;
+	}
+
+	public String getSearch_year() {
+		return search_year;
+	}
+
+	public void setSearch_year(String search_year) {
+		this.search_year = search_year;
 	}
 }

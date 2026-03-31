@@ -113,7 +113,9 @@ public class Student2 extends PagingUtils {
 	private int belong_idx; //기관idx
 
 	private String belong_name;	//기관이름
-	
+
+	private String search_year;
+
 	public Student2() {}
 	
 	public Student2(String homepage_id, int group_idx, int category_idx, int training_idx) {
@@ -957,5 +959,13 @@ public class Student2 extends PagingUtils {
 
 	public void setBelong_name(String belong_name) {
 		this.belong_name = belong_name;
+	}
+
+	public String getSearch_year() {
+		return search_year;
+	}
+
+	public void setSearch_year(String search_year) {
+		this.search_year = search_year;
 	}
 }

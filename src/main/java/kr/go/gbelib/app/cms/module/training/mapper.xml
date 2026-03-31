@@ -58,6 +58,9 @@
 			<if test="category_idx > 0">
 			AND a.CATEGORY_IDX = #{category_idx}
 			</if>
+			<if test="search_year != null and search_year != ''">
+			AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
+			</if>
 			AND a.HOMEPAGE_ID = #{homepage_id}
 			AND a.DELETE_YN = 'N'
 		ORDER BY
@@ -110,6 +113,9 @@
 				<if test="category_idx > 0">
 				AND a.CATEGORY_IDX = #{category_idx}
 				</if>
+				<if test="search_year != null and search_year != ''">
+				AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
+				</if>
 				AND a.DELETE_YN = 'N'
 			ORDER BY
 				a.ADD_DATE desc
@@ -140,6 +146,9 @@
 			</if>
 			<if test="category_idx > 0">
 			AND a.CATEGORY_IDX = #{category_idx}
+			</if>
+		  	<if test="search_year != null and search_year != ''">
+			AND SUBSTR(a.START_DATE, 1, 4) = #{search_year}
 			</if>
 			AND a.DELETE_YN = 'N'
 	</select>

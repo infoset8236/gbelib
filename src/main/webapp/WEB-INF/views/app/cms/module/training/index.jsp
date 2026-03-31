@@ -120,9 +120,18 @@ $(function() {
 		e.preventDefault();
 		$('#hiddenForm').attr('action', 'csvDownload.do').submit();
 	});
+
+	$('select#search_year').on('change', function() {
+		$('#trainingListForm #viewPage').val(1);
+		$('#trainingListForm').submit();
+	});
 	
 });
 </script>
+
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy" var="currentYear"/>
+
 <form:form id="hiddenForm" modelAttribute="training" action="save.do">
 	<form:hidden path="editMode" value="DELETE"/>
 	<form:hidden path="homepage_id"/>
@@ -137,6 +146,16 @@ $(function() {
 	<div class="infodesk">
 		검색 결과 : 총 ${trainingListCount}건
 		<div class="button">
+			<span>강좌연도 :
+				<form:select path="search_year" cssClass="selectmenu">
+					<form:option value="">전체</form:option>
+
+					<c:forEach var="y" begin="${currentYear - 5}" end="${currentYear + 5}">
+						<form:option value="${y}">${y}</form:option>
+					</c:forEach>
+
+				</form:select>
+			</span>
 			<span>대분류 : 
 				<form:select path="large_category_idx" cssClass="selectmenu">
 					<form:option class="all" value="0" label="전체" />

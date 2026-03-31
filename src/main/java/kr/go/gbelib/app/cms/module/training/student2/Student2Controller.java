@@ -72,6 +72,7 @@ public class Student2Controller extends BaseController {
 		model.addAttribute("categoryList", categoryService.getCategoryListAll(new TrainingCategory(student.getHomepage_id(), student.getGroup_idx(), student.getLarge_category_idx())));
 		Training training = new Training(student.getHomepage_id(), student.getGroup_idx(),student.getCategory_idx());
 		training.setLarge_category_idx(student.getLarge_category_idx());
+		training.setSearch_year(student.getSearch_year());
 		model.addAttribute("trainingList", trainingService.getTrainingListAll(training));
 		model.addAttribute("student", student);
 		
