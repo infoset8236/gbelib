@@ -61,4 +61,8 @@ public class FacilityReqService extends BaseService {
 	public List<FacilityReq> getFacilityReqListByExcelChoice(FacilityReq facilityReq) {
 		return facilityReqDao.getFacilityReqListByExcelChoice(facilityReq);
 	}
+
+	public List<FacilityReq> getFacilityReqCalendarIct(CalendarManage calendarManage) {
+		return facilityReqDao.getFacilityReqCalendarIct(calendarManage);
+	}
 }

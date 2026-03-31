@@ -6,7 +6,7 @@
 	<sql id="field">
 		homepage_id, cm_idx, start_date, start_time, end_date, 
 		end_time, title, contents, date_type, link_url,
-		weekday, individual_yn, memo
+		weekday, individual_yn, memo, add_id, add_name
 	</sql>
 
 	<!-- 	일정관리 list -->
@@ -199,13 +199,13 @@
 	<!-- 일정관리 등록 -->
 	<insert id="addCalendarManage">
 		INSERT INTO CMS_CALENDAR_MANAGE (
-		   		HOMEPAGE_ID, CM_IDX, START_DATE, START_TIME, END_DATE, 
-				END_TIME, TITLE, CONTENTS, DATE_TYPE, link_url, group_idx,
-				individual_yn, weekday, MEMO, DELETE_YN
+			HOMEPAGE_ID, CM_IDX, START_DATE, START_TIME, END_DATE,
+			END_TIME, TITLE, CONTENTS, DATE_TYPE, link_url, group_idx,
+			individual_yn, weekday, MEMO, DELETE_YN, ADD_ID, ADD_NAME
 	   )VALUES (
 	   		#{homepage_id}, (SELECT NVL(MAX(cm_idx),0)+1 FROM CMS_CALENDAR_MANAGE ), #{start_date}, #{start_time}, #{end_date},
 	   		#{end_time}, #{title}, #{contents}, #{date_type}, #{link_url}, #{group_idx},
-	   		'N', #{weekday}, #{memo}, 'N'
+	   		'N', #{weekday}, #{memo}, 'N', #{add_id}, #{add_name}
 		)
 	</insert>
 	

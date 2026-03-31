@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+
+import kr.co.whalesoft.app.cms.member.Member;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -127,7 +129,10 @@ public class CalendarManageController extends BaseController {
 
 		if (!result.hasErrors()) {
 			if (calendarManage.getEditMode().equals("ADD")) {
-				
+				Member member = (Member) getSessionMemberInfo(request);
+				calendarManage.setAdd_id(member.getMember_id());
+				calendarManage.setAdd_name(member.getMember_name());
+
 				String startDate = calendarManage.getStart_date();
 				String endDate = calendarManage.getEnd_date();
 				

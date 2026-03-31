@@ -26,4 +26,6 @@ public interface ApplyDao {
 	public int checkApply(Apply apply);
 	
 	public int deleteApplyAll(Apply apply);
+
+	public List<Apply> getOkApplyIct(CalendarManage calendarManage);
 }

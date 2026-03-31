@@ -16,7 +16,11 @@ import kr.co.whalesoft.app.cms.boardWordFilter.BoardWordFilter;
 import kr.co.whalesoft.app.cms.boardWordFilter.BoardWordFilterService;
 import kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage;
 import kr.co.whalesoft.app.cms.module.calendarManage.CalendarManageService;
+import kr.co.whalesoft.app.cms.module.excursions.apply.Apply;
+import kr.co.whalesoft.app.cms.module.excursions.apply.ApplyService;
 import kr.co.whalesoft.framework.utils.WebFilterCheckUtils;
+import kr.go.gbelib.app.cms.module.facilityReq.FacilityReq;
+import kr.go.gbelib.app.cms.module.facilityReq.FacilityReqService;
 import kr.go.gbelib.app.cms.module.teach.Teach;
 import kr.go.gbelib.app.cms.module.teach.TeachService;
 import kr.go.gbelib.app.common.api.CommonAPI;
@@ -71,7 +75,13 @@ public class ApiController extends BaseController {
 
 	@Autowired
 	private BoardWordFilterService boardWordFilterService;
-	
+
+	@Autowired
+	private ApplyService applyService;
+
+	@Autowired
+	private FacilityReqService facilityReqService;
+
 	private static final String LOGIN_PAGE = "/elib/intro/login/index.do?menu_idx=43";
 	
 	@RequestMapping(value = {"/board.*"})
@@ -453,11 +463,51 @@ public class ApiController extends BaseController {
 
 			m.put("startDate", c.getStart_date());
 			m.put("endDate", c.getEnd_date());
+			m.put("start_time", c.getStart_time());
+			m.put("end_time", c.getEnd_time());
 			m.put("title", c.getTitle());
 			m.put("contents", c.getContents());
 			m.put("dateType", c.getDate_type());
 			m.put("memo", c.getMemo());
+			m.put("add_id", c.getAdd_id());
+			m.put("add_name", c.getAdd_name());
 
+			listData.add(m);
+		}
+
+		//견학
+		List<Apply> okApplyList = applyService.getOkApplyIct(param);
+		for (Apply a : okApplyList) {
+			Map<String, Object> m = new HashMap<>();
+			m.put("type", "6");
+			m.put("title", a.getAgency_name());
+			m.put("startDate", a.getStart_date());
+			m.put("endDate", a.getEnd_date());
+			m.put("add_name", a.getCode_name());
+			listData.add(m);
+		}
+
+		List<Teach> teachList = teachService.getTeachListForCalendarIct(param);
+		for (Teach t : teachList) {
+			Map<String, Object> m = new HashMap<>();
+			m.put("type", "6");
+			m.put("title", t.getTeach_name());
+			m.put("startDate", t.getStart_date());
+			m.put("endDate", t.getEnd_date());
+			m.put("start_time", t.getStart_time());
+			m.put("end_time", t.getEnd_time());
+			m.put("add_name", "강좌");
+			listData.add(m);
+		}
+
+		List<FacilityReq> facilityList = facilityReqService.getFacilityReqCalendarIct(param);
+		for (FacilityReq f : facilityList) {
+			Map<String, Object> m = new HashMap<>();
+			m.put("type", "6");
+			m.put("title", f.getFacility_name());
+			m.put("startDate", f.getUse_date());
+			m.put("endDate", f.getUse_date());
+			m.put("add_name", "시설물");
 			listData.add(m);
 		}
 

@@ -416,4 +416,8 @@ public class TeachService extends BaseService {
 	public Teach getTeachByQr(Teach teach) {
 		return teachDao.getTeachByQr(teach);
 	}
+
+	public List<Teach> getTeachListForCalendarIct(CalendarManage calendarManage) {
+		return teachDao.getTeachListForCalendarIct(calendarManage);
+	}
 }

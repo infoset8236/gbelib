@@ -1491,4 +1491,20 @@
 			homepage_id = #{homepage_id}
 	  	AND teach_idx = #{teach_idx}
 	</select>
+
+	<select id="getTeachListForCalendarIct" resultType="kr.go.gbelib.app.cms.module.teach.Teach">
+		SELECT
+			HOMEPAGE_ID, GROUP_IDX, CATEGORY_IDX, TEACH_IDX, START_DATE, END_DATE, TEACH_NAME, TEACH_DAY,
+	        START_TIME, END_TIME, TEACH_STAGE
+		FROM
+			TEACH
+		WHERE
+			HOMEPAGE_ID = #{homepage_id}
+		AND START_DATE >= TO_DATE(#{start_date}, 'YYYY-MM-DD')
+		AND START_DATE &lt; TO_DATE(#{end_date}, 'YYYY-MM-DD') + 1
+		AND DELETE_YN = 'N'
+		AND CALENDAR_VIEW_YN = 'Y'
+		ORDER BY
+			START_DATE, END_DATE
+	</select>
 </mapper>

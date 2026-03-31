@@ -47,6 +47,9 @@ public class CalendarManage extends PagingUtils {
 	private String memo;
 	private String calendar_view_type;
 
+	private String add_id;
+	private String add_name;
+
 	public CalendarManage() {}
 	
 	public CalendarManage(String homepage_id, String plan_date) {
@@ -321,5 +324,21 @@ public class CalendarManage extends PagingUtils {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getAdd_id() {
+		return add_id;
+	}
+
+	public void setAdd_id(String add_id) {
+		this.add_id = add_id;
+	}
+
+	public String getAdd_name() {
+		return add_name;
+	}
+
+	public void setAdd_name(String add_name) {
+		this.add_name = add_name;
 	}
 }

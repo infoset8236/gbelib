@@ -70,4 +70,6 @@ public interface TeachDao  {
 	public int modifyToken(Teach teach);
 
 	public Teach getTeachByQr(Teach teach);
+
+	public List<Teach> getTeachListForCalendarIct(CalendarManage calendarManage);
 }

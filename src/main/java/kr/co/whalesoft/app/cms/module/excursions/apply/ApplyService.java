@@ -132,4 +132,7 @@ public class ApplyService extends BaseService {
 		return Dao.deleteApplyAll(apply);
 	}
 
+	public List<Apply> getOkApplyIct(CalendarManage calendarManage) {
+		return Dao.getOkApplyIct(calendarManage);
+	}
 }

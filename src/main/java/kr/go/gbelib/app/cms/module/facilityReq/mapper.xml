@@ -202,4 +202,19 @@
 		ORDER BY a.USE_DATE
 	</select>
 
+	<select id="getFacilityReqCalendarIct" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">
+		SELECT
+			A.HOMEPAGE_ID, A.FACILITY_IDX, A.FACILITY_REQ_IDX, A.APPLY_NAME, REGEXP_REPLACE(A.APPLY_NAME, '.', '*', 2) AS MASKING_NAME, A.APPLY_PHONE,
+			A.APPLY_STATUS, B.FACILITY_NAME, B.USE_DATE, A.BLACKBOARD_USE_YN
+		FROM
+			FACILITY_REQ A, FACILITY_MANAGE B
+		WHERE
+			A.HOMEPAGE_ID = B.HOMEPAGE_ID
+		AND A.FACILITY_IDX = B.FACILITY_IDX
+		AND A.HOMEPAGE_ID = #{homepage_id}
+		AND A.DELETE_YN = 'N'
+		AND A.APPLY_STATUS = '2'
+		AND B.USE_DATE >= TO_DATE(#{start_date}, 'YYYY-MM-DD')
+        AND B.USE_DATE &lt; TO_DATE(#{end_date}, 'YYYY-MM-DD') + 1
+	</select>
 </mapper>

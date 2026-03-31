@@ -29,4 +29,6 @@ public interface FacilityReqDao  {
 	public List<FacilityReq> getApplyList(FacilityReq facilityReq);
 
 	public List<FacilityReq> getFacilityReqListByExcelChoice(FacilityReq facilityReq);
+
+	public List<FacilityReq> getFacilityReqCalendarIct(CalendarManage calendarManage);
 }
