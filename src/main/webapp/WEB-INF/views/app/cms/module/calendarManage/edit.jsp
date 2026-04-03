@@ -175,6 +175,15 @@ $(function() {
 							<form:option value="1" label="휴관"/>
 						</form:select>
 					</c:when>
+					<c:when test="${calendarManage.homepage_id eq 'h23'}">
+						<form:select path="date_type" class="selectmenu">
+							<c:forEach var="i" items="${dateTypeList}">
+								<c:if test="${i.code_id ne '2' and i.code_id ne '3'}">
+									<form:option value="${i.code_id}" label="${i.code_name}"/>
+								</c:if>
+							</c:forEach>
+						</form:select>
+					</c:when>
 					<c:otherwise>
 						<form:select path="date_type" class="selectmenu">
 							<form:options items="${dateTypeList}" itemValue="code_id" itemLabel="code_name"/>
@@ -183,6 +192,14 @@ $(function() {
 				</c:choose>
 			</td>
 		</tr>
+		<c:if test="${calendarManage.homepage_id eq 'h23'}">
+			<tr>
+				<th>담당자</th>
+				<td>
+					<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
+				</td>
+			</tr>
+		</c:if>
 		<c:if test="${calendarManage.editMode ne 'ADD'}">
 		<tr>
 			<th>선택일자</th>
@@ -195,6 +212,11 @@ $(function() {
 			<th>제목</th>
 			<td>
 				<form:input path="title" cssStyle="width:320px;" cssClass="text" maxlength="50"/>
+				<c:if test="${calendarManage.homepage_id eq 'h23'}">
+					<div class="ui-state-highlight">
+						<em>4층 총괄 화면 캘린더에 표시되는 항목입니다.</em>
+					</div>
+				</c:if>
 			</td>
 		</tr>
 		<tr>
@@ -203,12 +225,14 @@ $(function() {
 				<form:textarea path="contents" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
 			</td>
 		</tr>
-		<tr>
-			<th>메모</th>
-			<td>
-				<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
-			</td>
-		</tr>
+		<c:if test="${calendarManage.homepage_id ne 'h23'}">
+			<tr>
+				<th>메모</th>
+				<td>
+					<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
+				</td>
+			</tr>
+		</c:if>
 		<tr>
 			<th>링크URL</th>
 			<td>
