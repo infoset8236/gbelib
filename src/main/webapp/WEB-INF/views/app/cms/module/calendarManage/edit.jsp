@@ -196,7 +196,7 @@ $(function() {
 			<tr>
 				<th>담당자</th>
 				<td>
-					<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100"/>
+					<form:textarea path="memo" cssStyle="width:90%;height:100px;" cssClass="text" maxlength="100" placeholder="ex) 홍길동 or 홍길동 외 3명"/>
 				</td>
 			</tr>
 		</c:if>
