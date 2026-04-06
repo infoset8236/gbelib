@@ -217,6 +217,7 @@ $(function(){
 	<form:hidden path="menu_idx"/>
 	<form:hidden path="category_idx"/>
 	<form:hidden path="large_category_idx"/>
+	<input type="hidden" name="searchCate1" value="${param.searchCate1}">
 <!--
 	<c:choose>
 		<c:when test="${teach.group_idx > 0 and fn:length(categoryList) > 0}">

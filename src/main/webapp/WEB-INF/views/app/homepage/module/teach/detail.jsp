@@ -10,7 +10,7 @@
 $(function() {
 	$('a.apply-btn').on('click', function(e) {
 		doGetLoad('/${homepage.context_path}/module/teach/student/edit.do', 'editMode=ADD&homepage_id=${homepage.homepage_id}&group_idx=${teach.group_idx}'
-			+'&category_idx=${teach.category_idx}&teach_idx=${teach.teach_idx}&large_category_idx=${teach.large_category_idx}&apply_status='+$(this).attr('apply_status')+'&menu_idx=${teach.menu_idx}');
+			+'&category_idx=${teach.category_idx}&teach_idx=${teach.teach_idx}&large_category_idx=${teach.large_category_idx}&apply_status='+$(this).attr('apply_status')+'&menu_idx=${teach.menu_idx}'+'&searchCate1='+'${param.searchCate1}');
 		e.preventDefault();
 	});
 
