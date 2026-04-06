@@ -180,6 +180,7 @@ $(function() {
 				</c:if>
 				<col width="50px"/>
 				<col width="20%"/>
+				<col width="10%"/>
 				<col width="15%"/>
 				<col width="15%"/>
 				<col width="10%"/>
@@ -191,6 +192,7 @@ $(function() {
 					</c:if>
 					<th>순번</th>
 					<th>서명</th>
+					<th>대출자명</th>
 					<th>소장처명</th>
 					<th>대출일</th>
 					<th>반납예정일</th>
@@ -215,6 +217,7 @@ $(function() {
 					</c:if>
 					<td class="center view-detail" data-loan_no="${i.LOAN_NO}">${status.index+1}</td>
 					<td class="left view-detail" data-loan_no="${i.LOAN_NO}"><a>${i.TITLE}</a></td>
+					<td class="view-detail" data-loan_no="${i.LOAN_NO}"><a>${i.USER_NAME}</a></td>
 					<td class="view-detail" data-loan_no="${i.LOAN_NO}">${i.LOAN_LOCA_NAME}</td>
 					<td class="view-detail" data-loan_no="${i.LOAN_NO}">
 						<fmt:parseDate var="curDate" value="${i.LOAN_DATE}" pattern="yyyyMMdd"/>

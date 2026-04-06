@@ -79,8 +79,8 @@
 		(
 		SELECT COUNT(*)
 		FROM ELIB_HOPE_BOOK b
-		WHERE b.use_yn != 'N'
-		AND (b.application_status IS NULL OR b.application_status IN (4, 5))
+		WHERE
+		    b.use_yn != 'N'
 		AND a.type = b.type
 		<if test="search_text != '' and search_text != '' ">
 			AND	UPPER(REPLACE(b.book_name, ' ')) LIKE '%'||UPPER(REPLACE(#{search_text}, ' '))||'%'

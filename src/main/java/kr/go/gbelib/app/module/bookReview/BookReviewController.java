@@ -49,8 +49,9 @@ public class BookReviewController extends BaseController {
 	@RequestMapping(value = {"/index.*"}, method = RequestMethod.GET)
 	public String index(Model model, BookReview bookReview, HttpServletRequest request) {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
+		Member member = getSessionMemberInfo(request);
 		
-		Map<String, Object> loanList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null);
+		Map<String, Object> loanList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null, member.getvFamYn());
 		String bookReviewFlag = "F"; // FAIL
 		if(loanList != null) {
 			@SuppressWarnings("unchecked")

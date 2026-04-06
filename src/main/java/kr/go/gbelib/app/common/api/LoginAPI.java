@@ -248,6 +248,16 @@ public class LoginAPI {
 				if (StringUtils.isNotEmpty(map.get("POSITN_NAME"))) {
 					member.setPositn_name(map.get("POSITN_NAME"));
 				}
+
+				String fam_agree;
+
+				if ("0001".equals(map.get("FAM_AGREE"))) {
+					fam_agree = map.get("FAM_AGREE");
+				} else {
+					fam_agree = "0002";
+				}
+
+				member.setvFamYn(fam_agree);
 			}
 
 			return member;

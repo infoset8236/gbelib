@@ -407,6 +407,15 @@ function dlsFail() {
 						</select>
 					</td>
 				</tr>
+				<tr>
+					<th>
+						가족회원 대출이력 공개여부
+					</th>
+					<td>
+						<form:radiobutton path="vFamYn" value="0001"/> <label for="vFamYn1" style="cursor:pointer;">공개</label>&nbsp;
+						<form:radiobutton path="vFamYn" value="0002"/> <label for="vFamYn2" style="cursor:pointer;">공개안함</label>
+					</td>
+				</tr>
 				<c:if test="${member.unAgreeFlag ne '0001'}">
 				<tr>
 					<th>

@@ -902,7 +902,7 @@ public class LibrarySearchController extends BaseController {
 			}
 		}
 		model.addAttribute("introMenu", "도서대출확인");
-		model.addAttribute("loanList", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null));
+		model.addAttribute("loanList", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null, member.getvFamYn()));
 		model.addAttribute("homepage", homepage);
 		return basePath + "loan/index";
 	}

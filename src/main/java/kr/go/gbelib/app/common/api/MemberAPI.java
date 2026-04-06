@@ -300,8 +300,6 @@ public class MemberAPI {
 		}
 		values.add(String.format("%s|%s", "ZIP_CODE", CommonAPI.getCrypt(member.getZipcode())));
 		values.add(String.format("%s|%s", "ADDRS", CommonAPI.getCrypt(String.format("%s",member.getAddress1()))));
-//		values.add(String.format("%s|%s", "WEB_HINT_TY", CommonAPI.getCrypt(member.getWeb_hint_ty())));
-//		values.add(String.format("%s|%s", "WEB_HINT_ANS", CommonAPI.getCrypt(member.getWeb_hint_ans())));
 
 		if (changePw) {
 			if (StringUtils.isNotEmpty(member.getMember_pw())) {
@@ -316,8 +314,6 @@ public class MemberAPI {
 		if (StringUtils.isNotEmpty(member.getDi_value())) {
 			values.add(String.format("%s|%s", "DUPINFO", CommonAPI.getCrypt(member.getDi_value())));
 		}
-
-
 
 		if (StringUtils.isNotEmpty(member.getWeb_id())) {
 			values.add(String.format("%s|%s", "WEB_ID", CommonAPI.getCrypt(member.getWeb_id())));
@@ -347,10 +343,13 @@ public class MemberAPI {
 			values.add(String.format("%s|%s", "UN_AGREE_DATE", CommonAPI.getCrypt(sdf.format(new Date()))));
 		}
 
+		if (StringUtils.isNotEmpty(member.getvFamYn())) {
+			values.add(String.format("%s|%s", "FAM_AGREE", CommonAPI.getCrypt(member.getvFamYn())));
+		}
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("USERID", workerId);
 		param.put("className", "action.lnk.LnkUserInfoDMod");
-//		param.put("vUserId", StringUtils.leftPad(StringUtils.upperCase(member.getMember_id()), 12, "0"));
 		param.put("vUserId", member.getUser_id());
 		param.put("value", StringUtils.join(values, "><"));
 		Document doc = CommonAPI.sendILUS(param);

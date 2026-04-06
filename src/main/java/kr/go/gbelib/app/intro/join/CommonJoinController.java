@@ -483,6 +483,16 @@ public class CommonJoinController extends BaseController {
 		member.setSms_service_yn(memberInfo.get("SMS_CHECK"));
 		member.setEmail_service_yn(memberInfo.get("MAIL_CHECK"));
 
+		String fam_agree;
+
+		if ("0001".equals(memberInfo.get("FAM_AGREE"))) {
+			fam_agree = memberInfo.get("FAM_AGREE");
+		} else {
+			fam_agree = "0002";
+		}
+
+		member.setvFamYn(fam_agree);
+
 		String phone = memberInfo.get("TEL_NO");
 		mergeTelno(member, phone);
 		String cellPhone = memberInfo.get("MOBILE_NO");
@@ -538,15 +548,7 @@ public class CommonJoinController extends BaseController {
 				ValidationUtils.rejectOnlyEngNum(result, "member_id", "ID can only be English or numeric");
 				ValidationUtils.rejectOnlyEngNum(result, "member_id", 6, 20, "Please enter 6 or more characters and 20 or less alphanumeric characters.");
 				ValidationUtils.rejectIfEmpty(result, "member_pw", "Please enter password");
-//			ValidationUtils.rejectIfEmpty(result, "member_name", "이름을 입력해주세요.");
-//			ValidationUtils.rejectIfEmpty(result, "birth_day", "생년월을 입력해주세요");
-//			ValidationUtils.rejectIfNotDate(result, "birth_day", "생년월일 형식이 올바르지 않습니다.");
-//			ValidationUtils.rejectIfEmpty(result, "phone2", "집 전화번호를 입력하세요.");
-//			ValidationUtils.rejectIfEmpty(result, "phone3", "집 전화번호를 입력하세요.");
 				ValidationUtils.rejectIfEmpty(result, "cell_phone", "Please enter Mobile phone number");
-//			ValidationUtils.rejectIfEmpty(result, "cell_phone2", "휴대폰 번호를 입력하세요.");
-//			ValidationUtils.rejectIfEmpty(result, "cell_phone3", "휴대폰 번호를 입력하세요.");
-//			ValidationUtils.rejectNotFullEmailType(result, "email", "이메일 형식이 올바르지 않습니다.");
 				ValidationUtils.rejectIfEmpty(result, "zipcode", "Please enter Address");
 				ValidationUtils.rejectIfEmpty(result, "address1", "Please enter Address");
 				ValidationUtils.rejectIfEmpty(result, "loca", "Please select Affiliated library");
@@ -576,15 +578,7 @@ public class CommonJoinController extends BaseController {
 					}
 				}
 				ValidationUtils.rejectIfEmpty(result, "member_pw", "비밀번호를 입력해주세요.");
-//			ValidationUtils.rejectIfEmpty(result, "member_name", "이름을 입력해주세요.");
-//			ValidationUtils.rejectIfEmpty(result, "birth_day", "생년월을 입력해주세요");
-//			ValidationUtils.rejectIfNotDate(result, "birth_day", "생년월일 형식이 올바르지 않습니다.");
-//			ValidationUtils.rejectIfEmpty(result, "phone2", "집 전화번호를 입력하세요.");
-//			ValidationUtils.rejectIfEmpty(result, "phone3", "집 전화번호를 입력하세요.");
 				ValidationUtils.rejectIfEmpty(result, "cell_phone", "휴대폰 번호를 입력하세요.");
-//			ValidationUtils.rejectIfEmpty(result, "cell_phone2", "휴대폰 번호를 입력하세요.");
-//			ValidationUtils.rejectIfEmpty(result, "cell_phone3", "휴대폰 번호를 입력하세요.");
-//			ValidationUtils.rejectNotFullEmailType(result, "email", "이메일 형식이 올바르지 않습니다.");
 				ValidationUtils.rejectIfEmpty(result, "zipcode", "주소를 입력해주세요.");
 				ValidationUtils.rejectIfEmpty(result, "address1", "주소를 입력해주세요.");
 				ValidationUtils.rejectIfEmpty(result, "loca", "소속 도서관이 선택되지 않았습니다.");
@@ -601,7 +595,6 @@ public class CommonJoinController extends BaseController {
 				ValidationUtils.rejectOnlyEngNum(result, "web_id", "아이디는 영문 또는 숫자만 사용가능합니다.");
 				ValidationUtils.rejectOnlyEngNum(result, "web_id", 6, 20, "아이디는 영문, 숫자 조합 6자 이상 20자 이하로 입력하세요.");
 			}
-//			ValidationUtils.rejectIfEmpty(result, "member_pw", "비밀번호를 입력해주세요.");
 			ValidationUtils.rejectIfEmpty(result, "cell_phone2", "휴대폰 번호를 입력하세요.");
 			ValidationUtils.rejectIfEmpty(result, "cell_phone3", "휴대폰 번호를 입력하세요.");
 			ValidationUtils.rejectExceptNumber(result, "cell_phone2", 3, 4, "휴대전화 4자리로 입력해주세요.");

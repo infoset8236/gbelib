@@ -196,6 +196,9 @@ public class Member extends PagingUtils implements Serializable {
 	// 신분명
 	private String positn_name;
 
+	//가족회원대출이력공개 여부
+	private String vFamYn;
+
 	public String getPram(String mode) {
 		StringBuffer sb = new StringBuffer();
 		sb.append(getPagingParam());
@@ -1287,4 +1290,12 @@ public class Member extends PagingUtils implements Serializable {
 	public String getPositn_name() { return positn_name; }
 
 	public void setPositn_name(String positn_name) { this.positn_name = positn_name; }
+
+	public String getvFamYn() {
+		return vFamYn;
+	}
+
+	public void setvFamYn(String vFamYn) {
+		this.vFamYn = vFamYn;
+	}
 }

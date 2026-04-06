@@ -1097,7 +1097,11 @@ public class LibSearchAPI {
 	}
 	
 	public static Map<String, Object> getMyLibraryList(String worker_id, String user_id, String vType, String vOption) {
-		return getMyLibraryList(worker_id, user_id, vType, vOption, null, null);
+		return getMyLibraryList(worker_id, user_id, vType, vOption, null, null, null);
+	}
+
+	public static Map<String, Object> getMyLibraryList(String worker_id, String user_id, String vType, String vOption, String vFamYn) {
+		return getMyLibraryList(worker_id, user_id, vType, vOption, null, null, vFamYn);
 	}
 
 	/**
@@ -1109,7 +1113,7 @@ public class LibSearchAPI {
 	 * @param vOption
 	 * @return Map<String, Object>
 	 */
-	public static Map<String, Object> getMyLibraryList(String worker_id, String user_id, String vType, String vOption, String vStartPos, String vEndPos) {
+	public static Map<String, Object> getMyLibraryList(String worker_id, String user_id, String vType, String vOption, String vStartPos, String vEndPos, String vFamYn) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("USERID", worker_id);
 		param.put("className", "action.lnk.LnkMyLibrary");
@@ -1131,11 +1135,16 @@ public class LibSearchAPI {
 			param.put("vSortDir", "DESC");
 		}
 		
-//		if ( StringUtils.equals(vType, "CLOSE") ) {
-//			param.put("vStartPos", vStartPos);
-//			param.put("vEndPos", vEndPos);
-//			param.put("vCntYn", "Y");
-//		}
+		if (StringUtils.isNotEmpty(vFamYn) && StringUtils.isNotEmpty(vOption)) {
+			if ("0001".equals(vOption)) {
+				if ("0001".equals(vFamYn)) {
+				vFamYn = "Y";
+			} else {
+				vFamYn = "N";
+			}
+			param.put("vFamYn", vFamYn);
+			}
+		}
 		
 		Document doc = CommonAPI.sendILUS(param);
 

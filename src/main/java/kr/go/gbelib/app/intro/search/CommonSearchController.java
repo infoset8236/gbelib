@@ -1896,13 +1896,10 @@ public class CommonSearchController extends BaseController {
 		if(request.getRequestURI().endsWith("/loan/detail.do")) {
 			model.addAttribute("loanDetail", LibSearchAPI.getLoanDetail("WEB", librarySearch.getvLoanNo()));
 		    return String.format(basePath, homepage.getFolder()) + "loan/detail";
-		}
-		else if(request.getRequestURI().endsWith("/loan/history.do")) {
-			model.addAttribute("loanList", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null));
+		} else if(request.getRequestURI().endsWith("/loan/history.do")) {
+			model.addAttribute("loanList", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", null, member.getvFamYn()));
 			return String.format(basePath, homepage.getFolder()) + "loan/history";
-		}
-		else {
-			Map<String, Object> myLibraryList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", "0001");
+		} else {Map<String, Object> myLibraryList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", "0001", member.getvFamYn());
 			if (myLibraryList!= null && !myLibraryList.isEmpty()) {
 				List<Map<String, Object>> dsMyLibraryList = (List<Map<String, Object>>) myLibraryList.get("dsMyLibraryList");
 
