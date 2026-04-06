@@ -564,7 +564,7 @@
 					AND a.category_idx IN (${searchCate3})
 					</if>
 					<if test="searchAge != null and searchAge != ''">
-					AND REGEXP_LIKE(REGEXP_REPLACE('//'||a.program_age_div, ',', ',//'),'//'||#{searchAge})
+					AND REGEXP_LIKE(a.program_age_div, '(^|,)(' || REPLACE(#{searchAge}, ',', '|') || ')(,|$)')
 					</if>
 					<if test="group_idx_list != null and group_idx_list != ''">
 					AND a.GROUP_IDX IN (${group_idx_list})
