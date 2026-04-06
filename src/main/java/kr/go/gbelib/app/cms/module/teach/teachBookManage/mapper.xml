@@ -60,7 +60,7 @@
             AND TO_CHAR(add_date, 'YYYY-MM-DD') &lt;= #{search_end_date}
         </if>
         ORDER BY
-            add_date desc
+            add_date desc, teach_book_manage_idx desc
         ${pagingBottom}
     </select>
 

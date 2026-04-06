@@ -27,7 +27,7 @@
         WHERE
             homepage_id = #{homepage_id}
         AND training_idx = #{training_idx}
-        AND apply_status in ('1', '2', '5')
+        AND apply_status in ('1', '5')
         AND NOT EXISTS (
             SELECT
                 tbm.web_id
@@ -67,7 +67,7 @@
             AND qr_count = #{qr_count}
         </if>
         ORDER BY
-            add_date desc
+            add_date desc, training_book_manage_idx desc
         ${pagingBottom}
     </select>
 
