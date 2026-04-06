@@ -52,7 +52,17 @@
 <script>
     $(function() {
         $('#member').on('submit', function() {
-            var cell_phone = $('#cell_phone1').val() + '-' + $('#cell_phone2').val() + '-' + $('#cell_phone3').val();
+            var cell_phone = $('#cell_phone1').val();
+
+            if (cell_phone.length === 10) {
+                cell_phone = cell_phone.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+            } else if (cell_phone.length === 11) {
+                cell_phone = cell_phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+            } else {
+                alert('전화번호는 10자리 또는 11자리만 가능합니다.');
+                return false;
+            }
+
             $('#cell_phone').val(cell_phone);
         });
     })
@@ -92,19 +102,9 @@
                                             </p>
                                             <div>핸드폰 번호</div>
                                             <label for="cell_phone" class="blind">핸드폰 번호</label>
-                                            <div style="display: flex; align-items: center; gap: 4px;">
-                                                <p class="idtype" class="blind">
-                                                    <form:input path="cell_phone1" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
-                                                </p>
-                                                -
-                                                <p class="idtype" class="blind">
-                                                    <form:input path="cell_phone2" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
-                                                </p>
-                                                -
-                                                <p class="idtype" class="blind">
-                                                    <form:input path="cell_phone3" class="txt" title="핸드폰 번호" maxlength="20" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off"/>
-                                                </p>
-                                            </div>
+                                            <p class="idtype" class="blind">
+                                                <form:input path="cell_phone1" class="txt" title="핸드폰 번호" maxlength="11" style="ime-mode:inactive" autocorrect="off" autocapitalize="none" autocomplete="off" placeholder="ex) 01012345678" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+                                            </p>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
