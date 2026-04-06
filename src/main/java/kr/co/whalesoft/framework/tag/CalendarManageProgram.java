@@ -39,30 +39,41 @@ public class CalendarManageProgram extends BodyTagSupport {
 				int planDay = Integer.parseInt(plan_date.substring(plan_date.lastIndexOf("-")+1));
 				int startDay = Integer.parseInt(cm.getStart_date().substring(cm.getStart_date().lastIndexOf("-")+1));
 				int endDay = Integer.parseInt(cm.getEnd_date().substring(cm.getEnd_date().lastIndexOf("-")+1));
-					if(planMonth.equals(startMonth) && !planMonth.equals(endMonth)) {
-						if(planDay >= startDay && planDay <= 31) {
+				if(planMonth.equals(startMonth) && !planMonth.equals(endMonth)) {
+					if(planDay >= startDay && planDay <= 31) {
+						if ("h23".equals(cm.getHomepage_id()) && StringUtils.isNotEmpty(cm.getMemo())) {
+							sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+"["+cm.getMemo()+"] '"+cm.getTitle()+"'</span></a>");
+						} else {
 							sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+cm.getTitle()+"</span></a>");
-							sb.append("<ul class=\"schedule\">");
-							sb.append("</ul>");
-							isHolyDay = StringUtils.equals(cm.getDate_type(), "1");//휴관일로 지정된 경우
 						}
-						
-					}
-					if(!planMonth.equals(startMonth) && planMonth.equals(endMonth)) {
-						if(planDay >= 1 && planDay <= endDay) {
-							sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+cm.getTitle()+"</span></a>");
-							sb.append("<ul class=\"schedule\">");
-							sb.append("</ul>");
-							isHolyDay = StringUtils.equals(cm.getDate_type(), "1");//휴관일로 지정된 경우
-						}
-					}
-					if (planDay >= startDay && planDay <= endDay) {
-						sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+cm.getTitle()+"</span></a>");
 						sb.append("<ul class=\"schedule\">");
 						sb.append("</ul>");
 						isHolyDay = StringUtils.equals(cm.getDate_type(), "1");//휴관일로 지정된 경우
-					} 
-				
+					}
+
+				}
+				if(!planMonth.equals(startMonth) && planMonth.equals(endMonth)) {
+					if(planDay >= 1 && planDay <= endDay) {
+						if ("h23".equals(cm.getHomepage_id()) && StringUtils.isNotEmpty(cm.getMemo())) {
+							sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+"["+cm.getMemo()+"] '"+cm.getTitle()+"'</span></a>");
+						} else {
+							sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+cm.getTitle()+"</span></a>");
+						}
+						sb.append("<ul class=\"schedule\">");
+						sb.append("</ul>");
+						isHolyDay = StringUtils.equals(cm.getDate_type(), "1");//휴관일로 지정된 경우
+					}
+				}
+				if (planDay >= startDay && planDay <= endDay) {
+					if ("h23".equals(cm.getHomepage_id()) && StringUtils.isNotEmpty(cm.getMemo())) {
+						sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+"["+cm.getMemo()+"] '"+cm.getTitle()+"'</span></a>");
+					} else {
+						sb.append("<a href=\"#\" class=\"modify\" type=\"calendar\" keyValue=\""+cm.getCm_idx()+"\" keyValue2=\""+cm.getDate_type()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+cm.getTitle()+"</span></a>");
+					}
+					sb.append("<ul class=\"schedule\">");
+					sb.append("</ul>");
+					isHolyDay = StringUtils.equals(cm.getDate_type(), "1");//휴관일로 지정된 경우
+				}
 			}
 		
 			if (!isHolyDay) {
@@ -113,17 +124,22 @@ public class CalendarManageProgram extends BodyTagSupport {
 						if ( dayCode == Integer.parseInt(day) ) {
 							if (start_date.compareTo(plan_date) <= 0 && end_date.compareTo(plan_date) >= 0) {
 								String statusName = "[강좌]";
-								
+								String cssClass = "";
+								if ("h23".equals(teach.getHomepage_id())) {
+									cssClass = "has-dot dot-6";
+								}
+
 								if (teach.getHolidays() != null && teach.getHolidays().size() > 0) {
 									for ( String holiday : teach.getHolidays() ) {
 										if (StringUtils.equals(plan_date, holiday)) {
 											statusName = "[휴강]";
+											cssClass = "";
 										}
 									}
 								}
 								
 								
-								sb.append("<a href=\"#\" class=\"modify\" type=\"teach\" keyValue3=\"" + teach.getGroup_idx()+"\" keyValue=\""+teach.getCategory_idx()+"\" keyValue2=\""+teach.getTeach_idx()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+statusName+""+teach.getTeach_name()+"</span></a>");
+								sb.append("<a href=\"#\" class=\"modify " + cssClass + "\" type=\"teach\" keyValue3=\"" + teach.getGroup_idx()+"\" keyValue=\""+teach.getCategory_idx()+"\" keyValue2=\""+teach.getTeach_idx()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+statusName+""+teach.getTeach_name()+"</span></a>");
 								sb.append("<ul class=\"schedule\">");
 								sb.append("</ul>");	
 							}

@@ -153,7 +153,39 @@ $(function(){
 
 
 });
+
+$(document).ready(function () {
+  $('.modify').each(function () {
+    let key = $(this).attr('keyvalue2');
+
+    if (['4', '5', '6'].includes(key)) {
+      $(this).addClass('has-dot dot-' + key);
+    }
+  });
+});
 </script>
+
+<style>
+	#calTable tbody td{
+		height: 227px;
+		text-align: left;
+		vertical-align: top;
+	}
+	#calTable tbody td > p.date{
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	.has-dot::before {
+		content: "●";
+		margin-right: 5px;
+	}
+
+	/* 색상 */
+	.dot-4::before { color: #f8353c; }
+	.dot-5::before { color: #307ef8; }
+	.dot-6::before { color: #19986a; }
+</style>
+
 <c:set var="plan_date" value="${fn:split(calendarManage.plan_date, '-')}" />
 <form:form modelAttribute="calendarManage">
 	<form:hidden path="plan_date"/>
