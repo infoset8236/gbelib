@@ -240,11 +240,10 @@
 		SELECT
 			COUNT(*) AS cnt
 		FROM
-			ELIB_HOPE_BOOK
+			ELIB_HOPE_APPLICANT
 		WHERE
-			book_code = #{book_code}
+			application_user_no = #{application_user_no}
 		AND book_idx = #{book_idx}
-		AND application_status IS NOT NULL
 	</select>
 
 	<select id="getHopeBookApplicationListCnt" resultType="java.lang.Integer">
@@ -252,10 +251,11 @@
 			COUNT(*) AS cnt
 		FROM
 			ELIB_HOPE_BOOK a
+			JOIN ELIB_HOPE_APPLICANT eh
+			ON eh.book_idx = a.book_idx
 		WHERE
-			a.use_yn != 'N'
-			AND a.application_status IS NOT NULL
-			AND a.application_user_id = #{application_user_id}
+			a.application_status IS NOT NULL
+		AND eh.application_user_id = #{application_user_id}
 		<include refid="search"/>
 		<include refid="sort"/>
 	</select>
@@ -286,10 +286,10 @@
 			LEFT JOIN ELIB_CATEGORY ec ON ec.cate_id = a.cate_id
 			LEFT JOIN ELIB_CATEGORY ep ON ep.cate_id = a.parent_id
 			LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
+			LEFT JOIN ELIB_HOPE_APPLICANT eh ON eh.book_idx = a.book_idx
 		WHERE
-			a.use_yn != 'N'
-			AND a.application_status IS NOT NULL
-			AND a.application_user_id = #{application_user_id}
+			a.application_status IS NOT NULL
+		AND eh.application_user_id = #{application_user_id}
 		<include refid="search"/>
 		<include refid="sort"/>
 		${pagingBottom}
@@ -448,13 +448,11 @@
 		WHERE
 			book_idx = #{book_idx}
 	</update>
-
 	
 	<delete id="deleteBook">
 		DELETE FROM ELIB_HOPE_BOOK
 		WHERE book_idx = #{book_idx}
 	</delete>
-
 
 	<delete id="deleteBookInfo">
 		DELETE FROM ELIB_HOPE_BOOKINFO WHERE book_idx = #{book_idx}
@@ -531,38 +529,36 @@
 			approved_yn != 'Y'
 	</update>
 
-	<update id="updateApplicationHopeElibBook">
-		UPDATE
-			ELIB_HOPE_BOOK
-		SET
-		    application_user_no = #{member.user_no},
-		    application_user_id = #{member.member_id},
-		    application_user_name = #{member.member_name},
-		    application_status = #{hopeElibBook.application_status},
-		    application_cell_phone = #{hopeElibBook.application_cell_phone},
-		    application_add_date = SYSDATE
-		WHERE
-		    BOOK_IDX = #{hopeElibBook.book_idx}
-	</update>
+	<insert id="addHopeElibBookApplicant">
+		<selectKey keyProperty="application_idx" order="BEFORE" resultType="int">
+			SELECT NVL(MAX(application_idx),0)+1 FROM ELIB_HOPE_APPLICANT
+		</selectKey>
+		INSERT INTO ELIB_HOPE_APPLICANT (
+			application_idx, book_idx, application_user_no, application_user_id, application_user_name,
+		    application_status, application_add_date, application_cell_phone
+		) VALUES (
+			#{application_idx}, #{hopeElibBook.book_idx}, #{member.user_no}, #{member.member_id}, #{member.member_name},
+			#{hopeElibBook.application_status}, SYSDATE, #{hopeElibBook.application_cell_phone}
+		)
+	</insert>
 
 	<update id="updateCancelHopeElibBook">
 		UPDATE
-			ELIB_HOPE_BOOK
+			ELIB_HOPE_APPLICANT
 		SET
 		    APPLICATION_STATUS      = #{application_status},
-				APPLICATION_CANCEL_ID   = #{application_user_id},
-				APPLICATION_CANCEL_DATE = SYSDATE
+			APPLICATION_CANCEL_ID   = #{application_user_id},
+			APPLICATION_CANCEL_DATE = SYSDATE
 		WHERE
 		    BOOK_IDX = #{book_idx}
-			AND BOOK_CODE = #{book_code}
-			AND APPLICATION_USER_ID = #{application_user_id}
-			AND APPLICATION_STATUS = '1'
-			AND APPLICATION_USER_NO = #{application_user_no}
+		AND APPLICATION_USER_ID = #{application_user_id}
+		AND APPLICATION_STATUS = '1'
+		AND APPLICATION_USER_NO = #{application_user_no}
 	</update>
 
 	<update id="updateApplicationStatusAdmin">
 		UPDATE
-		ELIB_HOPE_BOOK
+			ELIB_HOPE_APPLICANT
 		SET
 		APPLICATION_STATUS = #{application_status},
 		APPLICATION_REMARKS = #{application_remarks},
@@ -577,12 +573,9 @@
 			</when>
 		</choose>
 		WHERE
-		BOOK_IDX = #{book_idx}
-		AND BOOK_CODE = #{book_code}
+			BOOK_IDX = #{book_idx}
+		AND APPLICATION_IDX = #{application_idx}
 	</update>
-
-
-
 
 	<select id="getBookInfo" resultType="kr.go.gbelib.app.cms.module.elib.book.Book">
 		SELECT
@@ -619,5 +612,107 @@
 			AND a.library_code = SUBSTR(e.homepage_code, 1, 8)
 	</select>
 
+	<select id="getHopeElibBookApplicantCnt" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			ELIB_HOPE_APPLICANT A
+		JOIN
+    		ELIB_HOPE_BOOK B
+		ON A.BOOK_IDX = B.BOOK_IDX
+		WHERE
+		    B.APPROVED_YN = 'Y'
+		<if test="application_status != null and application_status != ''">
+		AND A.application_status = #{application_status}
+		</if>
+		<if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+			<choose>
+				<when test="search_type == 'application_user_id'">
+					AND A.application_user_id LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'application_user_name'">
+					AND A.application_user_name LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'book_name'">
+					AND B.book_name LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'book_pubname'">
+					AND B.book_pubname LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'author_name'">
+					AND B.author_name LIKE '%' || #{search_text} || '%'
+				</when>
+			</choose>
+		</if>
+	</select>
+
+	<select id="getHopeElibBookApplicantList" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		SELECT
+			A.application_idx, A.book_idx, A.application_user_no, A.application_user_id, A.application_user_name,
+			A.application_status, A.application_add_date, A.application_cancel_id, A.application_cancel_date, A.application_approval_date,
+			A.application_approval_id, A.application_remarks, B.book_code, B.cate_id, B.book_name,
+			B.author_name, B.book_pubname, B.book_image
+		FROM
+			ELIB_HOPE_APPLICANT A
+		JOIN
+    		ELIB_HOPE_BOOK B
+		ON A.BOOK_IDX = B.BOOK_IDX
+		WHERE
+		    B.APPROVED_YN = 'Y'
+	  	<if test="application_status != null and application_status != ''">
+		AND A.application_status = #{application_status}
+		</if>
+		<if test="search_type != null and search_type != '' and search_text != null and search_text != ''">
+			<choose>
+				<when test="search_type == 'application_user_id'">
+					AND A.application_user_id LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'application_user_name'">
+					AND A.application_user_name LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'book_name'">
+					AND B.book_name LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'book_pubname'">
+					AND B.book_pubname LIKE '%' || #{search_text} || '%'
+				</when>
+				<when test="search_type == 'author_name'">
+					AND B.author_name LIKE '%' || #{search_text} || '%'
+				</when>
+			</choose>
+		</if>
+	</select>
+
+	<select id="getHopeElibBookApplicantRank" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		SELECT
+			B.BOOK_IDX, B.BOOK_NAME, B.AUTHOR_NAME, B.BOOK_PUBNAME, COUNT(A.APPLICATION_IDX) AS CNT
+		FROM
+			ELIB_HOPE_BOOK B
+		LEFT JOIN
+			ELIB_HOPE_APPLICANT A
+		ON
+			A.BOOK_IDX = B.BOOK_IDX
+		WHERE
+			B.APPROVED_YN = 'Y'
+		GROUP BY
+			B.BOOK_IDX, B.BOOK_NAME, B.AUTHOR_NAME, B.BOOK_PUBNAME
+		ORDER BY
+			CNT DESC
+	</select>
+
+	<select id="getHopeElibBookApplicantCntOne" resultType="kr.go.gbelib.app.cms.module.elib.hopeElibBook.HopeElibBook">
+		SELECT
+			A.application_idx, A.book_idx, A.application_user_no, A.application_user_id, A.application_user_name,
+			A.application_status, A.application_add_date, A.application_cancel_id, A.application_cancel_date, A.application_remarks,
+			A.application_cell_phone, B.book_name
+		FROM
+			ELIB_HOPE_APPLICANT A
+		LEFT JOIN
+			ELIB_HOPE_BOOK B
+		ON
+			A.BOOK_IDX = B.BOOK_IDX
+		WHERE
+			application_idx = #{application_idx}
+	</select>
 
 </mapper>

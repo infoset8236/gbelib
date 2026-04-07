@@ -256,21 +256,8 @@ public class HopeElibBookController extends BaseController {
 
     @RequestMapping(value = {"/cms/module/elib/hopeElibBook/statusExcelDownload.*"}, method = RequestMethod.POST)
     public HopeElibBookExcelView excel(Model model, HopeElibBook hopeElibBook, HttpServletRequest request, HttpServletResponse response) throws Exception {
-        if (hopeElibBook.getSortType() == null) {
-            hopeElibBook.setSortType("ASC");
-        }
-
-        String sortField = hopeElibBook.getSortField();
-        if (StringUtils.equals(sortField, "TITLE") || StringUtils.equals(sortField, "book_name")) {
-            hopeElibBook.setSortField("book_name");
-            hopeElibBook.setSortType("ASC");
-        } else if (StringUtils.equals(sortField, "lend_total")) {
-            hopeElibBook.setSortType("DESC");
-        }
-        hopeElibBook.setRowCount(10000);
-
         model.addAttribute("hopeElibBook", hopeElibBook);
-        model.addAttribute("bookList", service.getHopeBookAdminList(hopeElibBook));
+        model.addAttribute("bookList", service.getHopeElibBookApplicantList(hopeElibBook));
         return new HopeElibBookExcelView();
     }
 
@@ -614,13 +601,12 @@ public class HopeElibBookController extends BaseController {
     @RequestMapping(value = {"/cms/module/elib/hopeElibBook/statusIndex.*"})
     public String statusIndex(Model model, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
         checkAuth("R", model, request);
-        hopeElibBook.setHomepage_id(getAsideHomepageId(request));
 
-        int count = service.getHopeBookAdminListCnt(hopeElibBook);
+        int count = service.getHopeElibBookApplicantCnt(hopeElibBook);
         service.setPaging(model, count, hopeElibBook);
 
-        model.addAttribute("getHopeBookAdminList", service.getHopeBookAdminList(hopeElibBook));
-        model.addAttribute("getHopeBookAdminListCnt", count);
+        model.addAttribute("hopeElibBookApplicantList", service.getHopeElibBookApplicantList(hopeElibBook));
+        model.addAttribute("hopeElibBookApplicantCnt", count);
         model.addAttribute("hopeElibBook", hopeElibBook);
 
         return basePath + "statusIndex";
@@ -630,7 +616,7 @@ public class HopeElibBookController extends BaseController {
     public String edit(Model model, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
         checkAuth("U", model, request);
 
-        hopeElibBook = service.getHopeElibBookOne(hopeElibBook);
+        hopeElibBook = service.getHopeElibBookApplicantCntOne(hopeElibBook);
 
         model.addAttribute("hopeElibBook", hopeElibBook);
 
@@ -693,4 +679,35 @@ public class HopeElibBookController extends BaseController {
         hopeElibBook.setApplication_user_name(member.getMember_name());
     }
 
+    @RequestMapping(value = {"/cms/module/elib/hopeElibBook/applicant.*"})
+    public String applicant(Model model, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
+        checkAuth("R", model, request);
+
+        int count = service.getHopeElibBookApplicantCnt(hopeElibBook);
+        service.setPaging(model, count, hopeElibBook);
+
+        model.addAttribute("hopeElibBookApplicantList", service.getHopeElibBookApplicantList(hopeElibBook));
+        model.addAttribute("hopeElibBookApplicantCnt", count);
+        model.addAttribute("hopeElibBook", hopeElibBook);
+
+        return basePath + "applicant";
+    }
+
+    @RequestMapping(value = {"/cms/module/elib/hopeElibBook/rank.*"})
+    public String rank(Model model, HopeElibBook hopeElibBook, HttpServletRequest request) throws AuthException {
+        checkAuth("R", model, request);
+
+        model.addAttribute("hopeElibBookApplicantRank", service.getHopeElibBookApplicantRank(hopeElibBook));
+        model.addAttribute("hopeElibBook", hopeElibBook);
+
+        return basePath + "rank";
+    }
+
+    @RequestMapping(value = {"/cms/module/elib/hopeElibBook/rankExcelDownload.*"}, method = RequestMethod.POST)
+    public HopeElibBookRankExcelView rankExcel(Model model, HopeElibBook hopeElibBook, HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+        model.addAttribute("hopeElibBook", hopeElibBook);
+        model.addAttribute("rankList", service.getHopeElibBookApplicantRank(hopeElibBook));
+        return new HopeElibBookRankExcelView();
+    }
 }

@@ -38,34 +38,17 @@
 </script>
 <form:form id="hopeElibBook" modelAttribute="hopeElibBook" method="post" action="changeStatus.do">
     <form:hidden path="book_idx"/>
-    <form:hidden path="book_code"/>
+    <form:hidden path="application_idx"/>
     <form:hidden path="editMode"/>
     <form:hidden path="application_cell_phone"/>
     <form:hidden path="type"/>
+    <form:hidden path="book_name"/>
     <table class="type2">
         <colgroup>
             <col width="130"/>
             <col width="*"/>
         </colgroup>
         <tbody>
-        <tr>
-            <th>제목</th>
-            <td>
-                <form:input path="book_name" class="text" cssStyle="width:100%"/>
-            </td>
-        </tr>
-        <tr>
-            <th>저자</th>
-            <td>
-                <form:input path="author_name" class="text" cssStyle="width:200px"/>
-            </td>
-        </tr>
-        <tr>
-            <th>출판사</th>
-            <td>
-                <form:input path="book_pubname" class="text" cssStyle="width:200px"/>
-            </td>
-        </tr>
         <tr>
             <th>상태</th>
             <td>

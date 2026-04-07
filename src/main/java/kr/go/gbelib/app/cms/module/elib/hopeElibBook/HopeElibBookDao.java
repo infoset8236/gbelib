@@ -56,8 +56,6 @@ public interface HopeElibBookDao {
 
     int getBookListCnt(HopeElibBook hopeElibBook);
 
-    void updateApplicationHopeElibBook(@Param("hopeElibBook") HopeElibBook hopeElibBook, @Param("member") Member member);
-
     int getDupHopeBookCheck(HopeElibBook hopeElibBook);
 
     int getHopeBookApplicationListCnt(HopeElibBook hopeElibBook);
@@ -77,4 +75,14 @@ public interface HopeElibBookDao {
     int getBookListCmsCnt(HopeElibBook hopeElibBook);
 
     List<HopeElibBook> getBookListCmsAll(HopeElibBook hopeElibBook);
+
+    int getHopeElibBookApplicantCnt(HopeElibBook hopeElibBook);
+
+    List<HopeElibBook> getHopeElibBookApplicantList(HopeElibBook hopeElibBook);
+
+    List<HopeElibBook> getHopeElibBookApplicantRank(HopeElibBook hopeElibBook);
+
+    HopeElibBook getHopeElibBookApplicantCntOne(HopeElibBook hopeElibBook);
+
+    int addHopeElibBookApplicant(@Param("hopeElibBook") HopeElibBook hopeElibBook, @Param("member") Member member);
 }

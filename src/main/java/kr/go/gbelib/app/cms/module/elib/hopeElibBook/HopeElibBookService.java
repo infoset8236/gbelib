@@ -476,8 +476,8 @@ public class HopeElibBookService extends BaseService {
         return dao.getBookListCnt(hopeElibBook);
     }
 
-    public void updateApplicationHopeElibBook(HopeElibBook hopeElibBook, Member member) {
-        dao.updateApplicationHopeElibBook(hopeElibBook, member);
+    public void addHopeElibBookApplicant(HopeElibBook hopeElibBook, Member member) {
+        dao.addHopeElibBookApplicant(hopeElibBook, member);
     }
 
     public int getDupHopeBookCheck(HopeElibBook hopeElibBook) {
@@ -572,5 +572,21 @@ public class HopeElibBookService extends BaseService {
 
     public List<HopeElibBook> getBookListCmsAll(HopeElibBook hopeElibBook) {
         return dao.getBookListCmsAll(hopeElibBook);
+    }
+
+    public int getHopeElibBookApplicantCnt(HopeElibBook hopeElibBook) {
+        return dao.getHopeElibBookApplicantCnt(hopeElibBook);
+    }
+
+    public List<HopeElibBook> getHopeElibBookApplicantList(HopeElibBook hopeElibBook) {
+        return dao.getHopeElibBookApplicantList(hopeElibBook);
+    }
+
+    public List<HopeElibBook> getHopeElibBookApplicantRank(HopeElibBook hopeElibBook) {
+        return dao.getHopeElibBookApplicantRank(hopeElibBook);
+    }
+
+    public HopeElibBook getHopeElibBookApplicantCntOne(HopeElibBook hopeElibBook) {
+        return dao.getHopeElibBookApplicantCntOne(hopeElibBook);
     }
 }

@@ -7,29 +7,22 @@
   $(function () {
     $('select#rowCount').change(function (e) {
       $('#viewPage').val(1);
-      doGetLoad('statusIndex.do', $('form#hopeElibBookStatusIndex').serialize());
+      doGetLoad('statusIndex.do', $('form#applicantIndex').serialize());
     });
 
     $('.selectmenu-search').on('change', function (e) {
       $('#viewPage').val(1);
-      $('#hopeElibBookStatusIndex').submit();
+      $('#applicantIndex').submit();
       e.preventDefault();
     });
-
-    $('#manage_code').on('change', function (e) {
-      $('#viewPage').val(1);
-      $('#hopeElibBookStatusIndex').submit();
-      e.preventDefault();
-    });
-
 
     $('#searchBtn').on('click', function (e) {
       e.preventDefault();
-      doGetLoad('statusIndex.do', $('form#hopeElibBookStatusIndex').serialize());
+      doGetLoad('statusIndex.do', $('form#applicantIndex').serialize());
     });
 
     $('a#excelDownload').on('click', function (e) {
-      $('#hopeElibBookStatusIndex').attr('action', 'statusExcelDownload.do').submit();
+      $('#applicantIndex').attr('action', 'statusExcelDownload.do').submit();
       e.preventDefault();
     });
 
@@ -38,11 +31,7 @@
 
       $('#dialog-1').load(
           'statusEdit.do?editMode=MODIFY&homepage_id=' + $('#homepage_id').val() +
-          '&book_code=' + encodeURIComponent(applicationData.book_code) +
-          '&book_idx=' + encodeURIComponent(applicationData.book_idx) +
-          '&application_user_name=' + encodeURIComponent(applicationData.application_user_name) +
-          '&application_user_id=' + encodeURIComponent(applicationData.application_user_id) +
-          '&application_user_no=' + encodeURIComponent(applicationData.application_user_no),
+          '&application_idx=' + encodeURIComponent(applicationData.application_idx),
           function(response, status, xhr) {
             $('#dialog-1').dialog({
               width: 600,
@@ -56,52 +45,8 @@
     });
 
   });
-
-  // function changeStatus(data, $this) {
-  //
-  //   var statusMessage = {
-  //     '1': "신청",
-  //     '2': "처리",
-  //     '3': "구입",
-  //     '4': "이용자취소",
-  //     '5': "기관취소"
-  //   };
-  //
-  //   var currentStatus = statusMessage[data.application_status];
-  //   var newStatus = statusMessage[$this.val()];
-  //   var changeMessage = currentStatus + " 상태를 " + newStatus + " 상태로 변경하시겠습니까?";
-  //
-  //   var ajaxData = {
-  //     'book_idx': data.book_idx,
-  //     'application_status': $this.val(),
-  //     'application_user_id': data.application_user_id,
-  //     'application_user_no': data.application_user_no,
-  //     'book_code': data.book_code
-  //   };
-  //
-  //   if (confirm(changeMessage)) {
-  //     $.ajax({
-  //       type: "POST",
-  //       url: 'changeStatus.do',
-  //       data: ajaxData,
-  //       success: function (response) {
-  //         if (response.valid) {
-  //           alert('변경 되었습니다.');
-  //         } else {
-  //           alert(response.message);
-  //         }
-  //         location.reload();
-  //       },
-  //       error: function () {
-  //         alert('상태 변경에 실패했습니다.\n관리자에게 문의해 주세요.');
-  //       }
-  //     });
-  //   } else {
-  //     $this.val(data.application_status);
-  //   }
-  // }
 </script>
-<form:form modelAttribute="hopeElibBook" id="hopeElibBookStatusIndex" action="statusIndex.do" method="POST">
+<form:form modelAttribute="hopeElibBook" id="applicantIndex" action="statusIndex.do" method="POST">
     <div class="search">
         검색 결과 : <fmt:formatNumber value="${paging.totalDataCount}" pattern="#,###"/> 건
         <form:select path="rowCount" class="selectmenu" style="width:150px;">
@@ -148,7 +93,7 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="i" varStatus="status" items="${getHopeBookAdminList }">
+        <c:forEach var="i" varStatus="status" items="${hopeElibBookApplicantList }">
             <tr>
                 <td>${paging.listRowNum - status.index}</td>
                 <td>${i.application_user_id }</td>
@@ -177,13 +122,7 @@
                     </c:choose>
                 </td>
                 <td>
-                    <a href="" class="btn" id="dialog-modify" data-application='{
-                                           "book_code": "${i.book_code}",
-                                           "book_idx": "${i.book_idx}",
-                                           "application_user_name": "${i.application_user_name}",
-                                           "application_user_id": "${i.application_user_id}",
-                                           "application_user_no": "${i.application_user_no}"
-                                       }'>수정</a>
+                    <a href="" class="btn" id="dialog-modify" data-application='{"application_idx": "${i.application_idx}"}'>수정</a>
                 </td>
             </tr>
         </c:forEach>
@@ -205,12 +144,13 @@
                 <form:option value="application_user_id">신청자아이디</form:option>
                 <form:option value="application_user_name">신청자명</form:option>
                 <form:option value="book_name">도서명</form:option>
+                <form:option value="book_pubname">출판사명</form:option>
+                <form:option value="author_name">저자명</form:option>
             </form:select>
             <form:input path="search_text" cssClass="text" cssStyle="width:200px;"/>
             <button id="search_btn"><i class="fa fa-search"></i><span>검색</span></button>
         </fieldset>
     </div>
 </form:form>
-
 
 <div id="dialog-1" class="dialog-common" title="상태 변경"></div>

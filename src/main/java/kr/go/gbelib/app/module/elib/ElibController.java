@@ -1402,6 +1402,8 @@ public class ElibController extends BaseController {
 
 		hopeElibBook.setApplication_cell_phone(member.getCell_phone1()+"-"+member.getCell_phone2()+"-"+member.getCell_phone3());
 
+		setApplicationMember(hopeElibBook, getSessionMemberInfo(request));
+
 		if (!result.hasErrors()) {
 			String editMode = hopeElibBook.getEditMode();
 			if ("ADD".equals(editMode)) {
@@ -1410,7 +1412,7 @@ public class ElibController extends BaseController {
 					res.setMessage("이미 신청된 도서입니다.");
 					return res;
 				}
-				hopeElibBookService.updateApplicationHopeElibBook(hopeElibBook, member);
+				hopeElibBookService.addHopeElibBookApplicant(hopeElibBook, member);
 				res.setValid(true);
 				res.setMessage("신청되었습니다.");
 			} else if ("CANCEL".equals(editMode)) {
@@ -1422,7 +1424,6 @@ public class ElibController extends BaseController {
 
 		return res;
 	}
-
 
 	@RequestMapping(value = {"/moazine.*"})
 	public String moazine(Model model, HttpServletRequest request, HttpServletResponse response) {

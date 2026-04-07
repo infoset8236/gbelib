@@ -1,25 +1,26 @@
 package kr.go.gbelib.app.cms.module.elib.hopeElibBook;
 
-import static java.net.URLEncoder.encode;
+import jxl.write.WritableWorkbook;
+import org.springframework.web.servlet.view.document.AbstractJExcelView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import jxl.write.WritableWorkbook;
-import org.springframework.web.servlet.view.document.AbstractJExcelView;
 
-public class HopeElibBookExcelView extends AbstractJExcelView {
+import static java.net.URLEncoder.encode;
+
+public class HopeElibBookRankExcelView extends AbstractJExcelView {
 
     @Override
     protected void buildExcelDocument(Map<String, Object> model, WritableWorkbook workbook, HttpServletRequest request, HttpServletResponse response) throws Exception {
         @SuppressWarnings("unchecked")
         HopeElibBook book = (HopeElibBook) model.get("hopeElibBook");
-        List<HopeElibBook> bookList = (List<HopeElibBook>) model.get("bookList");
+        List<HopeElibBook> rankList = (List<HopeElibBook>) model.get("rankList");
 
-        String fileName = "hopeElibBookList.xls";
+        String fileName = "hopeElibBookRank.xls";
         String header = request.getHeader("user-agent");
         String encodedFileName = null;
 
@@ -37,7 +38,7 @@ public class HopeElibBookExcelView extends AbstractJExcelView {
         response.setHeader("Expires", "0");
         response.setContentType("application/vnd.ms-excel");
 
-        new HopeElibBookWorkBook().workbookForm(workbook, book, bookList, request, response);
+        new HopeElibBookRankWorkBook().workbookForm(workbook, book, rankList, request, response);
     }
 
 }

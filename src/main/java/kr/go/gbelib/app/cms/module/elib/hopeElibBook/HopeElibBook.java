@@ -87,6 +87,8 @@ public class HopeElibBook extends PagingUtils {
     private String mkSessData;
     private int audio_no;
     private String audio_name;
+
+    private String application_idx; //희망도서 사용자 IDX
     private String application_user_no; //희망도서 사용자 등록번호
     private String application_user_id; //희망도서 사용자 아이디
     private String application_user_name; //희망도서 사용자 이름
@@ -862,5 +864,13 @@ public class HopeElibBook extends PagingUtils {
 
     public void setApplication_cell_phone(String application_cell_phone) {
         this.application_cell_phone = application_cell_phone;
+    }
+
+    public String getApplication_idx() {
+        return application_idx;
+    }
+
+    public void setApplication_idx(String application_idx) {
+        this.application_idx = application_idx;
     }
 }

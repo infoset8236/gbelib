@@ -44,71 +44,54 @@ public class HopeElibBookWorkBook {
         format3.setBorder(Border.ALL, BorderLineStyle.MEDIUM);
 
         // 컬럼 폭 지정
-        workbook.getSheet(0).setColumnView(0, 20);
-        workbook.getSheet(0).setColumnView(1, 20);
+        workbook.getSheet(0).setColumnView(0, 40);
+        workbook.getSheet(0).setColumnView(1, 30);
         workbook.getSheet(0).setColumnView(2, 20);
         workbook.getSheet(0).setColumnView(3, 10);
-        workbook.getSheet(0).setColumnView(4, 50);
-        workbook.getSheet(0).setColumnView(5, 40);
-        workbook.getSheet(0).setColumnView(6, 20);
-        workbook.getSheet(0).setColumnView(7, 20);
+        workbook.getSheet(0).setColumnView(4, 10);
+        workbook.getSheet(0).setColumnView(5, 10);
+        workbook.getSheet(0).setColumnView(6, 10);
+        workbook.getSheet(0).setColumnView(7, 10);
         workbook.getSheet(0).setColumnView(8, 10);
-        workbook.getSheet(0).setColumnView(9, 30);
-        workbook.getSheet(0).setColumnView(10, 20);
-        workbook.getSheet(0).setColumnView(11, 20);
-        workbook.getSheet(0).setColumnView(12, 20);
-
-        String countName = "EBK".equals(book.getType()) ? "대출횟수" : "이용횟수";
 
         // 헤더 컬럼 지정
-        workbook.getSheet(0).addCell(new Label(0, 0, "내부등록번호", format));
-        workbook.getSheet(0).addCell(new Label(1, 0, "카테고리", format));
-        workbook.getSheet(0).addCell(new Label(2, 0, "책제목", format));
-        workbook.getSheet(0).addCell(new Label(3, 0, "저자", format));
-        workbook.getSheet(0).addCell(new Label(4, 0, "출판사", format));
-        workbook.getSheet(0).addCell(new Label(5, 0, "ISBN", format));
-        workbook.getSheet(0).addCell(new Label(6, 0, "포맷", format));
-        workbook.getSheet(0).addCell(new Label(7, 0, "공급사", format));
-        workbook.getSheet(0).addCell(new Label(8, 0, "신청ID", format));
-        workbook.getSheet(0).addCell(new Label(9, 0, "신청자", format));
-        workbook.getSheet(0).addCell(new Label(10, 0, "상태", format));
-        workbook.getSheet(0).addCell(new Label(11, 0, "신청일", format));
-        workbook.getSheet(0).addCell(new Label(12, 0, "승인일", format));
-        workbook.getSheet(0).addCell(new Label(13, 0, "취소일", format));
-        workbook.getSheet(0).addCell(new Label(13, 0, "취소일", format));
+        workbook.getSheet(0).addCell(new Label(0, 0, "책제목", format));
+        workbook.getSheet(0).addCell(new Label(1, 0, "저자", format));
+        workbook.getSheet(0).addCell(new Label(2, 0, "출판사", format));
+        workbook.getSheet(0).addCell(new Label(3, 0, "신청ID", format));
+        workbook.getSheet(0).addCell(new Label(4, 0, "신청자", format));
+        workbook.getSheet(0).addCell(new Label(5, 0, "상태", format));
+        workbook.getSheet(0).addCell(new Label(6, 0, "신청일", format));
+        workbook.getSheet(0).addCell(new Label(7, 0, "승인일", format));
+        workbook.getSheet(0).addCell(new Label(8, 0, "취소일", format));
 
         int row = 1;
         for (HopeElibBook org : bookList) {
-            workbook.getSheet(0).addCell(new Label(0, row, String.valueOf(org.getBook_idx()), format1));
-            workbook.getSheet(0).addCell(new Label(1, row, org.getCate_name(), format1));
-            workbook.getSheet(0).addCell(new Label(2, row, org.getBook_name(), format1));
-            workbook.getSheet(0).addCell(new Label(3, row, org.getAuthor_name(), format1));
-            workbook.getSheet(0).addCell(new Label(4, row, org.getBook_pubname(), format1));
-            workbook.getSheet(0).addCell(new Label(5, row, org.getIsbn13(), format1));
-            workbook.getSheet(0).addCell(new Label(6, row, org.getFormat(), format1));
-            workbook.getSheet(0).addCell(new Label(7, row, org.getComp_name(), format1));
-            workbook.getSheet(0).addCell(new Label(8, row, org.getApplication_user_id(), format1));
-            workbook.getSheet(0).addCell(new Label(9, row, org.getApplication_user_name(), format1));
+            workbook.getSheet(0).addCell(new Label(0, row, org.getBook_name(), format1));
+            workbook.getSheet(0).addCell(new Label(1, row, org.getAuthor_name(), format1));
+            workbook.getSheet(0).addCell(new Label(2, row, org.getBook_pubname(), format1));
+            workbook.getSheet(0).addCell(new Label(3, row, org.getApplication_user_id(), format1));
+            workbook.getSheet(0).addCell(new Label(4, row, org.getApplication_user_name(), format1));
             if (org.getApplication_status().equals("1")) {
-                workbook.getSheet(0).addCell(new Label(10, row, "신청", format1));
+                workbook.getSheet(0).addCell(new Label(5, row, "신청", format1));
             } else if (org.getApplication_status().equals("2")) {
-                workbook.getSheet(0).addCell(new Label(10, row, "처리", format1));
+                workbook.getSheet(0).addCell(new Label(5, row, "처리", format1));
             } else if (org.getApplication_status().equals("3")) {
-                workbook.getSheet(0).addCell(new Label(10, row, "구입", format1));
+                workbook.getSheet(0).addCell(new Label(5, row, "구입", format1));
             } else if (org.getApplication_status().equals("4")) {
-                workbook.getSheet(0).addCell(new Label(10, row, "이용자취소", format1));
+                workbook.getSheet(0).addCell(new Label(5, row, "이용자취소", format1));
             } else {
-                workbook.getSheet(0).addCell(new Label(10, row, "관리자취소", format1));
+                workbook.getSheet(0).addCell(new Label(5, row, "관리자취소", format1));
             }
 
-            workbook.getSheet(0).addCell(new Label(11, row, conversionDateToString(org.getApplication_add_date()), format1));
+            workbook.getSheet(0).addCell(new Label(6, row, conversionDateToString(org.getApplication_add_date()), format1));
             if (org.getApplication_approval_date() != null) {
-                workbook.getSheet(0).addCell(new Label(12, row, conversionDateToString(org.getApplication_approval_date()), format1));
+                workbook.getSheet(0).addCell(new Label(7, row, conversionDateToString(org.getApplication_approval_date()), format1));
             }
             if (org.getApplication_cancel_date() != null) {
-                workbook.getSheet(0).addCell(new Label(12, row, conversionDateToString(org.getApplication_cancel_date()), format1));
+                workbook.getSheet(0).addCell(new Label(7, row, conversionDateToString(org.getApplication_cancel_date()), format1));
             }
-            workbook.getSheet(0).addCell(new Label(13, row, org.getApplication_remarks(), format1));
+            workbook.getSheet(0).addCell(new Label(8, row, org.getApplication_remarks(), format1));
 
             row++;
         }
