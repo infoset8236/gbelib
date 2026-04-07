@@ -235,10 +235,20 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 				<div style="text-align: right">
 					<b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b>
 					(<span style="color: red; font-weight: bold;">*</span>)
-					<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
-						<option value="Y">동의</option>
-						<option value="N">미동의</option>
-					</select>
+					<c:choose>
+						<c:when test="${terms.terms_idx eq 18}">
+							<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
+								<option value="Y">동의</option>
+								<option value="N">미동의</option>
+							</select>
+						</c:when>
+						<c:when test="${terms.terms_idx eq 19}">
+							<select class="selectmenu choice_self_info_yn" style="width:70px" title="동의여부">
+								<option value="Y">동의</option>
+								<option value="N">미동의</option>
+							</select>
+						</c:when>
+					</c:choose>
 				</div>
 			</c:when>
 		</c:choose>
