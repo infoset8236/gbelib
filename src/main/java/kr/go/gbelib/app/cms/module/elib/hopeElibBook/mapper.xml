@@ -254,7 +254,7 @@
 			JOIN ELIB_HOPE_APPLICANT eh
 			ON eh.book_idx = a.book_idx
 		WHERE
-			a.application_status IS NOT NULL
+			eh.application_status IS NOT NULL
 		AND eh.application_user_id = #{application_user_id}
 		<include refid="search"/>
 		<include refid="sort"/>
@@ -288,7 +288,7 @@
 			LEFT JOIN ELIB_COMPANY cmp ON cmp.com_code = a.com_code
 			LEFT JOIN ELIB_HOPE_APPLICANT eh ON eh.book_idx = a.book_idx
 		WHERE
-			a.application_status IS NOT NULL
+			eh.application_status IS NOT NULL
 		AND eh.application_user_id = #{application_user_id}
 		<include refid="search"/>
 		<include refid="sort"/>
