@@ -268,7 +268,7 @@
 			a.book_reserve, a.com_code, TO_CHAR(a.book_pubdt, 'YYYY-MM-DD') AS book_pubdt, TO_CHAR(a.add_date, 'YYYY-MM-DD') AS add_date, a.book_regdt,
 			a.use_yn, a.type, a.format, a.book_image, a.parent_id,
 			a.recommend_cnt, a.library_code, a.approved_yn, a.device, ec.cate_name AS cate_name,
-			a.application_status, a.application_add_date, a.application_user_name, a.application_user_id, a.application_user_no, a.application_cell_phone,
+			eh.application_status, eh.application_add_date, eh.application_user_name, eh.application_user_id, eh.application_user_no, eh.application_cell_phone,
 			CASE
 			WHEN a.library_code = '9999999' THEN '통합'
 			ELSE e.homepage_name
