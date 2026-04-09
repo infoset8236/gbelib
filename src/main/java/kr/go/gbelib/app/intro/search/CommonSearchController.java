@@ -2288,7 +2288,10 @@ public class CommonSearchController extends BaseController {
 		} else if (StringUtils.equals(librarySearch.getExcel_type(), "DRIVETHRU")) {
             model.addAttribute("result", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "POUCH", null));
             model.addAttribute("librarySearch", librarySearch);
-        } else {
+        } else if (StringUtils.equals(librarySearch.getExcel_type(), "LOAN")) {
+			model.addAttribute("result", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "LOAN", librarySearch.getExcel_type_detail(), getSessionMemberInfo(request).getvFamYn()));
+			model.addAttribute("librarySearch", librarySearch);
+		} else {
 			model.addAttribute("result", LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), librarySearch.getExcel_type(), librarySearch.getExcel_type_detail()));
 			model.addAttribute("librarySearch", librarySearch);
 
