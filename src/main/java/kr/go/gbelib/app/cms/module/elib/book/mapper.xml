@@ -897,12 +897,14 @@
 	</update>
 
 	<select id="getBookImage" resultType="String">
-		SELECT
-			book_image
-		FROM
-			ELIB_BOOK
-		WHERE
-			isbn13 = #{isbn13}
+		SELECT book_image
+		FROM (
+				 SELECT book_image
+				 FROM ELIB_BOOK
+				 WHERE isbn13 = #{isbn13}
+				 ORDER BY BOOK_IDX DESC
+			 )
+		WHERE ROWNUM = 1
 	</select>
 	
 </mapper>
