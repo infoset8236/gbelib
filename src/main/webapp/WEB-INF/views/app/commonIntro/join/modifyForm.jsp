@@ -409,7 +409,7 @@ function dlsFail() {
 				</tr>
 				<tr>
 					<th>
-						가족회원 대출이력 공개여부
+						가족회원 대출내역 공개여부
 					</th>
 					<td>
 						<form:radiobutton path="vFamYn" value="0001"/> <label for="vFamYn1" style="cursor:pointer;">공개</label>&nbsp;
