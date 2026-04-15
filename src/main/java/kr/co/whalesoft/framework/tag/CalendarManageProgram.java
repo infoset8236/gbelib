@@ -137,9 +137,11 @@ public class CalendarManageProgram extends BodyTagSupport {
 										}
 									}
 								}
-								
-								
-								sb.append("<a href=\"#\" class=\"modify " + cssClass + "\" type=\"teach\" keyValue3=\"" + teach.getGroup_idx()+"\" keyValue=\""+teach.getCategory_idx()+"\" keyValue2=\""+teach.getTeach_idx()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+statusName+""+teach.getTeach_name()+"</span></a>");
+								if ("h23".equals(teach.getHomepage_id())) {
+									sb.append("<a href=\"#\" class=\"modify " + cssClass + "\" type=\"teach\" keyValue3=\"" + teach.getGroup_idx()+"\" keyValue=\""+teach.getCategory_idx()+"\" keyValue2=\""+teach.getTeach_idx()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+ statusName + teach.getStart_time() + "~" + teach.getEnd_time() + ","+ teach.getTeach_stage() + "," + teach.getTeach_name()+"</span></a>");
+								} else {
+									sb.append("<a href=\"#\" class=\"modify " + cssClass + "\" type=\"teach\" keyValue3=\"" + teach.getGroup_idx()+"\" keyValue=\""+teach.getCategory_idx()+"\" keyValue2=\""+teach.getTeach_idx()+"\"><span style=\"margin-left : 5px; font-size:13px;\">"+statusName+""+teach.getTeach_name()+"</span></a>");
+								}
 								sb.append("<ul class=\"schedule\">");
 								sb.append("</ul>");	
 							}
