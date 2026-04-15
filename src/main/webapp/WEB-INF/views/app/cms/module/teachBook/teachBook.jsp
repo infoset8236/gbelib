@@ -167,9 +167,12 @@ $(function(){
 	<div class="calendar" style="width: 97%;">
 		<h4 class="blind">출석시간현황 </h4>
 		<div class="calendar-head" style="margin-bottom:-40px;">
-			<a href="#" id="month_prev" class="prev"><i class="fa fa-angle-left"></i><span class="blind">이전달</span></a>
+			<c:set var="selYM"   value="${teachBook.sel_date}" />
+			<c:set var="startYM" value="${fn:substring(teach.start_date, 0, 7)}" />
+			<c:set var="endYM"   value="${fn:substring(teach.end_date,   0, 7)}" />
+			<a href="#" id="month_prev" class="prev" <c:if test="${not empty startYM and selYM <= startYM}">style="visibility:hidden;"</c:if>><i class="fa fa-angle-left"></i><span class="blind">이전달</span></a>
 			<b>${teachBook.sel_date}</b>
-			<a href="#" id="month_next" class="next"><i class="fa fa-angle-right"></i><span class="blind">다음달</span></a>
+			<a href="#" id="month_next" class="next" <c:if test="${not empty endYM and selYM >= endYM}">style="visibility:hidden;"</c:if>><i class="fa fa-angle-right"></i><span class="blind">다음달</span></a>
 		</div>
 		<div class="calendar-table">
 			<div class="box" style="overflow: auto">
@@ -179,6 +182,9 @@ $(function(){
 						<tr>
 							<th rowspan="2" style="padding:0px">번호</th>
 							<th rowspan="2">성명</th>
+							<th rowspan="2">성별</th>
+							<th rowspan="2">학년</th>
+							<th rowspan="2">연령</th>
 							<c:forEach var="i" varStatus="status" items="${calendar}">
 								<c:choose>
 									<c:when test="${i.sun ne null and i.sun > 0}">
@@ -302,6 +308,9 @@ $(function(){
 									<tr>
 										<td>${k_Status.count}</td>
 										<td><a class="name-btn" keyValue="${oneStudent.student_idx}">${oneStudent.student_name}</a></td>
+										<td>${oneStudent.student_sex eq 'M' ? '남자' : '여자'}</td>
+										<td>${oneStudent.student_hack_str}</td>
+										<td>${oneStudent.student_old}</td>
 										<c:forEach var="k" varStatus="status" items="${calendar}">
 											<c:choose>
 												<c:when test="${k.sun ne null and k.sun > 0}">

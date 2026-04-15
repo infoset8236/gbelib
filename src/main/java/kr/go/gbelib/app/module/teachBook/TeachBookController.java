@@ -98,12 +98,20 @@ public class TeachBookController extends BaseController {
 				teachBook.setSel_date(teachOne.getStart_date().substring(0, 7));
 			}
 		}
+
+		CalendarManage calendarManage = new CalendarManage(teachBook.getSel_date());
+		if (teachOne != null) {
+			calendarManage.setStart_date(teachOne.getStart_date());
+			calendarManage.setEnd_date(teachOne.getEnd_date());
+			calendarManage.setTeach_day_arr(teachOne.getTeach_day_arr());
+		}
+
 		List<Student> studentList = studentService.getStudentListAll(new Student(teachBook.getHomepage_id(), teachBook.getGroup_idx(), teachBook.getCategory_idx(), teachBook.getTeach_idx(), "1"));
 		List<TeachBook> teachBookList = teachBookService.getTeachBookList(teachBook);
 		model.addAttribute("studentList", studentList);
 		model.addAttribute("codeList", codeService.getCode("CMS", "C0008"));
 		model.addAttribute("teach", teachOne);
-		model.addAttribute("calendar", calendarManageService.getCalendar(new CalendarManage(teachBook.getSel_date())));
+		model.addAttribute("calendar", calendarManageService.getCalendarByTeachBook(calendarManage));
 		model.addAttribute("teachBook", teachBook);
 		model.addAttribute("teachBookRepo", makeTeachBook(studentList, teachBookList));
 		

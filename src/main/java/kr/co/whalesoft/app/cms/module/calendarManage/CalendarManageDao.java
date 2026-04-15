@@ -60,4 +60,8 @@ public interface CalendarManageDao {
 	List<CalendarManage> getToDayEvent(CalendarManage calendarManage);
 
 	List<CalendarManage> getCalendarForIct(CalendarManage calendarManage);
+
+	List<CalendarManage> getCalendarByTeachBook(CalendarManage calendarManage);
+
+	List<CalendarManage> getCalendarByTeachBookExcel(CalendarManage calendarManage);
 }

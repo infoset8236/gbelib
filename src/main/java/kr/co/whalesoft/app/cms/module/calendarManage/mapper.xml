@@ -527,4 +527,78 @@
         AND START_DATE >= TO_DATE(#{start_date}, 'YYYY-MM-DD')
         AND START_DATE &lt; TO_DATE(#{end_date}, 'YYYY-MM-DD') + 1
 	</select>
+
+	<select id="getCalendarByTeachBook" resultType="kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage">
+		SELECT
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 1, TO_CHAR(DAYS, 'FMDD'))) AS SUN,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 2, TO_CHAR(DAYS, 'FMDD'))) AS MON,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 3, TO_CHAR(DAYS, 'FMDD'))) AS TUE,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 4, TO_CHAR(DAYS, 'FMDD'))) AS WED,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 5, TO_CHAR(DAYS, 'FMDD'))) AS THU,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 6, TO_CHAR(DAYS, 'FMDD'))) AS FRI,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 7, TO_CHAR(DAYS, 'FMDD'))) AS SAT,
+			#{plan_date} AS PLAN_DATE
+		FROM (
+			SELECT
+				(BASE_MON + LEVEL - 1) AS DAYS,
+				BASE_MON,
+				((TRUNC(BASE_MON + LEVEL - 1, 'D') - TRUNC(TRUNC(BASE_MON + LEVEL - 1, 'Y'), 'D')) / 7 + 1) AS WEEK_NUM
+			FROM
+			    (SELECT TO_DATE(#{plan_date}, 'yyyy-MM') AS BASE_MON FROM DUAL)
+			CONNECT BY LEVEL <![CDATA[ <= ]]> LAST_DAY(TO_DATE(#{plan_date}, 'yyyy-MM')) - TO_DATE(#{plan_date}, 'yyyy-MM') + 1
+		)
+		WHERE
+		    DAYS <![CDATA[ <= ]]> LAST_DAY(BASE_MON)
+		<if test="start_date != null and start_date != ''">
+			AND DAYS <![CDATA[ >= ]]> TO_DATE(#{start_date}, 'yyyy-MM-dd')
+		</if>
+		<if test="end_date != null and end_date != ''">
+			AND DAYS <![CDATA[ <= ]]> TO_DATE(#{end_date}, 'yyyy-MM-dd')
+		</if>
+		<if test="teach_day_arr != null and teach_day_arr.length > 0">
+			AND TO_CHAR(DAYS, 'D') IN
+			<foreach item="day" collection="teach_day_arr" open="(" separator="," close=")">
+				#{day}
+			</foreach>
+		</if>
+		GROUP BY WEEK_NUM
+		ORDER BY WEEK_NUM
+	</select>
+
+	<select id="getCalendarByTeachBookExcel" resultType="kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage">
+		SELECT
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 1, TO_CHAR(DAYS, 'FMDD'))) AS SUN,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 2, TO_CHAR(DAYS, 'FMDD'))) AS MON,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 3, TO_CHAR(DAYS, 'FMDD'))) AS TUE,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 4, TO_CHAR(DAYS, 'FMDD'))) AS WED,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 5, TO_CHAR(DAYS, 'FMDD'))) AS THU,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 6, TO_CHAR(DAYS, 'FMDD'))) AS FRI,
+			MIN(DECODE(TO_CHAR(DAYS, 'D'), 7, TO_CHAR(DAYS, 'FMDD'))) AS SAT,
+			TO_CHAR(DAYS, 'YYYY-MM') AS PLAN_DATE
+		FROM (
+			SELECT
+				(BASE_MON + LEVEL - 1) AS DAYS, BASE_MON, ((TRUNC(BASE_MON + LEVEL - 1, 'D') - TRUNC(TRUNC(BASE_MON + LEVEL - 1, 'Y'), 'D')) / 7 + 1) AS WEEK_NUM
+			FROM
+			<choose>
+				<when test="start_date != null and start_date != '' and end_date != null and end_date != ''">
+					(SELECT TRUNC(TO_DATE(#{start_date}, 'yyyy-MM-dd'), 'MM') AS BASE_MON FROM DUAL)
+					CONNECT BY LEVEL <![CDATA[ <= ]]> TO_DATE(#{end_date}, 'yyyy-MM-dd') - TRUNC(TO_DATE(#{start_date}, 'yyyy-MM-dd'), 'MM') + 1
+				</when>
+				<otherwise>
+					(SELECT TO_DATE(#{plan_date}, 'yyyy-MM') AS BASE_MON FROM DUAL)
+					CONNECT BY LEVEL <![CDATA[ <= ]]> LAST_DAY(TO_DATE(#{plan_date}, 'yyyy-MM')) - TO_DATE(#{plan_date}, 'yyyy-MM') + 1
+				</otherwise>
+			</choose>
+		)
+		WHERE
+			DAYS <![CDATA[ <= ]]> LAST_DAY(TO_DATE(TO_CHAR(DAYS, 'YYYY-MM'), 'YYYY-MM'))
+		<if test="teach_day_arr != null and teach_day_arr.length > 0">
+			AND TO_CHAR(DAYS, 'D') IN
+			<foreach item="day" collection="teach_day_arr" open="(" separator="," close=")">
+				#{day}
+			</foreach>
+		</if>
+		GROUP BY TO_CHAR(DAYS, 'YYYY-MM'), WEEK_NUM
+		ORDER BY TO_CHAR(DAYS, 'YYYY-MM'), WEEK_NUM
+	</select>
 </mapper>

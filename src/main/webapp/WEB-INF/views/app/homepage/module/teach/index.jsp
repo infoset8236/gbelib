@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="tag" uri="/WEB-INF/config/tld/cmsTag.tld" %>
 <script type="text/javascript">
@@ -355,76 +356,80 @@ $(function(){
 					</tr>
 				</thead>
 				<tbody>
-							<c:forEach items="${teachList}" var="i" varStatus="status">
-								<tr>
-									<td width="50" class="num">${status.count }</td>
-									<td >${i.teach_name }</td>
-									<td >${i.teach_stage }</td>
-									<td >${i.start_join_date}&nbsp;&nbsp;${i.start_join_time}&nbsp;&nbsp;&nbsp;~ &nbsp;&nbsp;&nbsp;${i.end_join_date}&nbsp;&nbsp;${i.end_join_time}</td>
-									<td >${i.start_date} <c:if test="${i.start_date ne i.end_date}">~ ${i.end_date}</c:if> (
-													<c:forEach var="j" varStatus="status_j" items="${i.teach_day_arr}">
-														<c:choose>
-															<c:when test="${j eq '1'}">일</c:when>
-															<c:when test="${j eq '2'}">월</c:when>
-															<c:when test="${j eq '3'}">화</c:when>
-															<c:when test="${j eq '4'}">수</c:when>
-															<c:when test="${j eq '5'}">목</c:when>
-															<c:when test="${j eq '6'}">금</c:when>
-															<c:when test="${j eq '7'}">토</c:when>
-														</c:choose>
-														<c:if test="${!status_j.last}">
-															, 
-														</c:if>
-													</c:forEach>
-												) ${i.start_time} ~ ${i.end_time}</td>
-									<td class="file"><span><strong>온라인</strong> ${i.teach_join_count} / ${i.teach_limit_count} </span>
-						<c:if test="${i.teach_offline_count > 0}"><span>, <strong>오프라인</strong> ${i.teach_off_join_count} / ${i.teach_offline_count}</span></c:if>
-						<c:if test="${i.teach_backup_count > 0}"><span>, ( <strong>후보자</strong> ${i.teach_backup_join_count} / ${i.teach_backup_count} )</span></c:if></td>
-									<td>
+					<jsp:useBean id="now" class="java.util.Date" />
+					<fmt:formatDate value="${now}" pattern="yyyyMMddHHmm" var="nowStr"/>
+					<c:forEach items="${teachList}" var="i" varStatus="status">
+						<tr>
+							<td width="50" class="num">${status.count }</td>
+							<td >${i.teach_name }</td>
+							<td >${i.teach_stage }</td>
+							<td >${i.start_join_date}&nbsp;&nbsp;${i.start_join_time}&nbsp;&nbsp;&nbsp;~ &nbsp;&nbsp;&nbsp;${i.end_join_date}&nbsp;&nbsp;${i.end_join_time}</td>
+							<td >${i.start_date} <c:if test="${i.start_date ne i.end_date}">~ ${i.end_date}</c:if> (
+											<c:forEach var="j" varStatus="status_j" items="${i.teach_day_arr}">
+												<c:choose>
+													<c:when test="${j eq '1'}">일</c:when>
+													<c:when test="${j eq '2'}">월</c:when>
+													<c:when test="${j eq '3'}">화</c:when>
+													<c:when test="${j eq '4'}">수</c:when>
+													<c:when test="${j eq '5'}">목</c:when>
+													<c:when test="${j eq '6'}">금</c:when>
+													<c:when test="${j eq '7'}">토</c:when>
+												</c:choose>
+												<c:if test="${!status_j.last}">
+													,
+												</c:if>
+											</c:forEach>
+										) ${i.start_time} ~ ${i.end_time}</td>
+							<td class="file"><span><strong>온라인</strong> ${i.teach_join_count} / ${i.teach_limit_count} </span>
+							<c:if test="${i.teach_offline_count > 0}"><span>, <strong>오프라인</strong> ${i.teach_off_join_count} / ${i.teach_offline_count}</span></c:if>
+							<c:if test="${i.teach_backup_count > 0}"><span>, ( <strong>후보자</strong> ${i.teach_backup_join_count} / ${i.teach_backup_count} )</span></c:if></td>
+							<td>
+								<c:set var="startStr" value="${fn:replace(i.start_date, '-', '')}${fn:replace(i.start_time, ':', '')}"/>
+								<c:set var="endStr" value="${fn:replace(i.end_date, '-', '')}${fn:replace(i.end_time, ':', '')}"/>
+								<c:choose>
+									<c:when test="${member.login and (member.loginType eq 'HOMEPAGE') and (i.member_key eq member.seq_no) and (nowStr >= startStr) and (nowStr <= endStr)}">
+										<a class="btn btn3 teachBook-btn" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}"keyValue5="${i.large_category_idx}" >출석부</a>
+									</c:when>
+									<c:otherwise>
 										<c:choose>
-				<c:when test="${member.login and (member.loginType eq 'HOMEPAGE') and (i.member_key eq member.seq_no)}">
-					<a class="btn btn3 teachBook-btn" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}"keyValue5="${i.large_category_idx}" >출석부</a>
-				</c:when>
-				<c:otherwise>
-					<c:choose>
-						<c:when test="${i.teach_status eq '0'}">
-							<a href="" class="btn btn1 add" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}" keyValue5="${i.large_category_idx}" apply_status="1">
-							<i class="fa fa-pencil-square-o"></i><span>수강신청 </span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '1'}">
-							<a href="" class="btn btn1 add" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}" keyValue5="${i.large_category_idx}" apply_status="2">
-							<i class="fa fa-pencil-square-o"></i><span>대기자신청</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '2' or i.teach_status eq '10'}">
-							<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
-							<i class="fa fa-circle-o"></i><span>신청완료</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '3'}">
-							<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
-							<i class="fa fa-circle-o"></i><span>대기자 신청완료</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '9'}">
-							<a href="javascript:void(0);" class="btn" style="cursor: default;">
-							<i class="fa fa-pencil"></i><span>수강종료</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '4'or i.teach_status eq '44'}">
-							<a href="javascript:void(0);" class="btn" style="cursor: default;">
-							<span>접수마감</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '5'}">
-							<a href="javascript:void(0);" class="btn" style="cursor: default;">
-							<i class="fa fa-user"></i><span>정원마감</span></a>
-						</c:when>
-						<c:when test="${i.teach_status eq '6'}">
-							<a href="javascript:void(0);" class="btn btn4" style="cursor: default;">
-							<i class="fa fa-clock-o"></i><span>신청대기</span></a>
-						</c:when>
-					</c:choose>
-				</c:otherwise>
-			</c:choose>
-									</td>
-								</tr>
-							</c:forEach>	
+											<c:when test="${i.teach_status eq '0'}">
+												<a href="" class="btn btn1 add" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}" keyValue5="${i.large_category_idx}" apply_status="1">
+												<i class="fa fa-pencil-square-o"></i><span>수강신청 </span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '1'}">
+												<a href="" class="btn btn1 add" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}" keyValue5="${i.large_category_idx}" apply_status="2">
+												<i class="fa fa-pencil-square-o"></i><span>대기자신청</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '2' or i.teach_status eq '10'}">
+												<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
+												<i class="fa fa-circle-o"></i><span>신청완료</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '3'}">
+												<a href="/${homepage.context_path}/module/teach/applyList.do?menu_idx=${myTeachListMenuIdx}" class="btn btn2">
+												<i class="fa fa-circle-o"></i><span>대기자 신청완료</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '9'}">
+												<a href="javascript:void(0);" class="btn" style="cursor: default;">
+												<i class="fa fa-pencil"></i><span>수강종료</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '4'or i.teach_status eq '44'}">
+												<a href="javascript:void(0);" class="btn" style="cursor: default;">
+												<span>접수마감</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '5'}">
+												<a href="javascript:void(0);" class="btn" style="cursor: default;">
+												<i class="fa fa-user"></i><span>정원마감</span></a>
+											</c:when>
+											<c:when test="${i.teach_status eq '6'}">
+												<a href="javascript:void(0);" class="btn btn4" style="cursor: default;">
+												<i class="fa fa-clock-o"></i><span>신청대기</span></a>
+											</c:when>
+										</c:choose>
+									</c:otherwise>
+								</c:choose>
+							</td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
@@ -533,8 +538,10 @@ $(function(){
 						</div>
 					</div>
 					<div class="stat">
+						<c:set var="startStr" value="${fn:replace(i.start_date, '-', '')}${fn:replace(i.start_time, ':', '')}"/>
+						<c:set var="endStr" value="${fn:replace(i.end_date, '-', '')}${fn:replace(i.end_time, ':', '')}"/>
 						<c:choose>
-							<c:when test="${member.login and (member.loginType eq 'HOMEPAGE') and (i.member_key eq member.seq_no)}">
+							<c:when test="${member.login and (member.loginType eq 'HOMEPAGE') and (i.member_key eq member.seq_no) and (nowStr >= startStr) and (nowStr <= endStr)}">
 								<a class="btn btn3 teachBook-btn" keyValue1="${i.homepage_id}" keyValue2="${i.group_idx}" keyValue3="${i.category_idx}" keyValue4="${i.teach_idx}"keyValue5="${i.large_category_idx}" >출석부</a>
 							</c:when>
 							<c:otherwise>

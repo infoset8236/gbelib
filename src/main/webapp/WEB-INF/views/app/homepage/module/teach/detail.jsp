@@ -259,7 +259,11 @@ $(function() {
 			<i class="fa fa-clock-o"></i><span>신청대기</span></a>
 		</c:when>
 	</c:choose>
-	<c:if test="${member.teacher_yn eq 'Y'}">
+	<jsp:useBean id="now" class="java.util.Date" />
+	<fmt:formatDate value="${now}" pattern="yyyyMMddHHmm" var="nowStr"/>
+	<c:set var="startStr" value="${fn:replace(teach.start_date, '-', '')}${fn:replace(teach.start_time, ':', '')}"/>
+	<c:set var="endStr" value="${fn:replace(teach.end_date, '-', '')}${fn:replace(teach.end_time, ':', '')}"/>
+	<c:if test="${member.login and (member.loginType eq 'HOMEPAGE') and (teach.member_key eq member.seq_no) and (nowStr >= startStr) and (nowStr <= endStr)}">
 		<a class="btn btn3 teachBook-btn" keyValue1="${teach.homepage_id}" keyValue2="${teach.group_idx }" keyValue3="${teach.category_idx}" keyValue4="${teach.teach_idx}"keyValue5="${teach.large_category_idx}">출석체크 하기</a>
 	</c:if>
 </div>

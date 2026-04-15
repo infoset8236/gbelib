@@ -164,11 +164,13 @@ $(function(){
 		<div class="calendar" style="width: 100%;">
 			<h4 class="blind">출석시간현황 </h4>
 			<div class="infodesk center">
-			
+				<c:set var="selYM"   value="${teachBook.sel_date}" />
+				<c:set var="startYM" value="${fn:substring(teach.start_date, 0, 7)}" />
+				<c:set var="endYM"   value="${fn:substring(teach.end_date,   0, 7)}" />
 				<div class="monthYear"> 
-					<a href="#" id="month_prev" class="btn prev" style="font-size: 10px;"><i class="fa fa-chevron-left" aria-hidden="true"></i>◀<span class="blind">이전달</span></a>
+					<a href="#" id="month_prev" class="btn prev" style="font-size: 10px; <c:if test="${not empty startYM and selYM <= startYM}">visibility:hidden;</c:if>"><i class="fa fa-chevron-left" aria-hidden="true"></i>◀<span class="blind">이전달</span></a>
 					<b>${teachBook.sel_date}</b>
-					<a href="#" id="month_next" class="btn next" style="font-size: 10px;"><i class="fa fa-angle-right"></i>▶<span class="blind">다음달</span></a>
+					<a href="#" id="month_next" class="btn next" style="font-size: 10px; <c:if test="${not empty endYM and selYM >= endYM}">visibility:hidden;</c:if>"><i class="fa fa-angle-right"></i>▶<span class="blind">다음달</span></a>
 					<!-- <a class="btn btn2 print-btn" style="float:right;">인쇄</a> -->
 			    </div>
 			    <br/>

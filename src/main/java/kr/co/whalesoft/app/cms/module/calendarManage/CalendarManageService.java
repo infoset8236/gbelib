@@ -303,4 +303,12 @@ public class CalendarManageService extends BaseService {
     public List<CalendarManage> getCalendarForIct(CalendarManage calendarManage) {
 		return dao.getCalendarForIct(calendarManage);
     }
+
+	public List<CalendarManage> getCalendarByTeachBook(CalendarManage calendarManage) {
+		return dao.getCalendarByTeachBook(calendarManage);
+	}
+
+	public List<CalendarManage> getCalendarByTeachBookExcel(CalendarManage calendarManage) {
+		return dao.getCalendarByTeachBookExcel(calendarManage);
+	}
 }

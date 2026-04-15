@@ -50,6 +50,8 @@ public class CalendarManage extends PagingUtils {
 	private String add_id;
 	private String add_name;
 
+	private String[] teach_day_arr;
+
 	public CalendarManage() {}
 	
 	public CalendarManage(String homepage_id, String plan_date) {
@@ -340,5 +342,13 @@ public class CalendarManage extends PagingUtils {
 
 	public void setAdd_name(String add_name) {
 		this.add_name = add_name;
+	}
+
+	public String[] getTeach_day_arr() {
+		return teach_day_arr;
+	}
+
+	public void setTeach_day_arr(String[] teach_day_arr) {
+		this.teach_day_arr = teach_day_arr;
 	}
 }

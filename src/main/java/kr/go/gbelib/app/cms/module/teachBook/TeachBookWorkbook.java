@@ -1,10 +1,7 @@
 package kr.go.gbelib.app.cms.module.teachBook;
 
 import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,147 +55,183 @@ public class TeachBookWorkbook {
 		// 헤더 컬럼 지정
 		String title = String.format("[%s-%s] %s / 강의기간 : %s ~ %s, 강의시간 : %s ~ %s, 총 인원 : %s", teach.getGroup_name(), teach.getCategory_name(), teach.getTeach_name(), teach.getStart_date(), teach.getEnd_date(), teach.getStart_time(), teach.getEnd_time(), studentList.size());
 		workbook.getSheet(0).addCell(new Label(5, 0, title));
-		
-		workbook.getSheet(0).addCell(new Label(0, 2, "번호", format));
-		workbook.getSheet(0).addCell(new Label(1, 2, "성명", format));
-		
-		// 일자 시작 컬럼 
-		int startDayCul = 2;
- 		for ( CalendarManage c : calendar ) {
-			if ( StringUtils.isNotEmpty(c.getSun()) ) {
-				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getSun(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getSun())), format));
-				startDayCul ++;
+
+		workbook.getSheet(0).addCell(new Label(0, 3, "번호", format));
+		workbook.getSheet(0).addCell(new Label(1, 3, "성명", format));
+		workbook.getSheet(0).addCell(new Label(2, 3, "성별", format));
+		workbook.getSheet(0).addCell(new Label(3, 3, "학년", format));
+		workbook.getSheet(0).addCell(new Label(4, 3, "연령", format));
+
+		String currentMonth = null;
+		Map<String, int[]> monthColRange = new LinkedHashMap<String, int[]>();
+
+		int startDayCul = 5;
+		for (int ci = 0; ci < calendar.size(); ci++) {
+			CalendarManage c = (CalendarManage) calendar.get(ci);
+			String planDate = c.getPlan_date();
+			if (!planDate.equals(currentMonth)) {
+				if (currentMonth != null) {
+					int[] prevRange = (int[]) monthColRange.get(currentMonth);
+					prevRange[1] = startDayCul - 1;
+				}
+				currentMonth = planDate;
+				monthColRange.put(planDate, new int[]{startDayCul, startDayCul});
 			}
-			if ( StringUtils.isNotEmpty(c.getMon()) ) {
+
+			if (StringUtils.isNotEmpty(c.getSun())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getMon(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getMon())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getSun(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getSun())), format));
+				startDayCul++;
 			}
-			if ( StringUtils.isNotEmpty(c.getTue()) ) {
+			if (StringUtils.isNotEmpty(c.getMon())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getTue(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getTue())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getMon(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getMon())), format));
+				startDayCul++;
 			}
-			if ( StringUtils.isNotEmpty(c.getWed()) ) {
+			if (StringUtils.isNotEmpty(c.getTue())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getWed(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getWed())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getTue(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getTue())), format));
+				startDayCul++;
 			}
-			if ( StringUtils.isNotEmpty(c.getThu()) ) {
+			if (StringUtils.isNotEmpty(c.getWed())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getThu(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getThu())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getWed(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getWed())), format));
+				startDayCul++;
 			}
-			if ( StringUtils.isNotEmpty(c.getFri()) ) {
+			if (StringUtils.isNotEmpty(c.getThu())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getFri(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getFri())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getThu(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getThu())), format));
+				startDayCul++;
 			}
-			if ( StringUtils.isNotEmpty(c.getSat()) ) {
+			if (StringUtils.isNotEmpty(c.getFri())) {
 				workbook.getSheet(0).setColumnView(startDayCul, 10);
-				workbook.getSheet(0).addCell(new Label(startDayCul, 1, c.getSat(), format));
-				workbook.getSheet(0).addCell(new Label(startDayCul, 2, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getSat())), format));
-				startDayCul ++;
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getFri(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getFri())), format));
+				startDayCul++;
+			}
+			if (StringUtils.isNotEmpty(c.getSat())) {
+				workbook.getSheet(0).setColumnView(startDayCul, 10);
+				workbook.getSheet(0).addCell(new Label(startDayCul, 2, c.getSat(), format));
+				workbook.getSheet(0).addCell(new Label(startDayCul, 3, getDayKorea(String.format("%s-%s", c.getPlan_date(), c.getSat())), format));
+				startDayCul++;
 			}
 		}
- 		workbook.getSheet(0).addCell(new Label(startDayCul, 2, "수강료", format));
- 		workbook.getSheet(0).addCell(new Label(startDayCul + 1, 2, "교재비", format));
- 		workbook.getSheet(0).addCell(new Label(startDayCul + 2, 2, "재료비", format));
-		
- 		int studentRowStart = 3;
-		for ( int i = 0; i < studentList.size(); i ++ ) {
-			Student oneStudent = studentList.get(i);
-			workbook.getSheet(0).addCell(new Label(0, studentRowStart, String.valueOf(i + 1))); //번호
-			workbook.getSheet(0).addCell(new Label(1, studentRowStart, oneStudent.getStudent_name())); //이름
 
-			// 다시 초기화
-	 		startDayCul = 2;
-			// ${teachBookRepo[oneStudent.student_idx][plan_date] eq '1'}
-			for ( CalendarManage c : calendar ) {
-				if ( StringUtils.isNotEmpty(c.getSun()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getSun().length() == 1 ? "0" + c.getSun():c.getSun());
+		if (currentMonth != null) {
+			int[] lastRange = monthColRange.get(currentMonth);
+			lastRange[1] = startDayCul - 1;
+		}
+
+		String[] keys = (String[]) monthColRange.keySet().toArray(new String[0]);
+		for (int k = 0; k < keys.length; k++) {
+			String month = ((String) keys[k]).substring(5).replaceFirst("^0", "") + "월";
+			int[] range = monthColRange.get(keys[k]);
+			int colStart = range[0];
+			int colEnd = range[1];
+			if (colStart < colEnd) {
+				workbook.getSheet(0).mergeCells(colStart, 1, colEnd, 1);
+			}
+			workbook.getSheet(0).addCell(new Label(colStart, 1, month, format3));
+		}
+
+		workbook.getSheet(0).addCell(new Label(startDayCul, 3, "수강료", format));
+		workbook.getSheet(0).addCell(new Label(startDayCul + 1, 3, "교재비", format));
+		workbook.getSheet(0).addCell(new Label(startDayCul + 2, 3, "재료비", format));
+
+		int studentRowStart = 4;
+		for (int i = 0; i < studentList.size(); i++) {
+			Student oneStudent = (Student) studentList.get(i);
+			workbook.getSheet(0).addCell(new Label(0, studentRowStart, String.valueOf(i + 1)));
+			workbook.getSheet(0).addCell(new Label(1, studentRowStart, oneStudent.getStudent_name()));
+			workbook.getSheet(0).addCell(new Label(2, studentRowStart, "M".equals(oneStudent.getStudent_sex()) ? "남자" : "여자"));
+			workbook.getSheet(0).addCell(new Label(3, studentRowStart, oneStudent.getStudent_hack_str()));
+			workbook.getSheet(0).addCell(new Label(4, studentRowStart, String.valueOf(oneStudent.getStudent_old())));
+
+			startDayCul = 5;
+			for (int ci = 0; ci < calendar.size(); ci++) {
+				CalendarManage c = (CalendarManage) calendar.get(ci);
+				if (StringUtils.isNotEmpty(c.getSun())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getSun().length() == 1 ? "0" + c.getSun() : c.getSun());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getMon()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getMon().length() == 1 ? "0" + c.getMon():c.getMon());
+				if (StringUtils.isNotEmpty(c.getMon())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getMon().length() == 1 ? "0" + c.getMon() : c.getMon());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getTue()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getTue().length() == 1 ? "0" + c.getTue():c.getTue());
+				if (StringUtils.isNotEmpty(c.getTue())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getTue().length() == 1 ? "0" + c.getTue() : c.getTue());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getWed()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getWed().length() == 1 ? "0" + c.getWed():c.getWed());
+				if (StringUtils.isNotEmpty(c.getWed())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getWed().length() == 1 ? "0" + c.getWed() : c.getWed());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getThu()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getThu().length() == 1 ? "0" + c.getThu():c.getThu());
+				if (StringUtils.isNotEmpty(c.getThu())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getThu().length() == 1 ? "0" + c.getThu() : c.getThu());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getFri()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getFri().length() == 1 ? "0" + c.getFri():c.getFri());
+				if (StringUtils.isNotEmpty(c.getFri())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getFri().length() == 1 ? "0" + c.getFri() : c.getFri());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
-				if ( StringUtils.isNotEmpty(c.getSat()) ) {
-					String key = String.format("%s-%s", c.getPlan_date(), c.getSat().length() == 1 ? "0" + c.getSat():c.getSat());
+				if (StringUtils.isNotEmpty(c.getSat())) {
+					String key = String.format("%s-%s", c.getPlan_date(), c.getSat().length() == 1 ? "0" + c.getSat() : c.getSat());
 					String status = null;
 					try {
 						status = teachBookRepo.get(oneStudent.getStudent_idx()).get(key);
 					} catch ( Exception e ) {
 					}
 					workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, getStatus(status)));
-					startDayCul ++;
+					startDayCul++;
 				}
 			}
-			
-			workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, oneStudent.getPay1_yn())); //수강료
-			workbook.getSheet(0).addCell(new Label(startDayCul + 1, studentRowStart, oneStudent.getPay2_yn())); //교재비
-			workbook.getSheet(0).addCell(new Label(startDayCul + 2, studentRowStart, oneStudent.getPay3_yn())); //재료비
-			
-			studentRowStart ++;
+
+			workbook.getSheet(0).addCell(new Label(startDayCul, studentRowStart, oneStudent.getPay1_yn()));
+			workbook.getSheet(0).addCell(new Label(startDayCul + 1, studentRowStart, oneStudent.getPay2_yn()));
+			workbook.getSheet(0).addCell(new Label(startDayCul + 2, studentRowStart, oneStudent.getPay3_yn()));
+
+			studentRowStart++;
 		}
 		
 		return workbook;
