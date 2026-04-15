@@ -1155,6 +1155,20 @@ public class CommonSearchController extends BaseController {
 			member.setLoca(librarySearch.getvLoca());
 		}
 
+		try {
+			Map<String, Object> hopeDupl = LibSearchAPI.getDuplHopeCheck(homepage.getHomepage_codeList()[0], librarySearch.getTitle(), librarySearch.getIsbn());
+			if(hopeDupl != null) {
+				List<Map<String, Object>> hopeDuplList = (List<Map<String, Object>>)hopeDupl.get("dsHopeDupList");
+				if(hopeDuplList != null && hopeDuplList.size() > 0) {
+					res.setValid(false);
+					res.setMessage("이미 신청된 도서입니다.");
+					return res;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		if(!result.hasErrors()) {
 			if ( !StringUtils.isEmpty(member.getStatus_code()) ) {
 				if (!(member.getStatus_code().equals("0001") || member.getStatus_code().equals("0") )) {

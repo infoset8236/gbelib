@@ -1938,7 +1938,7 @@ public class LibSearchAPI {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("className", "action.lnk.LnkHopeDupCheck");
 		try {
-			param.put("vTitle", URLEncoder.encode(title, "UTF-8").replaceAll("\\+", "%2B"));
+			param.put("vTitle", URLEncoder.encode(title, "UTF-8"));
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
