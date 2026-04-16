@@ -937,6 +937,12 @@ function removeChar(event) {
     .agreeChk input:checked + span::after{
         opacity:1;
     }
+    .blue{
+        font-size: 16px;
+        font-weight: 600;
+        color: blue;
+        text-decoration: underline;
+    }
 </style>
 <c:forEach items="${termsList}" var="terms">
 	${terms.contents }
@@ -945,7 +951,7 @@ function removeChar(event) {
 <c:if test="${homepage.context_path eq 'geic'}">
     <h4>개인정보 수집·이용 동의</h4>
     <p class="mB20 mL10">
-        본 기관은 강사등록 신청을 위하여 「개인정보보호법」에 따라 귀하의 개인정보를 수집·이용하고자 합니다.<br />
+        본 기관은 강사등록 신청을 위하여 「개인정보보호법」에 따라 귀하의 개인정보를 수집·이용하고자 합니다.<br>
         내용을 자세히 읽으신 후 동의 여부를 결정하여 주십시오.
     </p>
     <h4>1. [필수] 개인정보 수집 및 이용 동의</h4>
@@ -962,24 +968,25 @@ function removeChar(event) {
             <tbody>
             <tr>
                 <td>수집·이용 목적</td>
-                <td>경북지역 평생학습 강사정보의 체계적 관리</td>
+                <td><div class="blue">경북지역 평생학습 강사정보의 체계적 관리</div></td>
             </tr>
             <tr>
                 <td>수집 항목</td>
-                <td>이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서</td>
+                <td><b>이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서</b></td>
             </tr>
             <tr>
                 <td>보유·이용 기간</td>
-                <td>5년(동의 철회 시 까지)</td>
+                <td>
+                    <div class="blue">5년(동의 철회 시 까지)</div></td>
             </tr>
             <tr>
                 <td>동의 거부 권리 및 불이익</td>
-                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 강사등록 신청이 제한될 수 있습니다.</td>
+                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 <b>강사등록 신청이 제한</b>될 수 있습니다.</td>
             </tr>
             </tbody>
         </table>
         <div class="agreeBox">
-            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+            <p><b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b></p>
 
             <div class="agreeChk">
                 <label>
@@ -1006,15 +1013,17 @@ function removeChar(event) {
             <tbody>
             <tr>
                 <td>수집·이용 목적</td>
-                <td>경북지역 평생학습 강사정보의 체계적 관리</td>
+                <td>
+                    <div class="blue">경북지역 평생학습 강사정보의 체계적 관리</div></td>
             </tr>
             <tr>
                 <td>수집 항목</td>
-                <td>이메일, 자격·면허·수상 내역, 강의 경력</td>
+                <td><b>이메일, 자격·면허·수상 내역, 강의 경력</b></td>
             </tr>
             <tr>
                 <td>보유·이용 기간</td>
-                <td>5년(동의 철회 시 까지)</td>
+                <td>
+                    <div class="blue">5년(동의 철회 시 까지)</div></td>
             </tr>
             <tr>
                 <td>동의 거부 권리 및 불이익</td>
@@ -1023,7 +1032,7 @@ function removeChar(event) {
             </tbody>
         </table>
         <div class="agreeBox">
-            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+            <p><b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b></p>
 
             <div class="agreeChk">
                 <label>
@@ -1050,31 +1059,32 @@ function removeChar(event) {
             <tbody>
             <tr>
                 <td>개인정보를 제공받는 자</td>
-                <td>경상북도교육청 소속 교직원 및 누리집 이용자</td>
+                <td><div class="blue">경상북도교육청 소속 교직원 및 누리집 이용자</div></td>
             </tr>
             <tr>
                 <td>제공받는 자의 개인정보 이용 목적</td>
-                <td>교육프로그램 운영</td>
+                <td>
+                    <div class="blue">교육프로그램 운영</div></td>
             </tr>
             <tr>
                 <td>제공하는 개인정보 항목</td>
                 <td>
-                    - 교직원: 이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서 <br />
-                    - 누리집 이용자: 이름(비식별), 강의가능지역, 과목구분, 과목명
+                    <b>- 교직원: 이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능 지역, 강의계획서 <br/>
+                        - 누리집 이용자: 이름(비식별), 강의가능지역, 과목구분, 과목명</b>
                 </td>
             </tr>
             <tr>
                 <td>개인정보 보유 및 이용 기간</td>
-                <td>5년(동의 철회 시 까지)</td>
+                <td><div class="blue">5년(동의 철회 시 까지)</div></td>
             </tr>
             <tr>
                 <td>동의 거부 권리 및 불이익</td>
-                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 강사등록 신청이 제한될 수 있습니다.</td>
+                <td>귀하는 개인정보 수집 및 이용에 거부할 권리가 있습니다. 단, 동의를 거부할 경우 <b>강사등록 신청이 제한</b>될 수 있습니다.</td>
             </tr>
             </tbody>
         </table>
         <div class="agreeBox">
-            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+            <p><b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b></p>
             <div class="agreeChk">
                 <div class="agreeChk">
                     <label>
@@ -1103,19 +1113,19 @@ function removeChar(event) {
             <tbody>
             <tr>
                 <td>개인정보를 제공받는 자</td>
-                <td>경상북도교육청 소속 교직원</td>
+                <td><div class="blue">경상북도교육청 소속 교직원</div></td>
             </tr>
             <tr>
                 <td>제공받는 자의 개인정보 이용 목적</td>
-                <td>교육프로그램 운영</td>
+                <td><div class="blue">교육프로그램 운영</div></td>
             </tr>
             <tr>
                 <td>제공하는 개인정보 항목</td>
-                <td>5년(동의 철회 시 까지)</td>
+                <td><b>이메일, 자격·면허·수상 내역, 강의 경력</b></td>
             </tr>
             <tr>
                 <td>개인정보 보유 및 이용 기간</td>
-                <td>5년(동의 철회 시 까지)</td>
+                <td><div class="blue">5년(동의 철회 시 까지)</div></td>
             </tr>
             <tr>
                 <td>동의 거부 권리 및 불이익</td>
@@ -1124,10 +1134,10 @@ function removeChar(event) {
             </tbody>
         </table>
         <div class="agreeBox">
-            <p>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</p>
+            <p><b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b></p>
 
             <div class="agreeChk">
-                <label>
+                <label>sss
                     <input type="radio" name="agree4" value="yes" class="optionalAgree"> <span>동의함</span>
                 </label>
                 <label>
@@ -1143,25 +1153,6 @@ function removeChar(event) {
         </label>
     </div>
 
-
-    <h4>개인정보 제3자 제공 동의</h4>
-	<div class="Box" style="height:200px" tabindex="0" >
-		<h4>▣ 개인정보를 제공받는 자</h4>
-		<p class="mB20 mL10">&nbsp; · 경상북도교육청 소속 교직원 및 누리집 이용자</p>
-		<h4>▣ 개인정보를 제공받는 자의 개인정보 이용 목적</h4>
-		<p class="mB20 mL10">&nbsp; · 교육프로그램 운영</p>
-		<h4>▣ 제공하는 개인정보의 항목</h4>
-		<p class="mB20 mL10">&nbsp;&nbsp;&nbsp; - 교직원: 이름, 생년월일, 휴대전화번호, 학력, 과목구분, 과목명, 강의가능지역,강의계획서, 이메일, 자격·면허·수상 내역, 강의경력
-        </p>
-    <p class="mB20 mL10">&nbsp;&nbsp;&nbsp;- 누리집 이용자: 이름(비식별), 강의가능지역, 과목구분, 과목명
-    </p>
-        <h4>▣ 제공방법</h4>
-        <p class="mB20 mL10">&nbsp; · 경상북도교육청정보센터 누리집 내 강사은행 공지</p>
-		<h4>▣ 제공받는 자의 보유·이용 기간</h4>
-		<p class="mB20 mL10">&nbsp; · 개인정보 보유 및 이용기간 만료 및 누리집 게재 삭제 요청 시 즉시 파기</p>
-		<h4>▣ 개인정보 제3자 제공에 대한 동의를 거부할 권리</h4>
-		<p class="mB20 mL10">&nbsp; · 개인정보 제3자 제공을 거부할 수 있으며, 미동의 시 강사은행에 강사 등록신청이 제한됩니다.</p>
-	</div>
 </c:if>
 
 <form:form id="teacherForm" modelAttribute="teacher" method="post" action="save.do" onsubmit="return false;">
