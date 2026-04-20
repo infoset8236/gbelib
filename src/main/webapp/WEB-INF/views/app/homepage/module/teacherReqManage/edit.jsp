@@ -1137,7 +1137,7 @@ function removeChar(event) {
             <p><b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b></p>
 
             <div class="agreeChk">
-                <label>sss
+                <label>
                     <input type="radio" name="agree4" value="yes" class="optionalAgree"> <span>동의함</span>
                 </label>
                 <label>

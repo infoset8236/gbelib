@@ -70,7 +70,7 @@ $(function() {
 	<form:hidden path="member_key"/>
 	<form:hidden path="locker_idx"/>
 
-	<div class="search">
+	<div class="table-bar">
 		<fieldset>
 			<label class="blind">검색</label>			
 			<form:select class="selectmenu-search" style="width:200px" id="locker_pre_idx_1" path="locker_pre_idx">

@@ -94,7 +94,7 @@ $(function() {
 	</c:if>
 	
 	<c:if test="${member.admin}">
-		<div class="search">
+		<div class="table-bar">
 			<fieldset>
 				<label class="blind">검색</label>				
 				<form:select class="selectmenu-search" style="width:250px" path="homepage_id">

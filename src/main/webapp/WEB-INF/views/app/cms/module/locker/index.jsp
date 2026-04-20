@@ -110,7 +110,7 @@ $(function() {
 <form:form  modelAttribute="locker" id="lockerForm" action="index.do" >
 <form:hidden id="homepage_id_1" path="homepage_id"/>
 <form:hidden path="locker_pre_idx"/>
-<div class="search">
+<div class="table-bar">
 	<fieldset>
 		<label class="blind">검색</label>
 		<form:select class="selectmenu-search" style="width:200px" id="locker_pre_idx_1" path="locker_pre_idx">

@@ -72,7 +72,7 @@ $(function() {
 
 
 
-<div class="search">
+<div class="table-bar">
 	<fieldset>
 		<label class="blind">검색</label>
 		대분류 선택 :

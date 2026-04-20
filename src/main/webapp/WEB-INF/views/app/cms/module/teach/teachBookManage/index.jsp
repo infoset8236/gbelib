@@ -58,19 +58,19 @@ $(function(){
 		<div class="column ban">
 			<div class="areaL auto-scroll" style="width:30%;height:500px;margin-right: 10px;">
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
-				<div class="infodesk">
+				<div class="infodesk" style="display: flex; flex-wrap: wrap; gap: 5px;">
 					<span style="float:left;">대분류 : 
-					<form:select path="large_category_idx">
+					<form:select class="selectmenu" path="large_category_idx">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="teach_code" itemLabel="code_name" items="${teachLargeCategoryList}"/>
 					</form:select></span>
 					<span style="float:left;">중분류 : 
-					<form:select path="group_idx" cssStyle="width:100px;">
+					<form:select class="selectmenu" path="group_idx" cssStyle="width:100px;">
 						<form:option class="all" value="0" label="전체" />
 						<form:options itemValue="group_idx" itemLabel="group_name" items="${categoryGroupList}"/>
 					</form:select></span>
 					<span style="float:right;">소분류 : 
-					<form:select path="category_idx" >
+					<form:select class="selectmenu" path="category_idx" >
 						<form:option class="all" value="0" label="전체" />
 						<c:forEach items="${categoryList}" var="i">
 	         				<form:option class="group_${i.group_idx}" value="${i.category_idx}" >${i.category_name}</form:option>

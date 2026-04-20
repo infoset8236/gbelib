@@ -136,7 +136,7 @@ $(function() {
 	</c:if>
 	
 	<c:if test="${member.admin}">
-		<div class="search">
+		<div class="table-bar">
 			<fieldset>
 				<label class="blind">검색</label>				
 				<form:select class="selectmenu-search" style="width:300px" path="homepage_id">
@@ -146,7 +146,7 @@ $(function() {
 			</fieldset>
 		</div>
 	</c:if>
-	<div class="search">
+	<div class="table-bar">
 		<fieldset>
 			테마도서 게시판 : 
 			<label class="blind">게시판</label>								

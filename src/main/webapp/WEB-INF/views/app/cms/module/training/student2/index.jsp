@@ -54,7 +54,7 @@ $(function(){
 		<div class="column ban">
 			<div class="areaL auto-scroll" style="width:30%;height:500px;margin-right: 10px;">
 			<span>검색 결과 : ${fn:length(trainingList)}건</span>
-				<div class="infodesk">
+				<div class="infodesk" style="display: flex; flex-wrap: wrap; gap: 5px;">
 					<span style="float:left;">강좌연도 :
 						<form:select path="search_year" cssClass="selectmenu">
 							<form:option value="">전체</form:option>

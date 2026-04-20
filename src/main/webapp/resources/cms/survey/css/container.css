@@ -90,6 +90,16 @@ select.selectmenu.select2-hidden-accessible{padding:5px 15px 5px 5px;!important}
 	gap: 6px;
 	background: #F6F7FA;
 }
+.table-bar {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 10px;
+	border-radius: 4px;
+	background: #F6F7FA;
+	gap: 10px;
+	margin-bottom: 15px;
+}
 .search form{display:block!important}
 .search input{
 	font-family: Pretendard-Regular, serif;

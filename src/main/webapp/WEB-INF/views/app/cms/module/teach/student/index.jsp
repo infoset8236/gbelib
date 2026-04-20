@@ -91,11 +91,12 @@ function regExp(str){
 	<form:hidden path="totalTeachIdxArray"/>
 	<form:hidden path="homepage_id"/>
 	<div class="wrapper wrapper-white">
-		<div class="column ban">
-			<div class="areaL auto-scroll" style="width:33%;height:500px">
+		<div class="column ban" style="display: flex;">
+			<div class="areaL auto-scroll" style="height:500px">
 			<span>검색 결과 : ${fn:length(teachList)}건</span>
-				<div class="infodesk" style="overflow:hidden; display: flex; gap: 4px;"">
-					<span style="float:left;">강좌연도 :
+				<div class="infodesk" style="overflow:hidden;">
+                    <div style="display: flex; margin-bottom: 10px;">
+                        <span style="float:left;">강좌연도 :
 						<form:select path="search_year" cssClass="selectmenu">
 							<form:option value="">전체</form:option>
 
@@ -104,7 +105,7 @@ function regExp(str){
 							</c:forEach>
 
 						</form:select>
-					</span>
+					</span></div>
 				<div class="infodesk" style="overflow:hidden; display: flex; gap: 4px;">
 					<span style="float:left;">대분류 :
 					<form:select path="large_category_idx" cssClass="selectmenu">
@@ -161,6 +162,7 @@ function regExp(str){
 					</table> 
 				</div>
 
+			</div>
 			</div>
 
 			<div id="studentLayer" class="areaR" style="float:left; width:65%;">
