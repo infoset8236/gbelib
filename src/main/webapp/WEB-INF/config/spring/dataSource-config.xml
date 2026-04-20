@@ -16,7 +16,6 @@
 	
 	<aop:aspectj-autoproxy proxy-target-class="true" />
 	
-	<!-- transaction manager order 2 is process to together @Service and Transaction  -->
 	<tx:annotation-driven proxy-target-class="true" order="2"/>
 	
 	<context:property-placeholder location="classpath:jdbc.properties" />
@@ -32,14 +31,10 @@
 	    <qualifier value="master" />
   		<constructor-arg index="0" ref="sqlSessionFactoryBean" />
 	</bean> -->
-	
-	<!-- Transaction Manager -->
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	<!-- define the SqlSessionFactory -->
-	
 	
 	<bean id="sqlSessionFactoryBean" class="kr.co.whalesoft.framework.mybatis.RefreshableSqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
@@ -57,29 +52,28 @@
 	    <property name="targetDataSources">
 			<map key-type="kr.co.whalesoft.framework.dataSource.DataSourceType">
 			    <entry key="MASTER" value-ref="dataSource_master"/>
-			    <entry key="SLAVE1" value-ref="dataSource_slave"/>
-			    <entry key="SLAVE2" value-ref="dataSource_slave2"/>
 			</map>
 		</property>
-		<!-- Default DataSource -->
 		<property name="defaultTargetDataSource" ref="dataSource_master"/>
 	</bean>
-	
-	<bean id="dataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
-        <constructor-arg ref="dataSourceRef" />
-        <property name="logFormatter">
-            <bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
-                <property name="loggingType" value="MULTI_LINE" />
-<!--                 <property name="margin" value="19" /> -->
-                <property name="sqlPrefix" value="SQL   :::::  "/>
-            </bean>
-        </property>
-    </bean>
-	
+
+	<bean id="log4jdbcDataSource" class="net.sf.log4jdbc.Log4jdbcProxyDataSource">
+		<constructor-arg ref="dataSourceRef" />
+		<property name="logFormatter">
+			<bean class="net.sf.log4jdbc.tools.Log4JdbcCustomFormatter">
+				<property name="loggingType" value="MULTI_LINE" />
+				<property name="sqlPrefix" value="SQL   :::::  "/>
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<constructor-arg ref="log4jdbcDataSource"/>
+	</bean>
+
 	<bean id="parentDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" abstract="true">
 	</bean>
-	
-	<!-- db dataSource  -->
+
 	<beans profile="localServer">
 		<bean id="dataSource_master" parent="parentDataSource">
 			<property name="driverClassName" value="${localServer.driverClassName}"></property>
@@ -87,17 +81,12 @@
 			<property name="username" value="${localServer.username}"></property>
 			<property name="password" value="${localServer.password}"></property>
 		</bean>
-		<bean id="dataSource_slave" parent="parentDataSource">
-			<property name="driverClassName" value="${localServer2.driverClassName}"></property>
-			<property name="url" value="${localServer2.url}"></property>
-			<property name="username" value="${localServer2.username}"></property>
-			<property name="password" value="${localServer2.password}"></property>
-		</bean>
-		<bean id="dataSource_slave2" parent="parentDataSource">
-			<property name="driverClassName" value="${localServer3.driverClassName}"></property>
-			<property name="url" value="${localServer3.url}"></property>
-			<property name="username" value="${localServer3.username}"></property>
-			<property name="password" value="${localServer3.password}"></property>
+
+		<bean class="kr.co.whalesoft.framework.dataSource.DataSourceValidator" init-method="afterPropertiesSet">
+			<property name="dataSource"       ref="dataSource"/>
+			<property name="driverClassName"  value="${localServer.driverClassName}"/>
+			<property name="url"              value="${localServer.url}"/>
+			<property name="username"         value="${localServer.username}"/>
 		</bean>
 	</beans> 
 	
@@ -108,9 +97,19 @@
 			<property name="username" value="${devServer.username}"></property>
 			<property name="password" value="${devServer.password}"></property>
 		</bean>
+
+		<bean class="kr.co.whalesoft.framework.dataSource.DataSourceValidator">
+			<property name="dataSource"       ref="dataSource"/>
+			<property name="driverClassName"  value="${devServer.driverClassName}"/>
+			<property name="url"              value="${devServer.url}"/>
+			<property name="username"         value="${devServer.username}"/>
+		</bean>
 	</beans>
 	
 	<beans profile="realServer">
 		<jee:jndi-lookup id="dataSource_master" jndi-name="gbe_jndi" />
+		<bean class="kr.co.whalesoft.framework.dataSource.DataSourceValidator">
+			<property name="dataSource" ref="dataSource"/>
+		</bean>
 	</beans>
 </beans>

@@ -388,13 +388,13 @@
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
-            <version>1.1.0.Final</version>
+            <version>1.0.0.GA</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>5.4.3.Final</version>
+            <version>4.3.2.Final</version>
         </dependency>
 
         <dependency>
@@ -463,6 +463,78 @@
             <version>20.0</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignAccessSSOAgent-w</artifactId>
+            <version>4.2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignAccessSSOAgent-w-4.2.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignAccess-common</artifactId>
+            <version>4.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignAccess-common-4.0.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignAccessAgent</artifactId>
+            <version>4.0.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignAccessAgent-4.0.2.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignAccessLib2</artifactId>
+            <version>2.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignAccessLib2.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignLicenseGenerator</artifactId>
+            <version>2.7.8</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignLicenseGenerator-2.7.8.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ksign</groupId>
+            <artifactId>KSignLicenseVerify</artifactId>
+            <version>2.5.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/KSignLicenseVerify-2.5.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yhdb.solution.secukeypad</groupId>
+            <artifactId>ySecuKeypadResponsiveWeb</artifactId>
+            <version>3.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/ySecuKeypadResponsiveWeb_v3.0.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>Kisinfo</groupId>
+            <artifactId>IPIN2Client</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/IPIN2Client.jar</systemPath>
+        </dependency>
+
+         <dependency>
+            <groupId>org.niceid</groupId>
+            <artifactId>NiceID</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/NiceID.jar</systemPath>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -476,6 +548,9 @@
                     <source>${java-version}</source>
                     <target>${java-version}</target>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                    <compilerArguments>
+                        <bootclasspath>${java.home}/lib/rt.jar${path.separator}${java.home}/lib/jce.jar</bootclasspath>
+                    </compilerArguments>
                 </configuration>
             </plugin>
 
