@@ -192,6 +192,9 @@ public abstract class BaseController {
 					if ("CMS".equals(authInfo.split("_")[0]) && getSessionMemberInfo(request).getAuthMap().containsKey(getSessionHomepageInfo(request).getHomepage_id() + "_A")) {
 						isSiteAdmin = true;
 					} else {
+                        if ("소속도서관에서 신청하시기 바랍니다.".equals(msg)) {
+							log.error("@@@@@@@@@@@@@@ checkAuth fail - expected: {}, exists: {}, member_id: {}", authInfo + "_" + authCode, getSessionMemberInfo(request).getAuthMap().containsKey(authInfo + "_" + authCode), getSessionMemberInfo(request).getMember_id());
+                        }
 						throw new AuthException(msg);
 					}
 				}
@@ -243,6 +246,9 @@ public abstract class BaseController {
 		} else if ("R".equals(authCode) && getSessionMemberInfo(request).isAnonymous()) {
 			
 		} else {
+			if ("소속도서관에서 신청하시기 바랍니다.".equals(msg)) {
+				log.error("@@@@@@@@@@@@@@ checkAuth fail - expected: {}, exists: {}, member_id: {}", authInfo + "_" + authCode, getSessionMemberInfo(request).getAuthMap().containsKey(authInfo + "_" + authCode), getSessionMemberInfo(request).getMember_id());
+			}
 			throw new AuthException(msg);
 		}
 	}
