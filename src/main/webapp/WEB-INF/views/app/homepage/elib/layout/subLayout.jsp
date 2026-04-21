@@ -107,6 +107,31 @@ $(function() {
 			<div class="lnb">
 				<h2><b>${menuLeftList[0].menu_name}</b></h2>
 				<homepageTag:leftMenu menuList="${menuLeftList}"/>
+				<c:if test="${not empty categoryMenuList}">
+				<!--
+				<ul class="SubMenu">
+					<li style="line-height: 0%;">
+					<br/>
+					<c:forEach items="${categoryMenuList}" var="i" varStatus="status">
+					<c:choose>
+					<c:when test="${param.parent_id == i.cate_id}">
+					<a href="#" class="category_link_left" style="padding: 15px 20px; background-color: #4c8bdb;" data-parent_id="${i.cate_id}">
+						<span style="color: #fff;">${i.cate_name}</span>
+						<span style="color: #ccc; font-weight: normal; font-size: 12px;">(<fmt:formatNumber value="${i.cnt}" pattern="#,###" />)</span>
+					</a><br/>
+					</c:when>
+					<c:otherwise>
+					<a href="#" class="category_link_left" style="padding: 15px 20px;" data-parent_id="${i.cate_id}">
+						<span style="color: #8f7a65;">${i.cate_name}</span>
+						<span style="color: #aaa; font-weight: normal; font-size: 12px;">(<fmt:formatNumber value="${i.cnt}" pattern="#,###" />)</span>
+					</a><br/>
+					</c:otherwise>
+					</c:choose>
+					</c:forEach>
+					</li>
+				</ul>
+				-->
+				</c:if>
 			</div>
 			</c:if>
 			<div class="content">

@@ -21,60 +21,57 @@
 	</div>
 <script type="text/javascript">
 $(function() {
+   $('.bx-wrapper').css('margin','0 auto');
+		//$('.bx-viewport').css("padding","20px 0");
+		//$('.bx-controls-auto').css('display','none');
 
-	// 팝업 관련 코드 START
-	$('.close-btn').on('click', function() {
-		var $this = $(this);
-		var checkInput = $this.parent().find('input');
-		var popupId = checkInput.val();
-		if (checkInput.prop('checked')) {
-			var todayDate = new Date();
-			todayDate = new Date(
-					parseInt(todayDate.getTime() / 86400000) * 86400000 + 54000000);
-			document.cookie = popupId + "=no"
-					+ "; path=/; expires="
-					+ todayDate.toGMTString() + ";"
-		}
-
-		$('div#' + popupId).hide();
-	});
-
-	$('input[id*=pop]').on('click', function(e) {
-		e.preventDefault();
-		$(this).prop('checked', true);
-		$(this).parent('div').next('a').click();
-	});
-
-	$('#popupLayer > div').each(function(i, v) {
-		var result = '';
-		var name = $(v).attr('id');
-		var nameOfCookie = name + "=";
-		var x = 0;
-		while (x <= document.cookie.length) {
-			var y = (x + nameOfCookie.length);
-			if (document.cookie.substring(x, y) == nameOfCookie) {
-				if ((endOfCookie = document.cookie
-						.indexOf(";", y)) == -1)
-					endOfCookie = document.cookie.length;
-				result = unescape(document.cookie
-						.substring(y, endOfCookie));
+		// 팝업 관련 코드 START
+		$('.close-btn').on('click', function() {
+			var $this = $(this);
+			var checkInput = $this.parent().find('input');
+			var popupId = checkInput.val();
+			if ( checkInput.prop('checked') ) {
+				var todayDate 	= new Date();   
+				todayDate 		= new Date(parseInt(todayDate.getTime() / 86400000) * 86400000 + 54000000);  
+				document.cookie = popupId + "=no" + "; path=/; expires=" + todayDate.toGMTString() + ";"	
 			}
-			x = document.cookie.indexOf(" ", x) + 1;
-			if (x == 0)
-				break;
-		}
-
-		if (result != 'no') {
-			if  (window.innerWidth < $(v).width() ) {
-				$(v).css('width', 'auto');
-			}
-			$(v).show();
-		}
-	});
-
-	// 팝업 관련 코드 END
-	
-	$('#all-popup-wrap').each(function(i, v) {
+			
+			$('div#'+popupId).hide();
+		});
+		
+		$('input[id*=pop]').on('click', function(e) {
+			e.preventDefault();
+			$(this).prop('checked', true);
+			$(this).parent('div').next('a').click();
+		});
+		
+		$('#popupLayer > div').each(function(i, v) {
+			var result = '';
+			var name = $(v).attr('id');
+			var nameOfCookie = name + "=";  
+		    var x = 0;  
+		    while ( x <= document.cookie.length ) {  
+		       var y = ( x + nameOfCookie.length );
+		       if ( document.cookie.substring( x, y ) == nameOfCookie ) {  
+		           if ( (endOfCookie=document.cookie.indexOf( ";", y )) == -1 )  
+		               endOfCookie = document.cookie.length;  
+		           result = unescape( document.cookie.substring( y, endOfCookie ) );  
+		       }  
+		       x = document.cookie.indexOf( " ", x ) + 1;  
+		       if ( x == 0 )  
+		           break;  
+		    }  
+			
+		   	if (result != 'no') {
+		   		if  (window.innerWidth < $(v).width() ) {
+					$(v).css('width', 'auto');
+				}
+		      	$(v).show();
+		   	}
+		});
+	   	// 팝업 관련 코드 END
+	   	
+	   	$('#all-popup-wrap').each(function(i, v) {
 			var result = '';
 			var name = $(v).attr('class');
 			var nameOfCookie = name + "=";
@@ -130,7 +127,7 @@ $(function() {
 	
 	<c:if test="${not empty popupFullList}">
 	<!--통합팝업-->
-		<div id="all-popup-wrap" class="all-popup-${homepage.homepage_id}" style="display:none"/>
+		<div id="all-popup-wrap" class="all-popup-${homepage.homepage_id}" style="display:none">
 			
 		</div>
 	<!--//통합팝업-->

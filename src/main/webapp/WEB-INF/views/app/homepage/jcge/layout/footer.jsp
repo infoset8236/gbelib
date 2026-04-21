@@ -3,6 +3,7 @@
 <%@ taglib prefix="homepageTag" uri="/WEB-INF/config/tld/homepageTag.tld"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+
 		<div class="mFooter">
 			<div class="top">
 				<div class="sections">

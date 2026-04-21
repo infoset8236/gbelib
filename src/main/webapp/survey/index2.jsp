@@ -1,5 +1,5 @@
 <%@ page language="java" pageEncoding="utf-8" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML>
 <html lang="ko">
 <head>
 <meta charset="UTF-8"/>
@@ -62,32 +62,31 @@
 			<tr id="quest_detail_group_1">
 				<td></td>
 				<td class="aL">
-					<div class="chart_wrap">
-						<ul class="mysurvey_list">
-							<li>
-								<input id="questIdx_0_1" name="answer_list[0].quest_idx_list" type="radio" value="1">
-								<label for="questIdx_0_1">유치원</label>
-							</li>
-							<li>
-								<input id="questIdx_0_2" name="answer_list[0].quest_idx_list" type="radio" value="2">
-								<label for="questIdx_0_2">초등학교</label>
-							</li>
-							<li>
-								<input id="questIdx_0_3" name="answer_list[0].quest_idx_list" type="radio" value="3">
-								<label for="questIdx_0_3">중학교</label>
-							</li>
-							<li>
-								<input id="questIdx_0_4" name="answer_list[0].quest_idx_list" type="radio" value="4">
-								<label for="questIdx_0_4">고등학교</label>
-							</li>
-							<input id="answer_list0.short_answer" size="25" type="hidden" value=""/>
-						</ul>
-						<div class="chart_one"><svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-pie" style="width: 100%; height: 100%;"><g class="ct-series ct-series-a"><path d="M372,135.622A70,70,0,0,0,337,5L337,75Z" class="ct-slice-pie" value="5"></path></g><g class="ct-series ct-series-b"><path d="M276.378,110A70,70,0,0,0,372.211,135.499L337,75Z" class="ct-slice-pie" value="3"></path></g><g class="ct-series ct-series-c"><path d="M337,5A70,70,0,0,0,276.501,110.211L337,75Z" class="ct-slice-pie" value="4"></path></g><g><text dx="370.8074039201174" dy="65.94133342141177" text-anchor="middle" class="ct-label">42%</text><text dx="327.94133342141174" dy="108.8074039201174" text-anchor="middle" class="ct-label">25%</text><text dx="306.6891108675446" dy="57.5" text-anchor="middle" class="ct-label">33%</text></g></svg></div>
-					</div>
+					<ul class="mysurvey_list">
+						<li>
+							<input id="questIdx_0_1" name="answer_list[0].quest_idx_list" type="radio" value="1">
+							<label for="questIdx_0_1">유치원</label>
+						</li>
+						<li>
+							<input id="questIdx_0_2" name="answer_list[0].quest_idx_list" type="radio" value="2">
+							<label for="questIdx_0_2">초등학교</label>
+						</li>
+						<li>
+							<input id="questIdx_0_3" name="answer_list[0].quest_idx_list" type="radio" value="3">
+							<label for="questIdx_0_3">중학교</label>
+						</li>
+						<li>
+							<input id="questIdx_0_4" name="answer_list[0].quest_idx_list" type="radio" value="4">
+							<label for="questIdx_0_4">고등학교</label>
+						</li>
+						<input id="answer_list0.short_answer" size="25" type="hidden" value=""/>
+					</ul>
 				</td>
 			</tr>
 			<tr>
 				<td class="qustionNum"><span>Q19</span></td>
+				
+				
 				<td class="qustion">그 외 학교홈페이지의 발전적인 방향을 위해 제안하실 내용이 있으시다면 자유롭게 기술해 주시기 바랍니다. (필수)</td>
 			</tr>
 			<tr id="quest_detail_group_19">

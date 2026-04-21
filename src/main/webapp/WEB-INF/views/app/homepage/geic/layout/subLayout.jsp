@@ -4,7 +4,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="homepageTag" uri="/WEB-INF/config/tld/homepageTag.tld"%>
 <tiles:insertAttribute name="header" />
-<link rel="stylesheet" type="text/css" href="/resources/homepage/${homepage.context_path}/css/sub.css"/>
+
+<!-- <link rel="stylesheet" type="text/css" href="/resources/homepage/${homepage.context_path}/css/sub.css"/> -->
+
 <script type="text/javascript">
 $(function() {
 	$('li#menu_${menuOne.parent_menu_idx }').addClass('active');

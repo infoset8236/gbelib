@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+r<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="homepageTag" uri="/WEB-INF/config/tld/homepageTag.tld"%>
 	<div id="footer">
 		<div class="top-box">
@@ -11,7 +11,7 @@
 							<em>전화 ${homepage.homepage_tell }</em><br class="mobile-view"/>
 							<em>팩스 ${homepage.homepage_fax }</em>
 						</p>
-						<span>Copyright &copy; by ${homepage.homepage_eng_name} Public Library, All rights reserved.</span>
+						<span>Copyright &copy; by ${homepage.homepage_eng_name}, All rights reserved.</span>
 					</address>
 				</div>
 				<!-- <div class="info-right">

@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8"/>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
 <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
 <meta property="og:type" content="website"/>
@@ -29,12 +30,12 @@
 <link rel="stylesheet" type="text/css" href="/resources/book/css/common.css"/>
 <link rel="stylesheet" type="text/css" href="/resources/homepage/${homepage.context_path}/css/default_new.css"/>
 <link rel="stylesheet" type="text/css" href="/resources/homepage/${homepage.context_path}/css/main_new.css"/>
-<!--[if lte IE 7]>
-<link rel="stylesheet" type="text/css" href="/resources/common/css/fontawesome-ie7.min.css"/>
-<![endif]-->
-<!--[if lte IE 8]>
-<link rel="stylesheet" type="text/css" href="/resources/homepage/${homepage.context_path}/css/ie.css"/>
-<![endif]-->
+
+<script>
+if (document.location.protocol == 'http:') {
+	document.location.href = document.location.href.replace('http:', 'https:');
+}
+</script>
 <script type="text/javascript" src="/resources/common/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="/resources/common/js/jquery-ui-1.12.0.min.js"></script>
 <script type="text/javascript" src="/resources/common/js/jquery-ui-1.12.0-datepicker.min.js"></script>

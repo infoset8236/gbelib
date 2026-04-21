@@ -12,8 +12,8 @@
 	
 	String loginedId = "";
 	String clientIp = "";
+	
 	if("3045".equals(errorCode)) {
-		//웹취약점 XSS필터 작업 &를 &amp;로 치환하기 때문에 if문 필요
 		if(errorMsg.contains("&amp;")) {
 			loginedId = errorMsg.substring(errorMsg.indexOf("uid=") + 4, errorMsg.indexOf("&amp;clientip="));
 			clientIp = errorMsg.substring(errorMsg.indexOf("&amp;clientip=") + 14, errorMsg.indexOf("]"));
@@ -26,15 +26,15 @@
 	if(errorCode.equals("3045")){
 %>
 <script language="JavaScript">
-		var b = confirm("<%=loginedId %>아이디가 <%=clientIp%>IP에 로그인되어있습니다.  \n이전 로그인을 종료 하시겠습니까?");
+		var b = confirm("<%=loginedId %>아이디가 <%=clientIp%>IP에 로그인되어있습니다.  \n이전 로그인을 종료 하시겠습니까? \n대표도서관으로 이동합니다.");
 		
 		if(b) {
 			alert("이전 로그아웃을 실행합니다.");
-			top.location.href="<%=SSO_SERVER%>/sso/singleLogout.jsp?uid=<%=loginedId%>&returl=<%=AGENT_ADDR%>/login/logout.jsp"
+			top.location.href="<%=SSO_SERVER%>/sso/singleLogout.jsp?uid=<%=loginedId%>&returl=http://www.gbelib.kr"
 		} else {
-			alert("로그인페이지로 이동합니다.");
+			alert("대표도서관 홈페이지로 이동합니다.");
 			<%SSOService.getInstance().removeSSOToken(request);%>
-			top.location.href="<%=AGENT_ADDR%>/sso/index.jsp";
+			top.location.href="http://www.gbelib.kr/gbelib/intro/login/logout.do";
 		}
 </script>
 <%	

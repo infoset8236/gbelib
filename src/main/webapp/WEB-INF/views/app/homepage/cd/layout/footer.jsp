@@ -12,7 +12,7 @@
 							<em>팩스 ${homepage.homepage_fax }</em><br />
 							<em>어린이자료실 370-7600 ㅣ 종합자료실 370-7603 ㅣ 무한상상실 370-7604 ㅣ 평생학습 370-7607<em>
 						</p>
-						<span>Copyright &copy; by ${homepage.homepage_eng_name} Public Library, All rights reserved.</span>
+						<span>Copyright &copy; by ${homepage.homepage_eng_name}, All rights reserved.</span>
 					</address>
 				</div>
 				<!-- <div class="info-right">

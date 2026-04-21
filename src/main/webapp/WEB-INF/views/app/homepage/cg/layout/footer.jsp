@@ -7,11 +7,11 @@
 					<h3>${homepage.homepage_name}</h3>
 					<address>
 						<p>
-							<em>(우 ${homepage.zipcode}) ${homepage.address1 }</em><br/>
+							<em>(우 39887) 경북 칠곡군 왜관읍 중앙로 232, 5층 </em><br/>
 							<em>전화 ${homepage.homepage_tell }</em><br class="mobile-view"/>
 							<em>팩스 ${homepage.homepage_fax }</em>
 						</p>
-						<span>Copyright &copy; by ${homepage.homepage_eng_name} Public Library, All rights reserved.</span>
+						<span>Copyright &copy; by ${homepage.homepage_eng_name}, All rights reserved.</span>
 					</address>
 				</div>
 				<!-- <div class="info-right">

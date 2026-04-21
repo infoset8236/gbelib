@@ -5,28 +5,32 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <script>
-$(document).ready(function() {
-	$('a#memberInfoBtn').on('click', function(e) {
-		$('div#member_layer').show();
-		$('div.calAll').show();
-		e.preventDefault();
-	});
-	$("a#memberInfoBtn").on('mouseover', function() {
-		$('div#member_layer').show();
-		$('div.calAll').show();
-	});
-	$("div#member_layer").on('mouseover', function() {
-		$('div#member_layer').show();
-		$('div.calAll').show();
-	});
-	$("div#member_layer").on('mouseout', function() {
-		$('div#member_layer').hide();
-		$('div.calAll').hide();
-	});
-	$('a#closeMemberInfo').on('click', function(e) {
-		$('div#member_layer').hide();
-	});
+$(document).ready(function () {
+	const isMobile = window.innerWidth < 1025;
+
+	if (isMobile) {
+		// 모바일: click만 사용
+		$('#memberInfoBtn').on('click', function (e) {
+			e.preventDefault();
+			$('#member_layer, .calAll').toggle();
+		});
+
+		$('#closeMemberInfo').on('click', function (e) {
+			e.preventDefault();
+			$('#member_layer, .calAll').hide();
+		});
+	} else {
+		// PC: hover 유지
+		$('#memberInfoBtn, #member_layer')
+			.on('mouseenter', function () {
+				$('#member_layer, .calAll').show();
+			})
+			.on('mouseleave', function () {
+				$('#member_layer, .calAll').hide();
+			});
+	}
 });
+
 </script>
 <div id="memberInfo">
 	<div class="inbox" id="member_layer" style="display: none;">
