@@ -386,6 +386,7 @@ $(function(){
 			<col width="5%" />
 			<col width="12%" />
 			<col width="8%" />
+			<col width="5%" />
 			<c:choose>
 				<c:when test="${teachInfo.teach_status eq '1'}">
 					<col width="6%" />
@@ -407,6 +408,7 @@ $(function(){
 				<th>휴대전화번호<br/>(신청자)</th>
 				<th>학년<br/>(수강생)</th>
 				<th>상태</th>
+				<th>이용 약관<br/> 선택 동의</th>
 				<c:if test="${teachInfo.teach_status ne '1'}">
 				<th>취소자ID</th>
 				<th>취소일</th>
@@ -417,8 +419,7 @@ $(function(){
 		<tbody>
 		<c:if test="${fn:length(studentList) < 1}">
 			<tr style="height:100%">
-				<td colspan="11"
->데이터가 존재하지 않습니다.</td>
+				<td colspan="11">데이터가 존재하지 않습니다.</td>
 			</tr>
 		</c:if>
 		<c:forEach var="i" varStatus="status" items="${studentList}">
@@ -464,6 +465,7 @@ $(function(){
 						</c:otherwise>
 					</c:choose>
 				</td>
+				<td>${i.self_info_sel_yn}</td>
 				<c:if test="${teachInfo.teach_status ne '1'}">
 					<td>${i.cancel_id}</td>
 					<td><fmt:formatDate value="${i.cancel_date}" pattern="yyyy-MM-dd"/></td>

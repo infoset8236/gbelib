@@ -110,7 +110,7 @@
 					getCodeIdToCodeName('CMS', 'C0022', student_location_code) AS student_location_code_str,
 					student_neis_cd,
 					student_training_num,
-					student_organization, student_rank, student_course_taken_yn
+					student_organization, student_rank, student_course_taken_yn, self_info_sel_yn
 				FROM
 					STUDENT a
 				WHERE
@@ -192,7 +192,7 @@
 			student_location_code,
 			student_neis_cd,
 			student_training_num,
-			student_organization, student_rank, student_course_taken_yn
+			student_organization, student_rank, student_course_taken_yn, self_info_sel_yn
 		) VALUES
 		(
 			#{homepage_id}, #{group_idx}, #{category_idx}, #{teach_idx}, #{student_idx}, #{member_id}, #{member_key}, #{applicant_name}, #{applicant_birth}, #{web_id}
@@ -201,7 +201,7 @@
 			, #{self_info_yn}, #{apply_type}, #{apply_status}, SYSDATE, #{add_id}, 'N', #{family_relation}, #{family_name}, #{family_cell_phone}, #{family_confirm_yn}, #{family_desc}
 			, #{student_ban}, #{student_remark}, #{student_family_count},
 			#{student_location_code}, #{student_neis_cd}, #{student_training_num},
-			#{student_organization}, #{student_rank}, #{student_course_taken_yn}
+			#{student_organization}, #{student_rank}, #{student_course_taken_yn}, #{self_info_sel_yn}
 		)
 	</insert>
 

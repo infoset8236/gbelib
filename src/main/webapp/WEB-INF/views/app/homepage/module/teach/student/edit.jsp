@@ -85,6 +85,12 @@ $(function() {
 			$('#self_info_yn').val('Y');
 		}
 
+		if ( $form.find('.self_info_sel_yn option:selected[value="Y"]').length > 0) {
+			$('#self_info_sel_yn').val('Y');
+		} else {
+			$('#self_info_sel_yn').val('N');
+		}
+
 		var cellPhone1 = $form.find('#applicant_cell_phone_1').val();
 		if ( cellPhone1 == '' ) {
 			alert('휴대전화번호를 입력해주세요.');
@@ -224,10 +230,20 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 				<div style="text-align: right">
 					<b>위와 같이 개인정보를 수집·이용하는 것에 동의하십니까?</b>
 					(<span style="color: red; font-weight: bold;">*</span>)
-					<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
-						<option value="Y">동의</option>
-						<option value="N">미동의</option>
-					</select>
+					<c:choose>
+						<c:when test="${terms.terms_idx eq 20}">
+							<select class="selectmenu self_info_yn" style="width:70px" title="동의여부">
+								<option value="Y">동의</option>
+								<option value="N">미동의</option>
+							</select>
+						</c:when>
+						<c:when test="${terms.terms_idx eq 21}">
+							<select class="selectmenu self_info_sel_yn" style="width:70px" title="동의여부">
+								<option value="Y">동의</option>
+								<option value="N">미동의</option>
+							</select>
+						</c:when>
+					</c:choose>
 				</div>
 			</c:when>
 			<c:when test="${searchCate1Str eq '18' and (terms.terms_idx eq 18 or terms.terms_idx eq 19)}">
@@ -243,7 +259,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 							</select>
 						</c:when>
 						<c:when test="${terms.terms_idx eq 19}">
-							<select class="selectmenu choice_self_info_yn" style="width:70px" title="동의여부">
+							<select class="selectmenu self_info_sel_yn" style="width:70px" title="동의여부">
 								<option value="Y">동의</option>
 								<option value="N">미동의</option>
 							</select>
@@ -265,6 +281,7 @@ $(document).on("keyup", "input:text[numberOnly]", function() {$(this).val( $(thi
 	<form:hidden path="apply_status"/>
 	<form:hidden path="member_key" />
 	<form:hidden path="self_info_yn"/>
+	<form:hidden path="self_info_sel_yn"/>
 	<h3>신청자정보</h3>
 	<div style="text-align: right; ${param.ageType eq 'under' ? 'display:none;':''}">
 		(<span style="color: red; font-weight: bold;">*</span>) 항목은 필수 입력값입니다.

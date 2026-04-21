@@ -125,6 +125,8 @@ public class Student extends PagingUtils {
 
 	private String search_year;
 
+	private String self_info_sel_yn; // 개인정보동의여부(선택)
+
 	public Student() {}
 	
 	public Student(String homepage_id, int group_idx, int category_idx, int teach_idx) {
@@ -865,5 +867,13 @@ public class Student extends PagingUtils {
 
 	public void setSearch_year(String search_year) {
 		this.search_year = search_year;
+	}
+
+	public String getSelf_info_sel_yn() {
+		return self_info_sel_yn;
+	}
+
+	public void setSelf_info_sel_yn(String self_info_sel_yn) {
+		this.self_info_sel_yn = self_info_sel_yn;
 	}
 }
