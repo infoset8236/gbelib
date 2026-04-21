@@ -188,9 +188,17 @@ $(function() {
 						<th>휴대전화번호 (<span style="color: red; font-weight: bold;">*</span>)</th>
 						<td>
 							<form:hidden path="apply_phone"/>
-							<form:input path="apply_phone1" class="text" cssStyle="width:40px;" maxlength="3" numberonly="true" value="${fn:substring(member.mobile_no,0,3)}"/>
-						 	- <form:input path="apply_phone2" class="text" cssStyle="width:50px;" maxlength="4" numberonly="true" value="${fn:substring(member.mobile_no,3,7)}"/>
-						 	- <form:input path="apply_phone3" class="text" cssStyle="width:50px;" maxlength="4" numberonly="true" value="${fn:substring(member.mobile_no,7,11)}"/>
+							<c:set var="mobile_no" value="${fn:replace(member.mobile_no,'-','')}" />
+
+							<c:set var="phone1" value="${fn:length(mobile_no) >= 3 ? fn:substring(mobile_no,0,3) : ''}" />
+							<c:set var="phone2" value="${fn:length(mobile_no) >= 7 ? fn:substring(mobile_no,3,7) : ''}" />
+							<c:set var="phone3" value="${fn:length(mobile_no) >= 11 ? fn:substring(mobile_no,7,11) : ''}" />
+
+							<form:input path="apply_phone1" class="text" cssStyle="width:40px;" maxlength="3" numberonly="true" value="${phone1}"/>
+							-
+							<form:input path="apply_phone2" class="text" cssStyle="width:50px;" maxlength="4" numberonly="true" value="${phone2}"/>
+							-
+							<form:input path="apply_phone3" class="text" cssStyle="width:50px;" maxlength="4" numberonly="true" value="${phone3}"/>
 						</td>
 					</tr>
 					<c:if test="${facility.homepage_id eq 'h23'}">
