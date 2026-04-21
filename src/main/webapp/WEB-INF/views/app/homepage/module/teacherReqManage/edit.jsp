@@ -71,7 +71,10 @@ $(function () {
 
 		if (!isAgree) {
 			alert("필수 개인정보 수집 및 이용에 모두 동의해야 합니다.");
+			$('#self_info_yn').val('N');
 			return false;
+		} else {
+			$('#self_info_yn').val('Y');
 		}
 
 		if ((isEmpty($('#t_edu00').val()) && isEmpty($('#t_edu01').val())) &&
@@ -1156,12 +1159,7 @@ function removeChar(event) {
 </c:if>
 
 <form:form id="teacherForm" modelAttribute="teacher" method="post" action="save.do" onsubmit="return false;">
-	<div style="text-align: right"><b>이용약관 및 개인정보의 수집·이용 동의 여부</b>(<span style="color: red; font-weight: bold;">*</span>)
-		<form:select path="self_info_yn" cssClass="selectmenu" cssStyle="width : 70px">
-			<form:option value="Y" label="동의"/>
-			<form:option value="N" label="미동의" selected="selected"/>
-		</form:select>
-	</div><br/>
+	<form:hidden path="self_info_yn"/>
 	<form:hidden path="homepage_id"/>
 	<form:hidden path="teacher_idx"/>
 	<form:hidden path="teacher_id" value="${memberInfo.member_id}"/>
