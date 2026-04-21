@@ -1,6 +1,7 @@
 package kr.go.gbelib.app.module.facility;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -277,7 +278,30 @@ public class FacilityController extends BaseController {
 					res.setMessage("이미 신청 되었습니다.");
 					return res;
 				}
-				
+				// 예천 시설물 1일 1제한
+				if ("h23".equals(homepage.getHomepage_id())) {
+					Facility facility = new Facility();
+					Facility findFacility = service.getFacilityOne(new Facility(facilityReq.getHomepage_id(), facilityReq.getFacility_idx()));
+					facility.setUse_date(findFacility.getUse_date());
+					facility.setHomepage_id(homepage.getHomepage_id());
+					List<Facility> facilityList = service.getFacilityByUseDate(facility);
+
+					List<String> facility_idx_arr = new ArrayList<String>();
+					for (Facility facility1 : facilityList) {
+						facility_idx_arr.add(String.valueOf(facility1.getFacility_idx()));
+					}
+
+					facilityReq.setFacility_idx_arr(facility_idx_arr);
+
+					int count = facilityReqService.checkFacilityReqByIds(facilityReq);
+
+					if (count > 0) {
+						res.setValid(false);
+						res.setMessage("시설물은 1일 1회 신청 가능합니다.");
+						return res;
+					}
+				}
+
 				facilityReq.setAdd_id(getSessionMemberId(request));
 				facilityReqService.addFacilityReq(facilityReq);
 				res.setValid(true);

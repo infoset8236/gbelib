@@ -4,8 +4,9 @@
 	
 	<select id="getFacilityReqListAll" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">			
 		SELECT
-			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY, APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS
-			, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID, BLACKBOARD_USE_YN
+			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY,
+			APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS, ADD_DATE,
+			ADD_ID, MOD_DATE, MOD_ID, BLACKBOARD_USE_YN
 		FROM
 			FACILITY_REQ 
 		WHERE
@@ -17,7 +18,7 @@
 		ORDER BY
 			FACILITY_REQ_IDX ASC
 	</select>
-	
+
 	<select id="getFacilityReqList" resultType="kr.go.gbelib.app.cms.module.facilityReq.FacilityReq">
 		SELECT
 			HOMEPAGE_ID, FACILITY_IDX, FACILITY_REQ_IDX, APPLY_ID, MEMBER_KEY, APPLY_NAME, APPLY_PHONE, APPLY_DESC, APPLY_STATUS
@@ -57,6 +58,16 @@
 			AND MEMBER_KEY = #{member_key}
 			AND DELETE_YN = 'N'
 			AND APPLY_STATUS != '3'
+	</select>
+
+	<select id="checkFacilityReqByIds" resultType="int">
+		SELECT COUNT(*)
+		FROM FACILITY_REQ
+		WHERE HOMEPAGE_ID = #{homepage_id}
+		  AND FACILITY_IDX in <foreach collection="facility_idx_arr" close=")" open="(" separator="," item="i">#{i}</foreach>
+		  AND MEMBER_KEY = #{member_key}
+		  AND DELETE_YN = 'N'
+		  AND APPLY_STATUS != '3'
 	</select>
 	
 	<insert id="addFacilityReq">

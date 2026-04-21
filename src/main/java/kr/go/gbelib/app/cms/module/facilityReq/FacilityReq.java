@@ -1,8 +1,9 @@
 package kr.go.gbelib.app.cms.module.facilityReq;
 
+import kr.co.whalesoft.framework.utils.PagingUtils;
 import org.apache.commons.lang.StringUtils;
 
-import kr.co.whalesoft.framework.utils.PagingUtils;
+import java.util.List;
 
 public class FacilityReq extends PagingUtils {
 
@@ -51,7 +52,9 @@ public class FacilityReq extends PagingUtils {
 	private int user_aplly_count;		// 신청자의 신청인원
 
 	private String blackboard_use_yn = "N";
-	
+
+	private List<String>  facility_idx_arr;
+
 	public FacilityReq() { }
 	
 	public FacilityReq(String homepage_id,String[] choice_Month) {
@@ -339,5 +342,13 @@ public class FacilityReq extends PagingUtils {
 
 	public void setBlackboard_use_yn(String blackboard_use_yn) {
 		this.blackboard_use_yn = blackboard_use_yn;
+	}
+
+	public List<String> getFacility_idx_arr() {
+		return facility_idx_arr;
+	}
+
+	public void setFacility_idx_arr(List<String> facility_idx_arr) {
+		this.facility_idx_arr = facility_idx_arr;
 	}
 }

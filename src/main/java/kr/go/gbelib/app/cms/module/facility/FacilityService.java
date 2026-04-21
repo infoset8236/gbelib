@@ -1,21 +1,15 @@
 package kr.go.gbelib.app.cms.module.facility;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import kr.co.whalesoft.app.cms.module.calendarStatus.CalendarStatus;
+import kr.co.whalesoft.framework.base.BaseService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.whalesoft.app.cms.module.calendarStatus.CalendarStatus;
-import kr.co.whalesoft.framework.base.BaseService;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FacilityService extends BaseService {
@@ -54,7 +48,11 @@ public class FacilityService extends BaseService {
 	public Facility getFacilityOne(Facility facility) {
 		return facilityDao.getFacilityOne(facility);
 	}
-	
+
+	public List<Facility> getFacilityByUseDate(Facility facility) {
+		return facilityDao.getFacilityByUseDate(facility);
+	}
+
 	public int addFacility(Facility facility) {
 		SimpleDateFormat sf 	= new SimpleDateFormat("yyyy-MM-dd");
 		List<Facility> addList 	= new ArrayList<Facility>();

@@ -1,12 +1,11 @@
 package kr.go.gbelib.app.cms.module.facilityReq;
 
-import java.util.List;
-
 import kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage;
 import kr.co.whalesoft.framework.base.BaseService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class FacilityReqService extends BaseService {
@@ -28,6 +27,10 @@ public class FacilityReqService extends BaseService {
 
 	public int checkFacilityReq(FacilityReq facilityReq) {
 		return facilityReqDao.checkFacilityReq(facilityReq);
+	}
+
+	public int checkFacilityReqByIds(FacilityReq facilityReq) {
+		return facilityReqDao.checkFacilityReqByIds(facilityReq);
 	}
 	
 	public int addFacilityReq(FacilityReq facilityReq) {

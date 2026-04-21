@@ -86,7 +86,25 @@
 				AND	${search_type} LIKE '%'||#{search_text}||'%'
 			</if>
 	</select>
-	
+
+	<select id="getFacilityByUseDate" resultType="kr.go.gbelib.app.cms.module.facility.Facility">
+		SELECT
+			HOMEPAGE_ID, FACILITY_IDX, FACILITY_NAME, FACILITY_DESC, USE_DATE, START_TIME, END_TIME, LIMIT_COUNT,
+			APPLY_START_DATE, APPLY_END_DATE, APPLY_START_TIME, APPLY_END_TIME,
+			USE_YN, DELETE_YN, ADD_DATE, ADD_ID, MOD_DATE, MOD_ID
+		FROM
+			FACILITY_MANAGE
+		WHERE
+			HOMEPAGE_ID = #{homepage_id}
+		AND
+		 	USE_DATE = #{use_date}
+		AND
+		    USE_YN = 'Y'
+		AND
+		    DELETE_YN = 'N'
+	</select>
+
+
 	<insert id="addFacility" parameterType="HashMap">
 		INSERT ALL 
 		<foreach collection="list" item="i" separator=" " index="index">

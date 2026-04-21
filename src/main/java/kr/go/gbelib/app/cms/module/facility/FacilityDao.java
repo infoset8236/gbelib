@@ -1,9 +1,9 @@
 package kr.go.gbelib.app.cms.module.facility;
 
+import kr.co.whalesoft.app.cms.module.calendarStatus.CalendarStatus;
+
 import java.util.List;
 import java.util.Map;
-
-import kr.co.whalesoft.app.cms.module.calendarStatus.CalendarStatus;
 
 public interface FacilityDao  {
 
@@ -18,7 +18,9 @@ public interface FacilityDao  {
 	public int getFacilityListCount(Facility facility);
 	
 	public Facility getFacilityOne(Facility facility);
-	
+
+	public List<Facility> getFacilityByUseDate(Facility facility);
+
 	public int addFacility(Map<String, List<Facility>> param); 
 	
 	public int modifyFacility(Facility facility);

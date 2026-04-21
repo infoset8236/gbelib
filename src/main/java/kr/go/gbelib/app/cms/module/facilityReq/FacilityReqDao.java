@@ -1,8 +1,8 @@
 package kr.go.gbelib.app.cms.module.facilityReq;
 
-import java.util.List;
-
 import kr.co.whalesoft.app.cms.module.calendarManage.CalendarManage;
+
+import java.util.List;
 
 public interface FacilityReqDao  {
 
@@ -13,7 +13,9 @@ public interface FacilityReqDao  {
 	public FacilityReq getFacilityReqOne(FacilityReq facilityReq);
 	
 	public int checkFacilityReq(FacilityReq facilityReq);
-	
+
+	public int checkFacilityReqByIds(FacilityReq facilityReq);
+
 	public int addFacilityReq(FacilityReq facilityReq);
 	
 	public int modifyFacilityReq(FacilityReq facilityReq);
