@@ -1183,12 +1183,12 @@ function untactBookReg(vLoca, vAccNo, title, isbn, bookRegNo, address, email, ph
                                             org.joda.time.DateTime now = new org.joda.time.DateTime();
                                             int dayOfWeek = now.getDayOfWeek(); /* dayOfWeek 월 1 화 2 수 3 목 4 금 5 토 6 일 7 */
 
-                                            if( dayOfWeek == 6 ||  dayOfWeek == 7 )
+                                            if( dayOfWeek == 1 || dayOfWeek == 6 ||  dayOfWeek == 7 )
                                             {
                                         %>
                                         <%
                                         }
-                                        else if( dayOfWeek == 1 || dayOfWeek == 2 || dayOfWeek == 3 ||dayOfWeek == 4 ||dayOfWeek == 5 )
+                                        else if( dayOfWeek == 2 || dayOfWeek == 3 ||dayOfWeek == 4 ||dayOfWeek == 5 )
                                         {
                                         %>
                                         <c:if test="${startTime <= dateStr3 and dateStr3 <= endTime and i.SUB_LOCA_NAME eq '종합자료실'}">
