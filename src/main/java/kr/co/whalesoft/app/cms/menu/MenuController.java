@@ -334,23 +334,24 @@ public class MenuController extends BaseController {
 	@RequestMapping(value = {"/{contextPath}/htmlEdit.*"})
 	public String htmlEdit(@PathVariable String contextPath, Model model, Menu menu, HttpServletRequest request, HttpSession session) {
 		Homepage homepage = getHomepage(contextPath, request);
-		
+
 		String homepage_id = homepage.getHomepage_id();
 		int menu_idx = menu.getMenu_idx();
 		menu.setHomepage_id(homepage_id);
 		menu = menuService.getMenuOne(menu);
-		
+
 		session.setAttribute("homepage_id", homepage_id);
 		session.setAttribute("menu_idx", menu_idx);
 
 		MenuHtml menuHtml = menuHtmlService.getLastMenuHtmlOne(new MenuHtml(homepage_id, menu_idx));
-		
+
+		model.addAttribute("contextPath", contextPath);
 		model.addAttribute("siteList", siteService.getSiteListAll(new Site(homepage_id)));
 		model.addAttribute("menuHtml", menuHtml);
 		model.addAttribute("menuOne", service.getMenuOne(menu));
 		model.addAttribute("menuLeftList", menuService.getMenuLeftTreeListCache(homepage_id, menu.getGroup_idx()));
 		model.addAttribute("menuTreeList", menuService.getMenuTreeListCache(homepage_id));
-		
+
 		return "/homepage/" + homepage.getFolder() + "/htmlEdit";
 	}
 	
