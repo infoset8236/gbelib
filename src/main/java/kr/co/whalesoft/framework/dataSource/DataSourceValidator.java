@@ -21,7 +21,7 @@ public class DataSourceValidator implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() {
-        log.info("=== JDBC DataSource 연결 검증 시작 ===");
+        /*log.info("=== JDBC DataSource 연결 검증 시작 ===");*/
 
         // 1단계: 드라이버 클래스 로드 확인
         if (driverClassName != null) {
@@ -40,8 +40,6 @@ public class DataSourceValidator implements InitializingBean {
         if (url != null && driverClassName != null) {
             try {
                 Driver driver = DriverManager.getDriver(url);
-                log.info("[OK] JDBC URL 형식 인식 성공: {}", maskPassword(url));
-                log.info("     → 처리 드라이버: {}", driver.getClass().getName());
             } catch (SQLException e) {
                 log.error("[FAIL] JDBC URL 형식이 잘못되었거나 해당 URL을 처리할 드라이버가 없습니다.");
                 log.error("       → URL: {}", maskPassword(url));
@@ -58,13 +56,6 @@ public class DataSourceValidator implements InitializingBean {
                 long start = System.currentTimeMillis();
                 conn = dataSource.getConnection();
                 long elapsed = System.currentTimeMillis() - start;
-
-                log.info("[OK] DB 커넥션 획득 성공 ({}ms)", elapsed);
-                log.info("     → DB Product : {}", conn.getMetaData().getDatabaseProductName());
-                log.info("     → DB Version : {}", conn.getMetaData().getDatabaseProductVersion());
-                log.info("     → JDBC URL   : {}", maskPassword(conn.getMetaData().getURL()));
-                log.info("     → Username   : {}", conn.getMetaData().getUserName());
-
             } catch (SQLException e) {
                 String sqlState = e.getSQLState();
                 int errorCode  = e.getErrorCode();
@@ -85,8 +76,6 @@ public class DataSourceValidator implements InitializingBean {
                 }
             }
         }
-
-        log.info("=== JDBC DataSource 연결 검증 완료 ===");
     }
 
     private void diagnose(String sqlState, int errorCode, SQLException e) {

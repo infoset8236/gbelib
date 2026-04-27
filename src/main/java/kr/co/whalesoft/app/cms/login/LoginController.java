@@ -198,7 +198,7 @@ public class LoginController extends BaseController {
 	public String loginProc(Model model, @Valid Login login,BindingResult result, HttpServletRequest request, RedirectAttributes redirectAttributes, HttpServletResponse response) throws Exception {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		String redirectURL = "https://" + request.getServerName();
-		String returnUrl = null;
+		String returnUrl = getPath(request.getRequestURI()) + "/index.do";
 
 		Member member = new Member();
 		Member memberApi = new Member();
@@ -206,7 +206,6 @@ public class LoginController extends BaseController {
 		member.setMember_pw(login.getMember_pw());
 		memberApi.setCheck_certify_data(login.getMember_id().toUpperCase()); //대문자로변환 (ILUS API에 관리자 ID는 모두 대문자)
 		Map<String, String> adminMember =   MemberAPI.getLoginMemberCertify("WEB", memberApi);
-
 
 		String loginResult = service.login(member, request);
 		if(loginResult.equals("LOGIN")) {
@@ -310,7 +309,11 @@ public class LoginController extends BaseController {
 				String agentIp = String.valueOf(request.getLocale());
 				SSORspData rspData = null;
 
-				if(!returnUrl.startsWith("http")) {
+				if (returnUrl == null || returnUrl.isEmpty()) {
+					returnUrl = getPath(request.getRequestURI()) + "/index.do";
+				}
+
+				if (!returnUrl.startsWith("http")) {
 					returnUrl = homepage.getDomain() + returnUrl;
 				}
 
@@ -322,9 +325,6 @@ public class LoginController extends BaseController {
 					service.alertMessageAndUrl(alertMsg, nextURI, request, response);
 					return null;
 				}
-
-				// 이중로그인시에 세션 종료
-//				service.logout(request);
 
 			} catch(Exception e) {
 				e.printStackTrace();
