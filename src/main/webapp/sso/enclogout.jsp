@@ -3,7 +3,7 @@
 <%
 	String SSO_SERVER = SSOService.getInstance().getServerScheme();
 	//   returnUrl : 응용 커스터 마이징 필요
-	String returnUrl = "http://" + request.getServerName()+ ":" + request.getServerPort() + request.getContextPath() + "/index.jsp";
+	String returnUrl = "https://" + request.getServerName()+ ":" + request.getServerPort() + request.getContextPath() + "/index.jsp";
 	returnUrl = SSOService.getInstance().encryptURL(returnUrl);
 %>
 <html>

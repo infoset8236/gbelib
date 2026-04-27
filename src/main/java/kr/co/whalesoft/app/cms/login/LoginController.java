@@ -317,6 +317,10 @@ public class LoginController extends BaseController {
 					returnUrl = homepage.getDomain() + returnUrl;
 				}
 
+				if (returnUrl.contains("sso.gbelib.kr")) {
+					returnUrl = "https://www.gbelib.kr/cms/index.do";
+				}
+
 				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentIp, request.getRemoteAddr());
 
 				if(rspData != null && rspData.getResultCode() == -1){
