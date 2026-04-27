@@ -227,9 +227,6 @@ public class BoardManage extends BoardManageExt {
 	public void setEdit_auth_check(boolean edit_auth_check) {
 		this.edit_auth_check = edit_auth_check;
 	}
-	public boolean getEdit_auth_check() {
-		return edit_auth_check;
-	}
 	public boolean isDelete_auth_check() {
 		return delete_auth_check;
 	}
