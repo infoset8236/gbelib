@@ -443,7 +443,7 @@ public class CommonLoginController extends BaseController {
 				}
 			}
 			
-			
+
 			/**
 			 * 개인정보 동의 만료기간 60일전에 재동의 페이지로.
 			 */
@@ -649,12 +649,25 @@ public class CommonLoginController extends BaseController {
 
 	@RequestMapping(value="/ssoLogout.*")
 	public String ssoLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println("@@@@@@@ SSO LOGOUT END");
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		Member member = getSessionMemberInfo(request);
+		String member_id = null;
+		String server_id = null;
+		String member_name = null;
+		String status_code = null;
+		String loginType = null;
+		String loca = null;
 
 		String returnUrl = "";
 		if(member != null && member.getBefore_url() != null) {
 			returnUrl = member.getBefore_url();
+			member_id = member.getMember_id();
+			server_id = member.getServerId();
+			member_name = member.getMember_name();
+			status_code = member.getStatus_code();
+			loginType = member.getLoginType();
+			loca = member.getLoca();
 		}
 
 		if ( StringUtils.isEmpty(returnUrl) || returnUrl.indexOf("/login/") > -1 ) {
@@ -666,11 +679,14 @@ public class CommonLoginController extends BaseController {
 
 		Map<String, Object> param = new HashMap<String, Object>();
 
-		param.put("user_id", member.getMember_id());
-		param.put("server_gid", member.getServerId());
+		param.put("user_id", member_id);
+		param.put("server_gid", server_id);
+
+		System.out.println("@@@@@@ SSO LOGOUT " + member_id );
+		System.out.println("@@@@@@ SSO LOGOUT " + server_id );
 
 		boolean deleteSSOLogin = SSOAPI.sendSSO(param, "delete");
-
+		System.out.println("@@@@@@@ SSO LOGOUT deleteSSOLogin = " + deleteSSOLogin);
 		if (!deleteSSOLogin) {
 			String alertMsg = "사용자 인증토큰 삭제에 실패하였습니다.";
 			String nextURI = "/" + homepage.getContext_path() + "/index.do";
@@ -678,36 +694,35 @@ public class CommonLoginController extends BaseController {
 			return null;
 		}
 
-		{
-			try {
-				if(!StringUtils.equals(homepage.getContext_path(), "app")) {
-					SSOService ssoService = SSOService.getInstance();
-					String avps = "member_name="+member.getMember_name()+"$loca="+member.getLoca()+"$status_code="+member.getStatus_code()+"$login_type="+member.getLoginType();
+		try {
+			System.out.println("@@@@@@@ SSO LOGOUT " + homepage.getContext_path());
+			if(!StringUtils.equals(homepage.getContext_path(), "app")) {
+				SSOService ssoService = SSOService.getInstance();
+				String avps = "member_name="+member_name+"$loca="+loca+"$status_code="+status_code+"$login_type="+loginType;
 
-					String reqCtx = request.getContextPath();
-					String agentip = String.valueOf(request.getLocale());
+				String agentip = String.valueOf(request.getLocale());
 
-					SSORspData rspData = null;
+				SSORspData rspData = null;
 
-					if(!returnUrl.startsWith("http")) {
-						returnUrl = homepage.getDomain() + returnUrl;
-					}
-
-					rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentip, request.getRemoteAddr());
-
-					if(rspData != null && rspData.getResultCode() == -1) {
-						String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
-						String nextURI = "/" + homepage.getContext_path() + "/index.do";
-						service.alertMessageAndUrl(alertMsg, nextURI, request, response);
-						return null;
-					}
+				if(!returnUrl.startsWith("http")) {
+					returnUrl = homepage.getDomain() + returnUrl;
 				}
 
-			} catch(Exception e) {
-				e.printStackTrace();
+				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member_id, avps, returnUrl, agentip, request.getRemoteAddr());
+
+				if(rspData != null && rspData.getResultCode() == -1) {
+					String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
+					String nextURI = "/" + homepage.getContext_path() + "/index.do";
+					service.alertMessageAndUrl(alertMsg, nextURI, request, response);
+					return null;
+				}
 			}
+
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 
+		System.out.println("@@@@@@@ SSO LOGOUT END");
 		return "redirect:" + returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
 	}
 
