@@ -30,11 +30,11 @@
 		
 		if(b) {
 			alert("이전 로그아웃을 실행합니다.");
-			top.location.href="<%=SSO_SERVER%>/sso/singleLogout.jsp?uid=<%=loginedId%>&returl=http://www.gbelib.kr"
+			top.location.href="<%=SSO_SERVER%>/sso/singleLogout.jsp?uid=<%=loginedId%>&returl=https://www.gbelib.kr"
 		} else {
 			alert("대표도서관 홈페이지로 이동합니다.");
 			<%SSOService.getInstance().removeSSOToken(request);%>
-			top.location.href="http://www.gbelib.kr/gbelib/intro/login/logout.do";
+			top.location.href="https://www.gbelib.kr/gbelib/intro/login/logout.do";
 		}
 </script>
 <%	

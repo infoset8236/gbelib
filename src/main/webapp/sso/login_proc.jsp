@@ -69,7 +69,7 @@
 	//   returnUrl : 응용 커스터 마이징 필요
 	// =========================================================================
 	
-	String returnUrl = "http://" + request.getServerName()+":"+ request.getServerPort() + reqCtx + "/sso/index.jsp";
+	String returnUrl = "https://" + request.getServerName()+":"+ request.getServerPort() + reqCtx + "/sso/index.jsp";
 	String agentIp = request.getLocalAddr();
 	
 	// case.1. SSO API 내에서 SSO 서버로 리다이렉트 수행
