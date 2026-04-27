@@ -297,7 +297,7 @@ public class LoginController extends BaseController {
 				model.addAttribute("memberId", member.getMember_id());
 				model.addAttribute("userIp", userIp);
 
-				return String.format(basePath, homepage.getFolder()) + "ssoCheck";
+				return basePath + "ssoCheck";
 			}
 
 			try {
