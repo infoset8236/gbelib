@@ -466,11 +466,14 @@ public class LoginController extends BaseController {
 			returnUrl = member.getBefore_url();
 		}
 
-		if ( StringUtils.isEmpty(returnUrl) || returnUrl.indexOf("/login/") > -1 ) {
+		if (homepage != null) {
 			returnUrl = String.format("%s/cms/index.do", homepage.getDomain()).replaceAll("^http://", "https://");
-			if (request.getRequestURL().toString().contains("localhost")) {
-				returnUrl = String.format("%s/cms/index.do", "http://localhost");
-			}
+		} else {
+			returnUrl = "https://gbelib.kr/cms/index.do";
+		}
+
+		if (request.getRequestURL().toString().contains("localhost")) {
+			returnUrl = String.format("%s/cms/index.do", "http://localhost");
 		}
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -482,36 +485,42 @@ public class LoginController extends BaseController {
 
 		if (!deleteSSOLogin) {
 			String alertMsg = "사용자 인증토큰 삭제에 실패하였습니다.";
-			String nextURI = "/" + homepage.getContext_path() + "/index.do";
+			String nextURI = "";
+			if (homepage != null) {
+				nextURI = "/" + homepage.getContext_path() + "/index.do";
+			} else {
+				nextURI = "/cms/index.do";
+			}
 			service.alertMessageAndUrl(alertMsg, nextURI, request, response);
 			return null;
 		}
 
 		{
 			try {
-				if(!StringUtils.equals(homepage.getContext_path(), "app")) {
-					SSOService ssoService = SSOService.getInstance();
-					String avps = "";
+				if (homepage != null) {
+					if(!StringUtils.equals(homepage.getContext_path(), "app")) {
+						SSOService ssoService = SSOService.getInstance();
+						String avps = "";
 
-					String reqCtx = request.getContextPath();
-					String agentIp = String.valueOf(request.getLocale());
+						String reqCtx = request.getContextPath();
+						String agentIp = String.valueOf(request.getLocale());
 
-					SSORspData rspData = null;
+						SSORspData rspData = null;
 
-					if(!returnUrl.startsWith("http")) {
-						returnUrl = homepage.getDomain() + returnUrl;
-					}
+						if(!returnUrl.startsWith("http")) {
+							returnUrl = homepage.getDomain() + returnUrl;
+						}
 
-					rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentIp, request.getRemoteAddr());
+						rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentIp, request.getRemoteAddr());
 
-					if(rspData != null && rspData.getResultCode() == -1) {
-						String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
-						String nextURI = "/" + homepage.getContext_path() + "/index.do";
-						service.alertMessageAndUrl(alertMsg, nextURI, request, response);
-						return null;
+						if(rspData != null && rspData.getResultCode() == -1) {
+							String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
+							String nextURI = "/" + homepage.getContext_path() + "/index.do";
+							service.alertMessageAndUrl(alertMsg, nextURI, request, response);
+							return null;
+						}
 					}
 				}
-
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
