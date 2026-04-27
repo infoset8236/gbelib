@@ -649,7 +649,7 @@ public class CommonLoginController extends BaseController {
 
 	@RequestMapping(value="/ssoLogout.*")
 	public String ssoLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("@@@@@@@ SSO LOGOUT END");
+		System.out.println("@@@@@@@ SSOLOGOUT END");
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		Member member = getSessionMemberInfo(request);
 		String member_id = null;
@@ -682,11 +682,11 @@ public class CommonLoginController extends BaseController {
 		param.put("user_id", member_id);
 		param.put("server_gid", server_id);
 
-		System.out.println("@@@@@@ SSO LOGOUT " + member_id );
-		System.out.println("@@@@@@ SSO LOGOUT " + server_id );
+		System.out.println("@@@@@@ SSOLOGOUT " + member_id );
+		System.out.println("@@@@@@ SSOLOGOUT " + server_id );
 
 		boolean deleteSSOLogin = SSOAPI.sendSSO(param, "delete");
-		System.out.println("@@@@@@@ SSO LOGOUT deleteSSOLogin = " + deleteSSOLogin);
+		System.out.println("@@@@@@@ SSOLOGOUT deleteSSOLogin = " + deleteSSOLogin);
 		if (!deleteSSOLogin) {
 			String alertMsg = "사용자 인증토큰 삭제에 실패하였습니다.";
 			String nextURI = "/" + homepage.getContext_path() + "/index.do";
@@ -695,7 +695,7 @@ public class CommonLoginController extends BaseController {
 		}
 
 		try {
-			System.out.println("@@@@@@@ SSO LOGOUT " + homepage.getContext_path());
+			System.out.println("@@@@@@@ SSOLOGOUT " + homepage.getContext_path());
 			if(!StringUtils.equals(homepage.getContext_path(), "app")) {
 				SSOService ssoService = SSOService.getInstance();
 				String avps = "member_name="+member_name+"$loca="+loca+"$status_code="+status_code+"$login_type="+loginType;
@@ -709,7 +709,7 @@ public class CommonLoginController extends BaseController {
 				}
 
 				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member_id, avps, returnUrl, agentip, request.getRemoteAddr());
-
+				System.out.println("@@@@@@@ SSOLOGOUT rspData = " + rspData);
 				if(rspData != null && rspData.getResultCode() == -1) {
 					String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
 					String nextURI = "/" + homepage.getContext_path() + "/index.do";
@@ -722,7 +722,7 @@ public class CommonLoginController extends BaseController {
 			e.printStackTrace();
 		}
 
-		System.out.println("@@@@@@@ SSO LOGOUT END");
+		System.out.println("@@@@@@@ SSO LOGOUT END" + returnUrl);
 		return "redirect:" + returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
 	}
 
