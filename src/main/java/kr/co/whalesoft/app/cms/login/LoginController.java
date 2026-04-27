@@ -463,7 +463,7 @@ public class LoginController extends BaseController {
 		}
 
 		if ( StringUtils.isEmpty(returnUrl) || returnUrl.indexOf("/login/") > -1 ) {
-			returnUrl = String.format("%s/cms/index.do", homepage.getDomain());
+			returnUrl = String.format("%s/cms/index.do", homepage.getDomain()).replaceAll("^http://", "https://");
 			if (request.getRequestURL().toString().contains("localhost")) {
 				returnUrl = String.format("%s/cms/index.do", "http://localhost");
 			}
@@ -513,7 +513,7 @@ public class LoginController extends BaseController {
 			}
 		}
 
-		return "redirect:" + returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
+		return "redirect:" + returnUrl.replaceAll("^http://", "https://");
 	}
 
 }
