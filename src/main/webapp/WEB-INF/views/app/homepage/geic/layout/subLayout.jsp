@@ -22,6 +22,9 @@ $(function() {
 	.doc-info li a.btn{height:20px;line-height:20px;margin-top:-5px;margin-right:5px;}
 	.tnb{border-bottom:1px solid #e4e4e4;}
 	body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, button, textarea, p, blockquote, th, td, address{font-family:'S-Core Dream 4';}
+    .doc-info ol li .fa-home{
+        font-size: 17px;
+    }
 </style>
 
 <div id="wrap">
