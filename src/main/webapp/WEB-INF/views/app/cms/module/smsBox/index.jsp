@@ -61,7 +61,7 @@ $(function() {
 
     <style>
         table.wrapTable tbody tr td{
-            white-space: pre-line;
+            white-space: unset;
         }
     </style>
 
@@ -79,12 +79,12 @@ $(function() {
 	        <table class="type1 center wrapTable">
 		<thead>
 			<tr>
-				<th>번호</th>
-				<th>제목</th>	
+				<th style="width: 72px;">번호</th>
+				<th style="width: 200px;">제목</th>
 				<th>내용</th>	
-				<th>사용유무</th>
-				<th>등록일</th>					
-				<th>기능</th>
+				<th style="width: 100px;">사용유무</th>
+				<th style="width: 200px;">등록일</th>
+				<th style="width: 180px;">기능</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -96,18 +96,20 @@ $(function() {
 			</c:if>
 			<c:forEach var="i" varStatus="status" items="${smsBoxList}">
 				<tr>
-					<td class="num">${paging.listRowNum - status.index}</td>
-					<td>${i.title}</td>
-					<td>${i.contents}</td>
-					<td>${i.use_yn}</td>
-					<td>${i.add_date }</td>
+					<td class="num" style="width: 40px">${paging.listRowNum - status.index}</td>
+					<td style="width: 168px;">${i.title}</td>
+					<td style="width: 786px;">${i.contents}</td>
+					<td style="width: 69px;">${i.use_yn}</td>
+					<td style="width: 167px;">${i.add_date }</td>
 					<td>
-						<c:if test="${authU}">
-						<a href="" class="btn" id="dialog-modify" keyValue="${i.box_idx}">수정</a>
-						</c:if>
-						<c:if test="${authD}">
-						<a href="" class="btn" id="delete-btn" keyValue="${i.box_idx}">삭제</a>
-						</c:if>
+                        <div>
+                            <c:if test="${authU}">
+                                <a href="" class="btn" id="dialog-modify" keyValue="${i.box_idx}">수정</a>
+                            </c:if>
+                            <c:if test="${authD}">
+                                <a href="" class="btn" id="delete-btn" keyValue="${i.box_idx}">삭제</a>
+                            </c:if>
+                        </div>
 					</td>
 				</tr>
 			</c:forEach>			
