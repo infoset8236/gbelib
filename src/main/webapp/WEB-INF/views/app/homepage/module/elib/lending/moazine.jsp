@@ -82,7 +82,7 @@ $(document).ready(function() {
 });
 </script>
 <div class="btn_area txt-center">
-	<a href="#" id="go-btn" class="btn btn2 newWin"> <b>모아진</b> <span>바로가기</span> <i class="fa fa-external-link"></i></a>
+	<a href="#" id="go-btn" class="btn btn2 newWin" style="display: flex; width: fit-content; margin: 0 auto;"> <b>모아진</b> <span>바로가기</span> <i class="fa fa-external-link"></i></a>
 </div>
 </c:otherwise>
 </c:choose>
