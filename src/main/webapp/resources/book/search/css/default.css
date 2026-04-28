@@ -207,7 +207,7 @@
 span.middot {background: url(/resources/common/img/doc-arr2.gif) no-repeat 0 10px; padding: 3px 0 4px; padding-left: 13px;}
 .search-area { text-align: right; padding-bottom: 7px;}
 .search-area i {font-size: 16px;color: #fff;margin-right: 6px;vertical-align: middle;margin-top: -3px;}
-.search-area .orange {padding: 4px 19px; display: inline-block; margin-left: 2px;background:#ff741f;border-radius: 20px;color: #fff; font-weight: 600; margin-bottom: 5px;}
+.search-area .orange {padding: 5px 19px; display: inline-block; margin-left: 2px;background:#ff741f;border-radius: 20px;color: #fff; font-weight: 600;}
 .search-area .blue {padding: 4px 19px; display: inline-block; margin-left: 2px;background:#5885c9;border-radius: 20px;color: #fff; font-weight: 600; margin-bottom: 5px;}
 
 .search-bot { width: 100%; height: auto; display: inline-block; padding-bottom: 15px;}

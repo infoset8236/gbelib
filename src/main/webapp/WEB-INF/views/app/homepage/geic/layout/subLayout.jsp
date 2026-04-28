@@ -25,6 +25,10 @@ $(function() {
     .doc-info ol li .fa-home{
         font-size: 17px;
     }
+    .tnb .util-left ul li,
+    .tnb .util-right ul li{
+        font-family: 'MapoDPPA';
+    }
 </style>
 
 <div id="wrap">

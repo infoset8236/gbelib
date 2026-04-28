@@ -1037,9 +1037,9 @@ $(document).on("keyup", "input:text[numberOnly]", function() {
 	<div class="search-wrap">
 		<c:if test="${librarySearch.search_text ne null and librarySearch.search_text ne ''}">
 		</c:if>
-		<div class="search-area">
+		<div class="search-area" style="display: flex; justify-content: flex-end;">
 			<a id="toggleLibList"><span class="orange"><i class="fa fa-building" aria-hidden="true"></i>타도서관 검색</span></a>
-			<a href="#" id="toggleDetailSearch" class="btn btn1" title="상세검색" tabindex="0" style="border-radius: 20px;float: right;margin-top: -2px;" keyValue="${totalSearch.search_type eq 'DETAIL' ? 'show' : 'hide'}"><i class="fa fa-search"></i> 상세 검색</a>
+			<a href="#" id="toggleDetailSearch" class="btn btn1" title="상세검색" tabindex="0" style="border-radius: 20px;float: right;" keyValue="${totalSearch.search_type eq 'DETAIL' ? 'show' : 'hide'}"><i class="fa fa-search"></i> 상세 검색</a>
 		</div>
 		<div class="search-form">
 		<!--

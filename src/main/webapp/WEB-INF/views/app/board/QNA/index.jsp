@@ -96,7 +96,7 @@ ${boardManage.top_html}
 						<c:set var="boardIdx" value="${i.parent_idx > 0 ? i.parent_idx : i.board_idx}"></c:set>
 						<a href="view.do?menu_idx=${board.menu_idx}&manage_idx=${i.manage_idx}&board_idx=${boardIdx}&viewPage=${board.viewPage}" keyValue="${i.board_idx}">
 						<c:if test="${i.group_depth > 0}">
-							<i class="fa fa-reply"></i>
+							<i class="fa fa-reply" style="margin-left: 5px; "></i>
 						</c:if>
 							<span>${i.title}</span>${i.secret_yn eq 'Y'?'<i class="fa fa-lock"></i>':''}
 							<c:if test="${i.date_gap <= boardManage.new_date_count}"><em class="new">새글</em></c:if>
@@ -133,7 +133,7 @@ ${boardManage.top_html}
 						<a href="view.do?menu_idx=${board.menu_idx}&manage_idx=${i.manage_idx}&board_idx=${boardIdx}&viewPage=${board.viewPage}" keyValue="${i.board_idx}">
 							<span>${i.title}</span>${i.secret_yn eq 'Y'?'<i class="fa fa-lock"></i>':''}
 							<c:if test="${i.request_state_str eq '완료'}">
-								<i class="fa fa-reply"></i>
+								<i class="fa fa-reply" style="margin-left: 5px; "></i>
 							</c:if>
 							<c:if test="${i.date_gap <= boardManage.new_date_count}"><em class="new">새글</em></c:if>
 							<c:if test="${i.comment_count > 0}">
