@@ -1586,16 +1586,21 @@ public class CommonSearchController extends BaseController {
 		if ( !isLogin(request) || !"HOMEPAGE".equals(getSessionMemberLoginType(request)) ) {
 			try {
 				librarySearch.setBefore_url(URLEncoder.encode(request.getHeader("referer"), "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
+			} catch (Exception e) {
 				librarySearch.setBefore_url(String.format("http://www.gbelib.kr/%s/intro/search/close/index.do?menu_idx=%s", homepage.getContext_path(), librarySearch.getMenu_idx()));
 			}
 			service.alertMessageAndUrl("로그인 후 이용가능합니다.", String.format("http://www.gbelib.kr/%s/intro/login/index.do?menu_idx=%s&before_url=%s", homepage.getContext_path(), librarySearch.getMenu_idx(), librarySearch.getBefore_url()), request, response);
 			return null;
 		}
 
-		Map<String, Object> closeList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "CLOSE", null);
+		try {
+			Map<String, Object> closeList = LibSearchAPI.getMyLibraryList("WEB", getSessionUserId(request), "CLOSE", null);
 
-		model.addAttribute("closeList", closeList);
+			model.addAttribute("closeList", closeList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		return String.format(basePath, homepage.getFolder()) + "close/index";
 	}
 
@@ -2026,6 +2031,12 @@ public class CommonSearchController extends BaseController {
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		// String vOption = '0001' 신청|배송중|대출대기만 리스트에 출력됨
 
+		if ( !isLogin(request) || !"HOMEPAGE".equals(getSessionMemberLoginType(request))) {
+			librarySearch.setBefore_url(String.format("http://www.gbelib.kr/%s/intro/search/out/history.do?menu_idx=%s", homepage.getContext_path(), librarySearch.getMenu_idx()));
+			homepageService.alertMessageAndUrl("로그인 후 이용가능합니다.", String.format("http://www.gbelib.kr/%s/intro/login/index.do?menu_idx=%s&before_url=%s", homepage.getContext_path(), librarySearch.getMenu_idx(), librarySearch.getBefore_url()), request, response);
+			return null;
+		}
+
 		Map<String, String> paramMap = new HashMap<String, String>();
 		Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.YEAR, -1);
@@ -2047,24 +2058,27 @@ public class CommonSearchController extends BaseController {
 		paramMap.put("vSortDir", "DESC");
 
 		// 페이징을 위한 전체 카운터 조회
-		Map<String, Object> result = LibSearchAPI.getMyLibrarySearchList("WEB", getSessionUserId(request), "OUT", null, paramMap);
-		List<Map<String, Object>> list = (List<Map<String, Object>>) result.get("dsMyLibraryListCnt");
-		Map<String, Object> cnt = (Map<String, Object>) list.get(0);
+		try {
+			Map<String, Object> result = LibSearchAPI.getMyLibrarySearchList("WEB", getSessionUserId(request), "OUT", null, paramMap);
+			List<Map<String, Object>> list = (List<Map<String, Object>>) result.get("dsMyLibraryListCnt");
+			Map<String, Object> cnt = (Map<String, Object>) list.get(0);
+			int count = Integer.parseInt(String.valueOf(cnt.get("CNT")));
+			librarySearch.setTotalDataCount(count);
+			// 페이징 변수 시작, 끝값
+			paramMap.put("vStartPos", Integer.toString(librarySearch.getStartRowNum()));
+			paramMap.put("vEndPos",Integer.toString(librarySearch.getEndRowNum()));
 
-		int count = Integer.parseInt(String.valueOf(cnt.get("CNT")));
+			result = LibSearchAPI.getMyLibrarySearchList("WEB", getSessionUserId(request), "OUT", null, paramMap);
 
-		librarySearch.setTotalDataCount(count);
-		// 페이징 변수 시작, 끝값
-		paramMap.put("vStartPos", Integer.toString(librarySearch.getStartRowNum()));
-		paramMap.put("vEndPos",Integer.toString(librarySearch.getEndRowNum()));
+			service.setPaging(model, count, librarySearch);
 
-		result = LibSearchAPI.getMyLibrarySearchList("WEB", getSessionUserId(request), "OUT", null, paramMap);
+			model.addAttribute("totalCount", count);
+			model.addAttribute("outList", result);
+			model.addAttribute("librarySearch", librarySearch);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
-		service.setPaging(model, count, librarySearch);
-
-		model.addAttribute("totalCount", count);
-		model.addAttribute("outList", result);
-		model.addAttribute("librarySearch", librarySearch);
 		return String.format(basePath, homepage.getFolder()) + "out/history";
 	}
 
