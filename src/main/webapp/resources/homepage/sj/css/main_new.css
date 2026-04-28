@@ -18,7 +18,7 @@
 
 .Gnb .gnb-menu > li{padding:0 2%;}
 
-#main0{background:url('/resources/homepage/sj/img/main/main-bg.jpg')no-repeat center bottom;}
+#main0{background:url('/resources/homepage/sj/img/main/main-bg.jpg')no-repeat center bottom;background-size: cover;}
 #main0 .main0-top .search-box .main-box button{background:#0093cf url('/resources/homepage/sj/img/main/srch-icon.png') no-repeat center center;}
 
 #main0 .main0-bottom .qmenu li a:hover,

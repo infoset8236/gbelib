@@ -1,4 +1,4 @@
-#main0 {position:relative;background:url('/resources/common/img/main_type02/main-bg.jpg') no-repeat center center;background-size:cover;}
+#main0 {position:relative;background:url('/resources/common/img/main_type02/main-bg.jpg') no-repeat center center;background-size:cover !important;}
 
 #main0 .main0-top .search-box {position:relative;text-align:center;margin-top:160px;}
 #main0 .main0-top .search-box .main-box {position:relative;display:inline-block;width:70%;margin:0 auto;border:0;border-radius:7px;}
