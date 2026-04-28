@@ -13,7 +13,10 @@
 </style>
 <script type="text/javascript" src="/resources/cms/smart_editor/js/lib/jindo2.all.js" charset="utf-8"></script>
 <script type="text/javascript" src="/resources/cms/smart_editor/js/lib/jindo_component.js" charset="utf-8"></script>
-<script type="text/javascript" src="/cms/menu/${contextPath}/se2configuration_general.do" charset="utf-8"></script>	<!-- 설정 파일 -->
+<script>
+    window.CONTEXT_PATH = "${contextPath}";
+</script>
+<script src="/resources/cms/smart_editor/js/se2configuration_general.js"></script>
 <script type="text/javascript" src="/resources/cms/smart_editor/js/service/SE2BasicCreator.js" charset="utf-8"></script>
 <script type="text/javascript" src="/resources/cms/smart_editor/js/smarteditor2_htmledit.js" charset="utf-8"></script>
 
