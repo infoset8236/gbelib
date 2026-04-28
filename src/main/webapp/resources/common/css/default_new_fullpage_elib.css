@@ -625,7 +625,7 @@ transform:translatez(0);
 div.sns-box {text-align:right;box-sizing:border-box;height:100%;}
 div.sns-box ul{display:inline-block;box-sizing:border-box;height:100%;}
 div.sns-box ul li{margin:0 2px;display:inline-block;box-sizing:border-box;height:100%;}
-div.sns-box ul li a {box-sizing:border-box;display:inline-block;height:100%;line-height:50px;}
+div.sns-box ul li a {box-sizing:border-box;display:inline-block;margin-bottom: -16px;}
 div.sns-box ul li a img {display:block;padding-top:10px;}
 div#share_layer {display:none;position:absolute;top:55px;right:0;background:#fff;overflow:hidden;height:63px;z-index:7}
 div.shareAllBtns ul.shareBox {position:relative;width:180px;}

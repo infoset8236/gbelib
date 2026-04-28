@@ -46,6 +46,9 @@ $(function() {
 <style>
 	.doc-info li a.btn{height:18px;line-height:15px;margin-top:-7px;margin-right:5px;}
 	.tnb{border-bottom:1px solid #e4e4e4;}
+    button#main-search-btn::before {
+        content: "";
+    }
 </style>
 
 <div id="wrap">
