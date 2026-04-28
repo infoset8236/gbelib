@@ -513,7 +513,7 @@ transform:translatez(0);
 .midd-sections {position:relative;width:1650px;margin:0 auto;box-sizing:border-box;}
 .sections {position:relative;max-width:1450px;margin:0 auto;box-sizing:border-box;} /* 기준 */
 
-.content {margin-right: -282px;width: 78%;float: left;box-sizing: border-box;}
+.content {/*margin-right:-282px;*/width:calc(100% - 282px);float:left;box-sizing:border-box;}
 .doc-info {width:1260px;margin:0 auto;}
 
 .lnb {width:280px;float:left;}
@@ -534,8 +534,6 @@ transform:translatez(0);
 
 @media all and (max-width:1280px){
 	.sections-align {width:100%;margin:0;padding:0;}
-	.content{margin-right:-25%}
- 
 	#container.subpage > .sections{width:100%;}
 	.doc-info{width:calc(100% - 20px);}
 }
