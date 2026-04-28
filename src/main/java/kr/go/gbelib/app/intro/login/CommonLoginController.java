@@ -649,45 +649,88 @@ public class CommonLoginController extends BaseController {
 
 	@RequestMapping(value="/ssoLogout.*")
 	public String ssoLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("@@@@@@@ SSOLOGOUT END");
+		long totalStart = System.currentTimeMillis();
+
+		System.out.println("========== SSOLOGOUT START ==========");
+		System.out.println("[SSOLOGOUT] requestURI      = " + request.getRequestURI());
+		System.out.println("[SSOLOGOUT] requestURL      = " + request.getRequestURL());
+		System.out.println("[SSOLOGOUT] queryString     = " + request.getQueryString());
+		System.out.println("[SSOLOGOUT] remoteAddr      = " + request.getRemoteAddr());
+		System.out.println("[SSOLOGOUT] remoteHost      = " + request.getRemoteHost());
+		System.out.println("[SSOLOGOUT] serverName      = " + request.getServerName());
+		System.out.println("[SSOLOGOUT] scheme          = " + request.getScheme());
+		System.out.println("[SSOLOGOUT] locale          = " + request.getLocale());
+		System.out.println("[SSOLOGOUT] userAgent       = " + request.getHeader("User-Agent"));
+		System.out.println("[SSOLOGOUT] referer         = " + request.getHeader("Referer"));
+		System.out.println("[SSOLOGOUT] x-forwarded-for = " + request.getHeader("X-Forwarded-For"));
+
 		Homepage homepage = (Homepage) request.getAttribute("homepage");
 		Member member = getSessionMemberInfo(request);
+
+		System.out.println("[SSOLOGOUT] homepage        = " + homepage);
+		System.out.println("[SSOLOGOUT] member null     = " + (member == null));
+
 		String member_id = null;
 		String server_id = null;
 		String member_name = null;
 		String status_code = null;
 		String loginType = null;
 		String loca = null;
-
 		String returnUrl = "";
-		if(member != null && member.getBefore_url() != null) {
-			returnUrl = member.getBefore_url();
-			member_id = member.getMember_id();
-			server_id = member.getServerId();
-			member_name = member.getMember_name();
-			status_code = member.getStatus_code();
-			loginType = member.getLoginType();
-			loca = member.getLoca();
+
+		if (homepage != null) {
+			System.out.println("[SSOLOGOUT] homepage.domain       = " + homepage.getDomain());
+			System.out.println("[SSOLOGOUT] homepage.context_path = " + homepage.getContext_path());
 		}
 
-		if ( StringUtils.isEmpty(returnUrl) || returnUrl.indexOf("/login/") > -1 ) {
+		if (member != null) {
+			System.out.println("[SSOLOGOUT] member.before_url = " + member.getBefore_url());
+			System.out.println("[SSOLOGOUT] member_id         = " + member.getMember_id());
+			System.out.println("[SSOLOGOUT] server_id         = " + member.getServerId());
+			System.out.println("[SSOLOGOUT] member_name       = " + member.getMember_name());
+			System.out.println("[SSOLOGOUT] status_code       = " + member.getStatus_code());
+			System.out.println("[SSOLOGOUT] loginType         = " + member.getLoginType());
+			System.out.println("[SSOLOGOUT] loca              = " + member.getLoca());
+
+			if (member.getBefore_url() != null) {
+				returnUrl = member.getBefore_url();
+				member_id = member.getMember_id();
+				server_id = member.getServerId();
+				member_name = member.getMember_name();
+				status_code = member.getStatus_code();
+				loginType = member.getLoginType();
+				loca = member.getLoca();
+			}
+		}
+
+		System.out.println("[SSOLOGOUT] returnUrl before fallback = " + returnUrl);
+
+		if (StringUtils.isEmpty(returnUrl) || returnUrl.indexOf("/login/") > -1) {
 			returnUrl = String.format("%s/%s/index.do", homepage.getDomain(), homepage.getContext_path());
+
 			if (request.getRequestURL().toString().contains("localhost")) {
 				returnUrl = String.format("%s/%s/index.do", "http://localhost", homepage.getContext_path());
 			}
 		}
 
-		Map<String, Object> param = new HashMap<String, Object>();
+		System.out.println("[SSOLOGOUT] returnUrl after fallback = " + returnUrl);
 
+		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("user_id", member_id);
 		param.put("server_gid", server_id);
 
-		System.out.println("@@@@@@ SSOLOGOUT " + member_id );
-		System.out.println("@@@@@@ SSOLOGOUT " + server_id );
+		System.out.println("[SSOLOGOUT] delete param user_id    = " + member_id);
+		System.out.println("[SSOLOGOUT] delete param server_gid = " + server_id);
 
+		long deleteStart = System.currentTimeMillis();
 		boolean deleteSSOLogin = SSOAPI.sendSSO(param, "delete");
-		System.out.println("@@@@@@@ SSOLOGOUT deleteSSOLogin = " + deleteSSOLogin);
+		long deleteEnd = System.currentTimeMillis();
+
+		System.out.println("[SSOLOGOUT] deleteSSOLogin = " + deleteSSOLogin);
+		System.out.println("[SSOLOGOUT] delete API time = " + (deleteEnd - deleteStart) + " ms");
+
 		if (!deleteSSOLogin) {
+			System.out.println("[SSOLOGOUT] delete failed. alert redirect.");
 			String alertMsg = "사용자 인증토큰 삭제에 실패하였습니다.";
 			String nextURI = "/" + homepage.getContext_path() + "/index.do";
 			service.alertMessageAndUrl(alertMsg, nextURI, request, response);
@@ -695,35 +738,74 @@ public class CommonLoginController extends BaseController {
 		}
 
 		try {
-			System.out.println("@@@@@@@ SSOLOGOUT " + homepage.getContext_path());
-			if(!StringUtils.equals(homepage.getContext_path(), "app")) {
+			System.out.println("[SSOLOGOUT] issueToken block start");
+			System.out.println("[SSOLOGOUT] context_path = " + homepage.getContext_path());
+
+			if (!StringUtils.equals(homepage.getContext_path(), "app")) {
+				long instanceStart = System.currentTimeMillis();
 				SSOService ssoService = SSOService.getInstance();
-				String avps = "member_name="+member_name+"$loca="+loca+"$status_code="+status_code+"$login_type="+loginType;
+				long instanceEnd = System.currentTimeMillis();
+
+				System.out.println("[SSOLOGOUT] SSOService.getInstance time = " + (instanceEnd - instanceStart) + " ms");
+				System.out.println("[SSOLOGOUT] ssoService = " + ssoService);
+
+				String avps = "member_name=" + member_name
+						+ "$loca=" + loca
+						+ "$status_code=" + status_code
+						+ "$login_type=" + loginType;
 
 				String agentip = String.valueOf(request.getLocale());
 
-				SSORspData rspData = null;
+				System.out.println("[SSOLOGOUT] avps    = " + avps);
+				System.out.println("[SSOLOGOUT] agentip = " + agentip);
+				System.out.println("[SSOLOGOUT] remoteAddr = " + request.getRemoteAddr());
 
-				if(!returnUrl.startsWith("http")) {
+				if (!returnUrl.startsWith("http")) {
+					System.out.println("[SSOLOGOUT] returnUrl is relative. before = " + returnUrl);
 					returnUrl = homepage.getDomain() + returnUrl;
+					System.out.println("[SSOLOGOUT] returnUrl is relative. after  = " + returnUrl);
 				}
 
-				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member_id, avps, returnUrl, agentip, request.getRemoteAddr());
-				System.out.println("@@@@@@@ SSOLOGOUT rspData = " + rspData);
-				if(rspData != null && rspData.getResultCode() == -1) {
+				System.out.println("[SSOLOGOUT] issueToken returnUrl = " + returnUrl);
+
+				long issueStart = System.currentTimeMillis();
+				SSORspData rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member_id, avps, returnUrl, agentip, request.getRemoteAddr());
+				long issueEnd = System.currentTimeMillis();
+
+				System.out.println("[SSOLOGOUT] issueToken time = " + (issueEnd - issueStart) + " ms");
+				System.out.println("[SSOLOGOUT] rspData = " + rspData);
+
+				if (rspData != null) {
+					System.out.println("[SSOLOGOUT] rspData.resultCode = " + rspData.getResultCode());
+				} else {
+					System.out.println("[SSOLOGOUT] rspData is null");
+				}
+
+				if (rspData != null && rspData.getResultCode() == -1) {
+					System.out.println("[SSOLOGOUT] issueToken failed. resultCode = -1");
 					String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
 					String nextURI = "/" + homepage.getContext_path() + "/index.do";
 					service.alertMessageAndUrl(alertMsg, nextURI, request, response);
 					return null;
 				}
+			} else {
+				System.out.println("[SSOLOGOUT] context_path is app. issueToken skip.");
 			}
 
-		} catch(Exception e) {
+		} catch (Exception e) {
+			System.out.println("[SSOLOGOUT] issueToken exception occurred");
 			e.printStackTrace();
 		}
 
-		System.out.println("@@@@@@@ SSO LOGOUT END" + returnUrl);
-		return "redirect:" + returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
-	}
+		String finalRedirectUrl = returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
 
+		long totalEnd = System.currentTimeMillis();
+
+		System.out.println("[SSOLOGOUT] returnUrl         = " + returnUrl);
+		System.out.println("[SSOLOGOUT] finalRedirectUrl = " + finalRedirectUrl);
+		System.out.println("[SSOLOGOUT] total time       = " + (totalEnd - totalStart) + " ms");
+		System.out.println("========== SSOLOGOUT END ==========");
+
+		return "redirect:" + finalRedirectUrl;
+	}
 }

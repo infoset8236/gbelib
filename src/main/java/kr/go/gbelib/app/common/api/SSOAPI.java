@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.*;
 
 public class SSOAPI {
@@ -25,56 +26,133 @@ public class SSOAPI {
 		return connection;
 	}
 
-	public static boolean sendSSO (Map<String, Object> param, String mode) {
-		try {
-			URL url = new URL(KSIGN_SSO_API_URL);
+	public static boolean sendSSO(Map<String, Object> param, String mode) {
+		HttpURLConnection conn = null;
+		BufferedReader in = null;
 
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		long totalStart = System.currentTimeMillis();
+
+		try {
+			URL apiUrl = new URL(KSIGN_SSO_API_URL + "/" + mode);
 
 			List<String> paramList = new ArrayList<String>();
+
 			if (param != null) {
 				Set<String> keys = param.keySet();
+
 				for (String oneKey : keys) {
-					paramList.add(String.format("%s=%s", oneKey, param.get(oneKey)));
+					String key = URLEncoder.encode(oneKey, "UTF-8");
+					String value = URLEncoder.encode(String.valueOf(param.get(oneKey)), "UTF-8");
+
+					paramList.add(key + "=" + value);
 				}
 			}
 
-			conn = initConn(url + "/" + mode + "?" + StringUtils.join(paramList, "&"));
+			String body = StringUtils.join(paramList, "&");
+
+			long t0 = System.currentTimeMillis();
+
+			conn = (HttpURLConnection) apiUrl.openConnection();
 			conn.setRequestMethod("POST");
 
+			// 일단 원인 찾을 때는 넣는 걸 추천
+			conn.setConnectTimeout(3000);
+			conn.setReadTimeout(5000);
+
+			conn.setDoOutput(true);
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+			conn.setRequestProperty("Accept", "application/json");
+
+			long t1 = System.currentTimeMillis();
+			log.error("[SSOAPI] open/setup time = " + (t1 - t0) + "ms");
+
+			OutputStream os = conn.getOutputStream();
+
+			long t2 = System.currentTimeMillis();
+			log.error("[SSOAPI] getOutputStream time = " + (t2 - t1) + "ms");
+
+			os.write(body.getBytes("UTF-8"));
+			os.flush();
+			os.close();
+
+			long t3 = System.currentTimeMillis();
+			log.error("[SSOAPI] write/close time = " + (t3 - t2) + "ms");
+
+			log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API URL : " + apiUrl);
+			log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API PARAM : " + body);
+
 			int responseCode = conn.getResponseCode();
+
+			long t4 = System.currentTimeMillis();
+			log.error("[SSOAPI] getResponseCode time = " + (t4 - t3) + "ms");
+			log.error("[SSOAPI] responseCode = " + responseCode);
+
+			InputStream is;
+
 			if (responseCode == HttpURLConnection.HTTP_OK) {
-				BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+				is = conn.getInputStream();
+			} else {
+				is = conn.getErrorStream();
+			}
+
+			StringBuffer response = new StringBuffer();
+
+			if (is != null) {
+				in = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+
 				String inputLine;
-				StringBuffer response = new StringBuffer();
+
+				long t5 = System.currentTimeMillis();
 
 				while ((inputLine = in.readLine()) != null) {
 					response.append(inputLine);
 				}
 
-				log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API : " + url + "/" + mode + "?" + StringUtils.join(paramList, "&"));
-
-				in.close();
-
-				JSONObject jsonObject = new JSONObject(response.toString());
-
-				String objectString = jsonObject.getString("object");
-
-				String result = objectString.substring(objectString.indexOf("result:") + 7, objectString.indexOf(",", objectString.indexOf("result:")));
-
-				if ("success".equals(result)) {
-					return true;
-				} else {
-					return false;
-				}
-
+				long t6 = System.currentTimeMillis();
+				log.error("[SSOAPI] read body time = " + (t6 - t5) + "ms");
+				log.error("[SSOAPI] total time = " + (t6 - totalStart) + "ms");
 			} else {
-                log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API response ERROR : ", responseCode);
+				log.error("[SSOAPI] response stream is null");
+				log.error("[SSOAPI] total time = " + (System.currentTimeMillis() - totalStart) + "ms");
+			}
+
+			log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API RESPONSE : " + response.toString());
+
+			if (responseCode != HttpURLConnection.HTTP_OK) {
+				log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API response ERROR : " + responseCode);
 				return false;
 			}
+
+			JSONObject jsonObject = new JSONObject(response.toString());
+
+			String objectString = jsonObject.getString("object");
+
+			log.error("[SSOAPI] objectString = " + objectString);
+
+			String result = objectString.substring(
+					objectString.indexOf("result:") + 7,
+					objectString.indexOf(",", objectString.indexOf("result:"))
+			);
+
+			log.error("[SSOAPI] result = " + result);
+
+			return "success".equals(result);
+
 		} catch (Exception e) {
-            log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API ERROR : ", String.valueOf(e));
+			log.error("@@@@@@@@@@@@@@@@@@ KSIGN SSO API ERROR", e);
+			log.error("[SSOAPI] total time when error = " + (System.currentTimeMillis() - totalStart) + "ms");
 			return false;
+
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (Exception e) {}
+			}
+
+			if (conn != null) {
+				conn.disconnect();
+			}
 		}
 	}
 
