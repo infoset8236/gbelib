@@ -99,6 +99,12 @@ public class TopMenuTag extends BodyTagSupport {
 						liTag_lvl1.setAttribute("style", "display:none");
 					}
 				} else if(menu.getMenu_level() == 2) {
+					if (liTag_lvl1 != null) {
+						if (!liTag_lvl1.getAttribute("class").contains("menu_" + menu.getParent_menu_idx())) {
+							continue;
+						}
+					}
+
 					check_lvl3 = false;
 					if(!check_lvl2) {
 						check_lvl2 = true;
@@ -121,6 +127,12 @@ public class TopMenuTag extends BodyTagSupport {
 						liTag_lvl2.setAttribute("style", "display:none");
 					}
 				} else if(menu.getMenu_level() == 3) {
+					if (liTag_lvl2 != null) {
+						if (!liTag_lvl2.getAttribute("class").contains("menu_" + menu.getParent_menu_idx())) {
+							continue;
+						}
+					}
+
 					if(!check_lvl3) {
 						check_lvl3 = true;
 						ulTag_lvl3 = new HtmlTag("ul");
