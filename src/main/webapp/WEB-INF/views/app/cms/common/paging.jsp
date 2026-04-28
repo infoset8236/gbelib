@@ -9,12 +9,15 @@
 <form:hidden path="viewPage"/>
 <div id="cms_paging" class="dataTables_paginate">
 <c:if test="${paging.firstPageNum > 0}">
-	<a href="" class="paginate_button previous" keyValue="${paging.firstPageNum}">처음</a>
+	<a href="" class="paginate_button previous" keyValue="${paging.firstPageNum}" style="background-color: transparent; padding: 0;">
+        <img src="/resources/cms/img/main/icon_line_left.svg" alt="">
+    </a>
 </c:if>
 <c:if test="${paging.prevPageNum > 0}">
-	<a href="" class="paginate_button previous" keyValue="${paging.prevPageNum}">이전</a>
+	<a href="" class="paginate_button previous" keyValue="${paging.prevPageNum}" style="background-color: transparent; padding: 0;">
+        <img src="/resources/cms/img/main/prev.svg" alt="">
+    </a>
 </c:if>	
-	<span>
 <c:forEach var="i" varStatus="status" begin="${paging.startPageNum}" end="${paging.endPageNum}">
 <c:choose>
 <c:when test="${i eq paging.viewPage}">	
@@ -26,12 +29,15 @@
 </c:choose>
 </c:forEach>
 <c:if test="${paging.nextPageNum > 0}">
-	<a href="" class="paginate_button next" keyValue="${paging.nextPageNum}">다음</a>
+	<a href="" class="paginate_button next" keyValue="${paging.nextPageNum}" style="background-color: transparent; padding: 0;">
+        <img src="/resources/cms/img/main/next.svg" alt="">
+    </a>
 </c:if>
-<c:if test="${paging.totalPageCount ne paging.lastPageNum}">
-	<a href="" class="paginate_button next" keyValue="${paging.totalPageCount}">맨끝</a>
+<c:if test="${paging.totalPageCount ne paging.lastPageNum}" >
+	<a href="" class="paginate_button next" keyValue="${paging.totalPageCount}" style="background-color: transparent; padding: 0;">
+        <img src="/resources/cms/img/main/icon_line_right.svg" alt="">
+    </a>
 </c:if>
-	</span>
 </div>
 
 

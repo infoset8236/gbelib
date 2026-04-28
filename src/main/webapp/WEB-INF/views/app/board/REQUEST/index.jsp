@@ -78,6 +78,25 @@ $(document).ready(function() {
 	});
 });
 </script>
+
+<style>
+    .ui-datepicker .ui-datepicker-header{
+        padding: 10px;
+    }
+    .ui-datepicker .ui-datepicker-next:hover, .ui-datepicker .ui-datepicker-prev-hover{background: none!important;}
+    .ui-datepicker .ui-datepicker-prev{
+        left: -12px;
+        top: -1px;
+        filter: invert(1);
+    }
+    .ui-datepicker .ui-datepicker-next{
+        right: -5px;
+        top: -1px;
+        filter: invert(1);
+    }
+</style>
+
+
 <c:if test="${boardManage.add_html_use_yn eq 'Y' and fn:length(boardManage.top_html) > 0}">
 ${boardManage.top_html}
 </c:if>
@@ -135,7 +154,12 @@ ${boardManage.top_html}
 				<div class="f_r">
 					<a href="#" style="width: 60px;" codeid="" class="btn btn03 requestA"><c:if test="${empty board.request_state}"><i class="fa fa-play" aria-hidden="true"></i></c:if>전체</a>
 					<c:forEach var="i" items="${request_state_list}" varStatus="status">
-					<a href="#" style="width: 60px;" codeid="${i.code_id}" class="btn btn0${i.code_id} requestA"><c:if test="${(i.code_id eq board.request_state)}"><i class="fa fa-play" aria-hidden="true"></i></c:if>${i.code_name}<b><br/>(0)</b></a>
+					<a href="#" style="width: 60px;" codeid="${i.code_id}" class="btn btn0${i.code_id} requestA">
+                        <c:if test="${(i.code_id eq board.request_state)}">
+                            <i class="fa fa-play" aria-hidden="true"></i>
+                        </c:if>
+                        <span>${i.code_name}<b><br/>(0)</b></span>
+                    </a>
 					</c:forEach>
 				</div>
 				</c:if>
@@ -146,7 +170,7 @@ ${boardManage.top_html}
 			</span><br />
 			<!-- 일반 목록형 여기부터 -->
 			<table class="bbs center">
-				<thead>
+				<thead style="border-top: 2px solid #ccc;">
 					<tr>
 						<c:if test="${board.delete_yn eq 'Y'}">
 						<th><input type="checkbox" id="checkAll"> </th>
@@ -244,7 +268,7 @@ ${boardManage.top_html}
 							</c:when>
 							<c:otherwise>
 								<a href="" class="btn btn4" id="board_deleteRecovery_btn" style="width:93px"><span>삭제 게시물 보기</span></a>
-								<a href="" class="btn btn1 write" id="board_edit_btn" style="width:55px"><i class="fa fa-pencil"></i><span>글쓰기</span></a>
+								<a href="" class="btn btn1 write" id="board_edit_btn" style="width:70px"><i class="fa fa-pencil"></i><span>글쓰기</span></a>
 							</c:otherwise>
 						</c:choose>
 					</c:when>
@@ -269,14 +293,18 @@ ${boardManage.top_html}
 <%-- 				</jsp:include> --%>
 
 				<form:hidden path="viewPage"/>
-				<div id="board_paging" class="dataTables_paginate">
+				<div id="board_paging" class="dataTables_paginate" style="display: flex; align-items: center; justify-content: center; margin-top: 32px; gap: 4px;">
 				<c:if test="${paging.firstPageNum > 0}">
-					<a href="" class="paginate_button previous" keyValue="${paging.firstPageNum}">처음</a>
+					<a href="" class="paginate_button previous" keyValue="${paging.firstPageNum}" style="background-color: transparent; padding: 0;">
+                        <img src="/resources/cms/img/main/icon_line_left.svg" alt="">
+                    </a>
 				</c:if>
 				<c:if test="${paging.prevPageNum > 0}">
-					<a href="" class="paginate_button previous" keyValue="${paging.prevPageNum}">이전</a>
-				</c:if>	
-					<span>
+					<a href="" class="paginate_button previous" keyValue="${paging.prevPageNum}" style="background-color: transparent; padding: 0;">
+                        <img src="/resources/cms/img/main/prev.svg" alt="">
+                    </a>
+				</c:if>
+
 				<c:forEach var="i" varStatus="status" begin="${paging.startPageNum}" end="${paging.endPageNum}">
 				<c:choose>
 				<c:when test="${i eq paging.viewPage}">
@@ -288,21 +316,27 @@ ${boardManage.top_html}
 				</c:choose>
 				</c:forEach>
 				<c:if test="${paging.nextPageNum > 0}">
-					<a href="" class="paginate_button next" keyValue="${paging.nextPageNum}">다음</a>
+					<a href="" class="paginate_button next" keyValue="${paging.nextPageNum}" style="background-color: transparent; padding: 0;">
+                        <img src="/resources/cms/img/main/next.svg" alt="">
+                    </a>
 				</c:if>
 				<c:if test="${paging.totalPageCount ne paging.lastPageNum}">
-					<a href="" class="paginate_button next" keyValue="${paging.totalPageCount}">맨끝</a>
+					<a href="" class="paginate_button next" keyValue="${paging.totalPageCount}" style="background-color: transparent; padding: 0;">
+                        <img src="/resources/cms/img/main/icon_line_right.svg" alt="">
+                    </a>
 				</c:if>
-					</span>
+
 				</div>
 				
 				<div class="search txt-center mmm2" style="margin-top:25px;"><!-- 하단 정렬 시 margin-top 입력 -->
-					<fieldset>
+					<fieldset style="display: flex; justify-content: center; align-items: center; gap: 5px;">
 						<label class="blind" for="search_type">검색조건</label>
 						<c:if test="${board.homepage_id eq 'c0'}">
-						기간 : <form:input path="searchStartDate" id="noticeStartDate" class="text ui-calendar" title="시작기간,입력예시 2017-01-01" /> ~ <form:input id="noticeEndDate" path="searchEndDate" class="text ui-calendar" title="종료기간, 입력예시 2017-12-31"/>
+						기간 :
+                            <form:input path="searchStartDate" id="noticeStartDate" class="text ui-calendar" title="시작기간,입력예시 2017-01-01" /> ~
+                            <form:input id="noticeEndDate" path="searchEndDate" class="text ui-calendar" title="종료기간, 입력예시 2017-12-31"/>
 						</c:if>
-						<form:select path="search_type" cssClass="selectmenu" cssStyle="width:100px;">
+						<form:select path="search_type" cssClass="selectmenu" cssStyle="width: 100px; border-color: #ccc; border-radius: 3px; height: 29px;padding: 0;">
 							<form:option value="title+content">제목+내용</form:option>
 							<form:option value="title">제목</form:option>
 							<form:option value="content">내용</form:option>
@@ -310,7 +344,7 @@ ${boardManage.top_html}
 						</form:select>
 						<form:input path="search_text" id="search_text_board" cssClass="text" accesskey="s" title="검색어" alt="검색어"  placeholder="검색어를 입력하세요" cssStyle="ime-mode:active;" />
 						<label for="search_text_board" class="blind">검색어</label>
-						<a href="" class="btn btn1" id="board_btn_search"><i class="fa fa-search"></i><span>검색</span></a>
+						<a href="" class="btn btn1" id="board_btn_search" style="height: 30px; width: 60px;"><i class="fa fa-search"></i><span>검색</span></a>
 					</fieldset>
 				</div>
 				

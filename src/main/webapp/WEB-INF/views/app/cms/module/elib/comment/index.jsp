@@ -189,60 +189,63 @@ function updateCategory(cate_id) {
 			<a href="#" id="csvDownload" class="btn btn2"><i class="fa fa-file-excel-o"></i><span>CSV저장</span></a>
 		</div>
 	</div>
-	<table class="type1 center">
-		<colgroup>
-			<col width="100"/>
-			<col width="150"/>
-			<col width="70"/>
-			<col width="200"/>
-			<col width="250"/>
-			<col width="150"/>
-			<col width="100"/>
-			<col width="200"/>
-			<col width="100"/>
-		</colgroup>
-		<thead>
-			<tr>
-				<th>회원ID</th>
-				<th>소속도서관명</th>
-				<th>연령대</th>
-				<th>일시</th>
-				<th>서명</th>
-				<th>저자</th>
-				<th>출판사</th>
-				<th>서평</th>
-				<th>기능</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:if test="${fn:length(commentList) < 1}">
-				<tr style="height:100%">
-					<td colspan="7"
->조회된 자료가 없습니다.</td>
-				</tr>
-			</c:if>
-			<c:forEach var="i" varStatus="status" items="${commentList}">
-				<tr>
-					<td>${i.member_id}</td>
-					<td>${i.member_library_name}</td>
-					<td>${i.age_group}</td>
-					<td>${i.regdt}</td>
-					<td>${i.book_name}</td>
-					<td>${i.author_name}</td>
-					<td>${i.book_pubname}</td>
-					<td>${i.user_comment}</td>
-					<td>
-						<c:if test="${authU}">
-							<a href="" class="btn dialog-modify" data-comment_idx="${i.comment_idx}">수정</a>
-						</c:if>
-						<c:if test="${authD}">
-							<a href="" class="btn delete-btn" data-comment_idx="${i.comment_idx}">삭제</a>
-						</c:if>
-					</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+    <div style="overflow-x: auto;">
+        <table class="type1 center">
+            <colgroup>
+                <col width="100"/>
+                <col width="150"/>
+                <col width="70"/>
+                <col width="200"/>
+                <col width="250"/>
+                <col width="150"/>
+                <col width="100"/>
+                <col width="200"/>
+                <col width="100"/>
+            </colgroup>
+            <thead>
+            <tr>
+                <th>회원ID</th>
+                <th>소속도서관명</th>
+                <th>연령대</th>
+                <th>일시</th>
+                <th>서명</th>
+                <th>저자</th>
+                <th>출판사</th>
+                <th>서평</th>
+                <th>기능</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:if test="${fn:length(commentList) < 1}">
+                <tr style="height:100%">
+                    <td colspan="7"
+                    >조회된 자료가 없습니다.
+                    </td>
+                </tr>
+            </c:if>
+            <c:forEach var="i" varStatus="status" items="${commentList}">
+                <tr>
+                    <td>${i.member_id}</td>
+                    <td>${i.member_library_name}</td>
+                    <td>${i.age_group}</td>
+                    <td>${i.regdt}</td>
+                    <td>${i.book_name}</td>
+                    <td>${i.author_name}</td>
+                    <td>${i.book_pubname}</td>
+                    <td>${i.user_comment}</td>
+                    <td>
+                        <c:if test="${authU}">
+                            <a href="" class="btn dialog-modify" data-comment_idx="${i.comment_idx}">수정</a>
+                        </c:if>
+                        <c:if test="${authD}">
+                            <a href="" class="btn delete-btn" data-comment_idx="${i.comment_idx}">삭제</a>
+                        </c:if>
+                    </td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
+    </div>
 	<jsp:include page="/WEB-INF/views/app/cms/common/paging.jsp" flush="false">
 		<jsp:param name="formId" value="#commentListForm"/>
 		<jsp:param name="pagingUrl" value="index.do"/>
