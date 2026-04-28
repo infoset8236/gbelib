@@ -32,6 +32,13 @@ $(document).ready(function() {
 	});
 });
 </script>
+
+<style>
+    .btn0{
+        border: 0;
+    }
+</style>
+
 <form:form modelAttribute="board" method="get">
 <jsp:include page="/WEB-INF/views/app/board/common/form_param.jsp" flush="false" />
 <jsp:include page="/WEB-INF/views/app/board/common/form_paging_param.jsp" flush="false" />

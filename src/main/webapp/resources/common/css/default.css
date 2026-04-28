@@ -251,6 +251,14 @@ input[type="radio"][disabled],input[type="checkbox"][disabled],input[type="radio
 #footer .site_link > div > div > ul > li > a:hover{background:#5897fb;color:#fff}
 
 /* 페이징 */
+
+.dataTables_paginate {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 32px;
+	gap: 4px;
+}
 .dataTables_paginate > span{
 	display: flex;
 	align-items: center;

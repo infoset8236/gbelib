@@ -69,7 +69,7 @@ $(document).ready(function(){
 <div class="page-subtitle">
 	<h3>
 		${topMenuName}
-		<a href="#" class="help" title="도움말"><i class="fa fa-question-circle"></i><span class="sr-only">안내</span></a>
+		<a href="#" class="help" title="도움말"><span class="sr-only">안내</span></a>
 	</h3>
 	<p>${topMenuDesc}</p>
 	<div class="location">
