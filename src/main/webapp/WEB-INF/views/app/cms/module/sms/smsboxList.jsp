@@ -19,7 +19,12 @@ $(function() {
 });
 </script>
 
-<div style="float:left;width:80%">
+<style>
+    table.wrapTable tbody tr td{
+        white-space: pre-line;
+    }
+</style>
+<div style="float:left;">
 	<font color="blue;">※문자함은 좌측 SMS문자함 메뉴에서 관리 하실 수 있습니다.</font>
 </div>
 <div style="float:left;width:19%" align="right">
@@ -28,23 +33,23 @@ $(function() {
 
 <div class="table-wrap">
 	<div class="table-scroll">
-		<table id="table2" class="type1 center">
+		<table id="table2" class="type1 center wrapTable">
 			<thead>
 				<tr>
-					<th style="width:30px;">번호</th>
-					<th style="width:100px;">제목</th>
-					<th style="width:200px;">내용</th>
-					<th style="width:65px;">선택</th>	
+					<th style="width: 71px;">번호</th>
+					<th>제목</th>
+					<th>내용</th>
+					<th>선택</th>
 				</tr>
 			</thead>
 			
 			<tbody style="height:360px">
 				<c:forEach var="i" varStatus="status" items="${smsboxList}">
 					<tr id="smsBoxSelect${status.index}">
-						<td style="width:30px;">${paging.listRowNum - status.index}</td>
-						<td style="width:100px;">${i.imsi_v_2}</td>
-						<td style="width:200px;" id="smsText${status.index}">${i.imsi_v_3 }</td>
-						<td style="width:65px;"><a href="#" class="btn" id="select_box" keyValue="" keyValue2="${status.index}">선택</a></td>
+						<td style="width: 40px;">${paging.listRowNum - status.index}</td>
+						<td>${i.imsi_v_2}</td>
+						<td id="smsText${status.index}">${i.imsi_v_3 }</td>
+						<td><a href="#" class="btn" id="select_box" keyValue="" keyValue2="${status.index}">선택</a></td>
 					</tr>
 				</c:forEach>
 				<c:if test="${fn:length(smsboxList) < 1}">

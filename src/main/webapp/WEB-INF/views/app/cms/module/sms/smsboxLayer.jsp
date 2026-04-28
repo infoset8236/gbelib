@@ -13,7 +13,7 @@ $(function() {
 
 <!--// 문자함 -->
 
-<div style="float:left;width:480px">	
+<div style="float:left;">
 <!-- 	<h1>문자함</h1>	 -->
 	<span class="tabmenu" style="padding:0px;">
 		<ul>

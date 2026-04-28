@@ -59,6 +59,12 @@ $(function() {
 <form:form id="smsBoxListForm"  modelAttribute="smsBox" action="index.do" >
 <form:hidden id="homepage_id_1" path="homepage_id"/>
 
+    <style>
+        table.wrapTable tbody tr td{
+            white-space: pre-line;
+        }
+    </style>
+
 	<div class="infodesk">
 		검색 결과 : 총  ${smsBoxCnt}건
 		<div class="button">
@@ -68,15 +74,9 @@ $(function() {
 		</div>
 	</div>
 	<!-- 교육소식 관리 table -->
-	<table class="type1 center">
-		<colgroup>
-			<col width="100"/>
-			<col width="150"/>
-			<col width=""/>
-			<col width="100"/>
-			<col width="200"/>
-			<col width="200"/>
-		</colgroup>
+    <div class="table-wrap">
+        <div class="table-scroll">
+	        <table class="type1 center wrapTable">
 		<thead>
 			<tr>
 				<th>번호</th>
@@ -113,6 +113,8 @@ $(function() {
 			</c:forEach>			
 		</tbody>
 	</table>
+        </div>
+    </div>
 	<jsp:include page="/WEB-INF/views/app/cms/common/paging.jsp" flush="false">
 		<jsp:param name="formId" value="#smsBoxListForm"/>
 	</jsp:include>

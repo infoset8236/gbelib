@@ -188,7 +188,7 @@ function doAjaxPostSms(form, ajaxBody) {
 		<textarea id="real_msg" name="send_msg" style="display: none;" wrap="hard"></textarea>
 		
 		<div class="search" style="color: rgb(176, 14, 0);">
-		* 문자 대량 발송 시에는 순차적 처리로 인해 문자발송이 지연되거나 SMS전송서비스 페이지 화면멈춤 현상이 나타날 수 있으니 발송 후에는<br> 
+		* 문자 대량 발송 시에는 순차적 처리로 인해 문자발송이 지연되거나 SMS전송서비스 페이지 화면멈춤 현상이 나타날 수 있으니 발송 후에는<br>
 		<b>[ 자료관리시스템 - 공통 - 알림기능관리 - SMS관리 ]</b>에서 문자가 정상적으로 발송되었는지 확인 후 문자가 발송되지 않았을 경우 재발송 하시기 바랍니다.
 		</div>
 		
@@ -230,10 +230,10 @@ function doAjaxPostSms(form, ajaxBody) {
 				</div>
 			</div>
 			<!-- 발송 대상자 리스트 -->
-			<div id="member-list-layer" style="float:left;width:700px">
+			<div id="member-list-layer" style="float:left;width:650px">
 			</div>
 			<!-- 문자함-->
-			<div id="smsbox-list-layer" style="float:left;width:565px">
+			<div id="smsbox-list-layer" style="float:left;width:700px">
 			</div>
 		</div>
 		<!--// 문자 전송 -->
