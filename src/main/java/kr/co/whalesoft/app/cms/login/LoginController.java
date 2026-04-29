@@ -26,8 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ksign.access.wrapper.api.SSORspData;
 import com.ksign.access.wrapper.api.SSOService;
-import com.ksign.access.wrapper.sso.sso10.*;
-import com.ksign.access.wrapper.api.*;
 
 import kr.co.whalesoft.app.cms.accountLock.AccountLock;
 import kr.co.whalesoft.app.cms.accountLock.AccountLockService;
@@ -81,105 +79,13 @@ public class LoginController extends BaseController {
 	private LoginLogService loginLogService;
 
 	@RequestMapping(value = {"/index.*"})
-	public String index(Model model, HttpServletRequest request,HttpServletResponse response) throws Exception {
-		String returnUrl = null;
-		String redirectURL = "https://" + request.getServerName();
-		SSORspData rspData = null;
-		SSOService ssoService = SSOService.getInstance();
-		String result = null;
-		try {
-			//sso서버에서 토큰 획득
-
-			rspData = ssoService.ssoGetLoginData(request);
-//				System.out.println("@@@@@@@@@@@@@@@@sso test token rspData.getResultCode : " + rspData.getResultCode());
-		}catch (Exception e){
-//				System.out.println("sso token get fail");
-			result = "noData";
-		}
-
-		if(!"noData".equals(result)) { //토큰 정보를 가져오는데 오류가 나지 않았다면
-			if(rspData.getResultCode() == SSORspData.SSO_OK) { // 토큰 정보가 유효하다면 (유효하면 0 , 유효하지 않으면 -1)
-				//sso
-				String uid = rspData.getAttribute("KSIGN_FED_USER_ID");
-				if(uid == null) {
-					uid = rspData.getAttribute("UID");
-				}
-
-				//토큰정보에서 가져온 ID 값으로 관리자 정보가 있는지 확인
-				Member member = new Member();
-				member.setMember_id(uid);
-				member = memberService.getMemberOne(member);
-
-				//토큰정보에서 가져온 ID 값을 소문자로 변환하여 관리자 정보가 있는지 확인
-				if (member.getMember_name() == null) {
-					member.setMember_id(uid.toLowerCase());
-					member = memberService.getMemberOne(member);
-				}
-
-				if(member.getMember_name() != null) { //토큰 정보와 일치하는 관리자가 있을경우
-					//로그인 처리---->
-					member.setLogin(true);
-					service.setSessionMember(member, request);
-					loginLogService.addLoginLog(new LoginLog(member, request, "CMS"));
-					//<----로그인 처리
-
-					if(member.isLogin()) {
-						//로그인이 됐다면
-						String getUri = request.getRequestURI().substring(request.getContextPath().length());
-						if (getUri.startsWith("/cms/")){
-							redirectURL = "redirect:" + redirectURL + "/cms/index.do";
-							//접속 URI 가져오기
-						}else if(getUri.startsWith("/pms/")) {
-							redirectURL = "redirect:" + redirectURL + "/pms/index.do";
-							//접속 URI 가져오기
-						}else if(getUri.startsWith("/dms/")) {
-							redirectURL = "redirect:" + redirectURL + "/dms/index.do";
-							//접속 URI 가져오기
-						}
-						return redirectURL;
-					}else {
-						model.addAttribute("login", new Login());
-					}
-				}else {
-					model.addAttribute("login", new Login());
-				}
-
-
-//					int redirectPort = request.getServerPort();
-//						if (redirectPort != 443) {
-//							redirectURL += ":"+redirectPort;
-//					}
-
-//					if(request.getSession().getAttribute("returnUrl") != null){
-//						returnUrl = String.valueOf(request.getSession().getAttribute("returnUrl"));
-//						if (returnUrl.contains("/cms/")) {
-//							redirectURL = "redirect:" + redirectURL + "/cms/index.do";
-//						} else {
-//	//							redirectURL = "redirect:" + request.getSession().getAttribute("returnUrl");
-//							redirectURL = "redirect:" + redirectURL + getPath(request.getRequestURI()) + "/index.do";
-//						}
-//					}else{
-//						redirectURL = "redirect:" + redirectURL + getPath(request.getRequestURI()) + "/index.do";
-//					}
-
-//					return redirectURL;
-//
-			}else if(rspData == null || rspData.getResultCode() == -1) {
-
-				//cms
-				model.addAttribute("login", new Login());
-			}
-		}else {
-			model.addAttribute("login", new Login());
-		}
-
+	public String index(Model model, Menu menu,HttpServletRequest request) {
+		model.addAttribute("login", new Login());
 		//관리자 로그인후 이동할 이전 주소 기록
 		if(request.getHeader("referer") != null && !request.getHeader("referer").isEmpty() && request.getHeader("referer").indexOf("login/index.") == -1 && request.getHeader("referer").indexOf("/cms/aside.") == -1){
 			request.getSession().setAttribute("returnUrl", request.getHeader("referer"));
 			log.debug("retrunUrl : "+request.getSession().getAttribute("returnUrl"));
 		}
-
-
 		return basePath + "index";
 	}
 
@@ -243,17 +149,6 @@ public class LoginController extends BaseController {
 
 			}
 
-			if(request.getSession().getAttribute("returnUrl") != null){
-				returnUrl = String.valueOf(request.getSession().getAttribute("returnUrl"));
-				if (returnUrl.contains("/cms/")) {
-					redirectURL = "redirect:" + redirectURL + "/cms/index.do";
-				} else {
-					redirectURL = "redirect:" + redirectURL + getPath(request.getRequestURI()) + "/index.do";
-				}
-			}else{
-				redirectURL = "redirect:" + redirectURL + getPath(request.getRequestURI()) + "/index.do";
-			}
-
 			Map<String, Object> param = new HashMap<String, Object>();
 
 			param.put("user_id", member.getMember_id());
@@ -303,7 +198,7 @@ public class LoginController extends BaseController {
 			try {
 				// <SSO.1> SSO 서비스 객체 획득
 				SSOService ssoService = SSOService.getInstance();
-				String avps = "member_name="+member.getMember_name();
+				String avps = "member_name="+member.getMember_name()+"$loca=0001"+"$status_code=0"+"$login_type=CMS";
 				// <SSO.3>. 인증 토큰 생성 요청
 				String reqCtx = request.getContextPath();
 				String agentIp = String.valueOf(request.getLocale());
@@ -313,15 +208,10 @@ public class LoginController extends BaseController {
 					returnUrl = getPath(request.getRequestURI()) + "/index.do";
 				}
 
-				if (!returnUrl.startsWith("http")) {
-					returnUrl = homepage.getDomain() + returnUrl;
-				}
-
-				if (returnUrl.contains("sso.gbelib.kr")) {
-					returnUrl = "https://www.gbelib.kr/cms/index.do";
-				}
-
 				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentIp, request.getRemoteAddr());
+
+				System.out.println(rspData);
+				System.out.println("ssoReqIssueToken : " + rspData.getResultCode());
 
 				if(rspData != null && rspData.getResultCode() == -1){
 					String alertMsg = "사용자 인증토큰 요청정보 생성에 실패하였습니다.";
@@ -333,6 +223,8 @@ public class LoginController extends BaseController {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+
+			loginLogService.addLoginLog(new LoginLog(member, request, "CMS"));
 
 			return "redirect:" + returnUrl.replaceAll("^http://(www\\.)?gbelib\\.kr", "https://www.gbelib.kr");
 		} else if(loginResult.equals("LOCKED")) {
@@ -500,7 +392,7 @@ public class LoginController extends BaseController {
 				if (homepage != null) {
 					if(!StringUtils.equals(homepage.getContext_path(), "app")) {
 						SSOService ssoService = SSOService.getInstance();
-						String avps = "";
+						String avps = "member_name="+member.getMember_name()+"$loca=0001"+"$status_code=0001"+"$login_type=CMS";
 
 						String reqCtx = request.getContextPath();
 						String agentIp = String.valueOf(request.getLocale());

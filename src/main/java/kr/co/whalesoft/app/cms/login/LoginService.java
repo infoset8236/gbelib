@@ -184,7 +184,11 @@ public class LoginService extends BaseService {
 				}
 			}else if ( getMember.getMember_pw().equals(member.getMember_pw()) ) {
 				member.setLogin(true);
-//				member.setAdmin(member.getAuth_id().equals("100"));
+				if (StringUtils.isNotEmpty(member.getMember_name()) && !member.getMember_name().equals(getMember.getMember_name())) {
+					getMember.setMember_name(member.getMember_name());
+				} else {
+					getMember.setMember_name("관리자");
+				}
 				setSessionMember(member, request);
 				accountLockService.loginSucceeded(new AccountLock(getMember, request.getRemoteAddr()));
 				loginLogService.addLoginLog(new LoginLog(member, request, "CMS"));
