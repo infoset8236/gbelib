@@ -20,7 +20,7 @@
 	</head>
 	<body>
 
-	<script src="https://spi.maps.daum.net/imap/map_js_init/postcode.v2.js"></script>
+    <script src="https://t1.kakaocdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			$(document).ready(function () {
