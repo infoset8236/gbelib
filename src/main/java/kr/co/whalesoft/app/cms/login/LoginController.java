@@ -208,6 +208,10 @@ public class LoginController extends BaseController {
 					returnUrl = getPath(request.getRequestURI()) + "/index.do";
 				}
 
+				if (returnUrl.startsWith("/pms") || returnUrl.startsWith("/cms") || returnUrl.startsWith("/dms")) {
+					returnUrl = redirectURL + returnUrl;
+				}
+
 				rspData = ssoService.ssoReqIssueToken(request, response, "form-based", member.getMember_id(), avps, returnUrl, agentIp, request.getRemoteAddr());
 
 				System.out.println(rspData);
